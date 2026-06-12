@@ -133,3 +133,48 @@ data-quality-doctrine buyer, credible entry points are (1) people-data/skills
 foundations, (2) Joule-compatible agentic service delivery, (3) AI
 adoption/enablement during restructuring — not rip-and-replace talent-
 marketplace plays.
+
+## 5. SAP agentic stack — verified facts (adversarially fact-checked June 2026)
+
+Checked because the Grok second-opinion report (see ideas.md §6) made claims
+here that we might otherwise repeat to the client. Use these wordings.
+
+- **Joule Studio** is a low-code/no-code capability within SAP Build on BTP:
+  skill builder **GA July 2025**, agent builder **GA Dec 2025/Jan 2026**.
+  Caveat: a *separate, new* fully managed "Joule Studio" offering announced at
+  Sapphire (May 2026) is **not yet GA** (free design-time access through end
+  of 2026). [SAP News Q2-2025](https://news.sap.com/2025/07/sap-business-ai-release-highlights-q2-2025/),
+  [SAP Connect Oct 2025](https://news.sap.com/2025/10/sap-connect-business-ai-new-joule-agents-embedded-intelligence/),
+  [Q4-2025 highlights](https://news.sap.com/2026/01/sap-business-ai-release-highlights-q4-2025/),
+  [Sapphire May 2026](https://news.sap.com/2026/05/new-joule-studio-enterprise-scale-agentic-development/).
+- **Joule agents:** as of Q1-2026 highlights (Apr 2026), at least one GA agent
+  per domain — finance (Expense Report Validation), supply chain (Tender
+  Analysis), procurement (Catalog Optimization), HR (Performance Preparation,
+  GA ~Nov 2025) — but many headline agents (Dispute Resolution, Cash
+  Management, Production Planning & Operations…) were still beta/Early
+  Adopter Care in H1 2026. SAP cites 30+ specialized agents, 2,500+ skills,
+  Joule live across 35 solutions. "SAP ships GA agents across the board"
+  **overstates** it. [Q1-2026 highlights](https://news.sap.com/2026/04/sap-business-ai-release-highlights-q1-2026/)
+- **Where Joule runs:** embedded in SAP SuccessFactors and S/4HANA **Cloud**
+  (Private Edition via BTP setup) — not on-premise S/4HANA. Which S/4 edition
+  OneProcess uses is a **question to ask STG**, not to assume.
+- **Productivity numbers:** SAP does NOT publish a "30–80% time savings"
+  benchmark. Actual SAP claims (all self-reported, labeled indicative):
+  2,100+ task automations covering ~80% of most-used SAP transactions;
+  routine tasks "up to 80% faster"; a *goal* of 30% end-user productivity;
+  per-agent projections of 10–83%. Quote precisely or not at all.
+  [SAP Learning](https://learning.sap.com/courses/introducing-joule/identifying-roles-and-personas)
+- **Tooling corrections:** **SAP Build Apps retired as a standalone product
+  23 March 2026** (folded into unified SAP Build — don't recommend it).
+  Signavio Process Intelligence = the process-mining product (real). Custom
+  Joule skills are declarative low-code calling APIs via BTP — *not*
+  "LangChain wrappers"; the pro-code path is **SAP Cloud SDK for AI**
+  (`sap-ai-sdk-gen`, v6.10.0 May 2026, LangChain integration included) on
+  BTP, reaching S/4HANA through standard OData/REST APIs.
+  [Deprecation post](https://community.sap.com/t5/technology-blog-posts-by-sap/sap-build-apps-deprecation-and-the-path-forward/ba-p/14351750),
+  [sap-ai-sdk-gen](https://pypi.org/project/sap-ai-sdk-gen/)
+- **Pouch market growth (for any deck slide):** consensus **25–30% CAGR**
+  through 2030–2033 (Grand View 24.7–29.6%, TBRC ~28.9%, Persistence 28.4%);
+  top-end outliers ~36% (SkyQuest), low end ~18–19%. Say "25–30%, with some
+  forecasts to ~36%" — never bare "36%".
+  [Grand View](https://www.grandviewresearch.com/industry-analysis/nicotine-pouches-market-report)

@@ -23,8 +23,11 @@ Interactive map of the four OneProcess value streams (Record-to-Report,
 Source-to-Pay, Order-to-Cash, Plan-to-Deliver). Each stream expands into
 4–6 AI use-case cards scored on **data readiness** (what S/4 consolidation
 now makes possible) and **value potential**, each naming its OneProcess
-prerequisite ("single master data", "real-time postings"…). Static seeded
-content, hand-written, credible. No live AI required.
+prerequisite ("single master data", "real-time postings"…). Each card also
+carries a **"SAP Joule today / custom bridge" badge** — whether SAP's GA
+agent portfolio already covers it or a custom layer wins (sourced from
+research-brief.md §5; demonstrates Joule fluency without vendor-bashing).
+Static seeded content, hand-written, credible. No live AI required.
 
 ### Act 2 — Work redesign studio (`/studio`) ⭐ centerpiece
 - Pick a seeded STG-flavored role (financial controller, customer service
