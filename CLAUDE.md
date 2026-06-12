@@ -1,7 +1,7 @@
 # STG / Broen
 
 Pitch prototype targeting Scandinavian Tobacco Group (STG) — built by
-Jensen Production / talent.dk as a consulting calling card. The buyer is
+Jensen Production / valent.dk as a consulting calling card. The buyer is
 STG's Head of Global People Data and Digital Solutions; the product is a
 working demo of the bridge between STG's OneProcess (SAP S/4HANA) foundation
 and AI-driven work redesign. **This is a demo, not a production system** —
