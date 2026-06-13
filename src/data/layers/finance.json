@@ -1,0 +1,17 @@
+{
+  "id": "finance", "dept": "Finance", "label": "Finance", "icon": "coins", "status": "stub",
+  "blurb": "Revenue & exposure by geography. The regulatory-P&L drill-down = the Impact Room.",
+  "asOf": "2026-06-13",
+  "kpis": [
+    { "label": "Net sales", "value": "DKK 9.0bn", "sub": "FY2025", "flag": "C" },
+    { "label": "US share of sales", "value": "46.8%", "sub": "DKK 4,230m", "flag": "C" },
+    { "label": "EBIT before special items", "value": "DKK 1,342m", "sub": "FY2025", "flag": "C" },
+    { "label": "Leverage", "value": "3.0x", "sub": "target 2.5x by end-2026", "flag": "C" }
+  ],
+  "markers": [
+    { "id": "fin-us", "lat": 39.0, "lng": -98.0, "label": "Americas", "value": "DKK 4,538m", "provenance": "public", "sourceRef": "AR2025 p112", "detail": "50% of sales. USD ≈ half of group; a 10% USD/DKK move ≈ 5% of sales. Live FX via ECB feed." },
+    { "id": "fin-eu", "lat": 50.0, "lng": 9.0, "label": "Europe", "value": "DKK 3,934m", "provenance": "public", "sourceRef": "AR2025 p112", "detail": "Machine-rolled cigar cash cow. EU excise revision = the Impact Room." },
+    { "id": "fin-row", "lat": 1.0, "lng": 110.0, "label": "Rest of world", "value": "DKK 564m", "provenance": "public", "sourceRef": "AR2025 p112", "detail": "Asia/GTR + other." }
+  ],
+  "agentNote": "Finance markers deepen into the Impact Room (Surface A: regulatory→DKK band) and a live ECB FX overlay. Stub for now."
+}

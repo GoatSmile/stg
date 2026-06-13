@@ -1,0 +1,29 @@
+{
+  "id": "hr",
+  "dept": "HR / People",
+  "label": "HR",
+  "icon": "users",
+  "blurb": "The company's people footprint, live. Headcount by site, open roles + days-open from the careers feed, and (illustrative) retirement risk.",
+  "asOf": "2026-06-13",
+  "kpis": [
+    { "label": "Employees", "value": "8,858", "sub": "year-end 2025", "flag": "C" },
+    { "label": "Open positions", "value": "49", "sub": "live · careers.st-group.com", "flag": "C" },
+    { "label": "Group turnover", "value": "18.7%", "sub": "2025 (was 22.7%)", "flag": "C" },
+    { "label": "Retirement-risk roles", "value": "~310*", "sub": "illustrative — needs PeopleHub", "flag": "fab" }
+  ],
+  "markers": [
+    { "id": "hr-dr", "siteId": "fac-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "employees": 1626, "openPositions": 7, "oldestDaysOpen": 64, "retirementRisk": 95, "provenance": "public", "sourceRef": "AR2025 p96 + careers", "detail": "Largest site. 7 open SAP-support roles (Santiago support centre). *Retirement-risk illustrative." },
+    { "id": "hr-id", "siteId": "fac-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia — Semarang", "employees": 1409, "openPositions": 1, "oldestDaysOpen": 22, "retirementRisk": 70, "provenance": "public", "sourceRef": "AR2025 p96 + careers", "detail": "1 open role (Head of Finance & Accounting, Pasuruan)." },
+    { "id": "hr-hn", "siteId": "fac-hn", "lat": 14.02, "lng": -86.58, "label": "Honduras — Danlí", "employees": 1382, "openPositions": 0, "oldestDaysOpen": 0, "retirementRisk": 60, "provenance": "public", "sourceRef": "AR2025 p96", "detail": "Handmade cigar workforce." },
+    { "id": "hr-lk", "siteId": "leaf-lk", "lat": 6.95, "lng": 79.96, "label": "Sri Lanka — Biyagama", "employees": 1264, "openPositions": 2, "oldestDaysOpen": 41, "retirementRisk": 40, "provenance": "public", "sourceRef": "AR2025 p96 + careers", "detail": "2 open roles (Foreman/Superintendent, Machinist)." },
+    { "id": "hr-us-beth", "siteId": "office-bethlehem", "lat": 40.63, "lng": -75.38, "label": "Bethlehem, PA", "employees": 500, "openPositions": 6, "oldestDaysOpen": 88, "retirementRisk": 30, "provenance": "public", "sourceRef": "careers", "detail": "CI HQ. 6 open roles incl. Sr Network Engineer, IT App Security, SEO. Oldest ~88 days." },
+    { "id": "hr-pt", "siteId": "sales-pt", "lat": 38.72, "lng": -9.24, "label": "Carnaxide / Lisbon", "employees": 71, "openPositions": 8, "oldestDaysOpen": 53, "retirementRisk": 10, "provenance": "public", "sourceRef": "careers", "detail": "The SDO / IT delivery hub — 8 open roles (SAP Data Engineer, ServiceNow, Analytics Lead). STG is staffing up here." },
+    { "id": "hr-es", "siteId": "sales-es", "lat": 40.46, "lng": -3.69, "label": "Madrid", "employees": 62, "openPositions": 4, "oldestDaysOpen": 35, "retirementRisk": 15, "provenance": "public", "sourceRef": "careers", "detail": "4 open roles (SAP SD/PP consultants, Business Analyst Iberia)." },
+    { "id": "hr-us-rich", "siteId": "office-richmond", "lat": 37.54, "lng": -77.44, "label": "Richmond, VA", "employees": 200, "openPositions": 3, "oldestDaysOpen": 27, "retirementRisk": 45, "provenance": "public", "sourceRef": "careers", "detail": "Forged Cigars commercial office (Sutliff factory here closed Feb 2025). 3 open roles." },
+    { "id": "hr-be", "siteId": "fac-be", "lat": 50.99, "lng": 5.20, "label": "Belgium — Lummen/Westerlo", "employees": 763, "openPositions": 1, "oldestDaysOpen": 12, "retirementRisk": 55, "provenance": "public", "sourceRef": "AR2025 + careers", "detail": "Machine-rolled cigar workforce. 1 open (Technieker)." },
+    { "id": "hr-dk", "siteId": "hq-gentofte", "lat": 55.756, "lng": 12.547, "label": "Copenhagen / Gentofte", "employees": 300, "openPositions": 2, "oldestDaysOpen": 18, "retirementRisk": 25, "provenance": "public", "sourceRef": "careers", "detail": "HQ. 2 student-assistant roles (Legal/PA, HR)." },
+    { "id": "hr-ni", "siteId": "fac-ni", "lat": 13.09, "lng": -86.35, "label": "Nicaragua — Estelí", "employees": 361, "openPositions": 2, "oldestDaysOpen": 30, "retirementRisk": 35, "provenance": "public", "sourceRef": "AR2025 + careers", "detail": "2 open (Expedition Supervisor, Talent Pool)." },
+    { "id": "hr-de", "siteId": "sales-de", "lat": 53.083, "lng": 8.802, "label": "Bremen", "employees": 88, "openPositions": 1, "oldestDaysOpen": 9, "retirementRisk": 20, "provenance": "public", "sourceRef": "careers", "detail": "1 open (Inventory Control Coordinator Europe)." }
+  ],
+  "agentNote": "Open-positions + days-open are fetched from careers.st-group.com (SAP SuccessFactors): city + postal code are in each job URL; the detail page carries a Posting Start Date. Refreshed on a schedule, first-seen stamped to derive days-open. Retirement-risk is illustrative (needs PeopleHub)."
+}

@@ -1,0 +1,27 @@
+{
+  "id": "regulatory",
+  "dept": "Regulatory & Public Affairs",
+  "label": "Regulatory",
+  "icon": "scale",
+  "blurb": "Live regulatory threats on the footprint. Click a pin for the DKK impact band.",
+  "asOf": "2026-06-13",
+  "kpis": [
+    { "label": "Active threats tracked", "value": "5", "sub": "EU + 4 markets", "flag": "C" },
+    { "label": "Revenue in restricted/banned pouch markets", "value": "DKK ~390m*", "sub": "EU pouch line, modeled", "flag": "fab" },
+    { "label": "Combustible core exposed to EU excise", "value": "50%", "sub": "of group net sales", "flag": "C" },
+    { "label": "Next ruling", "value": "Jun 2026", "sub": "France Conseil d'État merits", "flag": "C" }
+  ],
+  "markers": [
+    { "id": "eu-etd", "lat": 50.85, "lng": 4.35, "label": "EU tobacco-tax revision", "value": "proposed", "severity": "high", "provenance": "public", "sourceRef": "COM(2025) 580", "asOf": "2025-07-16", "detail": "Proposal, in Council negotiation. Would raise excise minimums on cigars/cigarillos/pipe from a proposed 2028 (pouch minima phase 2030–2032). Reaches the cigar & pipe core. → opens the Impact Room.", "impact": true },
+    { "id": "fr-ban", "lat": 48.85, "lng": 2.35, "label": "France oral-nicotine ban", "value": "in force", "severity": "high", "provenance": "public", "sourceRef": "Décret 2025-898", "asOf": "2026-04-01", "detail": "Total ban on oral nicotine in force Apr 2026. France is also STG's #1 machine-rolled cigar market (~DKK 620m*). Conseil d'État merits ruling ~Jun 2026." },
+    { "id": "dk-cap", "lat": 55.68, "lng": 12.57, "label": "Denmark 9mg + flavour cap", "value": "in force", "severity": "medium", "provenance": "public", "sourceRef": "sik.dk", "asOf": "2026-04-01", "detail": "9 mg/pouch cap + tobacco/menthol-only flavours (full effect Apr 2026). Hits XQS's flavour-led range in the home market." },
+    { "id": "es-prop", "lat": 40.42, "lng": -3.70, "label": "Spain 0.99mg cap (proposed)", "value": "proposed", "severity": "medium", "provenance": "public", "sourceRef": "ES draft RD", "asOf": "2025-2026", "detail": "Proposed 0.99 mg/pouch cap would foreclose standard pouches. Sweden has formally objected." },
+    { "id": "us-tariff", "lat": 38.90, "lng": -77.04, "label": "US handmade tariff lines", "value": "in flux", "severity": "medium", "provenance": "agent", "sourceRef": "USTR / EO 14389", "asOf": "2026-02", "detail": "Tariffs on handmade cigar imports (DR/HN/NI). Regime in flux — treat as a scenario variable." }
+  ],
+  "regimes": [
+    { "country": "France", "status": "banned" }, { "country": "Belgium", "status": "banned" },
+    { "country": "Netherlands", "status": "banned" }, { "country": "Denmark", "status": "restricted" },
+    { "country": "Spain", "status": "restricted" }, { "country": "Poland", "status": "restricted" },
+    { "country": "Sweden", "status": "open" }, { "country": "Italy", "status": "open" }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "sales", "dept": "Sales / Commercial", "label": "Sales", "icon": "trending-up", "status": "stub",
+  "blurb": "Per-market competitive position. Full drill-down = the Pouch Radar (live e-commerce).",
+  "asOf": "2026-06-13",
+  "kpis": [
+    { "label": "XQS share, Sweden", "value": "13.6%", "sub": "from 7.8% (2025)", "flag": "C" },
+    { "label": "XQS organic growth", "value": "+55%", "sub": "FY2025", "flag": "C" },
+    { "label": "Active online consumers (US)", "value": "−3% YoY", "sub": "NAOR file", "flag": "C" },
+    { "label": "Mint share of UK pouch cans", "value": "58%*", "sub": "Haypp-derived", "flag": "I" }
+  ],
+  "markers": [
+    { "id": "sales-se", "lat": 59.33, "lng": 18.07, "label": "Sweden — XQS #2", "value": "13.6% share", "provenance": "public", "sourceRef": "STG AR2025", "detail": "XQS focus market. Live price/launch tracking in the Pouch Radar." },
+    { "id": "sales-uk", "lat": 51.51, "lng": -0.13, "label": "UK — XQS growth", "value": "doubling", "provenance": "public", "sourceRef": "STG AR2025", "detail": "Second XQS focus market; convenience channel fastest-growing." },
+    { "id": "sales-us-online", "lat": 40.63, "lng": -75.38, "label": "US online cigar war", "value": "margin pressure", "provenance": "agent", "sourceRef": "e-commerce crawl", "detail": "Free-shipping price war across CI / Thompson vs rivals — observable on public product pages." }
+  ],
+  "agentNote": "Sales markers deepen into the Pouch Radar (Surface B): Haypp + nicotine-pouches.org price/launch/bestseller crawl. Stub for now."
+}

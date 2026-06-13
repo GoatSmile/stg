@@ -1,0 +1,16 @@
+{
+  "id": "sustainability", "dept": "Sustainability / ESG", "label": "ESG", "icon": "leaf", "status": "stub",
+  "blurb": "Climate exposure of growing regions and site-level footprint (mostly agent + illustrative).",
+  "asOf": "2026-06-13",
+  "kpis": [
+    { "label": "SBTi targets", "value": "validated", "sub": "Scope 1, 2, 3", "flag": "C" },
+    { "label": "Leaf suppliers in STP", "value": ">70", "sub": "strategic", "flag": "C" },
+    { "label": "Water-stress origins", "value": "live*", "sub": "WRI Aqueduct feed", "flag": "I" },
+    { "label": "US catalogue reduction", "value": "underway", "sub": "from 25m mailed", "flag": "C" }
+  ],
+  "markers": [
+    { "id": "esg-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "value": "water-stress: med*", "provenance": "agent", "sourceRef": "WRI Aqueduct", "detail": "Leaf growing region water-stress; *illustrative until wired." },
+    { "id": "esg-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia", "value": "deforestation-watch*", "provenance": "agent", "sourceRef": "Global Forest Watch / EUDR", "detail": "EUDR exposure on the growing region." }
+  ],
+  "agentNote": "ESG layer: WRI Aqueduct (water), Global Forest Watch + EUDR benchmarking (deforestation), site emissions. Stub for now."
+}
