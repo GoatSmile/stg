@@ -1,9 +1,19 @@
-# STG × AI — ideation portfolio
+# STG × AI — ideation portfolio (HR track — PARKED)
+
+> **⚠️ This track is parked (June 2026).** This document is the original
+> department-level (HR / People & Culture) ideation aimed at Anne-Marie
+> Tørnes-Hansen. The owner redirected to a **CEO-level** play that gets used
+> immediately in any domain. The live strategy is now **[ceo-play.md](ceo-play.md)**
+> (product: *Varsel*, a regulation→P&L early-warning room), backed by
+> **[ceo-research-digest.md](ceo-research-digest.md)**. Kept here intact: the
+> needs map, the Tier-1…4 menu, and the SAP/Joule + pouch-regulation facts
+> remain useful reference, and the HR angle is a legitimate *second* expansion
+> account if the CEO play lands.
 
 *Prepared June 2026. Source material: "Research for N" (internal research doc),
 plus open-web research in [research-brief.md](research-brief.md). This is the
-divergent-thinking artifact — the full menu. The convergent pick lives in
-[prototype-spec.md](prototype-spec.md).*
+divergent-thinking artifact — the full menu. The (now superseded) HR pick lived
+in this doc's §4.*
 
 ---
 
