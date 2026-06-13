@@ -149,11 +149,20 @@ repeated to the client: owner decides, always.
   marker click opens the detail card. The CEO play (Varsel) superseded the parked
   HR/"Broen" track June 2026 (`docs/ceo-play.md`); re-architecture in
   `docs/map-platform.md`, data-of-record in `docs/stg-facts.md`.
-- **Next:** Surface A (Impact Room — threat→DKK band drill-down behind the
-  Regulatory/Finance lenses) → first **live agent feed** (ECB FX or the
-  SuccessFactors careers feed) to prove "live" → Surface B (Pouch Radar / Sales
-  lens). Add Supabase (EU) when the first scheduled feed needs history. Then the
-  ~3-min video + forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`;
-  open decisions in `docs/ceo-play.md` §8).
+- **Surface A — Impact Room shipped — `c1c164d` (2026-06-13).** The regulation→DKK
+  band drill-down (worked example: EU-ETD on the cigar/pipe core). Pure
+  contribution-margin model in `src/lib/impact-model.ts` (band = min/max over the
+  elasticity × pass-through grid — brackets the base, can't invert); editable
+  assumption sliders recompute the band live; citation chips, visible abstention,
+  a "proposed — in Council" status (never "enacted"), and the "illustrative — not
+  STG's own figure" tag are the credibility rails. Default band ≈ DKK 45–95m at
+  risk/yr. Static model only — the live AI route + golden responses are Phase 3.
+- **Next:** Phase 3 — make the Impact number live (`/api/ai/impact`: a server-only
+  Claude call with a golden offline fallback and citation enforcement at the route
+  layer) and wire the first **live public feed** (ECB FX or the SuccessFactors
+  careers feed) to prove "agents fetch it live" → then Surface B (Pouch Radar /
+  Sales lens). Add Supabase (EU) when the first scheduled feed needs history. Then
+  the ~3-min video + forwardable link (GTM in `docs/outreach.md` +
+  `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8).
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
