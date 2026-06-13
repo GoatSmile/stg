@@ -8,7 +8,11 @@ end). Spoken word count ≈ 460 (~150 wpm). Strategy: [ceo-play.md](ceo-play.md)
 
 **Recording notes:** screen-record at 1920×1080, cursor visible, app already
 loaded (offline/`DEMO_MODE` so nothing stalls live). Talk like you're sitting
-next to her. No music. One take is fine — warmth beats polish.
+next to her. No music. One take is fine — warmth beats polish. **Record the VO
+*after* the build, and say the actual on-screen band figure** — don't pre-commit
+a number in narration (the band is model output; pin the default sliders or read
+what's on screen). Keep recording in offline mode so "does it in seconds" never
+collides with live API latency.
 
 ---
 
@@ -31,28 +35,32 @@ next to her. No music. One take is fine — warmth beats polish.
 >
 > Now watch the red markers. Those are the live regulatory threats hitting that
 > footprint right now — the France ban, the Danish flavour cap, Spain's
-> proposal, US tariffs… and this one" — *click EU* — "the EU tax revision. Let's
-> open that one, because it's the big one: it hits the machine-rolled core,
-> half your revenue."
+> proposal, US tariffs… and this one" — *click EU* — "the EU's proposed tax
+> revision. Let's open that one, because it reaches the cigar and pipe core
+> directly — the heart of the European business."
 
 *Click the EU threat → Impact Room (Surface A).*
 
 ### 0:50–2:10 — the money-shot (Surface A)
 
-> "Here's the EU tax revision — the actual proposal, COM 2025/580 — turned into
-> a P&L view. It raises the excise minimums on cigars and pipe tobacco from
-> 2028. The question nobody answers cleanly today is: what's that worth to STG?
+> "This is the proposed EU tax revision — COM(2025) 580, still in Council
+> negotiation — which *would* raise excise minimums on cigars and pipe from a
+> proposed 2028. It models only the slice of the European cigar-and-pipe base
+> that sits *below* the new floor — you'd tell me which markets that's actually
+> true in; I've made a transparent assumption. The question nobody answers
+> cleanly today is: what's it worth to STG?
 >
-> The tool's answer is a band, not a fake single number: roughly sixty million
-> kroner of EBITDA at risk a year, in a range. And here's the part I care about
-> most — these are *assumptions*, and they're yours to argue with."
+> The tool's answer is a band, not a fake single number — and right up here it
+> says what it is: a public-data model, not STG's own figure. And the part I
+> care about most: these are *assumptions*, and they're yours to argue with."
 
-*Drag the elasticity slider.*
+*Drag the assumption sliders.*
 
-> "How much of the tax gets passed to the consumer? How sensitive is demand?
-> Drag it — the band moves. The model doesn't hide its working; it shows it. And
-> every number on this screen carries its source" — *point to a citation chip* —
-> "and where the source doesn't state something — like a France-specific line
+> "How much of the tax gets passed to the consumer? How sensitive is demand —
+> and note it says plainly there's no clean public elasticity for cigars, so
+> this is a range you set, not a borrowed number. Drag it — the band moves. The
+> model shows its working. Every figure carries its source" — *point to a
+> citation chip* — "and where the source is silent — like a France-specific line
 > STG doesn't publish — it says so, here, instead of inventing it. It would
 > rather abstain than be wrong in front of you.
 >
@@ -73,11 +81,11 @@ next to her. No music. One take is fine — warmth beats polish.
 
 ### 2:40–3:00 — to camera, the close
 
-> "That's it. I built this in days, on my own, with AI — which is really the
-> point: that speed is the capability. It runs on public data today; wire it to
-> your real numbers and it gets sharp. If it's useful, reply and I'll plug STG's
-> figures in and walk you through it live. Either way — thanks for the three
-> minutes."
+> "That's it. It's deliberately cheap and fast to stand up — so you can
+> pressure-test the idea on public data before anyone commits real numbers or
+> budget. Wire it to STG's actual figures and it gets sharp. If it's useful,
+> reply and I'll tailor it and walk you through it live. Either way — thanks for
+> the three minutes."
 
 *End. No outro card with a link — the link lives in the email so the video
 forwards clean.*
@@ -91,7 +99,8 @@ forwards clean.*
   me the right number and watch the band move."
 - **"We already track regulation."** → "You track *that it's happening*. This
   is what it's *worth* — to STG specifically, in kroner, with the assumptions on
-  the table. Nobody sells that."
+  the table. I haven't found anyone who sells exactly that — the closest is a
+  ~$4k static spreadsheet or six-figure bespoke consulting."
 - **"Is this an IR / investor tool?"** → "No — strictly internal scenario prep.
   I deliberately don't generate anything investor-facing."
 

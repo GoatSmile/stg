@@ -63,7 +63,7 @@ named layoff round 2025–26 (widely-indexed halfwheel layoff article is from
 | **Sweden, Italy, Poland, Austria, Czechia** | Open | Plus UK/Norway/Switzerland outside EU |
 
 **EU level:** TPD3 still pre-proposal as of spring 2026 (pouches entirely
-outside TPD2; realistic effect ~2028+). Tobacco-excise revision COM(2025)580
+outside TPD2; realistic effect ~2028+). Tobacco-excise revision COM(2025) 580
 (16 Jul 2025) proposes **€143/kg or 50%-of-price minimum excise on pouches**;
 Council deadlocked (Cyprus compromise failed Jan 2026).
 **Sweden's pushback:** Trade Minister Benjamin Dousa — formal warning letters
@@ -83,7 +83,7 @@ problem nobody has tooled.
 Key sources: [Vidal (FR decree)](https://www.vidal.fr/actualites/31543-les-produits-a-usage-oral-contenant-de-la-nicotine-interdits-a-partir-de-mars-2026.html),
 [CNCT (Conseil d'État)](https://cnct.fr/communiques/sachets-de-nicotine-le-conseil-detat-confirme-linterdiction-de-la-vente-malgre-une-suspension-partielle-du-decret/),
 [sik.dk (DK rules)](https://www.sik.dk/en/business/legal-guides/tobacco/new-danish-regulation-nicotine-and-tobacco-products-1-july-2025),
-[EUR-Lex COM(2025)580](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52025PC0580),
+[EUR-Lex COM(2025) 580](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52025PC0580),
 [The Local (Dousa)](https://www.thelocal.com/20260330/a-ban-on-being-swedish-minister-rails-against-frances-new-snus-ban),
 [EP question](https://www.europarl.europa.eu/doceo/document/P-10-2026-001366_EN.html).
 

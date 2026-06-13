@@ -9,7 +9,7 @@ parked — see [ideas.md](ideas.md) header.*
 ## One-liner
 
 A standing web app that turns a live tobacco/nicotine **regulatory event** into a
-**probability-weighted DKK EBITDA/volume/margin band on STG's own footprint** —
+**DKK EBITDA/volume/margin band on STG's own footprint** —
 the thing no incumbent does, aimed at the CEO's single most-punished wound:
 surprise guidance cuts in "a market condition of geopolitical uncertainty."
 
@@ -26,7 +26,7 @@ driven, with one undeniable real-data moment.
 
 ### A — Impact Room (`/impact`) ⭐ spine
 Pre-modeled shocks → DKK bands on a transparent model of STG's published
-segments. Shocks: EU Tobacco Taxation Directive revision (COM(2025)580, applies
+segments. Shocks: EU Tobacco Taxation Directive revision (COM(2025) 580, applies
 2028, pouch minima phase 2030–2032), France oral-nicotine ban (+ France as #1
 MRC market), Denmark 9 mg/flavor cap, US handmade tariffs (scenario variable).
 Each band has **editable elasticity & pass-through sliders** (with cited source

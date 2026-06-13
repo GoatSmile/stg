@@ -65,7 +65,7 @@ a specific company's P&L impact.** The layers that exist each stop short:
 > cigars/cigarillos/smoking tobacco. **Do not repeat those claims.** The moat is
 > not a coverage gap — it is the **composite** nobody assembles:
 > *live regulatory text in → STG-specific DKK EBITDA/volume/margin → editable
-> elasticity & pass-through → probability-weighted scenario band → decision-ready
+> elasticity & pass-through → scenario band → decision-ready
 > out.* (The exact extent of each incumbent's cigar/pipe depth still needs
 > precise re-verification before any client meeting — flagged.)
 
@@ -84,10 +84,13 @@ Pre-modeled regulatory shocks, each rendered as a **DKK EBITDA / volume / margin
 band on a transparent model of STG's published segments**, with every assumption
 visible and editable:
 
-- **EU Tobacco Taxation Directive revision** (COM(2025)580, proposed 16 Jul
-  2025; directive **applies from 2028**; pouch minima **phase 2030–2032**;
-  cigar/cigarillo/pipe minimums raised). The big one — it taxes the combustible
-  core that is 50% of group revenue.
+- **EU Tobacco Taxation Directive revision** (COM(2025) 580, **a proposal,
+  still in Council negotiation**, proposed 16 Jul 2025; would apply from 2028;
+  pouch minima phase 2030–2032; cigar/cigarillo/pipe minimums raised). The big
+  one — it reaches the cigar and pipe core directly. (Exposure = the share of
+  that base sitting *below* the new floor, not the whole 50% block — an excise
+  minimum only bites below the floor; the model makes that share an editable
+  assumption.)
 - **France oral-nicotine ban** (in force April 2026) — and France is *also*
   STG's #1 machine-rolled cigar market (~19% of Europe Branded), a separate and
   larger exposure than the pouch line.
@@ -110,9 +113,13 @@ visible and editable:
   category/geography splits*, labeled as such, with the estimation step visible
   and editable. ("Plug in your real volumes behind a DPA for SKU precision" is
   the paid expansion, not a v1 claim.)
-- **Assumptions are first-class:** elasticity & pass-through as editable sliders
-  with their source studies (premium cigarettes −1.0 to −1.2; pass-through
-  80–100%). Bands, not point estimates. A skeptical CFO can co-own it instead of
+- **Assumptions are first-class:** pass-through and demand elasticity as editable
+  sliders. Honesty rule (cost us a fatal in red-team): there is **no clean public
+  elasticity for cigars/pipe**, so that slider is labelled "no public consensus —
+  a range you set" and the default sits inside the shown band — we never display
+  a cited *cigarette* elasticity against a *cigar* base (that mismatch is the
+  fastest way the citation rail gets caught citing a number it doesn't use).
+  Bands, not point estimates. A skeptical CFO can co-own the model instead of
   contesting it — which turns STG's regulatory-affairs team from competitor into
   champion.
 

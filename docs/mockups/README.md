@@ -35,26 +35,33 @@ The forwardable wow and the video's opener. Layout, top to bottom:
 
 ## Surface A — Impact Room (the spine / money-shot, `/impact`)
 
-Worked example: **EU tobacco-tax revision — raised excise minimums** (chip:
-`COM(2025)580 · as of 12 Jun 2026`). Header pill: "scenario prep · internal
-decision-support · not investor-facing" (the EU-MAR guardrail, visible).
-Two columns:
-- **Left — assumptions (editable):** three sliders — excise-driven price rise
-  (2–16%, default 8), pass-through to consumer (50–100%, default 85), demand
-  elasticity (−1.00…−0.20, default −0.50), with an elasticity-prior source chip
-  (IARC 2011). Editing them is the live demo moment.
-- **Right — modeled annual EBITDA impact:** big red figure (**−DKK 60m** base),
-  a **band** (−DKK 43m to −DKK 76m), a horizontal band bar on a 0…−DKK 130m
-  scale, and context "vs EBIT before special items DKK 1,342m" (source chip).
-- Footer strip: exposed base "EU machine-rolled & smoking tobacco **DKK 2,684m
-  (modeled)**", contribution margin 30% (editable), and an **abstention** cell —
-  "France-specific MRC line: not stated in source — analyst derivation, needs
-  STG volumes" (the honest-denominator discipline, shown not hidden).
+> **The chat mockup of this surface contained the fatal flaw the red-team
+> caught** (cited cigarette elasticity against a cigar base; default outside its
+> own band; "applies 2028" as if enacted). The corrected spec below is what to
+> build — it diverges from the rendered widget on purpose.
 
-Interactive math (illustrative, monotonic): `effUp = price×passthrough`;
-`vol = elasticity×effUp`; `absorbed = price×(1−passthrough)`;
-`EBITDA impact = base × (0.30×vol − absorbed)`; band = recompute at
-elasticity ±0.30. Round every displayed number.
+Worked example: **EU's proposed tobacco-tax revision — would raise excise
+minimums** (chip: `COM(2025) 580 · proposed, in Council · as of 12 Jun 2026`,
+CELEX `52025PC0580`). Header pill: "scenario prep · internal decision-support ·
+not investor-facing" (the EU-MAR guardrail, visible). Two columns:
+- **Left — assumptions (editable):** sliders — excise-driven price rise
+  (2–16%, default 8), pass-through (50–100%, default 85), **exposed share** of
+  the cigar/pipe base below the new floor (default conservative, labelled "which
+  markets sit below the floor — your call"), and demand elasticity labelled
+  **"cigars — no public consensus; a range you set"** (default *inside* the shown
+  band; NO cited cigarette number against a cigar base).
+- **Right — modeled annual EBITDA impact:** big red figure + a **band** + bar,
+  context "vs EBIT before special items DKK 1,342m" (source chip), and an
+  **eye-level tag beside the number**: "illustrative — public-data model, not
+  STG's own figure". (Figures recomputed by `model.ts`; don't hard-code.)
+- Footer strip: exposed base "EU cigar & pipe (modeled from published EUB
+  splits)", contribution margin 30% (editable), and an **abstention** cell —
+  "France-specific MRC line: not stated in source — needs STG volumes".
+
+Interactive math: see [../build-plan.md](../build-plan.md) §3 Phase 2 — the
+corrected contribution-margin walk on `exposedBase` (not the whole category),
+with the band as min/max over the elasticity×pass-through grid (guaranteed to
+bracket the base). Round every displayed number.
 
 ## Surface B — Pouch Radar (live-data proof, `/radar`)
 

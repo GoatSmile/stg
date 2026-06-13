@@ -3,8 +3,8 @@
 Pitch prototype targeting Scandinavian Tobacco Group (STG) — built by
 Jensen Production / valent.dk as a consulting calling card. **Varsel** (Danish:
 a warning / advance notice / forecast) is a regulation→P&L early-warning room:
-it turns a live tobacco/nicotine regulatory event into a probability-weighted
-DKK EBITDA/volume/margin band on STG's own footprint. First recipient is
+it turns a live tobacco/nicotine regulatory event into a DKK EBITDA/volume/margin
+band on STG's own footprint (a scenario range, not a point estimate). First recipient is
 **Yulia Lyusina, SVP Strategy, Transformation & Sustainability** (warm intro via
 the owner's wife in STG HR), designed to be forwarded up to the **CFO**
 (Marianne Rørslev Bock) and CEO (Niels Frederiksen). Delivered as a ~3-min

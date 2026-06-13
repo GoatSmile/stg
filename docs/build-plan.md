@@ -82,18 +82,32 @@ demo.
   MRC ~620m) carry `derived: true` + the derivation note.
 - **`operations.json`** — the map: sites `[{type, label, country, city, lat,
   lng, employees?, makes?, source, approx?}]`. Types: manufacturing, leaf,
-  pouch, retail, hq. ~12 sites + 15 superstores (geo from the research digest;
-  Richmond VA is CLOSED — do not include).
+  pouch, retail, hq. ~12 sites + 15 superstores (geo from the research digest).
+  **Richmond, VA (Sutliff/Mac Baren) is CLOSED** — last production 28 Feb 2025,
+  consolidated into Assens, DK ([cigar-coop, Jan 2025](https://cigar-coop.com/2025/01/stg-shutting-down-sutliff-tobacco-richmond-facility-and-streaming-portfolio-news.html));
+  carry that dated `sourceRef` so the omission is provably correct, not an
+  error. (Note: this corrects the earlier commercial-footprint line in the
+  digest, which predates the closure.)
 - **`regulatory-corpus.json`** — the curated, dated, sourced events:
-  `[{id, title, jurisdiction, instrument, sourceUrl, asOf, status, summary,
-  knownRates: [{claim, value, sourceRef}], exposureFootprint: [...], appliesFrom}]`.
-  Start with 5: EU ETD revision (COM(2025)580, applies 2028, pouch minima phase
-  2030–2032), France ban (in force Apr 2026), Denmark 9mg+flavour, Spain 0.99mg
-  proposal, US handmade tariffs (flag EO-14389 flux). This file is the citation
-  source of truth — the AI may only cite from here.
-- **`elasticity-priors.json`** — `[{category, low, base, high, source}]`
-  (e.g. premium cigarettes −1.0…−1.2; pass-through 80–100%; IARC 2011). Powers
-  the sliders' default ranges and the source chip.
+  `[{id, celex, title, jurisdiction, instrument, status, sourceUrl, asOf,
+  summary, knownRates: [{claim, value, unit, sourceRef}], exposedShare?,
+  exposureFootprint: [...], appliesFrom}]`. Start with 5: EU ETD revision
+  (`COM(2025) 580`, CELEX `52025PC0580`, status **proposed — in Council
+  negotiation**, proposed to apply from 2028, pouch minima phase 2030–2032),
+  France ban (in force Apr 2026), Denmark 9mg+flavour, Spain 0.99mg proposal,
+  US handmade tariffs (flag EO-14389 flux). `status` is rendered on-screen
+  (proposed vs in-force) — never present a proposal as enacted. This file is the
+  citation source of truth — the AI may cite only from here, by `sourceRef`,
+  and only values that match `knownRates` (see Phase 3).
+- **`elasticity-priors.json`** — `[{category, low, base, high, source,
+  hasPublicConsensus}]`. **Honesty rule:** there is no clean public elasticity
+  for *cigars/pipe* — that category sets `hasPublicConsensus:false`, the UI
+  labels the slider "demand elasticity (cigars — no public consensus; a range
+  you set)", and the default sits inside whatever band is shown. Do NOT display
+  a cited cigarette elasticity (e.g. IARC 2011 −1.0…−1.2) against a cigar/pipe
+  base — that mismatch is the single fastest way an ex-BCG reader catches the
+  citation rail "citing a number you then don't use." Cigarette/pouch categories
+  may carry their real cited priors where the base actually is cigarettes/pouches.
 - **`golden/*.json`** — one cached Claude response per pre-modeled scenario,
   keyed by `{eventId + assumptionHash}` for the demo's default slider positions.
 - **`radar/*.json`** — cached crawler output (prices, launches, ranks). See §6.
@@ -105,7 +119,14 @@ demo.
 > (RSC boundary violations pass the build and only explode at runtime —
 > jensen-fms lesson fa1dbed).
 
-### Phase 0 — scaffold + data spine  (~90 min build)
+### Phase 0a — source verification  (~60 min, no code)
+Before any datum enters the corpus, confirm against the AR2025 PDF + primary
+sources and record `sourceRef`/`asOf` for each: EU ETD status & dates (proposed,
+in Council, applies 2028, pouch minima 2030–2032), the Richmond VA closure, the
+segment/geography splits, and Yulia's exact current title. A wrong fact here
+propagates into a number shown to a CEO — this block is cheap insurance.
+
+### Phase 0b — scaffold + data spine  (~90 min build)
 - `create-next-app` (TS, App Router, Tailwind), port shadcn radix-nova config
   from jensen-fms (do not re-init fresh).
 - Layout shell: top bar with the **public-data banner**, nav (Pulse / Impact /
@@ -124,70 +145,120 @@ demo.
 - **Acceptance:** map renders with real geo, threats locate on click, KPIs
   correct. This alone is a forwardable artifact.
 
-### Phase 2 — Surface A, the Impact Room (static model)  (~150 min)
-- `/lib/model.ts`: the pure impact function (effUp = price×passthrough;
-  vol = elasticity×effUp; absorbed = price×(1−passthrough);
-  EBITDA = base×(CM×vol − absorbed); band = recompute at elasticity ±0.30).
-  **Unit-tested** (this is the one place a Vitest file earns its keep — the math
-  is repeated to a CEO).
+### Phase 2 — Surface A, the Impact Room (static model)  (~3–4 h)
+- `/lib/model.ts`: a contribution-margin walk on clearly-typed **fractional**
+  inputs (no unit/sign defect). Given `exposedBase` (DKK revenue actually below
+  the new excise floor — NOT the whole category), `priceIncreasePct`,
+  `passThrough`, `elasticity` (negative), `contributionMargin`:
+  ```
+  effPriceUp        = priceIncreasePct × passThrough
+  retainedVolFactor = 1 + elasticity × effPriceUp        // <1
+  volumeLossDKK     = exposedBase × (1 − retainedVolFactor)
+  marginLossOnVol   = volumeLossDKK × contributionMargin
+  absorbedExcise    = exposedBase × priceIncreasePct × (1 − passThrough)
+  ΔEBITDA           = −(marginLossOnVol + absorbedExcise)   // negative = at risk
+  ```
+  **Band = min/max of ΔEBITDA over the full grid** of {elasticity, passThrough}
+  low/base/high from `elasticity-priors.json` — this guarantees the band brackets
+  the base point and can never invert (the ±0.30 shortcut could). **Unit-tested
+  with Vitest** — the math is repeated to a CFO; pin cases incl. the band-brackets
+  invariant and a zero-exposed-share case.
+- **`exposedShare` is a first-class, visible input** — the model never applies
+  an excise *minimum* across 100% of a category (a minimum only bites below the
+  floor). Default conservative, labelled "assumption — which markets sit below
+  the floor", editable.
 - `ScenarioControls.tsx` (sliders), `ImpactBand.tsx` (figure + band bar),
-  `CitationChip.tsx`, `Abstain.tsx` (the "not stated in source" cell).
+  `CitationChip.tsx`, `Abstain.tsx`, and an **always-visible eye-level tag** next
+  to the DKK figure: "illustrative — public-data model, not STG's own figure".
 - Event selector wired to `regulatory-corpus.json`; deep-link from the map.
-- **Acceptance:** sliders recompute the band live; every number sourced or
-  abstained; honest-denominator note visible.
+- **Acceptance:** sliders recompute the band live; band always brackets the base;
+  every number sourced or abstained; the "not STG's figure" tag sits beside the
+  number (not buried in a footer).
 
 ### Phase 3 — the live AI moment  (~120 min)
 - `/api/ai/impact/route.ts`: server-only Claude call. Input = a corpus event +
   current assumptions. **Structured output** (a tool/JSON schema): the model
   returns `{narrative, lineItems:[{claim, value, sourceRef|abstain}], band}`.
-- **Citation enforcement at the route layer:** reject/abstain any `lineItem`
-  whose `sourceRef` isn't present in `regulatory-corpus.json` — the rails are
-  code, not vibes. Prompt instructs: cite from the provided corpus only; if a
-  rate isn't there, return `abstain: true` with a reason. Never invent.
-- Golden response captured to `/src/data/golden/` for `DEMO_MODE=offline`.
+- **Citation enforcement at the route layer (value-match, not key-exists):**
+  reject-to-abstain any `lineItem` whose `sourceRef` is missing **OR** whose
+  `value` doesn't match the corpus `knownRates[sourceRef].value` within tolerance
+  (exact string for non-numeric claims). Validating only that the source ID
+  exists still lets a hallucinated *number* through — the rail must check the
+  number. The rails are code, not prompt vibes.
+- **Offline behaviour that keeps sliders live:** `{eventId+assumptionHash}` only
+  hits for the default sliders, so in `DEMO_MODE=offline` freeze the Claude
+  *narrative* to the default-scenario golden, but **always recompute the band
+  locally via `model.ts`** from current slider state. The sliders stay live
+  offline; only the prose is cached. (A pure golden-by-hash would go blank the
+  moment the presenter drags a slider — the rehearsed path.)
+- **Pin an abstention golden fixture:** a deterministic golden for the default
+  EU-ETD scenario where the France-specific MRC line returns `abstain:true`
+  ("not stated in source — needs human lookup"); assert the route returns it
+  verbatim offline. The scripted abstention beat must not depend on a live
+  model's mood.
 - The demo uses "paste a snippet of a corpus-known text → cited impact" — NOT
   live-parse of an arbitrary URL (hallucination trap; descoped to post-pilot).
-- **Acceptance:** live call returns cited structured impact; offline mode serves
-  the golden response identically; an out-of-corpus claim abstains.
+- **Acceptance:** live call returns value-validated cited impact; offline mode
+  serves frozen narrative + live-recomputed band; the France-line abstention
+  fires deterministically.
 
-### Phase 4 — Surface B, the Pouch Radar  (~120 min crawler + UI)
-- Crawler (a `/scripts/crawl-radar.ts` run locally / on a schedule, NOT at
-  request time): Haypp group sitemaps (robots.txt exposes 34, no crawl-delay —
-  sitemap-diff for launches/delists) + `nicotine-pouches.org` price API. Polite
-  rate-limit; respect each site's ToS (facts/prices are low-risk under EU law,
-  but check per-site ToS; buying Haypp's Media & Insights feed is the clean
-  paid alternative). Output → `/src/data/radar/*.json`.
-- `PriceChart.tsx` (Chart.js price-per-pouch, XQS vs ZYN vs Velo), `LaunchFeed.tsx`
-  (launch/price events + a compliance-drift flag), KPI cards.
-- **Acceptance:** chart + feed render from cached crawl; "live · refreshed
-  [time]" label honest; sources cited.
+### Phase 4 — Surface B, the Pouch Radar  (~3–4 h crawler + UI)
+- **GATE (do first):** Surface B does not ship until a per-retailer **ToS read**
+  confirms automated price collection is permitted. robots.txt permission ≠ ToS
+  permission — post-*Ryanair v PR Aviation*, a site's ToS can contractually
+  restrict scraping of even public, non-protected price data. If a retailer's
+  ToS prohibits it, fall back to the **Haypp Media & Insights paid feed** or a
+  manually-sourced snapshot. Prefer **sitemap-diffing** over HTML scraping.
+- Crawler (`/scripts/crawl-radar.ts`, run locally / on a schedule, NOT at request
+  time): permitted Haypp sitemaps + `nicotine-pouches.org` API; polite
+  rate-limit; output → `/src/data/radar/*.json` with `crawledAt`.
+- `PriceChart.tsx` — **`'use client'` + `next/dynamic({ssr:false})`** (Chart.js
+  touches `window`/canvas; an SSR import 500s — the "passes build, explodes at
+  runtime" trap). `LaunchFeed.tsx` (events + compliance-drift flag), KPI cards.
+- **Acceptance:** ToS check logged per source; chart + feed render from cached
+  crawl; `/radar` does not 500 with JS disabled; "live · refreshed [crawledAt]"
+  label honest; sources cited.
 
-### Phase 5 — polish, deploy, record  (~120 min + recording)
+### Phase 5 — polish, deploy, record  (~2–3 h + recording)
 - Map narrative copy, empty/loading states, mobile not-broken (laptop-first).
-- Write the demo-script timing into the build (the click path is smooth).
+- Walk the demo-script click path until smooth; run the honesty checklist (§4).
 - Deploy to Vercel behind SSO; rehearse once in `DEMO_MODE=offline`.
-- Record the ~3-min video ([demo-script.md](demo-script.md)).
+- Record the ~3-min video ([demo-script.md](demo-script.md)) — VO *after* the
+  build so spoken figures match the screen.
 - **Acceptance:** the script runs start-to-finish with no stalls; link
   forwards; video recorded.
 
-**Total: ~10–12 human-dev-hours of build across the phases.** A forwardable
-artifact exists after Phase 1; the demo is bookable after Phase 2; the live
-clincher lands at Phase 3–4.
+**Total: ~16–20 human-dev-hours** (the earlier ~10–12 underestimated the D3 map,
+the crawler, and the AI-route rails by ~2×). A forwardable artifact exists after
+Phase 1; the demo is bookable after Phase 2; the live AI clincher lands at
+Phase 3. **Recommended cut if time-boxed: ship Phases 0–3 (map + impact + live
+AI) as the demo and treat the Pouch Radar (Phase 4) as a fast-follow** — it's the
+highest-effort, highest-ToS-risk surface, and Phases 0–3 already carry the
+pitch.
 
 ## 4. The credibility/honesty checklist (review before recording)
 
 - [ ] Public-data banner on every page.
 - [ ] Every regulatory figure has a citation chip → a real `regulatory-corpus`
-      entry with a working `sourceUrl` + `asOf`.
-- [ ] Abstention visibly fires on at least one known gap (France MRC line).
-- [ ] Derived figures labelled "(modeled)" / "(analyst derivation)", never
-      "STG's number".
-- [ ] Bands, never naked point estimates.
-- [ ] No investor-facing / earnings-language copy anywhere (EU MAR).
-- [ ] Radar labelled "live"; Impact labelled "illustrative model".
-- [ ] `DEMO_MODE=offline` produces the identical golden response.
-- [ ] Re-verify the EU ETD dates (applies 2028; pouch minima phase 2030–2032)
-      and Yulia's title against the AR2025 PDF before recording.
+      entry with a working `sourceUrl` + `asOf`; the route value-matches it.
+- [ ] Proposals labelled **"proposed / in Council"**, never as enacted; "would
+      raise", not "raises". (COM(2025) 580 is a proposal.)
+- [ ] Abstention visibly fires on at least one known gap (France MRC line),
+      from a pinned golden fixture.
+- [ ] Elasticity slider for cigars/pipe is labelled "no public consensus — a
+      range you set"; **no cited cigarette elasticity shown against a cigar base**;
+      default sits inside the displayed band.
+- [ ] `exposedShare` visible and editable — no minimum-excise applied across a
+      whole category.
+- [ ] "Illustrative — not STG's own figure" tag sits **beside** the DKK number,
+      not only in a footer.
+- [ ] Bands, never naked point estimates; band brackets the base (unit test).
+- [ ] No investor-facing / earnings-language copy anywhere (EU MAR); a persistent
+      "internal scenario prep" footer on the app UI, not only a spoken line.
+- [ ] Radar labelled "live · [crawledAt]"; Impact labelled "illustrative model".
+- [ ] `DEMO_MODE=offline`: frozen narrative + locally-recomputed live band.
+- [ ] Re-verify EU ETD status/dates, the Richmond closure, and Yulia's title
+      against the AR2025 PDF before recording (Phase 0a).
 
 ## 5. Risks & mitigations
 
