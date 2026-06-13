@@ -89,7 +89,7 @@ export function PulseDashboard() {
             </div>
             {selected.impact && (
               <Link
-                href="/impact"
+                href={`/impact?event=${selected.id}`}
                 className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:opacity-90"
               >
                 Open the Impact Room <ArrowRight className="size-4" />

@@ -1,0 +1,101 @@
+{
+  "asOf": "2026-06-13",
+  "scenarios": {
+    "eu-etd": {
+      "eventId": "eu-etd",
+      "title": "EU tobacco-tax revision (ETD)",
+      "instrument": "COM(2025) 580",
+      "celex": "52025PC0580",
+      "status": "proposed — in Council negotiation",
+      "sourceUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0580",
+      "appliesFrom": "proposed from 2028 · pouch minima phased 2030–2032",
+      "summary": "Would raise EU excise minima on cigars, cigarillos and pipe tobacco — STG's combustible core. This models the annual EBITDA at risk on the exposed share of the EU cigar/pipe base.",
+      "exposedBaseDkkM": 3270,
+      "exposedBaseSourceRef": "AR2025 — EUB division",
+      "exposedBaseDerived": true,
+      "exposedBaseNote": "EUB (Europe Branded) division net sales, used as the EU cigar/pipe base. STG does not publish an EU-excise-exposed revenue line, so the share actually below each new floor is the editable 'exposed share' assumption — not an STG figure.",
+      "assumptions": [
+        {
+          "key": "exposedShare",
+          "label": "Exposed share of the EU base",
+          "kind": "assumption",
+          "default": 0.3,
+          "min": 0.05,
+          "max": 1.0,
+          "step": 0.05,
+          "unit": "pct",
+          "note": "Share of the EU base sitting below the proposed new floor. Not stated in the source — you set it."
+        },
+        {
+          "key": "priceIncreasePct",
+          "label": "Excise-driven retail price rise",
+          "kind": "scenario",
+          "sourceRef": "COM(2025) 580",
+          "default": 0.15,
+          "min": 0.05,
+          "max": 0.4,
+          "step": 0.01,
+          "unit": "pct",
+          "note": "The directive sets minima, not a single headline rate — modeled as a scenario."
+        },
+        {
+          "key": "passThrough",
+          "label": "Pass-through to the shelf",
+          "kind": "assumption",
+          "default": 0.7,
+          "min": 0.1,
+          "max": 1.0,
+          "step": 0.05,
+          "spread": 0.15,
+          "unit": "pct",
+          "note": "Share of the excise that reaches the consumer vs STG absorbs. Drives the band."
+        },
+        {
+          "key": "contributionMargin",
+          "label": "Contribution margin on lost volume",
+          "kind": "assumption",
+          "default": 0.45,
+          "min": 0.3,
+          "max": 0.6,
+          "step": 0.01,
+          "unit": "pct",
+          "note": "STG does not disclose category contribution margin — an assumption."
+        },
+        {
+          "key": "elasticity",
+          "label": "Own-price elasticity (cigars / pipe)",
+          "kind": "no-consensus",
+          "default": -0.6,
+          "min": -1.0,
+          "max": -0.2,
+          "step": 0.05,
+          "spread": 0.2,
+          "unit": "raw",
+          "note": "No public elasticity consensus for cigars/pipe — a range you set. We deliberately do NOT show a cited cigarette elasticity against a cigar base. Drives the band."
+        }
+      ],
+      "facts": [
+        { "claim": "STG group net sales (FY2025)", "value": "DKK 9,036m", "sourceRef": "AR2025", "provenance": "public" },
+        { "claim": "Europe net sales (FY2025)", "value": "DKK 3,934m", "sourceRef": "AR2025 p112", "provenance": "public" },
+        { "claim": "EUB division net sales — the EU cigar/pipe base", "value": "DKK 3,270m", "sourceRef": "AR2025", "provenance": "public" },
+        { "claim": "Combustible share of group (handmade + machine-rolled)", "value": "≈ 85%", "sourceRef": "AR2025 category split", "provenance": "public" }
+      ],
+      "abstain": [
+        {
+          "claim": "EU revenue sitting below each market's new excise floor",
+          "reason": "not stated in source — needs human lookup (you set it via 'exposed share')"
+        },
+        {
+          "claim": "The exact ETD rate increase for cigars / pipe",
+          "reason": "COM(2025) 580 sets minima, not a single headline rate — modeled as a scenario, not quoted as fact"
+        }
+      ]
+    }
+  },
+  "unmodeled": [
+    { "eventId": "fr-ban", "label": "France oral-nicotine ban", "why": "a ban (in-market volume → 0), not an excise band — a separate model" },
+    { "eventId": "dk-cap", "label": "Denmark 9mg + flavour cap", "why": "a pouch-format restriction — separate model" },
+    { "eventId": "es-prop", "label": "Spain 0.99mg cap (proposed)", "why": "a pouch-strength cap — separate model" },
+    { "eventId": "us-tariff", "label": "US handmade tariff lines", "why": "an import-cost shock — separate model" }
+  ]
+}
