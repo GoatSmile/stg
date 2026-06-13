@@ -97,12 +97,23 @@ track (reference only).
 - `/src/data` — STG segment model, curated regulatory corpus (each datum dated +
   source-linked), golden AI responses, cached radar output. Versioned, reviewed
   like code.
-- `/src/app` — routes per spec: `/` (Frederiksen Brief landing), `/impact`
-  (Impact Room), `/radar` (Pouch Radar).
+- `/src/app` — routes per spec: `/` (Pulse map platform — the home), `/impact`
+  (Impact Room), `/radar` (Pouch Radar), `/transparency` (honest-data contract).
 
 ## Demo shortcuts (running log — add as they're taken)
 
-*(none yet — repo is pre-build)*
+- **Five lenses are stubs.** Sales / Finance / Procurement / Supply / ESG ship a
+  real KPI rail + a few markers + a `·soon` tag (provably-coming, not empty).
+  Only Regulatory + HR are built out. Expand per `docs/map-platform.md` §4.
+- **Static dated JSON, no live feeds yet.** Lens `asOf` and all marker values are
+  hardcoded snapshots in `src/data/`; the "agents fetch it live" story (ECB FX,
+  careers feed, weather…) is designed but not wired. First real feed is the next
+  build step. No DB yet (Supabase deferred to first scheduled feed).
+- **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
+  (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
+  and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
+- **`.claude/launch.json` is local-only** (gitignored): `npm run dev` on :3000 for
+  the preview workflow; recreate it if a fresh clone needs the preview server.
 
 ## Out of scope for the demo
 
@@ -129,10 +140,20 @@ repeated to the client: owner decides, always.
 
 ## Status & handoff
 
-- **Pre-build.** Repo contains strategy docs + this file. The CEO play (Varsel)
-  superseded the parked HR/"Broen" track June 2026 after a multi-agent
-  research→ideation→judge→stress-test pass (see `docs/ceo-play.md`). Next step:
-  owner green-lights Varsel and the open decisions (`docs/ceo-play.md` §8), then
-  Phase 0 scaffold.
+- **Surface C scaffold shipped — `922e93c` (2026-06-13).** Varsel Pulse runs: a
+  department-switchable D3 world map with the **Regulatory** (default) and **HR**
+  lenses built out fully and five lenses stubbed; the `/transparency` page; and
+  provenance flags throughout. Built on the jensen-fms radix-nova stack
+  (Next 16.2.5 / React 19 / Tailwind 4). `tsc` clean + `next build` green (6 static
+  pages, no RSC trap); verified in-browser — lens switch re-skins KPIs + markers,
+  marker click opens the detail card. The CEO play (Varsel) superseded the parked
+  HR/"Broen" track June 2026 (`docs/ceo-play.md`); re-architecture in
+  `docs/map-platform.md`, data-of-record in `docs/stg-facts.md`.
+- **Next:** Surface A (Impact Room — threat→DKK band drill-down behind the
+  Regulatory/Finance lenses) → first **live agent feed** (ECB FX or the
+  SuccessFactors careers feed) to prove "live" → Surface B (Pouch Radar / Sales
+  lens). Add Supabase (EU) when the first scheduled feed needs history. Then the
+  ~3-min video + forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`;
+  open decisions in `docs/ceo-play.md` §8).
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
