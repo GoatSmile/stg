@@ -129,67 +129,110 @@ elasticity math — "here is a competitor price/SKU move from **this morning** y
 quarterly-panel team hasn't seen yet" — and its demand signal feeds the pouch
 portion of the Impact Room with evidence instead of assumption.
 
-### Surface C — the Frederiksen Brief (the wrapper / landing)
-The landing page *is* the five questions the CEO is under pressure to answer,
-each wired to the live module that addresses it. It's the framing device that
-makes a forwarded link instantly legible to anyone in the C-suite — not a
-separate build.
+### Surface C — the Global Pulse map (the hero / landing)
+*Owner's idea, adopted as the landing.* A world map of STG's actual footprint —
+manufacturing & leaf (Dominican Republic, Honduras, Nicaragua, Indonesia, Sri
+Lanka, Belgium), pouch production (Svendborg DK, + contract Sweden/Poland), US
+online & 15 superstores, HQ in Gentofte — over which the **live regulatory
+threats glow on the geographies they hit** (France ban, EU excise, Denmark cap,
+Spain proposal, US tariffs). It gives a CEO the *pulse of the business* in one
+glance, on a geography he feels viscerally, and every threat marker is a
+click-through into the Impact Room (Surface A). KPI rail: net sales DKK 9.0bn,
+US 46.8%, 8,858 employees, ~100 markets. The five questions the CEO is under
+pressure to answer ride alongside as the framing device — so a forwarded link is
+instantly legible to anyone in the C-suite. This is the forwardable wow and the
+"this is real" opener of the video. *(Mockups of all three surfaces:
+[mockups/](mockups/).)*
 
 *Phase-2 teaser:* a **gray-market / orphaned-demand radar** — where France's and
 Denmark's banned/capped demand migrates (checkout-availability testing across EU
 retailers). Doubles as advocacy evidence ("bans create unregulated supply") and
 growth-capture signal (where XQS can *legally* capture orphaned demand).
 
-## 5. Go-to-market — how an unknown solo shop lands a halved-stock C-suite
+## 5. Go-to-market — the warm intro changes everything
 
-The CEO-reality refuter was blunt: a solo consultant will **not** get
-Frederiksen's calendar cold, and procurement/infosec will bury "software to
-onboard." The entry path is therefore designed around it:
+The CEO-reality refuter assumed cold outreach. We have better: **the owner's
+wife works in STG HR (data analyst) and can introduce him to the Head of
+Strategy.** That is the single hardest step (getting watched at all) solved for
+free — and it lands on the *ideal* owner, not a compromise.
 
-1. **CEO-magnetic in content, IR/CFO-office-adopted in practice.** First user is
-   an **IR analyst / FP&A / public-affairs lead** — reachable cold, owns the
-   pain, value flows upward. Named surface from the digest: **IR head Torben
-   Sand, CFO Marianne Rørslev Bock**, Chairman Henrik Brandt; sell-side analysts
-   (Ekman/DNB Carnegie, Grave/Nordea, McNeela/Deutsche Numis) as users *or*
-   referrers; industry bodies (Premium Cigar Association, Cigar Association of
-   America, the Swedish snus lobby publicly fighting the France/Spain bans — a
-   natural ally with the same modeling need).
-2. **The forwardable live link is the landing mechanic** (already a house
-   discipline: "every page must survive unattended viewing — the buyer will
-   forward it"). A public URL turning a *real, dated* regulatory event into a DKK
-   band on STG's *published* segments — with a visible **"built entirely on
-   public data, zero STG data"** banner — is exactly what an IR analyst forwards
-   to the CFO. The banner is also the AI-fluency / trust moment.
-3. **v1 is an "intelligence brief," not "software."** Zero integration, no data
-   transfer, hosted link. It buys through an **existing research/advisory budget
-   line**, not a new-vendor software procurement cycle.
-4. **No earnings-language feature in the cold version.** Under EU MAR, no listed
-   Danish firm lets an external unvetted tool author investor-facing copy. The
-   same output is positioned as **internal decision-support / scenario prep**,
-   explicitly not investor-facing.
+1. **The recipient is Yulia Lyusina — SVP, Strategy, Transformation &
+   Sustainability** (not "Irina" — a misremembered name; she's Russian-born,
+   ex-BCG, reports to the CEO). She *owns Focus2030, M&A, and transformation* —
+   the exact thesis the regulatory threats endanger. Ex-BCG means she thinks in
+   models, bands, and assumptions: Varsel's honest-rails design is built for her
+   skepticism, not against it. Use her **real title** ("SVP, Strategy,
+   Transformation & Sustainability"), not the aggregator label "CSO."
+2. **The intro mechanic:** wife tells Yulia an email is coming → the email's
+   payload is a **short forwardable video** (see §5b) → the email CTA is *"reply
+   and I'll plug in STG's real numbers and walk you through it live."*
+3. **Design the artifact to be forwarded by Yulia to the CFO, Marianne Rørslev
+   Bock.** The DKK EBITDA/margin band is CFO-native language; the money-shot
+   (Surface A) must stand alone when she forwards it. Secondary forward targets:
+   IR head Torben Sand (internal scenario-prep framing only) and Group GC /
+   Public & Regulatory Affairs Peter Schøtt Knudsen (the source-credibility
+   check). Note: there is **no standalone Corporate Affairs SVP** — regulatory
+   ownership is split across Strategy (Lyusina), Legal (Knudsen) and Scientific &
+   Regulatory (Thomas Lindegaard), which is *why* a regulation→P&L tool that
+   straddles all three has no internal owner. That's the whitespace.
+4. **A strategy-head sponsor is how a cross-cutting tool gets adopted.** Pitched
+   cold to the CFO or IR it risks being filed as "an FP&A tool" or "an IR comms
+   tool" and siloed. Yulia can convene the CFO/IR/Legal table Varsel needs.
+5. **v1 is an "intelligence brief," not "software."** Zero integration, no data
+   transfer, a hosted link with a visible **"built on public data, zero STG
+   data"** banner (the AI-fluency / trust moment). It buys through an existing
+   research/advisory budget line, not a new-vendor procurement cycle.
+6. **No earnings-language feature.** Under EU MAR no listed Danish firm lets an
+   external tool author investor-facing copy — output is framed as **internal
+   decision-support / scenario prep**, explicitly not investor-facing.
+
+## 5b. The pitch video (the email payload)
+
+The introduction is a **~3-minute video** (hard ceiling 4): the owner to camera,
+intercut with a screen-walkthrough of the demo. Forwardable, publicly
+accessible, viewers free to contact him. Rationale: best self-introduction,
+far higher response rate than a deck, and it removes all guesswork — he narrates
+the screen "like a baby." Recommended structure:
+
+| Time | Beat | On screen |
+|---|---|---|
+| 0:00–0:20 | To camera. "[Wife] mentioned I'd reach out. 3 minutes, no deck." Name the wound: surprise guidance, the regulatory tail. | Face |
+| 0:20–0:50 | The map — "STG's footprint on public data, and what's coming at it." Threats light up. | Surface C |
+| 0:50–2:10 | The money-shot: walk **one** scenario (EU excise or France), drag the elasticity slider — "these are *your* assumptions; every number cites its source, and it refuses to guess where there's none." | Surface A |
+| 2:10–2:40 | The live proof: a competitor price/launch move from this morning. | Surface B |
+| 2:40–3:00 | To camera. "Built by one person in days — the speed STG needs. Public data only; plug in your real numbers and it gets sharp. Reply and I'll tailor it live." | Face |
+
+**On linking the live app:** include it, but make the video the star. The app
+link *is* the proof it's real (not slideware) and the forwardable landing
+mechanic — but gate the depth: the link shows the demo, the valuable step
+("plug in STG's real numbers") requires replying to the owner. Put the link in
+the email body, not burned into the video, so the video forwards cleanly on its
+own. This satisfies the owner's "whet the appetite, let them come after me"
+instinct while still proving the thing works.
 
 ## 6. Expansion ladder (the consulting business behind the product)
 
-`Public-data v1 (forwardable brief)` → **champion in IR/FP&A/public-affairs**
+`Public-data v1 (forwardable video + link)` → **Yulia sponsors, forwards to CFO**
 → `paid "Varsel" subscription with STG's real volume/elasticity data behind a
 DPA` (finance-grade vs analyst-grade precision) → `pre-earnings regulatory-impact
-retainer` for IR/CFO (recurring) → `bespoke scenario deep-dives` that undercut
-the Oxford Economics niche on **speed and price** → second buyer inside the same
-account (public affairs, armed against the prohibition wave). This is the
-cleanest ladder of any concept evaluated — and the medium is the message: *built
-by one person + AI in weeks, the speed STG itself needs.*
+retainer` for Strategy/IR/CFO (recurring) → `bespoke scenario deep-dives` that
+undercut the Oxford Economics niche on **speed and price** → second buyer inside
+the same account (public affairs, armed against the prohibition wave). This is
+the cleanest ladder of any concept evaluated — and the medium is the message:
+*built by one person + AI in weeks, the speed STG itself needs.*
 
 ## 7. Build plan (each phase independently demoable)
 
 | Phase | Scope | Est. |
 |---|---|---|
-| 0 | Scaffold (Next.js + shadcn radix-nova), the segment model (public AR2025 splits as versioned JSON), the Frederiksen Brief landing | ~half day |
+| 0 | Scaffold (Next.js + shadcn radix-nova), the segment model + operations footprint (public AR2025 splits + site/store geo as versioned JSON), the Global Pulse map landing | ~half day–1 day |
 | 1 | Impact Room: the 3–4 pre-modeled shocks, editable elasticity/pass-through sliders, scenario bands, citation rails + abstention, "as of" dates, public-data banner | ~1–1.5 days |
 | 2 | Live Claude moment: paste a *snippet of a corpus-known text* → structured cited impact (golden response for `DEMO_MODE=offline`) | ~half day |
 | 3 | Pouch Radar: crawler over Haypp sitemaps + nicotine-pouches.org, price/launch/bestseller index, Sweden/UK focus | ~1–1.5 days |
-| 4 | Polish: the brief narrative, demo script, offline rehearsal, deploy behind Vercel SSO | ~half day |
+| 4 | Polish + record: the map narrative, demo script, offline rehearsal, deploy behind Vercel SSO, **record the ~3-min video** | ~1 day |
 
-A meeting is bookable after Phase 1; Phase 3 is the live-data clincher.
+The deliverable is the video + a forwardable link; Phase 3 is the live-data
+clincher. Visual targets are mocked in [mockups/](mockups/).
 
 ## 8. Open decisions (owner)
 
@@ -203,3 +246,8 @@ A meeting is bookable after Phase 1; Phase 3 is the live-data clincher.
 5. **Re-verify** the precise cigar/pipe depth of Tamarind & Euromonitor before
    any client conversation (our own agents conflicted; framing is safe either
    way, but a specific spoken claim must be checked).
+6. **Confirm Yulia's exact title** against the AR2025 PDF before written outreach
+   (web board page says "SVP, Strategy, Transformation & Sustainability"), and
+   confirm with the wife that Yulia (not someone else) is who she can introduce.
+7. **App link in the email — yes/no.** Recommendation: yes, but gated (video is
+   the star; the valuable "plug in real numbers" step requires replying).
