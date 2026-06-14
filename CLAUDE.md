@@ -114,6 +114,10 @@ track (reference only).
   and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
 - **`.claude/launch.json` is local-only** (gitignored): `npm run dev` on :3000 for
   the preview workflow; recreate it if a fresh clone needs the preview server.
+- **Live AI defaults to offline.** `/api/ai/impact` calls Claude only when
+  `ANTHROPIC_API_KEY` is set and `DEMO_MODE` ≠ `offline`; otherwise (and on any
+  error) it serves the cached golden, labeled "offline" in the UI — so the demo
+  never depends on wifi. Model `claude-sonnet-4-6` is one constant in the route.
 
 ## Out of scope for the demo
 
@@ -157,12 +161,20 @@ repeated to the client: owner decides, always.
   a "proposed — in Council" status (never "enacted"), and the "illustrative — not
   STG's own figure" tag are the credibility rails. Default band ≈ DKK 45–95m at
   risk/yr. Static model only — the live AI route + golden responses are Phase 3.
-- **Next:** Phase 3 — make the Impact number live (`/api/ai/impact`: a server-only
-  Claude call with a golden offline fallback and citation enforcement at the route
-  layer) and wire the first **live public feed** (ECB FX or the SuccessFactors
-  careers feed) to prove "agents fetch it live" → then Surface B (Pouch Radar /
-  Sales lens). Add Supabase (EU) when the first scheduled feed needs history. Then
-  the ~3-min video + forwardable link (GTM in `docs/outreach.md` +
-  `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8).
+- **Phase 3 — live Impact AI shipped — `d88e42d` (2026-06-14).** `/api/ai/impact`
+  is a server-only Claude call (`claude-sonnet-4-6`, per the live-latency choice)
+  that writes the CFO narrative + cited line-items; the DKK band stays the local
+  deterministic model (the AI never produces the number). Citation enforcement is
+  **code** in `src/lib/citation-rail.ts` — value-match, not key-exists (a
+  hallucinated figure under a real source is abstained), run on live and golden
+  alike. `DEMO_MODE=offline` / no `ANTHROPIC_API_KEY` → the pre-reviewed golden in
+  `src/data/golden/` (France-MRC abstention pinned); the route never throws to the
+  client. Offline path verified in-browser (4 cited + 2 abstained, honest
+  live/offline badge); live path wired (drop a key in `.env.local` to exercise).
+- **Next:** the first **live public feed** (ECB FX or the SuccessFactors careers
+  feed) to make "agents fetch it live" real — add Supabase (EU) when it needs
+  history → then Surface B (Pouch Radar / Sales lens) → the ~3-min video +
+  forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open
+  decisions in `docs/ceo-play.md` §8).
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
