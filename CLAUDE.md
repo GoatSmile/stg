@@ -102,13 +102,14 @@ track (reference only).
 
 ## Demo shortcuts (running log — add as they're taken)
 
-- **Five lenses are stubs.** Sales / Finance / Procurement / Supply / ESG ship a
-  real KPI rail + a few markers + a `·soon` tag (provably-coming, not empty).
-  Only Regulatory + HR are built out. Expand per `docs/map-platform.md` §4.
-- **Static dated JSON, no live feeds yet.** Lens `asOf` and all marker values are
-  hardcoded snapshots in `src/data/`; the "agents fetch it live" story (ECB FX,
-  careers feed, weather…) is designed but not wired. First real feed is the next
-  build step. No DB yet (Supabase deferred to first scheduled feed).
+- **Four lenses are stubs.** Sales / Procurement / Supply / ESG ship a real KPI
+  rail + a few markers + a `·soon` tag (provably-coming, not empty). Regulatory,
+  HR, and now Finance (live ECB FX) are built out. Expand per `docs/map-platform.md` §4.
+- **One live feed wired (ECB FX); other markers are static snapshots.**
+  `/api/feeds/fx` fetches ECB rates live with an offline-safe cached fallback;
+  other lens `asOf`/marker values remain hardcoded snapshots in `src/data/`. The
+  careers feed, weather, freight etc. are designed, not yet wired. No DB yet — feed
+  *history* (FX/careers over time) is the trigger for Supabase (EU).
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
   and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
@@ -171,10 +172,16 @@ repeated to the client: owner decides, always.
   `src/data/golden/` (France-MRC abstention pinned); the route never throws to the
   client. Offline path verified in-browser (4 cited + 2 abstained, honest
   live/offline badge); live path wired (drop a key in `.env.local` to exercise).
-- **Next:** the first **live public feed** (ECB FX or the SuccessFactors careers
-  feed) to make "agents fetch it live" real — add Supabase (EU) when it needs
-  history → then Surface B (Pouch Radar / Sales lens) → the ~3-min video +
-  forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open
-  decisions in `docs/ceo-play.md` §8).
+- **First live feed shipped — `c94fe38` (2026-06-14).** `/api/feeds/fx` fetches
+  ECB `eurofxref-daily.xml` live (30-min cache, 4s timeout) → USD/DKK · EUR/DKK ·
+  GBP/DKK + a first-order USD sales-exposure line on the Finance lens (now out of
+  stub). Offline-safe: a committed snapshot is served and labeled "cached" on any
+  failure — never faked live. Pure parse/cross-rate in `src/lib/fx.ts`
+  (node-verified). No DB — FX history → Supabase is the trigger.
+- **Next:** the **careers feed** (SuccessFactors → HR lens: open roles + days-open,
+  the hero HR datum) — its time-series need is what pulls in **Supabase (EU)** →
+  then Surface B (Pouch Radar / Sales lens) → the ~3-min video + forwardable link
+  (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
+  `docs/ceo-play.md` §8).
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
