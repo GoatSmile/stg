@@ -1,6 +1,6 @@
 {
-  "id": "finance", "dept": "Finance", "label": "Finance", "icon": "coins", "status": "stub",
-  "blurb": "Revenue & exposure by geography. The regulatory-P&L drill-down = the Impact Room.",
+  "id": "finance", "dept": "Finance", "label": "Finance", "icon": "coins", "feed": "fx",
+  "blurb": "Revenue & exposure by geography, with a live ECB FX feed. The regulatory-P&L drill-down = the Impact Room.",
   "asOf": "2026-06-13",
   "kpis": [
     { "label": "Net sales", "value": "DKK 9.0bn", "sub": "FY2025", "flag": "C" },
@@ -13,5 +13,5 @@
     { "id": "fin-eu", "lat": 50.0, "lng": 9.0, "label": "Europe", "value": "DKK 3,934m", "provenance": "public", "sourceRef": "AR2025 p112", "detail": "Machine-rolled cigar cash cow. EU excise revision = the Impact Room." },
     { "id": "fin-row", "lat": 1.0, "lng": 110.0, "label": "Rest of world", "value": "DKK 564m", "provenance": "public", "sourceRef": "AR2025 p112", "detail": "Asia/GTR + other." }
   ],
-  "agentNote": "Finance markers deepen into the Impact Room (Surface A: regulatory→DKK band) and a live ECB FX overlay. Stub for now."
+  "agentNote": "FX above is live from the ECB (agent-fetched). Markers deepen into the Impact Room (Surface A: regulatory→DKK band); per-currency and tariff overlays expand next."
 }

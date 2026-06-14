@@ -1,0 +1,7 @@
+{
+  "_note": "Cached ECB reference-rate snapshot. Served as the offline-safe fallback when the live fetch in /api/feeds/fx is unavailable (conference/client wifi is never a dependency). The UI labels it 'cached' honestly, never 'live'.",
+  "asOf": "2026-06-12",
+  "source": "ECB eurofxref-daily (cached snapshot)",
+  "rates": { "EUR": 1, "USD": 1.0856, "DKK": 7.459, "GBP": 0.8553 },
+  "cross": { "usdDkk": 6.871, "eurDkk": 7.459, "gbpDkk": 8.721 }
+}

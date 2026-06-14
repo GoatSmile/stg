@@ -5,6 +5,7 @@ import Link from "next/link";
 import { X, ArrowRight } from "lucide-react";
 import { PulseMap } from "./PulseMap";
 import { LensSwitcher } from "./LensSwitcher";
+import { LiveFxStrip } from "./LiveFxStrip";
 import { ProvenanceLegend } from "./ProvenanceLegend";
 import { Card } from "@/components/ui/card";
 import {
@@ -47,6 +48,8 @@ export function PulseDashboard() {
           </div>
         ))}
       </div>
+
+      {lens.feed === "fx" && <LiveFxStrip />}
 
       <PulseMap sites={sites} markers={lens.markers} selectedId={selected?.id} onSelect={setSelected} />
 

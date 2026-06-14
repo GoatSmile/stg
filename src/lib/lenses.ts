@@ -35,6 +35,8 @@ export type Lens = {
   id: string; dept: string; label: string; icon: string; blurb: string;
   status?: "stub"; asOf: string; kpis: Kpi[]; markers: Marker[];
   regimes?: Regime[]; agentNote?: string;
+  /** A live agent feed to render on this lens (currently "fx" = ECB rates on Finance). */
+  feed?: string;
 };
 
 export const sites = (operations as { sites: Site[] }).sites;
