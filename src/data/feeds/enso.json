@@ -1,0 +1,7 @@
+{
+  "_note": "Cached ENSO/ONI snapshot — the offline-safe fallback for /api/feeds/enso when NOAA is unreachable. NOAA CPC Oceanic Niño Index (oni.ascii.txt), latest published period. The UI labels it 'cached' honestly.",
+  "season": "MAM 2026",
+  "oni": 0.48,
+  "phase": "Neutral",
+  "asOf": "2026-06-14"
+}

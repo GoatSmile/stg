@@ -108,15 +108,16 @@ track (reference only).
 
 ## Demo shortcuts (running log — add as they're taken)
 
-- **One lens is a stub.** ESG ships a real KPI rail + a few markers + a `·soon` tag
-  (provably-coming, not empty). Regulatory, HR, Finance (live ECB FX), Sales (Pouch
-  Radar), Procurement (live Open-Meteo weather), and Supply (production footprint + the
-  OneProcess SAP rollout; freight illustrative*, no live feed yet) are built out. Expand
-  per `docs/map-platform.md` §4.
-- **Three live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
-  (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR), and
-  `/api/feeds/weather` (Open-Meteo → Procurement) read live with offline-safe cached
-  fallbacks; other lens `asOf`/marker values remain hardcoded snapshots in `src/data/`.
+- **All seven lenses are built out — no stubs.** Regulatory, HR (live careers), Finance
+  (live ECB FX), Sales (Pouch Radar), Procurement (live Open-Meteo weather), Supply
+  (production footprint + the OneProcess SAP rollout; freight illustrative*, no live feed),
+  and ESG (live NOAA ENSO climate over the leaf base) all ship real KPI rails + markers.
+  See `docs/map-platform.md` §4.
+- **Four live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
+  (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR),
+  `/api/feeds/weather` (Open-Meteo → Procurement), and `/api/feeds/enso` (NOAA CPC ONI →
+  ESG) read live with offline-safe cached fallbacks; other lens `asOf`/marker values
+  remain hardcoded snapshots in `src/data/`.
   The careers feed now holds **real data** — a one-time, owner-authorised pull (2026-06-14)
   of STG's SuccessFactors RMK API (`/services/recruiting/v1/jobs`) found **60 real open
   vacancies** (3 evergreen "talent pool" posts excluded), 29 at strategic sites + 31 US
@@ -259,12 +260,23 @@ repeated to the client: owner decides, always.
   wire-ready via a free FRED cost proxy or a paid FBX key — offered, not built, to avoid
   shipping an unverified live integration). `tsc` clean + `next build` green; verified
   in-browser. **ESG is now the only stub.**
-- **Next (video deferred per owner):** build out the **last stub lens — ESG** (same pattern:
-  real KPI rail + markers; a live feed where one exists — WRI Aqueduct water-stress / Global
-  Forest Watch are candidates). Optional: wire the Supply freight feed (FRED cost proxy,
-  needs a free key) and leaf-price (FRED/USDA) + water-stress overlays on Procurement. The
-  ~3-min video + forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open
-  decisions in `docs/ceo-play.md` §8) is parked, not dropped.
+- **ESG lens shipped — all seven lenses now built, zero stubs — (2026-06-14).** Un-stubbed
+  ESG with a **fourth live feed**: `/api/feeds/enso` reads NOAA CPC's Oceanic Niño Index
+  (free, keyless ascii) → the current ENSO phase + ONI over STG's tropical leaf base (pure
+  `src/lib/enso.ts`, 6h cache, offline-safe cached fallback, `EnsoStrip` wired via
+  `lens.feed === "enso"`). Live path verified end-to-end (`live:true`, ONI +0.48 Neutral).
+  KPI rail is fully sourced — net-zero 2050 (SBTi-committed), Scope 1&2 −4.2%/yr from 2020,
+  ≥67% Scope-3 engagement by 2030 (just-drinks/SBTi), US catalogue cut (real) — and caught
+  two more stub overclaims (SBTi was "committed", not "validated"; dropped the unverified
+  ">70 STP suppliers"). 7 markers (leaf regions climate-watched via ENSO + EUDR Indonesia +
+  catalogue + net-zero HQ); per-region water-stress (WRI Aqueduct) stays illustrative*.
+  `tsc` clean + `next build` green; verified in-browser, no console errors.
+- **Next (video deferred per owner):** the seven-lens platform is complete. Optional polish:
+  wire the Supply freight feed (FRED cost proxy / paid FBX, needs a key), WRI Aqueduct
+  water-stress + leaf-price (FRED/USDA) overlays on Procurement/ESG, and a theme toggle to
+  surface the (already-built) dark mode. The ~3-min video + forwardable link (GTM in
+  `docs/outreach.md` + `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is
+  parked, not dropped — and **gate prod (Vercel SSO) before the link goes out**.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,

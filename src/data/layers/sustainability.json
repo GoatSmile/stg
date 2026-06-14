@@ -1,16 +1,22 @@
 {
-  "id": "sustainability", "dept": "Sustainability / ESG", "label": "ESG", "icon": "leaf", "status": "stub",
-  "blurb": "Climate exposure of growing regions and site-level footprint (mostly agent + illustrative).",
-  "asOf": "2026-06-13",
+  "id": "sustainability", "dept": "Sustainability / ESG", "label": "ESG", "icon": "leaf",
+  "feed": "enso",
+  "blurb": "Climate exposure of STG's leaf-growing regions (live NOAA ENSO state), the SBTi net-zero pathway, and the e-commerce footprint. Mostly public + agent-fetched; per-region water-stress is illustrative.",
+  "asOf": "2026-06-14",
   "kpis": [
-    { "label": "SBTi targets", "value": "validated", "sub": "Scope 1, 2, 3", "flag": "C" },
-    { "label": "Leaf suppliers in STP", "value": ">70", "sub": "strategic", "flag": "C" },
-    { "label": "Water-stress origins", "value": "live*", "sub": "WRI Aqueduct feed", "flag": "I" },
-    { "label": "US catalogue reduction", "value": "underway", "sub": "from 25m mailed", "flag": "C" }
+    { "label": "Net-zero target", "value": "2050", "sub": "SBTi-committed value chain", "flag": "C" },
+    { "label": "Scope 1 & 2", "value": "−4.2%/yr", "sub": "to 2030, from a 2020 base", "flag": "C" },
+    { "label": "Scope 3 engagement", "value": "67%", "sub": "of value chain by 2030", "flag": "C" },
+    { "label": "US catalogue cut", "value": "underway", "sub": "from 25m mailed (cost + ESG)", "flag": "C" }
   ],
   "markers": [
-    { "id": "esg-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "value": "water-stress: med*", "provenance": "agent", "sourceRef": "WRI Aqueduct", "detail": "Leaf growing region water-stress; *illustrative until wired." },
-    { "id": "esg-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia", "value": "deforestation-watch*", "provenance": "agent", "sourceRef": "Global Forest Watch / EUDR", "detail": "EUDR exposure on the growing region." }
+    { "id": "esg-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia — Semarang", "value": "EUDR exposure", "severity": "medium", "provenance": "public", "sourceRef": "EUDR + AR2025", "detail": "Wrapper/binder leaf region. EU Deforestation Regulation (EUDR) compliance exposure on the growing region, plus ENSO-driven drought/flood risk. *Per-region water-stress (WRI Aqueduct) illustrative until wired." },
+    { "id": "esg-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "value": "climate-watch", "provenance": "agent", "sourceRef": "NOAA ENSO + AR2025", "detail": "Largest leaf + handmade region. Climate exposure tracked via the live NOAA ENSO signal; *water-stress (WRI Aqueduct) illustrative." },
+    { "id": "esg-hn", "lat": 14.02, "lng": -86.58, "label": "Honduras — Danlí", "value": "drought-prone", "provenance": "agent", "sourceRef": "NOAA ENSO", "detail": "Central-America 'dry corridor' — drought-prone and strongly ENSO-sensitive (El Niño = drier)." },
+    { "id": "esg-ni", "lat": 13.09, "lng": -86.35, "label": "Nicaragua — Estelí", "value": "drought-prone", "provenance": "agent", "sourceRef": "NOAA ENSO", "detail": "Dry-corridor handmade leaf region; rainfall swings with ENSO." },
+    { "id": "esg-lk", "lat": 6.95, "lng": 79.96, "label": "Sri Lanka — Biyagama", "value": "climate-watch", "provenance": "agent", "sourceRef": "NOAA ENSO", "detail": "Wrapper/binder leaf; monsoon timing is ENSO-sensitive." },
+    { "id": "esg-us-cat", "lat": 40.63, "lng": -75.38, "label": "US online / catalogue (NAOR)", "value": "catalogue cut", "provenance": "public", "sourceRef": "AR2025 + st-group.com", "detail": "The US direct-to-consumer business — historically ~25m catalogues mailed across five websites. Catalogue volumes are being cut for cost and environmental footprint." },
+    { "id": "esg-dk", "lat": 55.756, "lng": 12.547, "label": "Group HQ — Copenhagen", "value": "net-zero 2050", "provenance": "public", "sourceRef": "STG / SBTi commitment", "detail": "SBTi-committed: net-zero value chain by 2050; Scope 1 & 2 down 4.2%/yr from a 2020 base; ≥67% of Scope 3 emissions engaged with suppliers by 2030." }
   ],
-  "agentNote": "ESG layer: WRI Aqueduct (water), Global Forest Watch + EUDR benchmarking (deforestation), site emissions. Stub for now."
+  "agentNote": "Leaf-region climate is the live NOAA CPC ENSO (ONI) signal — ENSO drives drought/flood across the tropical leaf base. SBTi figures are STG's public commitments (net-zero value chain by 2050; Scope 1 & 2 −4.2%/yr from a 2020 base; ≥67% of Scope 3 engaged by 2030). Per-region water-stress (WRI Aqueduct) + per-site Scope 1/2 are illustrative* until wired/sourced."
 }
