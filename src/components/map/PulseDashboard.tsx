@@ -9,6 +9,7 @@ import { LiveFxStrip } from "./LiveFxStrip";
 import { CareersStrip } from "./CareersStrip";
 import { WeatherStrip } from "./WeatherStrip";
 import { EnsoStrip } from "./EnsoStrip";
+import { FreightStrip } from "./FreightStrip";
 import { ProvenanceLegend } from "./ProvenanceLegend";
 import { Card } from "@/components/ui/card";
 import {
@@ -56,6 +57,7 @@ export function PulseDashboard() {
       {lens.feed === "careers" && <CareersStrip />}
       {lens.feed === "weather" && <WeatherStrip />}
       {lens.feed === "enso" && <EnsoStrip />}
+      {lens.feed === "freight" && <FreightStrip />}
 
       <PulseMap sites={sites} markers={lens.markers} selectedId={selected?.id} onSelect={setSelected} />
 

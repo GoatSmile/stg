@@ -1,0 +1,11 @@
+{
+  "_note": "Cached freight-cost snapshot — offline-safe fallback for /api/feeds/freight when FRED is unreachable or FRED_API_KEY is unset. Brent crude (FRED DCOILBRENTEU) as the dominant ocean-freight + leaf-transport cost driver. The UI labels it 'cached' honestly.",
+  "series": "Brent crude",
+  "unit": "USD/bbl",
+  "date": "2026-06-08",
+  "value": 97.46,
+  "priorDate": "2026-04-24",
+  "priorValue": 111.86,
+  "changePct": -12.9,
+  "asOf": "2026-06-14"
+}

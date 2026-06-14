@@ -115,13 +115,14 @@ track (reference only).
 
 - **All seven lenses are built out — no stubs.** Regulatory, HR (live careers), Finance
   (live ECB FX), Sales (Pouch Radar), Procurement (live Open-Meteo weather), Supply
-  (production footprint + the OneProcess SAP rollout; freight illustrative*, no live feed),
+  (production footprint + the OneProcess SAP rollout + a live FRED freight-cost signal),
   and ESG (live NOAA ENSO climate over the leaf base) all ship real KPI rails + markers.
   See `docs/map-platform.md` §4.
-- **Four live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
+- **Five live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
   (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR),
-  `/api/feeds/weather` (Open-Meteo → Procurement), and `/api/feeds/enso` (NOAA CPC ONI →
-  ESG) read live with offline-safe cached fallbacks; other lens `asOf`/marker values
+  `/api/feeds/weather` (Open-Meteo → Procurement), `/api/feeds/enso` (NOAA CPC ONI → ESG),
+  and `/api/feeds/freight` (FRED Brent crude → Supply, needs `FRED_API_KEY`) read live with
+  offline-safe cached fallbacks; other lens `asOf`/marker values
   remain hardcoded snapshots in `src/data/`.
   The careers feed now holds **real data** — a one-time, owner-authorised pull (2026-06-14)
   of STG's SuccessFactors RMK API (`/services/recruiting/v1/jobs`) found **60 real open
@@ -284,12 +285,21 @@ repeated to the client: owner decides, always.
   vs `SITE_PASSWORD` and sets an httpOnly cookie (a SHA-256 of the password via shared
   `src/lib/gate.ts`); off when `SITE_PASSWORD` is unset. Verified end-to-end (server + browser:
   unauth→gate, wrong→error, right→cookie→full app). `tsc` clean + `next build` green.
-- **Next (video deferred per owner):** the seven-lens platform is complete + polished.
-  **To gate prod: set `SITE_PASSWORD` in Vercel env + redeploy** (any value you'll share with
-  Yulia) — the gate is built, just not activated in prod. Remaining optional: wire the Supply
-  freight feed (FRED cost proxy / paid FBX, needs a key) + WRI Aqueduct / leaf-price overlays
-  on Procurement/ESG. The ~3-min video + forwardable link (GTM in `docs/outreach.md` +
-  `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is parked, not dropped.
+- **Supply freight feed shipped — fifth live feed — (2026-06-14).** `/api/feeds/freight`
+  reads FRED's Brent crude series (`DCOILBRENTEU`, daily) via `FRED_API_KEY` → latest price +
+  ~30-trading-day change + a stated "pressure" rule (rising/easing/stable), framed honestly as
+  the dominant ocean-freight (bunker) + leaf-transport **cost driver** — per-lane Freightos FBX
+  rates stay illustrative* (need a paid feed). Pure `src/lib/freight.ts`, 6h cache, offline-safe
+  cached fallback (`src/data/feeds/freight.json`), `FreightStrip` via `lens.feed === "freight"`.
+  Verified live end-to-end (`live:true`, Brent $97.46, −12.9% easing). `FRED_API_KEY` is in
+  `.env.local` + Vercel. All seven lenses now carry real data; five lenses have live feeds.
+- **Next (video deferred per owner):** the seven-lens platform is complete + polished, with
+  five live feeds. **To gate prod: set `SITE_PASSWORD` in Vercel env + redeploy** (any value
+  you'll share with Yulia) — the gate is built, just not activated in prod. Remaining optional:
+  WRI Aqueduct water-stress / leaf-price (FRED/USDA) overlays on Procurement/ESG; a real
+  per-lane freight rate (paid Freightos FBX). The ~3-min video + forwardable link (GTM in
+  `docs/outreach.md` + `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is
+  parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
