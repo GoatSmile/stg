@@ -1,6 +1,6 @@
 {
-  "id": "procurement", "dept": "Procurement / Leaf", "label": "Procurement", "icon": "sprout", "status": "stub",
-  "blurb": "Leaf-sourcing regions with commodity-price and weather/climate risk (AI-agent feeds).",
+  "id": "procurement", "dept": "Procurement / Leaf", "label": "Procurement", "icon": "sprout", "feed": "weather",
+  "blurb": "Leaf-sourcing origins with live weather/crop risk (Open-Meteo). Commodity-price + water-stress overlays next.",
   "asOf": "2026-06-13",
   "kpis": [
     { "label": "Strategic leaf suppliers", "value": ">70", "sub": "Sustainable Tobacco Program", "flag": "C" },
@@ -9,9 +9,11 @@
     { "label": "Leaf price index", "value": "live*", "sub": "FRED/USDA feed", "flag": "I" }
   ],
   "markers": [
-    { "id": "proc-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "value": "drought-risk: low*", "provenance": "agent", "sourceRef": "Open-Meteo", "detail": "Wrapper/binder + handmade. Weather/drought risk via Open-Meteo; *illustrative until wired." },
-    { "id": "proc-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia", "value": "monsoon-watch*", "provenance": "agent", "sourceRef": "Open-Meteo", "detail": "Machine-rolled leaf. Climate-exposed growing region." },
-    { "id": "proc-lk", "lat": 6.95, "lng": 79.96, "label": "Sri Lanka", "value": "stable*", "provenance": "agent", "sourceRef": "Open-Meteo", "detail": "Wrapper/binder leaf." }
+    { "id": "proc-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "value": "wrapper/binder", "provenance": "public", "sourceRef": "AR2025 + STP", "detail": "Largest origin — wrapper/binder + handmade. Live weather/crop risk above (Open-Meteo)." },
+    { "id": "proc-hn", "lat": 14.02, "lng": -86.58, "label": "Honduras — Danlí", "value": "filler/binder", "provenance": "public", "sourceRef": "AR2025 + STP", "detail": "Handmade filler/binder origin." },
+    { "id": "proc-ni", "lat": 13.09, "lng": -86.35, "label": "Nicaragua — Estelí", "value": "filler", "provenance": "public", "sourceRef": "AR2025 + STP", "detail": "Handmade filler origin." },
+    { "id": "proc-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia — Semarang", "value": "wrapper/binder", "provenance": "public", "sourceRef": "AR2025 + STP", "detail": "Machine-rolled wrapper/binder; climate-exposed origin." },
+    { "id": "proc-lk", "lat": 6.95, "lng": 79.96, "label": "Sri Lanka — Biyagama", "value": "wrapper/binder", "provenance": "public", "sourceRef": "AR2025 + STP", "detail": "Wrapper/binder leaf origin." }
   ],
-  "agentNote": "Procurement layer: Open-Meteo (weather/crop risk), FRED/USDA (leaf prices), WRI Aqueduct (water stress). Stub for now."
+  "agentNote": "Leaf-region weather is live above (Open-Meteo, agent-fetched). Next overlays: tobacco-leaf commodity price (FRED/USDA) and water-stress (WRI Aqueduct)."
 }

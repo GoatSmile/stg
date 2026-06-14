@@ -1,0 +1,12 @@
+{
+  "_note": "Cached Open-Meteo snapshot — offline-safe fallback for /api/feeds/weather. The route applies the same risk rule (lib/weather.ts) to live and cached data alike; the UI labels this 'cached' honestly. Values illustrative of a plausible day across the leaf regions.",
+  "asOf": "2026-06-13",
+  "source": "Open-Meteo (cached snapshot)",
+  "regions": [
+    { "id": "proc-dr", "label": "Dominican Republic", "lat": 19.45, "lng": -70.7, "makes": "Wrapper/binder + handmade", "tempC": 29, "precipMm": 0.2, "humidity": 78, "weekPrecipMm": 35, "maxTempC": 32 },
+    { "id": "proc-hn", "label": "Honduras — Danlí", "lat": 14.02, "lng": -86.58, "makes": "Handmade filler/binder", "tempC": 26, "precipMm": 0, "humidity": 70, "weekPrecipMm": 14, "maxTempC": 31 },
+    { "id": "proc-ni", "label": "Nicaragua — Estelí", "lat": 13.09, "lng": -86.35, "makes": "Handmade filler", "tempC": 27, "precipMm": 0, "humidity": 64, "weekPrecipMm": 3, "maxTempC": 33 },
+    { "id": "proc-id", "label": "Indonesia — Semarang", "lat": -6.97, "lng": 110.42, "makes": "Machine-rolled wrapper/binder", "tempC": 31, "precipMm": 2.1, "humidity": 82, "weekPrecipMm": 140, "maxTempC": 34 },
+    { "id": "proc-lk", "label": "Sri Lanka — Biyagama", "lat": 6.95, "lng": 79.96, "makes": "Wrapper/binder leaf", "tempC": 30, "precipMm": 1, "humidity": 80, "weekPrecipMm": 60, "maxTempC": 33 }
+  ]
+}
