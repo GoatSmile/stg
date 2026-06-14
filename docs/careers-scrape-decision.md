@@ -1,0 +1,96 @@
+# Careers scraper — productionization decision memo
+
+**Status: OPEN — awaiting owner decision.** Documented 2026-06-14.
+Owner call required per CLAUDE.md escalation (touches STG data/collection + how the
+pitch lands). Nothing will be built against the live site until decisions 1–3 below
+are made; in particular, **no automated job will point at the robots-disallowed
+`/services/` API without explicit sign-off.**
+
+**TL;DR:** The careers feed *reads* fine off its seeded snapshot, but the *daily
+scraper* (`scripts/crawl-careers.ts`) is not production-wired. A live probe of
+`careers.st-group.com` found the clean data API is robots-disallowed, the
+robots-allowed path (the sitemap) lacks posting dates, and the live job mix matches
+neither our 12-site model nor the seeded "49 open roles."
+
+## Background
+
+- `scripts/crawl-careers.ts` is meant to run daily: scrape STG's public SuccessFactors
+  careers listings, aggregate open roles per site, and write one dated snapshot to
+  Supabase (`varsel_careers_snapshots`). Diffing snapshots over time yields days-open /
+  hiring velocity — the HR lens needs ≥2 crawls before it can show a trend.
+- It was authored in a sandbox with no network access, so its endpoint + parser were
+  guesses (flagged in the file header).
+- The Supabase **write path is verified** (manual curl insert/delete with the rotated
+  `sb_secret_…`, 2026-06-14). The feed's **read** side works live. Only the **scrape
+  source + scheduling** are unresolved.
+
+## Live-site findings (probed 2026-06-14; sitemap dated 2026-06-13)
+
+Platform: SAP SuccessFactors Career Site Builder (jobs2web / RMK).
+
+1. **The clean JSON API is robots-disallowed.** Job data loads via an AJAX call under
+   `/services/`, and `robots.txt` disallows `/services/`. The current `JOBS_URL` default
+   (`/api/jobs`) is dead (302). `/search/` is a client-rendered SPA with no job data in
+   the HTML (only facet config); `/search/json` returns the SPA shell, not JSON.
+   → A daily automated hit on `/services/` would breach robots **on the company we're
+   pitching** — a poor fit for a demo whose selling point is "honest/credible."
+
+2. **Robots-allowed path: `/sitemap.xml`.** Returns 200 — a direct `urlset` of **75
+   `/job/…` URLs** (today). Sitemaps are crawler-intended, so this is the legitimate
+   enumeration source. `robots.txt` has no `Sitemap:`/`Allow:` lines; `/job/` pages are
+   not disallowed.
+
+3. **Sitemap limits:**
+   - **No posting dates** — all 75 `<lastmod>` = `2026-06-13` (the sitemap's regen date,
+     not per-job). "Oldest vacancy / days-open" can't come from the sitemap; it needs each
+     job page's SEO JSON-LD (`datePosted`) → ~75 extra GETs per crawl.
+   - **Location comes from the URL slug** (e.g. `Tampa-…-FL-33619`) — workable but coarse.
+
+4. **Coverage gap: only 30 of 75 roles map to our 12 sites.** The other 45 are unmapped,
+   dominated by **US retail / bar associates** (Tampa FL; Jacksonville FL; Katy, Conroe,
+   San Antonio, The Colony, Ft Worth TX; Bridgeville PA), plus DR **San Pedro de Macoris**
+   SAP/ERP roles (our `fac-dr` match `["santiago","dominican"]` misses them) and
+   **Holstebro DK**.
+   Mapped breakdown (30): Lisbon/Carnaxide 8 · Bethlehem 7 · Madrid 4 · Richmond 3 ·
+   Copenhagen 2 · Sri Lanka 2 · Dominican Rep 2 · Bremen 1 · Belgium 1. (Nicaragua /
+   Indonesia / Honduras: 0 in the sitemap today.)
+
+5. **Honesty flag.** The HR-lens seed shows **49 open roles**; the live sitemap shows
+   **75 total / 30 at our sites** (seed per-site numbers sum to ~37). These don't
+   reconcile — the seeded "49" looks **illustrative, not a real crawl**, even though
+   CLAUDE.md currently calls it "seeded real 2026-06-13 data." Correct either the number
+   or the claim when the real scrape lands.
+
+## Decisions needed
+
+**1. Automate daily scraping of STG at all?**
+Robots-compliant via the sitemap, but still automated collection from the pitch target.
+- *Recommend:* **yes, but gentle** (sitemap once/day, optionally job pages). Alternative:
+  keep it a manual, occasional run you trigger by hand.
+
+**2. Days-open KPI.**
+The sitemap has no posting dates. Either **fetch each job page** (~75 light GETs/crawl)
+for real `datePosted`, or **drop days-open** and show live counts only.
+- *Recommend:* **fetch the pages** — modest load, keeps "oldest vacancy" honest.
+
+**3. Honest totals / site model.**
+Live data is 75 roles, heavily US retail, across locations we don't map.
+- (a) Expand the site model to the real footprint;
+- (b) **count all 75, break out the strategic sites, bucket the rest as "other (incl. US
+  retail)"**;
+- (c) scope the feed to "strategic production/office sites" and label it.
+- *Recommend:* **(b)** — real total, honest framing, no pretense that retail associates
+  are the strategy.
+
+## Recommended bundle (build once approved)
+
+Sitemap source (robots-safe) + per-job `datePosted` (decision 2) + totals option (b) +
+a daily GitHub Action (service-role secret stored as an Actions secret). Plus
+unconditional robustness regardless of 1–3: request timeout, one retry, descriptive
+`User-Agent`, fail-loud, and a same-day **idempotent upsert** (needs a unique index on
+`as_of`, or check-then-insert). Also correct the seed number + the CLAUDE.md "seeded
+real data" wording to match the real crawl.
+
+## Will NOT be done without explicit sign-off
+
+Pointing any automated / daily job at the robots-disallowed `/services/` API.

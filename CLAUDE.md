@@ -116,11 +116,12 @@ track (reference only).
   (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR), and
   `/api/feeds/weather` (Open-Meteo → Procurement) read live with offline-safe cached
   fallbacks; other lens `asOf`/marker values remain hardcoded snapshots in `src/data/`.
-  The careers scraper (`scripts/crawl-careers.ts`) is unproven on two axes (authored
-  without network access): a `DRY_RUN` validates its `parseJobs` against the live site
-  but returns before writing, while a **real run** exercises the write path with the
-  rotated service-role secret. Freight / commodity-prices etc. are designed, not yet
-  wired.
+  The careers scraper (`scripts/crawl-careers.ts`) is **not production-wired**: a
+  2026-06-14 live probe found its endpoint guess wrong + the clean API robots-disallowed,
+  and the live job mix doesn't match our site model or the seeded `49` (which is therefore
+  illustrative, not a real crawl). Its Supabase write path is verified; productionizing it
+  is **blocked on 3 owner decisions** — see `docs/careers-scrape-decision.md`. Freight /
+  commodity-prices etc. are designed, not yet wired.
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
   and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
@@ -223,8 +224,8 @@ repeated to the client: owner decides, always.
 - **Next (video deferred per owner):** build out the last two stub lenses —
   **Supply, then ESG** (same pattern: real KPI rail + markers + a live feed where one
   exists). Optional: leaf-price (FRED/USDA) + water-stress (WRI Aqueduct) overlays on
-  Procurement; schedule the careers scraper (cron / GitHub Action) for hiring-velocity
-  history; run `crawl-careers.ts` once to exercise the rotated secret. The ~3-min video +
+  Procurement; productionize the careers scraper (blocked on 3 decisions —
+  `docs/careers-scrape-decision.md`). The ~3-min video +
   forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
   `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
