@@ -3,6 +3,7 @@
   "dept": "HR / People",
   "label": "HR",
   "icon": "users",
+  "feed": "careers",
   "blurb": "The company's people footprint, live. Headcount by site, open roles + days-open from the careers feed, and (illustrative) retirement risk.",
   "asOf": "2026-06-13",
   "kpis": [

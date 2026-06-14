@@ -1,0 +1,21 @@
+{
+  "_note": "Cached careers snapshot — the offline-safe fallback for /api/feeds/careers when Supabase is unreachable or unconfigured. Mirrors the seed row in Supabase (varsel_careers_snapshots, as_of 2026-06-13). The UI labels it 'cached' honestly. Public data from careers.st-group.com (SuccessFactors).",
+  "asOf": "2026-06-13",
+  "source": "careers.st-group.com (SAP SuccessFactors)",
+  "totalOpen": 49,
+  "crawledAt": null,
+  "sites": [
+    { "siteId": "fac-dr", "label": "Dominican Republic", "lat": 19.45, "lng": -70.7, "openPositions": 7, "oldestDaysOpen": 64 },
+    { "siteId": "sales-pt", "label": "Carnaxide / Lisbon", "lat": 38.72, "lng": -9.24, "openPositions": 8, "oldestDaysOpen": 53 },
+    { "siteId": "office-bethlehem", "label": "Bethlehem, PA", "lat": 40.63, "lng": -75.38, "openPositions": 6, "oldestDaysOpen": 88 },
+    { "siteId": "sales-es", "label": "Madrid", "lat": 40.46, "lng": -3.69, "openPositions": 4, "oldestDaysOpen": 35 },
+    { "siteId": "office-richmond", "label": "Richmond, VA", "lat": 37.54, "lng": -77.44, "openPositions": 3, "oldestDaysOpen": 27 },
+    { "siteId": "leaf-lk", "label": "Sri Lanka — Biyagama", "lat": 6.95, "lng": 79.96, "openPositions": 2, "oldestDaysOpen": 41 },
+    { "siteId": "fac-ni", "label": "Nicaragua — Estelí", "lat": 13.09, "lng": -86.35, "openPositions": 2, "oldestDaysOpen": 30 },
+    { "siteId": "hq-gentofte", "label": "Copenhagen / Gentofte", "lat": 55.756, "lng": 12.547, "openPositions": 2, "oldestDaysOpen": 18 },
+    { "siteId": "fac-id", "label": "Indonesia — Semarang", "lat": -6.97, "lng": 110.42, "openPositions": 1, "oldestDaysOpen": 22 },
+    { "siteId": "fac-be", "label": "Belgium — Lummen/Westerlo", "lat": 50.99, "lng": 5.2, "openPositions": 1, "oldestDaysOpen": 12 },
+    { "siteId": "sales-de", "label": "Bremen", "lat": 53.083, "lng": 8.802, "openPositions": 1, "oldestDaysOpen": 9 },
+    { "siteId": "fac-hn", "label": "Honduras — Danlí", "lat": 14.02, "lng": -86.58, "openPositions": 0, "oldestDaysOpen": 0 }
+  ]
+}
