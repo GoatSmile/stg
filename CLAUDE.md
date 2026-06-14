@@ -26,9 +26,12 @@ track (reference only).
   deliberately share a link
 - **No database in v0.** All data is versioned JSON in `/src/data/`: the STG
   segment model (from published disclosures), the curated regulatory corpus,
-  golden AI responses, and cached Pouch Radar crawler output. Add Supabase
-  (EU region) only when a feature genuinely needs persistence (e.g. radar
-  history) — and ask first; it adds a moving part to the demo.
+  golden AI responses, and cached Pouch Radar crawler output. **Supabase (EU) is
+  now wired** for the one feature that needs history — the careers feed's daily
+  snapshots (project "Jensen" / eu-west-1, table `public.varsel_careers_snapshots`,
+  public-read RLS, `varsel_`-prefixed so it's isolated from the 61 jensen-fms
+  tables). Everything else stays versioned JSON; add further tables only when a
+  feature genuinely needs persistence, and ask first.
 - Claude API server-side only (`/api/ai/*` routes, `ANTHROPIC_API_KEY` in
   `.env.local` — never `NEXT_PUBLIC_`). Default model: latest Sonnet-class
   for live demo latency; check `/model` pricing before switching.
@@ -105,11 +108,13 @@ track (reference only).
 - **Four lenses are stubs.** Sales / Procurement / Supply / ESG ship a real KPI
   rail + a few markers + a `·soon` tag (provably-coming, not empty). Regulatory,
   HR, and now Finance (live ECB FX) are built out. Expand per `docs/map-platform.md` §4.
-- **One live feed wired (ECB FX); other markers are static snapshots.**
-  `/api/feeds/fx` fetches ECB rates live with an offline-safe cached fallback;
-  other lens `asOf`/marker values remain hardcoded snapshots in `src/data/`. The
-  careers feed, weather, freight etc. are designed, not yet wired. No DB yet — feed
-  *history* (FX/careers over time) is the trigger for Supabase (EU).
+- **Two live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
+  (ECB FX → Finance) and `/api/feeds/careers` (SuccessFactors → Supabase → HR) read
+  live with offline-safe cached fallbacks; other lens `asOf`/marker values remain
+  hardcoded snapshots in `src/data/`. The careers scraper
+  (`scripts/crawl-careers.ts`) needs its `parseJobs` validated against the live site
+  (authored without network access). Weather / freight / prices etc. are designed,
+  not yet wired.
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
   and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
@@ -178,10 +183,17 @@ repeated to the client: owner decides, always.
   stub). Offline-safe: a committed snapshot is served and labeled "cached" on any
   failure — never faked live. Pure parse/cross-rate in `src/lib/fx.ts`
   (node-verified). No DB — FX history → Supabase is the trigger.
-- **Next:** the **careers feed** (SuccessFactors → HR lens: open roles + days-open,
-  the hero HR datum) — its time-series need is what pulls in **Supabase (EU)** →
-  then Surface B (Pouch Radar / Sales lens) → the ~3-min video + forwardable link
-  (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
-  `docs/ceo-play.md` §8).
+- **Careers feed + Supabase shipped — `db08466` (2026-06-14).** `/api/feeds/careers`
+  reads daily open-role snapshots from Supabase (EU, `varsel_careers_snapshots`,
+  public-read RLS, seeded real 2026-06-13 data) → open roles, oldest vacancy,
+  staffing-up site, and hiring velocity (null until ≥2 crawls — no faked trend) on
+  the HR lens, with a cached fallback. The scheduled scraper is
+  `scripts/crawl-careers.ts` (validate its `parseJobs` against the live site on the
+  first real run). Verified reading live from Supabase in-browser.
+- **Next:** Surface B (Pouch Radar / Sales lens — live public e-commerce price +
+  bestseller signals; **gate on a per-retailer ToS read first**, build-plan §4) →
+  then the ~3-min video + forwardable link (GTM in `docs/outreach.md` +
+  `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8). Schedule the
+  careers scraper (cron / GitHub Action) so hiring-velocity history accrues.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
