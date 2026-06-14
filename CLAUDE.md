@@ -19,12 +19,13 @@ track (reference only).
 
 ## Stack
 
-- Next.js 15 (App Router) + TypeScript + Tailwind + shadcn/ui
+- Next.js 16 (App Router) + TypeScript + Tailwind + shadcn/ui
 - shadcn style is `radix-nova` (same as jensen-fms — do NOT re-init with
   newer CLI defaults; `base-nova` won't compose with `asChild` patterns)
-- Deploy: Vercel, push-to-`main` → prod, gated behind Vercel SSO until we
-  deliberately share a link
-- **No database in v0.** All data is versioned JSON in `/src/data/`: the STG
+- Deploy: Vercel, push-to-`main` → prod at `https://stg-azure.vercel.app`. SSO/password
+  gating is the intent but is currently **off (on hold per owner)** — prod is public, so
+  gate it before the link goes out.
+- **JSON-first, one DB table.** All data is versioned JSON in `/src/data/`: the STG
   segment model (from published disclosures), the curated regulatory corpus,
   golden AI responses, and cached Pouch Radar crawler output. **Supabase (EU) is
   now wired** for the one feature that needs history — the careers feed's daily
@@ -107,17 +108,19 @@ track (reference only).
 
 ## Demo shortcuts (running log — add as they're taken)
 
-- **Three lenses are stubs.** Procurement / Supply / ESG ship a real KPI rail + a
-  few markers + a `·soon` tag (provably-coming, not empty). Regulatory, HR, Finance
-  (live ECB FX), and Sales (Pouch Radar) are built out. Expand per
-  `docs/map-platform.md` §4.
-- **Two live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
-  (ECB FX → Finance) and `/api/feeds/careers` (SuccessFactors → Supabase → HR) read
-  live with offline-safe cached fallbacks; other lens `asOf`/marker values remain
-  hardcoded snapshots in `src/data/`. The careers scraper
-  (`scripts/crawl-careers.ts`) needs its `parseJobs` validated against the live site
-  (authored without network access). Weather / freight / prices etc. are designed,
-  not yet wired.
+- **Two lenses are stubs.** Supply / ESG ship a real KPI rail + a few markers + a
+  `·soon` tag (provably-coming, not empty). Regulatory, HR, Finance (live ECB FX),
+  Sales (Pouch Radar), and Procurement (live Open-Meteo weather) are built out. Expand
+  per `docs/map-platform.md` §4.
+- **Three live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
+  (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR), and
+  `/api/feeds/weather` (Open-Meteo → Procurement) read live with offline-safe cached
+  fallbacks; other lens `asOf`/marker values remain hardcoded snapshots in `src/data/`.
+  The careers scraper (`scripts/crawl-careers.ts`) is unproven on two axes (authored
+  without network access): a `DRY_RUN` validates its `parseJobs` against the live site
+  but returns before writing, while a **real run** exercises the write path with the
+  rotated service-role secret. Freight / commodity-prices etc. are designed, not yet
+  wired.
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
   and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
@@ -130,7 +133,7 @@ track (reference only).
 
 ## Out of scope for the demo
 
-- Auth/RLS/multi-tenancy (Vercel SSO is the only gate)
+- Auth/RLS/multi-tenancy (Vercel SSO is the intended gate — currently off per owner; see Stack)
 - Real STG volume/SKU data integration — that's the paid, post-DPA phase. v1
   models the *shape* of impact on published segments so the "plug in your real
   numbers" story is honest.
