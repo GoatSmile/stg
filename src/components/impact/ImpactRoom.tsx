@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AlertTriangle, Lock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ScenarioControls } from "./ScenarioControls";
+import { AiRead } from "./AiRead";
 import { CitationChip } from "./CitationChip";
 import { Abstain } from "./Abstain";
 import { computeImpact, spreadTriple } from "@/lib/impact-model";
@@ -104,6 +105,8 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
           brackets the base case. Internal scenario prep — not investor-facing (EU MAR).
         </p>
       </Card>
+
+      <AiRead eventId={scenario.eventId} assumptions={values} />
 
       <div className="grid gap-6 md:grid-cols-2">
         <ScenarioControls

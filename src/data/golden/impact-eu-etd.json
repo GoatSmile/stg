@@ -1,0 +1,13 @@
+{
+  "_note": "Pre-reviewed golden response served when DEMO_MODE=offline or no ANTHROPIC_API_KEY. The presenter says 'offline mode' out loud. Line items run through the same citation rail as a live call; the last two are deliberate abstentions (the pinned France-MRC gap).",
+  "model": "claude-sonnet-4-6",
+  "narrative": "On the current assumptions, the proposed EU tobacco-tax revision (COM(2025) 580, still in Council) puts roughly DKK 45–95m of annual EBITDA at risk across STG's EU cigar and pipe core. The band is driven mostly by how much of the higher excise STG can pass through to the shelf versus absorb, and by the demand response — for which there is no public cigar elasticity, so it is a range you set. This is internal scenario preparation built on STG's published segment splits, not investor guidance and not STG's own figures; the directive is a proposal, not enacted law.",
+  "lineItems": [
+    { "claim": "STG group net sales (FY2025)", "value": "DKK 9,036m", "sourceRef": "AR2025", "abstain": false, "reason": null },
+    { "claim": "Europe net sales (FY2025)", "value": "DKK 3,934m", "sourceRef": "AR2025 p112", "abstain": false, "reason": null },
+    { "claim": "EU cigar/pipe base used in the model (EUB division)", "value": "DKK 3,270m", "sourceRef": "AR2025", "abstain": false, "reason": null },
+    { "claim": "Combustible share of group (handmade + machine-rolled)", "value": "≈ 85%", "sourceRef": "AR2025 category split", "abstain": false, "reason": null },
+    { "claim": "EU revenue sitting below each market's new excise floor", "value": null, "sourceRef": null, "abstain": true, "reason": "not stated in source — needs human lookup (you set it via 'exposed share')" },
+    { "claim": "France machine-rolled cigar revenue (~DKK 620m, cited for the France ban)", "value": null, "sourceRef": null, "abstain": true, "reason": "not in this scenario's corpus — a derived figure that needs human lookup before it enters the EU-ETD model" }
+  ]
+}
