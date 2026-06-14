@@ -274,9 +274,13 @@ repeated to the client: owner decides, always.
   KPI rail is fully sourced — net-zero 2050 (SBTi-committed), Scope 1&2 −4.2%/yr from 2020,
   ≥67% Scope-3 engagement by 2030 (just-drinks/SBTi), US catalogue cut (real) — and caught
   two more stub overclaims (SBTi was "committed", not "validated"; dropped the unverified
-  ">70 STP suppliers"). 7 markers (leaf regions climate-watched via ENSO + EUDR Indonesia +
-  catalogue + net-zero HQ); per-region water-stress (WRI Aqueduct) stays illustrative*.
-  `tsc` clean + `next build` green; verified in-browser, no console errors.
+  ">70 STP suppliers"). 7 markers (leaf regions + EUDR Indonesia + catalogue + net-zero HQ).
+  **Per-site water stress is now real** (owner pulled the data from the WRI Water Risk Atlas;
+  embedded 2026-06-14) — WRI Aqueduct 4.0 baseline water stress at each leaf site: Indonesia /
+  Central Java **Extremely High (>80%)** — the pulsing hotspot; Sri Lanka Med–High; DR Low–Med;
+  Honduras / Nicaragua **Low** by withdrawal, so their live risk is ENSO-driven seasonal drought,
+  not scarcity (a nuance country averages would have hidden). `tsc` clean + `next build` green;
+  verified in-browser, no console errors.
 - **Dark-mode toggle + prod password gate shipped — (2026-06-14).** (1) `ThemeToggle` in
   the header flips the `.dark` class + persists to `localStorage`; an inline `<head>` script
   applies the saved theme before paint (no flash; `<html suppressHydrationWarning>`). Defaults
@@ -296,8 +300,8 @@ repeated to the client: owner decides, always.
 - **Next (video deferred per owner):** the seven-lens platform is complete + polished, with
   five live feeds. **To gate prod: set `SITE_PASSWORD` in Vercel env + redeploy** (any value
   you'll share with Yulia) — the gate is built, just not activated in prod. Remaining optional:
-  WRI Aqueduct water-stress / leaf-price (FRED/USDA) overlays on Procurement/ESG; a real
-  per-lane freight rate (paid Freightos FBX). The ~3-min video + forwardable link (GTM in
+  a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane freight rate (paid Freightos
+  FBX). (WRI Aqueduct water-stress on ESG is now done.) The ~3-min video + forwardable link (GTM in
   `docs/outreach.md` + `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is
   parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
