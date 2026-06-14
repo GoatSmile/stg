@@ -28,10 +28,12 @@ track (reference only).
   segment model (from published disclosures), the curated regulatory corpus,
   golden AI responses, and cached Pouch Radar crawler output. **Supabase (EU) is
   now wired** for the one feature that needs history — the careers feed's daily
-  snapshots (project "Jensen" / eu-west-1, table `public.varsel_careers_snapshots`,
-  public-read RLS, `varsel_`-prefixed so it's isolated from the 61 jensen-fms
-  tables). Everything else stays versioned JSON; add further tables only when a
-  feature genuinely needs persistence, and ask first.
+  snapshots: project **"Valent - proposals"** / eu-west-3, ref `nphebbjrdtaldrgqlssn`,
+  table `public.varsel_careers_snapshots`, public-read RLS + service-role writes.
+  Migrated 2026-06-14 out of the shared jensen-fms "Jensen" project
+  (`jzlphajunfrqvpogzsiz`) into this dedicated project — isolation is now by separate
+  project, not just the `varsel_` prefix. Everything else stays versioned JSON; add
+  further tables only when a feature genuinely needs persistence, and ask first.
 - Claude API server-side only (`/api/ai/*` routes, `ANTHROPIC_API_KEY` in
   `.env.local` — never `NEXT_PUBLIC_`). Default model: latest Sonnet-class
   for live demo latency; check `/model` pricing before switching.
@@ -197,6 +199,17 @@ repeated to the client: owner decides, always.
   curated snapshot — structure/shares sourced, per-can prices/ranks illustrative* —
   with the crawler (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan
   §4). Sales lens un-stubbed; Sweden/UK markers deep-link to it (`Marker.radar`).
+- **Careers DB moved to its own Supabase project — (2026-06-14; infra + gitignored env + this doc, no app-code change).**
+  `varsel_careers_snapshots` migrated from the shared "Jensen" project
+  (`jzlphajunfrqvpogzsiz`, eu-west-1) to a dedicated **"Valent - proposals"** project
+  (`nphebbjrdtaldrgqlssn`, eu-west-3) — table + RLS policy + the seeded 2026-06-13 row,
+  verified jsonb-identical, then the source table dropped from "Jensen" (its 54
+  jensen-fms tables untouched; confirmed 55→54). Local `.env.local` **and Vercel prod
+  env** both re-pointed + redeployed — verified reading live (`live:true`, real
+  `crawledAt`) from the new project. Exposed secret key **rotated** (old key confirmed
+  revoked/401); the new `sb_secret_…` lives where the scraper runs. Site gating (Vercel
+  SSO/password) is **on hold** per owner — prod is currently public. Only open item: run
+  `crawl-careers.ts` once with the new secret to exercise the write path end-to-end.
 - **Next (video deferred per owner):** build out the remaining stub lenses —
   **Procurement first, with a live Open-Meteo weather/commodity feed** (free, no
   ToS gate) over the leaf-growing regions — then Supply / ESG. Schedule the careers
