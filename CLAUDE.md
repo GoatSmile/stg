@@ -228,4 +228,6 @@ repeated to the client: owner decides, always.
   forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
   `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
-  what's next) so a fresh session can pick up cold from this file + git history.
+  what's next) so a fresh session can pick up cold from this file + git history —
+  and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
+  versions) so the top of this file never contradicts the log.
