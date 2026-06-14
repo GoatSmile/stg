@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -23,7 +24,15 @@ const nav = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Apply the saved theme before paint so there's no flash of the wrong mode. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('varsel-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}`,
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} font-sans antialiased`}>
         <div className="flex min-h-screen flex-col">
           <header className="border-b border-border">
@@ -33,17 +42,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="font-heading text-xl font-medium tracking-tight">Varsel</span>
                 <span className="text-xs text-muted-foreground">STG operations pulse</span>
               </Link>
-              <nav className="flex gap-1 text-sm">
-                {nav.map((n) => (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    className="rounded-md px-2.5 py-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  >
-                    {n.label}
-                  </Link>
-                ))}
-              </nav>
+              <div className="flex items-center gap-1">
+                <nav className="flex gap-1 text-sm">
+                  {nav.map((n) => (
+                    <Link
+                      key={n.href}
+                      href={n.href}
+                      className="rounded-md px-2.5 py-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                    >
+                      {n.label}
+                    </Link>
+                  ))}
+                </nav>
+                <ThemeToggle />
+              </div>
             </div>
             <div className="bg-secondary/60 px-4 py-1.5 text-center text-[11px] text-muted-foreground">
               Built on public data · zero STG internal data · some figures are illustrative (marked *) ·{" "}
