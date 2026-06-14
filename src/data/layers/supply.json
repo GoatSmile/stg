@@ -1,17 +1,23 @@
 {
-  "id": "supply", "dept": "Supply chain / Logistics", "label": "Supply", "icon": "ship", "status": "stub",
-  "blurb": "Factory→market flows, freight-rate exposure, and execution-risk markers.",
-  "asOf": "2026-06-13",
+  "id": "supply", "dept": "Supply chain / Logistics", "label": "Supply", "icon": "ship",
+  "blurb": "Factory→market flows across STG's production footprint, the OneProcess SAP rollout (EU live, US late 2026), and freight exposure on the main inbound lanes.",
+  "asOf": "2026-06-14",
   "kpis": [
-    { "label": "Manufacturing sites", "value": ">10", "sub": "4 countries core", "flag": "C" },
-    { "label": "SAP US go-live", "value": "late 2026", "sub": "next execution risk", "flag": "C" },
-    { "label": "Freight index", "value": "live*", "sub": "Freightos FBX feed", "flag": "I" },
-    { "label": "2025 ERP disruption", "value": "FCF −DKK 200m", "sub": "delayed receivables", "flag": "C" }
+    { "label": "Production sites", "value": "10+", "sub": "8 countries", "flag": "C" },
+    { "label": "US SAP go-live", "value": "late 2026", "sub": "next execution risk", "flag": "C" },
+    { "label": "SAP special items '25", "value": "~DKK 130m", "sub": "of ~200m total", "flag": "C" },
+    { "label": "OTIF / on-time-in-full", "value": "~94%*", "sub": "illustrative — needs STG data", "flag": "fab" }
   ],
   "markers": [
-    { "id": "sup-dr-us", "lat": 25.0, "lng": -78.0, "label": "DR/HN/NI → US lane", "value": "freight-watch*", "provenance": "agent", "sourceRef": "Freightos FBX", "detail": "Handmade cigars to the US — the biggest inbound lane. *Freight rate illustrative until wired." },
-    { "id": "sup-eu", "lat": 50.99, "lng": 5.20, "label": "EU factories", "value": "SAP done", "provenance": "public", "sourceRef": "STG", "detail": "European go-lives complete (caused 2025 disruption)." },
-    { "id": "sup-us-sap", "lat": 40.63, "lng": -75.38, "label": "US — SAP late 2026", "value": "execution risk", "severity": "medium", "provenance": "public", "sourceRef": "STG Q1'26", "detail": "US deployment late 2026 — the next operational landmine." }
+    { "id": "sup-us-sap", "lat": 40.63, "lng": -75.38, "label": "US — SAP S/4HANA go-live late 2026", "value": "execution risk", "severity": "high", "provenance": "public", "sourceRef": "STG Q1'26 + research-brief", "detail": "OneProcess replaces 12 inherited ERPs with one global SAP instance. The US deployment (late 2026) is the next go-live — and EU go-lives already caused Q3 2025 supply disruption + market-share loss. The pulsing landmine on this lens." },
+    { "id": "sup-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic — Santiago / Tamboril", "value": "→ US", "provenance": "public", "sourceRef": "AR2025 §4.3", "detail": "Largest production hub: handmade + machine-rolled cigars and wrapper/binder leaf. Ships to the US — the biggest inbound lane. (San Pedro site closed 2025.)" },
+    { "id": "sup-hn", "lat": 14.02, "lng": -86.58, "label": "Honduras — Danlí", "value": "→ US", "provenance": "public", "sourceRef": "AR2025 §4.3", "detail": "Handmade premium cigars for the US market." },
+    { "id": "sup-ni", "lat": 13.09, "lng": -86.35, "label": "Nicaragua — Estelí", "value": "→ US", "provenance": "public", "sourceRef": "AR2025 §4.3", "detail": "Handmade premium cigars for the US market." },
+    { "id": "sup-lane-us", "lat": 24.5, "lng": -75.0, "label": "DR / HN / NI → US — handmade lane", "value": "freight-watch*", "provenance": "fabricated", "sourceRef": "Freightos FBX (designed)", "detail": "The main inbound ocean lane carrying handmade cigars to the US. *Per-lane freight rate is illustrative — the feed (Freightos FBX / Drewry, or a free FRED cost proxy) is wire-ready but not yet live, so no real-time number is shown." },
+    { "id": "sup-be", "lat": 50.99, "lng": 5.20, "label": "Belgium — Lummen / Westerlo", "value": "SAP done", "provenance": "public", "sourceRef": "AR2025 + Q1'26", "detail": "Machine-rolled cigars for the EU. EU SAP go-lives are complete — and were the source of the Q3 2025 disruption now behind the group." },
+    { "id": "sup-dk", "lat": 55.27, "lng": 9.90, "label": "Denmark — Assens / Svendborg / Holstebro", "value": "pipe · pouch", "provenance": "public", "sourceRef": "AR2025 §4.3", "detail": "Pipe tobacco (Assens), fine-cut (Holstebro), and the owned nicotine-pouch factory (Svendborg) — the supply base behind the XQS pouch push." },
+    { "id": "sup-lk", "lat": 6.95, "lng": 79.96, "label": "Sri Lanka — Biyagama", "value": "leaf", "provenance": "public", "sourceRef": "AR2025 §4.3", "detail": "Wrapper/binder leaf feeding the cigar factories — an upstream node in the flow." },
+    { "id": "sup-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia — Semarang / Pasuruan", "value": "leaf · cigars", "provenance": "public", "sourceRef": "AR2025 §4.3", "detail": "Machine-rolled cigars plus wrapper/binder leaf — both a production and a leaf-sourcing node." }
   ],
-  "agentNote": "Supply layer: Freightos FBX / Drewry WCI (freight), port-congestion feeds, severe-weather alerts. Stub for now."
+  "agentNote": "Production geography + the OneProcess SAP timeline (EU live, US late 2026; ~DKK 130m of 2025 special items) are from STG disclosures (AR2025, Q1'26). Per-lane ocean-freight (Freightos FBX / Drewry) and OTIF are illustrative* — the freight feed is wire-ready (a free FRED cost proxy, or a paid FBX key) but not yet live; OTIF / days-of-supply need STG data."
 }

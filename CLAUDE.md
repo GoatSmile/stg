@@ -108,9 +108,10 @@ track (reference only).
 
 ## Demo shortcuts (running log — add as they're taken)
 
-- **Two lenses are stubs.** Supply / ESG ship a real KPI rail + a few markers + a
-  `·soon` tag (provably-coming, not empty). Regulatory, HR, Finance (live ECB FX),
-  Sales (Pouch Radar), and Procurement (live Open-Meteo weather) are built out. Expand
+- **One lens is a stub.** ESG ships a real KPI rail + a few markers + a `·soon` tag
+  (provably-coming, not empty). Regulatory, HR, Finance (live ECB FX), Sales (Pouch
+  Radar), Procurement (live Open-Meteo weather), and Supply (production footprint + the
+  OneProcess SAP rollout; freight illustrative*, no live feed yet) are built out. Expand
   per `docs/map-platform.md` §4.
 - **Three live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
   (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR), and
@@ -247,12 +248,23 @@ repeated to the client: owner decides, always.
   kept deliberately distinct from the brand; STG's **lion logo not used** (honest note on
   `/transparency`). `tsc` clean + `next build` green (10 pages); verified in-browser across
   Pulse / HR / Impact / Radar + dark mode, no console errors.
-- **Next (video deferred per owner):** build out the last two stub lenses —
-  **Supply, then ESG** (same pattern: real KPI rail + markers + a live feed where one
-  exists). Optional: leaf-price (FRED/USDA) + water-stress (WRI Aqueduct) overlays on
-  Procurement. The ~3-min video +
-  forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
-  `docs/ceo-play.md` §8) is parked, not dropped.
+- **Supply lens shipped — (2026-06-14).** Un-stubbed Supply with a rich, fully-sourced
+  build: KPI rail (10+ production sites · 8 countries · US SAP go-live late 2026 · ~DKK 130m
+  of 2025 SAP special items · OTIF illustrative*) + 9 factory→market markers across the real
+  footprint (DR/HN/NI handmade → US, Belgium/Denmark, Sri Lanka/Indonesia leaf) with the
+  **US-SAP-late-2026** as the pulsing execution-risk marker. Corrected the stub's wrong "FCF
+  −DKK 200m" (the ~200m is total FY25 special items ≈130m SAP + 70m reorg, not an FCF hit).
+  **No live feed wired:** freight (Freightos FBX / Drewry) is gated/commercial with no clean
+  keyless source verifiable end-to-end, so per-lane freight stays illustrative* (feed
+  wire-ready via a free FRED cost proxy or a paid FBX key — offered, not built, to avoid
+  shipping an unverified live integration). `tsc` clean + `next build` green; verified
+  in-browser. **ESG is now the only stub.**
+- **Next (video deferred per owner):** build out the **last stub lens — ESG** (same pattern:
+  real KPI rail + markers; a live feed where one exists — WRI Aqueduct water-stress / Global
+  Forest Watch are candidates). Optional: wire the Supply freight feed (FRED cost proxy,
+  needs a free key) and leaf-price (FRED/USDA) + water-stress overlays on Procurement. The
+  ~3-min video + forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open
+  decisions in `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
