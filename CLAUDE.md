@@ -210,11 +210,19 @@ repeated to the client: owner decides, always.
   revoked/401); the new `sb_secret_…` lives where the scraper runs. Site gating (Vercel
   SSO/password) is **on hold** per owner — prod is currently public. Only open item: run
   `crawl-careers.ts` once with the new secret to exercise the write path end-to-end.
-- **Next (video deferred per owner):** build out the remaining stub lenses —
-  **Procurement first, with a live Open-Meteo weather/commodity feed** (free, no
-  ToS gate) over the leaf-growing regions — then Supply / ESG. Schedule the careers
-  scraper (cron / GitHub Action) so hiring-velocity history accrues. The ~3-min
-  video + forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`;
-  open decisions in `docs/ceo-play.md` §8) is parked, not dropped.
+- **Procurement weather lens shipped — `fda757a` (2026-06-14).** Un-stubbed Procurement
+  with a live **Open-Meteo** leaf-region feed: pure lib (`src/lib/weather.ts` — 5 origins
+  + a transparent stated crop-risk rule: dry <5mm / heat ≥35°C / wet >120mm on the 7-day
+  forecast), `/api/feeds/weather` (30-min cache, 4s timeout, offline-safe cached
+  fallback), and `WeatherStrip` wired into the dashboard via `lens.feed === "weather"`.
+  `tsc` clean + `next build` green; verified in-browser (live badge; DR dry/high, Sri
+  Lanka wet/elevated). Free + keyless, no ToS gate. **Supply / ESG are now the only stubs.**
+- **Next (video deferred per owner):** build out the last two stub lenses —
+  **Supply, then ESG** (same pattern: real KPI rail + markers + a live feed where one
+  exists). Optional: leaf-price (FRED/USDA) + water-stress (WRI Aqueduct) overlays on
+  Procurement; schedule the careers scraper (cron / GitHub Action) for hiring-velocity
+  history; run `crawl-careers.ts` once to exercise the rotated secret. The ~3-min video +
+  forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
+  `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
