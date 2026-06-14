@@ -1,6 +1,6 @@
 {
-  "id": "sales", "dept": "Sales / Commercial", "label": "Sales", "icon": "trending-up", "status": "stub",
-  "blurb": "Per-market competitive position. Full drill-down = the Pouch Radar (live e-commerce).",
+  "id": "sales", "dept": "Sales / Commercial", "label": "Sales", "icon": "trending-up",
+  "blurb": "Per-market competitive position — XQS vs ZYN vs VELO. Click a pouch market to open the Pouch Radar.",
   "asOf": "2026-06-13",
   "kpis": [
     { "label": "XQS share, Sweden", "value": "13.6%", "sub": "from 7.8% (2025)", "flag": "C" },
@@ -9,9 +9,9 @@
     { "label": "Mint share of UK pouch cans", "value": "58%*", "sub": "Haypp-derived", "flag": "I" }
   ],
   "markers": [
-    { "id": "sales-se", "lat": 59.33, "lng": 18.07, "label": "Sweden — XQS #2", "value": "13.6% share", "provenance": "public", "sourceRef": "STG AR2025", "detail": "XQS focus market. Live price/launch tracking in the Pouch Radar." },
-    { "id": "sales-uk", "lat": 51.51, "lng": -0.13, "label": "UK — XQS growth", "value": "doubling", "provenance": "public", "sourceRef": "STG AR2025", "detail": "Second XQS focus market; convenience channel fastest-growing." },
+    { "id": "sales-se", "lat": 59.33, "lng": 18.07, "label": "Sweden — XQS #2", "value": "13.6% share", "provenance": "public", "sourceRef": "STG AR2025", "radar": true, "detail": "XQS focus market, #2 at 13.6% share. Price/launch/rank tracking in the Pouch Radar." },
+    { "id": "sales-uk", "lat": 51.51, "lng": -0.13, "label": "UK — XQS growth", "value": "doubling", "provenance": "public", "sourceRef": "STG AR2025", "radar": true, "detail": "Second XQS focus market; sales doubled in Q4 2025, convenience channel fastest. → Pouch Radar." },
     { "id": "sales-us-online", "lat": 40.63, "lng": -75.38, "label": "US online cigar war", "value": "margin pressure", "provenance": "agent", "sourceRef": "e-commerce crawl", "detail": "Free-shipping price war across CI / Thompson vs rivals — observable on public product pages." }
   ],
-  "agentNote": "Sales markers deepen into the Pouch Radar (Surface B): Haypp + nicotine-pouches.org price/launch/bestseller crawl. Stub for now."
+  "agentNote": "Click Sweden or the UK to open the Pouch Radar (Surface B): XQS vs ZYN vs VELO price, strength, rank + a launch/compliance feed. v1 is a curated snapshot; the Haypp / nicotine-pouches.org crawl is built and ToS-gated."
 }

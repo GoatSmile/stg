@@ -1,0 +1,38 @@
+{
+  "_note": "Pouch Radar v1 — a curated, dated snapshot. Brand/market STRUCTURE and XQS market shares are public/sourced (STG AR2025 / Q1 2026); the specific per-can PRICES and online bestseller RANKS are illustrative* placeholders until the first ToS-permitted crawl. The crawler (scripts/crawl-radar.ts) is built and GATED on a per-retailer ToS read (build-plan §4). Sources: Haypp Media & Insights, nicotine-pouches.org.",
+  "asOf": "2026-06-13",
+  "crawledAt": null,
+  "pricesProvenance": "fabricated",
+  "sources": [
+    { "name": "Haypp Media & Insights", "url": "https://www.haypp.com", "use": "per-market price + online bestseller rank", "tos": "ToS read PENDING — automated collection gated; the paid Media & Insights feed is the clean fallback (build-plan §4)." },
+    { "name": "nicotine-pouches.org", "url": "https://nicotine-pouches.org", "use": "catalogue, strengths, flavour counts", "tos": "ToS read PENDING — prefer sitemap-diffing over HTML scraping." }
+  ],
+  "markets": [
+    { "code": "SE", "name": "Sweden", "lat": 59.33, "lng": 18.07, "currency": "SEK", "xqsShare": "13.6%", "shareFlag": "C", "note": "World's largest pouch market. XQS is #2 (share 7.8%→13.6% since 2024)." },
+    { "code": "UK", "name": "United Kingdom", "lat": 51.51, "lng": -0.13, "currency": "GBP", "shareFlag": "C", "note": "XQS focus market — sales doubled in Q4 2025; convenience channel fastest-growing." },
+    { "code": "DK", "name": "Denmark", "lat": 55.68, "lng": 12.57, "currency": "DKK", "shareFlag": "C", "note": "9 mg/pouch cap + tobacco/menthol-only flavours in force Apr 2026 — flavour-led SKUs delisted." }
+  ],
+  "brands": [
+    { "brand": "XQS", "owner": "STG", "isStg": true },
+    { "brand": "VELO", "owner": "BAT" },
+    { "brand": "ZYN", "owner": "PMI" },
+    { "brand": "Nordic Spirit", "owner": "JTI" }
+  ],
+  "prices": [
+    { "market": "SE", "brand": "VELO", "priceLocal": "SEK 36", "priceDkk": 23, "strengthMg": "6–10", "rank": 1, "flavours": 14 },
+    { "market": "SE", "brand": "XQS", "priceLocal": "SEK 33", "priceDkk": 21, "strengthMg": "8–12", "rank": 2, "flavours": 12 },
+    { "market": "SE", "brand": "ZYN", "priceLocal": "SEK 35", "priceDkk": 22, "strengthMg": "6–11", "rank": 3, "flavours": 10 },
+    { "market": "UK", "brand": "VELO", "priceLocal": "£4.95", "priceDkk": 44, "strengthMg": "6–10", "rank": 1, "flavours": 12 },
+    { "market": "UK", "brand": "ZYN", "priceLocal": "£5.00", "priceDkk": 44, "strengthMg": "3–11", "rank": 2, "flavours": 8 },
+    { "market": "UK", "brand": "XQS", "priceLocal": "£4.50", "priceDkk": 40, "strengthMg": "6–11", "rank": 4, "flavours": 9 },
+    { "market": "DK", "brand": "VELO", "priceLocal": "DKK 38", "priceDkk": 38, "strengthMg": "≤ 9 (capped)", "rank": 1, "flavours": 6 },
+    { "market": "DK", "brand": "XQS", "priceLocal": "DKK 35", "priceDkk": 35, "strengthMg": "≤ 9 (capped)", "rank": 3, "flavours": 4 }
+  ],
+  "events": [
+    { "date": "2026-04-01", "market": "DK", "type": "compliance", "text": "Denmark 9 mg cap + tobacco/menthol-only flavours in force — XQS flavour-led SKUs delisted in DK.", "sourceRef": "sik.dk" },
+    { "date": "2026-04-01", "market": "FR", "type": "compliance", "text": "France oral-nicotine ban in force — France removed from XQS's expansion map.", "sourceRef": "Décret 2025-898" },
+    { "date": "2026-05-20", "market": "SE", "type": "share", "text": "XQS Sweden share 12.3% → 13.6%; XQS volume +38% vs +21% category (Q1 2026).", "sourceRef": "STG Q1 2026" },
+    { "date": "2026-01-01", "market": "UK", "type": "launch", "text": "XQS entering the mint segment — an explicit hedge against flavour regulation.", "sourceRef": "Focus2030" },
+    { "date": "2024-07-01", "market": "US", "type": "distribution", "text": "STG discontinued third-party ZYN distribution (NAOR) — drove NGP organic −17%.", "sourceRef": "STG AR2025" }
+  ]
+}

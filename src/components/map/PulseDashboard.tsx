@@ -100,6 +100,14 @@ export function PulseDashboard() {
                 Open the Impact Room <ArrowRight className="size-4" />
               </Link>
             )}
+            {selected.radar && (
+              <Link
+                href="/radar"
+                className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:opacity-90"
+              >
+                Open the Pouch Radar <ArrowRight className="size-4" />
+              </Link>
+            )}
           </div>
         </Card>
       ) : lens.agentNote ? (

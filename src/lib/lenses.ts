@@ -26,7 +26,7 @@ export type Marker = {
   provenance: Provenance; sourceRef?: string; asOf?: string; detail?: string;
   // lens-specific extras
   siteId?: string; employees?: number; openPositions?: number;
-  oldestDaysOpen?: number; retirementRisk?: number; impact?: boolean;
+  oldestDaysOpen?: number; retirementRisk?: number; impact?: boolean; radar?: boolean;
 };
 
 export type Regime = { country: string; status: "banned" | "restricted" | "open" };
