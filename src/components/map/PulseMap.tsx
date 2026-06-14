@@ -4,11 +4,11 @@ import { geoNaturalEarth1, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import worldData from "@/data/world-110m.json";
-import { type Marker, type Site, provenanceMeta } from "@/lib/lenses";
+import { type Marker, type Site, sites as allSites, lenses, provenanceMeta } from "@/lib/lenses";
 import { radiusFromEmployees } from "@/lib/format";
 
 const W = 960;
-const H = 500;
+const H = 340;
 
 // Computed once at module load — deterministic, runs identically on server & client
 // (d3-geo + topojson are pure JS, no DOM), so the SVG hydrates without mismatch.
@@ -16,7 +16,27 @@ const land = feature(
   worldData as never,
   (worldData as unknown as { objects: { countries: never } }).objects.countries,
 ) as unknown as FeatureCollection<Geometry>;
-const projection = geoNaturalEarth1().fitSize([W, H], land);
+
+// Frame the map to STG's actual footprint, not the whole globe. We fit the
+// projection to the union of every site + every lens marker — so the viewport
+// crops the empty Pacific + Antarctica a whole-world fit wastes half the canvas
+// on, yet still contains every marker on every lens (it never jumps when you
+// switch lenses, because the extent is the same for all of them).
+const PAD = 0.07;
+const footprint = {
+  type: "MultiPoint" as const,
+  coordinates: [
+    ...allSites.map((s) => [s.lng, s.lat] as [number, number]),
+    ...lenses.flatMap((l) => l.markers.map((m) => [m.lng, m.lat] as [number, number])),
+  ],
+};
+const projection = geoNaturalEarth1().fitExtent(
+  [
+    [W * PAD, H * PAD],
+    [W * (1 - PAD), H * (1 - PAD)],
+  ],
+  footprint,
+);
 const geo = geoPath(projection);
 const countryPaths: string[] = land.features
   .map((f: Feature<Geometry>) => geo(f) ?? "")

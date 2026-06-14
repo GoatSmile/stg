@@ -18,14 +18,31 @@ export type CareerSite = {
 export type CareerSnapshot = {
   asOf: string;
   source: string;
+  // Real open vacancies (evergreen "talent pool" posts excluded).
   totalOpen: number;
   crawledAt: string | null;
+  // Strategic STG sites only — production / leaf / HQ / delivery offices.
   sites: CareerSite[];
 };
 
 /** The single oldest open role across all sites (the "ageing vacancy" signal). */
 export function oldestDaysOpen(sites: CareerSite[]): number {
   return sites.reduce((max, s) => Math.max(max, s.oldestDaysOpen), 0);
+}
+
+/** Open roles at the strategic sites we map (production / leaf / HQ / delivery). */
+export function strategicOpen(sites: CareerSite[]): number {
+  return sites.reduce((sum, s) => sum + s.openPositions, 0);
+}
+
+/**
+ * Roles NOT at a strategic site — US retail superstores / cigar bars + smaller
+ * sales offices. Derived (totalOpen − strategic) so it holds on both the live
+ * and cached paths without storing a separate column. The honest "we count all
+ * the roles, but don't pretend retail associates are the strategy" split.
+ */
+export function otherOpen(snap: CareerSnapshot): number {
+  return Math.max(0, snap.totalOpen - strategicOpen(snap.sites));
 }
 
 /** The site staffing up hardest right now (most open roles). */

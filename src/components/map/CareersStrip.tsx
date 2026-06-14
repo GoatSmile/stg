@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BriefcaseBusiness, ExternalLink } from "lucide-react";
-import { oldestDaysOpen, topHiringSite, type CareerSnapshot } from "@/lib/careers";
+import { oldestDaysOpen, topHiringSite, strategicOpen, otherOpen, type CareerSnapshot } from "@/lib/careers";
 
 type CareersResponse = CareerSnapshot & {
   live: boolean;
@@ -38,6 +38,8 @@ export function CareersStrip() {
   const oldest = data ? oldestDaysOpen(data.sites) : 0;
   const oldestSite = data?.sites.find((s) => s.oldestDaysOpen === oldest);
   const top = data ? topHiringSite(data.sites) : null;
+  const strat = data ? strategicOpen(data.sites) : 0;
+  const other = data ? otherOpen(data) : 0;
 
   return (
     <div className="flex flex-col gap-2 rounded-md border border-border bg-secondary/30 px-3 py-2.5">
@@ -66,7 +68,7 @@ export function CareersStrip() {
       {data && !loading && (
         <>
           <div className="flex flex-wrap gap-x-8 gap-y-2">
-            <Stat label="Open roles" value={String(data.totalOpen)} sub={`${data.sites.length} sites mapped`} />
+            <Stat label="Open roles" value={String(data.totalOpen)} sub={`${strat} strategic · ${other} retail/bar`} />
             <Stat
               label="Oldest vacancy"
               value={`${oldest}d`}
@@ -84,8 +86,9 @@ export function CareersStrip() {
             />
           </div>
           <p className="text-[11px] leading-snug text-muted-foreground">
-            Each posting&apos;s city + postal is in its URL; the detail page carries a posting date →
-            days-open. Snapshots persist in Supabase (EU), so hiring velocity is real once history
+            Roles, locations + posting dates come from STG&apos;s public SuccessFactors careers feed
+            → days-open. Strategic sites are mapped; US retail / cigar-bar roles are counted but
+            bucketed. Snapshots persist in Supabase (EU), so hiring velocity is real once history
             accrues.{" "}
             <a
               href="https://careers.st-group.com"

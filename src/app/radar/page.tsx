@@ -32,7 +32,7 @@ export default function Radar() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-5">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight">Pouch Radar</h1>
+        <h1 className="font-heading text-3xl font-medium tracking-tight">Pouch Radar</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           XQS vs VELO vs ZYN across STG&apos;s pouch focus markets — price, strength and online
           rank, plus the launch &amp; compliance feed. As of {pouchRadar.asOf}.

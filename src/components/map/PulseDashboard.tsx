@@ -33,7 +33,7 @@ export function PulseDashboard() {
       </div>
 
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h2 className="text-lg font-medium">{lens.dept}</h2>
+        <h2 className="font-heading text-xl font-medium tracking-tight">{lens.dept}</h2>
         <p className="text-sm text-muted-foreground">{lens.blurb}</p>
       </div>
 

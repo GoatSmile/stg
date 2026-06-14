@@ -10,7 +10,7 @@ export default function Transparency() {
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight">What&apos;s real, what&apos;s not</h1>
+        <h1 className="font-heading text-3xl font-medium tracking-tight">What&apos;s real, what&apos;s not</h1>
         <p className="mt-2 text-muted-foreground">
           Varsel is a prototype. Its whole credibility rests on being honest about where every
           number comes from. So here it is, in full. Nothing on this site is STG internal data —
@@ -20,7 +20,7 @@ export default function Transparency() {
       </div>
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-medium">The three flags you&apos;ll see</h2>
+        <h2 className="font-heading text-xl font-medium tracking-tight">The three flags you&apos;ll see</h2>
         <ul className="flex flex-col gap-3 text-sm">
           <li className="rounded-lg border border-border p-3">
             <Dot color="var(--prov-public)" />
@@ -51,7 +51,7 @@ export default function Transparency() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-medium">Honest by design</h2>
+        <h2 className="font-heading text-xl font-medium tracking-tight">Honest by design</h2>
         <ul className="ml-5 list-disc text-sm leading-relaxed text-muted-foreground">
           <li>Every regulatory figure cites its source; where a source is silent, the model says so rather than guessing.</li>
           <li>Derived figures (e.g. a France-specific revenue line STG doesn&apos;t publish) are labelled analyst derivations, never &quot;STG&apos;s number.&quot;</li>
@@ -61,7 +61,12 @@ export default function Transparency() {
             deliberately generate no earnings-facing copy (EU MAR).
           </li>
           <li>
-            Data current as of 13 June 2026. The full fact base lives in the project&apos;s
+            The visual language (warm palette + serif) is informed by STG&apos;s own public brand,
+            as a courtesy — we deliberately do <em>not</em> use STG&apos;s logo or lion mark, and
+            Varsel is not affiliated with or endorsed by STG.
+          </li>
+          <li>
+            Data current as of 14 June 2026. The full fact base lives in the project&apos;s
             <code className="mx-1 rounded bg-secondary px-1 py-0.5 text-[12px]">stg-facts.md</code>.
           </li>
         </ul>

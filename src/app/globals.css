@@ -15,7 +15,11 @@
      real variables instead. */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
+  /* Heading face (Fraunces) is applied via a real `.font-heading` rule at the
+     bottom of this file — NOT a --font-heading theme key. Tailwind v4's
+     @theme inline doesn't emit font vars as runtime CSS variables in this
+     setup (the same reason --font-sans is set directly in html{} below), so a
+     `font-heading` utility would resolve to nothing. */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -54,81 +58,85 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ── STG-aligned palette ──────────────────────────────────────────────────
+   Pulled from st-group.com: claret #950b31, espresso #4c382e, warm cream/
+   parchment grounds, tan/gold accent. Varsel wears STG's own visual language
+   (subtly — colour + type, never their lion mark) so the pitch feels built
+   *for* them. One signal colour (claret); everything else stays warm-neutral.
+   Provenance/data colours (further down) are deliberately NOT in this family,
+   so the honesty rails never read as decoration. */
 :root {
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  /* Brand accent — Deep Nordic blue (#1e4a7a). Used for primary buttons,
-     focus rings, and the active sidebar item. One accent only; secondaries
-     stay neutral so the blue marks "something to click / something selected"
-     rather than decoration. */
-  --primary: oklch(0.36 0.105 255);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.95 0.025 255);          /* faint blue tint for active backgrounds */
-  --accent-foreground: oklch(0.36 0.105 255);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.5 0.105 255);
-  /* Chart palette — 5 distinct hues, anchored to the brand blue.
-     Picked for side-by-side legibility (no two within 60° on the wheel)
-     and WCAG-AA contrast on a white background. */
-  --chart-1: oklch(0.55 0.13 250);          /* brand blue */
-  --chart-2: oklch(0.7 0.16 60);            /* amber */
+  --background: oklch(0.988 0.008 85);      /* warm ivory page */
+  --foreground: oklch(0.27 0.025 48);       /* espresso ink */
+  --card: oklch(0.998 0.004 85);            /* near-white, lifts above the page */
+  --card-foreground: oklch(0.27 0.025 48);
+  --popover: oklch(0.998 0.004 85);
+  --popover-foreground: oklch(0.27 0.025 48);
+  /* Brand accent — STG claret (#950b31). The single signal colour: primary
+     actions, focus rings, active selection, the masthead rule. */
+  --primary: oklch(0.42 0.155 12);
+  --primary-foreground: oklch(0.99 0.008 85);
+  --secondary: oklch(0.94 0.012 80);        /* warm stone — KPI tiles, chips */
+  --secondary-foreground: oklch(0.32 0.025 48);
+  --muted: oklch(0.945 0.011 82);
+  --muted-foreground: oklch(0.52 0.022 55); /* taupe-brown */
+  --accent: oklch(0.95 0.03 18);            /* faint claret tint for active backgrounds */
+  --accent-foreground: oklch(0.42 0.155 12);
+  --destructive: oklch(0.55 0.2 27);
+  --border: oklch(0.9 0.012 78);            /* warm taupe hairline */
+  --input: oklch(0.9 0.012 78);
+  --ring: oklch(0.55 0.13 14);
+  /* Chart palette — anchored to claret + gold, two distinct cool hues kept for
+     side-by-side legibility, all WCAG-AA on the warm ground. */
+  --chart-1: oklch(0.46 0.16 14);           /* claret */
+  --chart-2: oklch(0.72 0.11 65);           /* gold */
   --chart-3: oklch(0.6 0.13 195);           /* teal */
-  --chart-4: oklch(0.5 0.18 320);           /* plum */
+  --chart-4: oklch(0.5 0.1 50);             /* umber */
   --chart-5: oklch(0.65 0.12 100);          /* olive */
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.36 0.105 255);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.95 0.025 255);
-  --sidebar-accent-foreground: oklch(0.36 0.105 255);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.5 0.105 255);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --sidebar: oklch(0.98 0.008 84);
+  --sidebar-foreground: oklch(0.27 0.025 48);
+  --sidebar-primary: oklch(0.42 0.155 12);
+  --sidebar-primary-foreground: oklch(0.99 0.008 85);
+  --sidebar-accent: oklch(0.95 0.03 18);
+  --sidebar-accent-foreground: oklch(0.42 0.155 12);
+  --sidebar-border: oklch(0.9 0.012 78);
+  --sidebar-ring: oklch(0.55 0.13 14);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  /* Lighter blue for visibility on dark; foreground stays near-white. */
-  --primary: oklch(0.65 0.13 245);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.28 0.05 250);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.65 0.13 245);
-  --chart-1: oklch(0.65 0.13 250);
-  --chart-2: oklch(0.75 0.15 60);
+  /* Espresso night — warm near-black ground, ivory text, brighter claret. */
+  --background: oklch(0.17 0.012 45);
+  --foreground: oklch(0.95 0.01 85);
+  --card: oklch(0.225 0.014 46);
+  --card-foreground: oklch(0.95 0.01 85);
+  --popover: oklch(0.225 0.014 46);
+  --popover-foreground: oklch(0.95 0.01 85);
+  --primary: oklch(0.62 0.16 16);           /* brighter claret-rose for dark */
+  --primary-foreground: oklch(0.99 0.008 85);
+  --secondary: oklch(0.28 0.014 46);
+  --secondary-foreground: oklch(0.95 0.01 85);
+  --muted: oklch(0.28 0.014 46);
+  --muted-foreground: oklch(0.74 0.015 72);
+  --accent: oklch(0.33 0.06 18);
+  --accent-foreground: oklch(0.95 0.01 85);
+  --destructive: oklch(0.7 0.19 25);
+  --border: oklch(0.92 0.02 80 / 13%);
+  --input: oklch(0.92 0.02 80 / 16%);
+  --ring: oklch(0.62 0.16 16);
+  --chart-1: oklch(0.62 0.16 16);
+  --chart-2: oklch(0.78 0.12 70);
   --chart-3: oklch(0.7 0.12 195);
-  --chart-4: oklch(0.6 0.16 320);
+  --chart-4: oklch(0.62 0.1 55);
   --chart-5: oklch(0.7 0.11 100);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.65 0.13 245);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.28 0.05 250);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.65 0.13 245);
+  --sidebar: oklch(0.225 0.014 46);
+  --sidebar-foreground: oklch(0.95 0.01 85);
+  --sidebar-primary: oklch(0.62 0.16 16);
+  --sidebar-primary-foreground: oklch(0.99 0.008 85);
+  --sidebar-accent: oklch(0.33 0.06 18);
+  --sidebar-accent-foreground: oklch(0.95 0.01 85);
+  --sidebar-border: oklch(0.92 0.02 80 / 13%);
+  --sidebar-ring: oklch(0.62 0.16 16);
 }
 
 @layer base {
@@ -204,25 +212,25 @@
 }
 /* ── Varsel map + provenance tokens (used directly via var() in SVG/inline) ── */
 :root {
-  --map-bg: oklch(0.97 0 0);
-  --map-land: oklch(0.93 0.004 250);
-  --map-stroke: oklch(1 0 0);
-  --map-dot: oklch(0.72 0 0);
-  --map-marker-stroke: oklch(1 0 0);
-  --threat-high: #dc2626;
-  --threat-medium: #f59e0b;
-  --threat-low: #eab308;
-  --prov-public: #2563eb;
+  --map-bg: oklch(0.945 0.012 82);          /* warm parchment ocean */
+  --map-land: oklch(0.86 0.018 80);         /* soft taupe land */
+  --map-stroke: oklch(0.965 0.01 84);       /* ivory hairline between countries */
+  --map-dot: oklch(0.66 0.02 62);           /* muted taupe context dots */
+  --map-marker-stroke: oklch(0.99 0.008 85);
+  --threat-high: #a3122f;                   /* claret-red */
+  --threat-medium: #c2792a;                 /* warm amber */
+  --threat-low: #d8b14a;                    /* gold */
+  --prov-public: #2563eb;                   /* DATA colours — kept distinct from the brand claret */
   --prov-agent: #0d9488;
   --prov-internal: #6b7280;
   --prov-fab: #d97706;
 }
 .dark {
-  --map-bg: oklch(0.22 0 0);
-  --map-land: oklch(0.30 0.004 250);
-  --map-stroke: oklch(0.16 0 0);
-  --map-dot: oklch(0.5 0 0);
-  --map-marker-stroke: oklch(0.16 0 0);
+  --map-bg: oklch(0.225 0.012 50);
+  --map-land: oklch(0.32 0.016 52);
+  --map-stroke: oklch(0.18 0.01 46);
+  --map-dot: oklch(0.5 0.015 60);
+  --map-marker-stroke: oklch(0.2 0.01 46);
   --prov-public: #60a5fa;
   --prov-agent: #2dd4bf;
   --prov-internal: #9ca3af;
@@ -233,3 +241,10 @@
   50% { opacity: 0.9; transform: scale(1.12); }
 }
 .pulse-ring { animation: varsel-pulse 2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+/* Heritage serif for the masthead wordmark + section headings. A real rule
+   (with a serif fallback chain) so it survives the @theme-inline font quirk
+   noted above. --font-fraunces is set on <body> by next/font in layout.tsx. */
+.font-heading {
+  font-family: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
+}

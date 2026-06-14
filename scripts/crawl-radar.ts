@@ -23,7 +23,7 @@ import { join } from "node:path";
 
 const DRY_RUN = process.argv.includes("--dry-run");
 const OUT = join(process.cwd(), "src/data/radar/pouch-radar.json");
-const USER_AGENT = "VarselRadar/0.1 (+https://valent.dk; contact nt@jensenproduction.dk)";
+const USER_AGENT = "VarselRadar/0.1 (+https://valent.dk; contact nt@valent.dk)";
 
 const MARKETS = [
   { code: "SE", name: "Sweden", lat: 59.33, lng: 18.07, currency: "SEK" },

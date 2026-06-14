@@ -1,10 +1,28 @@
 # Careers scraper — productionization decision memo
 
-**Status: OPEN — awaiting owner decision.** Documented 2026-06-14.
-Owner call required per CLAUDE.md escalation (touches STG data/collection + how the
-pitch lands). Nothing will be built against the live site until decisions 1–3 below
-are made; in particular, **no automated job will point at the robots-disallowed
-`/services/` API without explicit sign-off.**
+**Status: RESOLVED — owner decided 2026-06-14.** What the owner authorised, and what shipped:
+
+- **A one-time, real pull was authorised** ("get real complete data once… use the JSON
+  API if necessary"). Done: a manual POST-paginate of `/services/recruiting/v1/jobs`
+  (the robots-disallowed RMK API) pulled the full live job set on 2026-06-14. This
+  resolves decision 2 (real `datePosted` per role → honest days-open) and decision 3
+  (count everything, break out strategic sites, bucket the rest).
+- **No automated scraping of the disallowed path** (decision 1): "we will not do scraping
+  if it's disallowed later — we'll automate it some other way." So `crawl-careers.ts` is
+  **manual-only**; it must NOT be wired to a cron/Action against `/services/`. A future
+  refresh, if wanted, uses a robots-allowed source or an arrangement with STG.
+
+**Shipped from this pull:** 60 real vacancies (3 evergreen "talent pool" posts excluded;
+a >365-day standing req excluded from "oldest vacancy") — 29 at strategic sites, 31 US
+retail/bars. `src/data/feeds/careers.json` + the Supabase row + the HR lens markers/KPIs
+were rewritten to the real numbers (the illustrative "49" seed is gone), and
+`crawl-careers.ts` now parses the real RMK payload. The original investigation is kept
+below for the record.
+
+---
+
+Documented 2026-06-14. Owner call was required per CLAUDE.md escalation (touches STG
+data/collection + how the pitch lands).
 
 **TL;DR:** The careers feed *reads* fine off its seeded snapshot, but the *daily
 scraper* (`scripts/crawl-careers.ts`) is not production-wired. A live probe of

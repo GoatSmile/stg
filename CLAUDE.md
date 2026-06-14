@@ -116,12 +116,15 @@ track (reference only).
   (ECB FX → Finance), `/api/feeds/careers` (SuccessFactors → Supabase → HR), and
   `/api/feeds/weather` (Open-Meteo → Procurement) read live with offline-safe cached
   fallbacks; other lens `asOf`/marker values remain hardcoded snapshots in `src/data/`.
-  The careers scraper (`scripts/crawl-careers.ts`) is **not production-wired**: a
-  2026-06-14 live probe found its endpoint guess wrong + the clean API robots-disallowed,
-  and the live job mix doesn't match our site model or the seeded `49` (which is therefore
-  illustrative, not a real crawl). Its Supabase write path is verified; productionizing it
-  is **blocked on 3 owner decisions** — see `docs/careers-scrape-decision.md`. Freight /
-  commodity-prices etc. are designed, not yet wired.
+  The careers feed now holds **real data** — a one-time, owner-authorised pull (2026-06-14)
+  of STG's SuccessFactors RMK API (`/services/recruiting/v1/jobs`) found **60 real open
+  vacancies** (3 evergreen "talent pool" posts excluded), 29 at strategic sites + 31 US
+  retail/bars; the illustrative `49` seed is gone (Supabase + `careers.json` + HR markers
+  rewritten). `scripts/crawl-careers.ts` parses the real payload but stays **manual-only**:
+  the rich API is robots-disallowed, so per owner decision it is **not** wired to a daily
+  job against `/services/` ("automate some other way" later) — see
+  `docs/careers-scrape-decision.md` (now RESOLVED). Freight / commodity-prices etc. are
+  designed, not yet wired.
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
   and marked `*`; what's real vs derived vs fabricated lives in `docs/stg-facts.md`.
@@ -212,8 +215,10 @@ repeated to the client: owner decides, always.
   env** both re-pointed + redeployed — verified reading live (`live:true`, real
   `crawledAt`) from the new project. Exposed secret key **rotated** (old key confirmed
   revoked/401); the new `sb_secret_…` lives where the scraper runs. Site gating (Vercel
-  SSO/password) is **on hold** per owner — prod is currently public. Only open item: run
-  `crawl-careers.ts` once with the new secret to exercise the write path end-to-end.
+  SSO/password) is **on hold** per owner — prod is currently public. (The 2026-06-14 real
+  careers pull below has since written a live row to this project via the MCP; running
+  `crawl-careers.ts` with the service key to exercise its own write path is the only minor
+  unexercised bit, and it stays manual-only.)
 - **Procurement weather lens shipped — `fda757a` (2026-06-14).** Un-stubbed Procurement
   with a live **Open-Meteo** leaf-region feed: pure lib (`src/lib/weather.ts` — 5 origins
   + a transparent stated crop-risk rule: dry <5mm / heat ≥35°C / wet >120mm on the 7-day
@@ -221,11 +226,31 @@ repeated to the client: owner decides, always.
   fallback), and `WeatherStrip` wired into the dashboard via `lens.feed === "weather"`.
   `tsc` clean + `next build` green; verified in-browser (live badge; DR dry/high, Sri
   Lanka wet/elevated). Free + keyless, no ToS gate. **Supply / ESG are now the only stubs.**
+- **Real careers data + STG-brand restyle shipped — (2026-06-14).** A four-part pass:
+  (1) **Careers feed is now real.** A one-time owner-authorised pull of STG's
+  SuccessFactors RMK API (`POST /services/recruiting/v1/jobs`) found **60 open vacancies**
+  (29 strategic + 31 US retail/bars; 3 evergreen "talent pool" posts + one >365-day standing
+  req handled honestly). `careers.json`, the Supabase row (illustrative `49` seed **deleted**
+  so hiring-velocity reads "accruing", not a fake +11), the HR markers/KPIs, and
+  `crawl-careers.ts`'s parser were all rewritten to the real payload. The careers-scrape
+  decision is **RESOLVED**: scraper stays **manual-only**, never automated against the
+  robots-disallowed `/services/` ("automate some other way" later). (2) **"Jensen" removed
+  from client-facing surfaces** — footer + README → "Nazar Taras / valent.dk", crawler UA
+  email → `valent.dk`; internal `jensen-fms` dev-doc lineage kept per owner. (3) **Map
+  zoom-to-fit** — `PulseMap` now `fitExtent`s the projection to the union of all sites +
+  markers (deterministic at module load, stable across lenses), cropping the dead
+  ocean/Antarctica a whole-world fit wasted; viewBox tightened to `960×340`. (4) **STG
+  warm-heritage restyle** — re-skinned in STG's own brand language (pulled from
+  st-group.com): claret `#950b31` as the single signal colour, warm ivory/parchment grounds
+  + espresso ink (`globals.css` token rework, light + dark + map tokens), **Fraunces** serif
+  for the masthead + section headings (Geist kept for all data/UI). Provenance/data colours
+  kept deliberately distinct from the brand; STG's **lion logo not used** (honest note on
+  `/transparency`). `tsc` clean + `next build` green (10 pages); verified in-browser across
+  Pulse / HR / Impact / Radar + dark mode, no console errors.
 - **Next (video deferred per owner):** build out the last two stub lenses —
   **Supply, then ESG** (same pattern: real KPI rail + markers + a live feed where one
   exists). Optional: leaf-price (FRED/USDA) + water-stress (WRI Aqueduct) overlays on
-  Procurement; productionize the careers scraper (blocked on 3 decisions —
-  `docs/careers-scrape-decision.md`). The ~3-min video +
+  Procurement. The ~3-min video +
   forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`; open decisions in
   `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,

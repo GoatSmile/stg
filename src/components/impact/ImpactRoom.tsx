@@ -48,7 +48,7 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
       {/* scenario header — status is shown, never dressed up as enacted */}
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2">
-          <h2 className="text-lg font-medium">{scenario.title}</h2>
+          <h2 className="font-heading text-xl font-medium tracking-tight">{scenario.title}</h2>
           <span
             className={
               proposed

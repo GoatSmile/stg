@@ -5,7 +5,7 @@ live tobacco/nicotine regulatory event (EU excise revision, the France pouch
 ban, flavor caps, US tariffs) into a DKK EBITDA/volume/
 margin band on STG's own footprint — the thing no incumbent does. Aimed at the
 office of the CEO/CFO. Built as a consulting calling card by
-Jensen Production / valent.dk.
+Nazar Taras / valent.dk.
 
 - **The strategy (live):** [docs/ceo-play.md](docs/ceo-play.md)
 - **What we're building:** [docs/prototype-spec.md](docs/prototype-spec.md)

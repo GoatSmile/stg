@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Editorial heritage serif for the masthead + section headings (see globals.css).
+const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Varsel — STG operations pulse",
@@ -22,12 +24,13 @@ const nav = [
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} font-sans antialiased`}>
         <div className="flex min-h-screen flex-col">
           <header className="border-b border-border">
             <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-              <Link href="/" className="flex items-baseline gap-2">
-                <span className="text-lg font-medium tracking-tight">Varsel</span>
+              <Link href="/" className="flex items-center gap-2.5">
+                <span aria-hidden className="h-5 w-[3px] rounded-full bg-primary" />
+                <span className="font-heading text-xl font-medium tracking-tight">Varsel</span>
                 <span className="text-xs text-muted-foreground">STG operations pulse</span>
               </Link>
               <nav className="flex gap-1 text-sm">
@@ -53,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
 
           <footer className="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground">
-            Varsel — a prototype by Jensen Production / valent.dk. Internal scenario-prep, not
+            Varsel — a prototype by Nazar Taras / valent.dk. Internal scenario-prep, not
             investor-facing. Public data only; illustrative figures marked *.
           </footer>
         </div>
