@@ -22,9 +22,14 @@ track (reference only).
 - Next.js 16 (App Router) + TypeScript + Tailwind + shadcn/ui
 - shadcn style is `radix-nova` (same as jensen-fms — do NOT re-init with
   newer CLI defaults; `base-nova` won't compose with `asChild` patterns)
-- Deploy: Vercel, push-to-`main` → prod at `https://stg-azure.vercel.app`. SSO/password
-  gating is the intent but is currently **off (on hold per owner)** — prod is public, so
-  gate it before the link goes out.
+- Deploy: Vercel, push-to-`main` → prod at `https://stg-azure.vercel.app`. A **password
+  gate is built** — env-driven: set `SITE_PASSWORD` and `src/middleware.ts` redirects
+  unauthenticated visitors to a styled `/gate` page (shared password, forwardable; cookie
+  validated by a SHA-256 of the password). It's **off when `SITE_PASSWORD` is unset** (so
+  local dev / any env without it stays open). **Prod is still public until you set
+  `SITE_PASSWORD` in Vercel env + redeploy** — do that before the link goes out. (Vercel's
+  own Password Protection is the zero-code alternative but needs Pro; this in-app gate is
+  free + in our control.)
 - **JSON-first, one DB table.** All data is versioned JSON in `/src/data/`: the STG
   segment model (from published disclosures), the curated regulatory corpus,
   golden AI responses, and cached Pouch Radar crawler output. **Supabase (EU) is
@@ -271,12 +276,20 @@ repeated to the client: owner decides, always.
   ">70 STP suppliers"). 7 markers (leaf regions climate-watched via ENSO + EUDR Indonesia +
   catalogue + net-zero HQ); per-region water-stress (WRI Aqueduct) stays illustrative*.
   `tsc` clean + `next build` green; verified in-browser, no console errors.
-- **Next (video deferred per owner):** the seven-lens platform is complete. Optional polish:
-  wire the Supply freight feed (FRED cost proxy / paid FBX, needs a key), WRI Aqueduct
-  water-stress + leaf-price (FRED/USDA) overlays on Procurement/ESG, and a theme toggle to
-  surface the (already-built) dark mode. The ~3-min video + forwardable link (GTM in
-  `docs/outreach.md` + `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is
-  parked, not dropped — and **gate prod (Vercel SSO) before the link goes out**.
+- **Dark-mode toggle + prod password gate shipped — (2026-06-14).** (1) `ThemeToggle` in
+  the header flips the `.dark` class + persists to `localStorage`; an inline `<head>` script
+  applies the saved theme before paint (no flash; `<html suppressHydrationWarning>`). Defaults
+  to light (the parchment hero). (2) Env-driven **password gate**: `src/middleware.ts` (Edge)
+  redirects unauthenticated visitors to a styled `/gate` page; `/api/gate` checks the password
+  vs `SITE_PASSWORD` and sets an httpOnly cookie (a SHA-256 of the password via shared
+  `src/lib/gate.ts`); off when `SITE_PASSWORD` is unset. Verified end-to-end (server + browser:
+  unauth→gate, wrong→error, right→cookie→full app). `tsc` clean + `next build` green.
+- **Next (video deferred per owner):** the seven-lens platform is complete + polished.
+  **To gate prod: set `SITE_PASSWORD` in Vercel env + redeploy** (any value you'll share with
+  Yulia) — the gate is built, just not activated in prod. Remaining optional: wire the Supply
+  freight feed (FRED cost proxy / paid FBX, needs a key) + WRI Aqueduct / leaf-price overlays
+  on Procurement/ESG. The ~3-min video + forwardable link (GTM in `docs/outreach.md` +
+  `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
