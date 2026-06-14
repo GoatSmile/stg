@@ -105,9 +105,10 @@ track (reference only).
 
 ## Demo shortcuts (running log — add as they're taken)
 
-- **Four lenses are stubs.** Sales / Procurement / Supply / ESG ship a real KPI
-  rail + a few markers + a `·soon` tag (provably-coming, not empty). Regulatory,
-  HR, and now Finance (live ECB FX) are built out. Expand per `docs/map-platform.md` §4.
+- **Three lenses are stubs.** Procurement / Supply / ESG ship a real KPI rail + a
+  few markers + a `·soon` tag (provably-coming, not empty). Regulatory, HR, Finance
+  (live ECB FX), and Sales (Pouch Radar) are built out. Expand per
+  `docs/map-platform.md` §4.
 - **Two live feeds wired; other markers are static snapshots.** `/api/feeds/fx`
   (ECB FX → Finance) and `/api/feeds/careers` (SuccessFactors → Supabase → HR) read
   live with offline-safe cached fallbacks; other lens `asOf`/marker values remain
@@ -190,10 +191,17 @@ repeated to the client: owner decides, always.
   the HR lens, with a cached fallback. The scheduled scraper is
   `scripts/crawl-careers.ts` (validate its `parseJobs` against the live site on the
   first real run). Verified reading live from Supabase in-browser.
-- **Next:** Surface B (Pouch Radar / Sales lens — live public e-commerce price +
-  bestseller signals; **gate on a per-retailer ToS read first**, build-plan §4) →
-  then the ~3-min video + forwardable link (GTM in `docs/outreach.md` +
-  `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8). Schedule the
-  careers scraper (cron / GitHub Action) so hiring-velocity history accrues.
+- **Surface B — Pouch Radar shipped — `2ef485b` (2026-06-14).** The Sales-lens
+  drill-down (`/radar`, static / SSR-safe): XQS vs VELO vs ZYN price/strength/rank
+  bars across SE/UK/DK + a launch & compliance feed with source chips. v1 is a
+  curated snapshot — structure/shares sourced, per-can prices/ranks illustrative* —
+  with the crawler (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan
+  §4). Sales lens un-stubbed; Sweden/UK markers deep-link to it (`Marker.radar`).
+- **Next (video deferred per owner):** build out the remaining stub lenses —
+  **Procurement first, with a live Open-Meteo weather/commodity feed** (free, no
+  ToS gate) over the leaf-growing regions — then Supply / ESG. Schedule the careers
+  scraper (cron / GitHub Action) so hiring-velocity history accrues. The ~3-min
+  video + forwardable link (GTM in `docs/outreach.md` + `docs/demo-script.md`;
+  open decisions in `docs/ceo-play.md` §8) is parked, not dropped.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history.
