@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { hiringVelocity, type CareerSnapshot } from "@/lib/careers";
+import { hiringVelocity, type CareerSnapshot, type CareerRole } from "@/lib/careers";
 import cached from "@/data/feeds/careers.json";
 
 export const runtime = "nodejs";
@@ -20,7 +20,32 @@ function toSnapshot(r: Row): CareerSnapshot {
   return { asOf: r.as_of, source: r.source, totalOpen: r.total_open, crawledAt: r.crawled_at, sites: r.sites };
 }
 
-export async function GET() {
+/**
+ * `?roles=1` returns the latest snapshot's full role list, straight from the DB.
+ * Roles are LIVE-ONLY by design — no committed JSON copy — so if the DB is
+ * unreachable we return an empty list (the map role-lists render empty, never
+ * stale or faked). The aggregate KPI path below keeps its cached fallback.
+ */
+async function liveRoles(): Promise<NextResponse> {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return NextResponse.json({ live: false, roles: [] });
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/${TABLE}?select=roles&order=as_of.desc,crawled_at.desc&limit=1`;
+    const res = await fetch(url, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(6000),
+    });
+    if (!res.ok) throw new Error(`Supabase responded ${res.status}`);
+    const rows = (await res.json()) as { roles: CareerRole[] | null }[];
+    return NextResponse.json({ live: true, roles: rows[0]?.roles ?? [] });
+  } catch {
+    return NextResponse.json({ live: false, roles: [] });
+  }
+}
+
+export async function GET(req: Request) {
+  if (new URL(req.url).searchParams.get("roles") === "1") return liveRoles();
+
   const cachedSnap = cached as unknown as CareerSnapshot;
 
   // Offline-safe: no DB configured → serve the committed snapshot, labeled cached.

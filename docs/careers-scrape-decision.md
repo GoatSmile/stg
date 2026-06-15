@@ -24,6 +24,20 @@ legitimate candidate to automate** (unlike the `/services/` search pull). Counts
 department + days-open still come from the manual `/services/` pull (the feed lacks job
 family + a start date).
 
+**Update 2026-06-15 (later) — roles are now DB-only; the two scripts are one.** Per owner
+("DB is the only source of truth and the only spot to store this data — nowhere else;
+everything live from the DB"): the per-role data (title, family, days-open, full
+description, apply URL) now lives **only** in `varsel_careers_snapshots.roles` and the app
+reads it **live** at `/api/feeds/careers?roles=1` (live-only — empty if the DB is down,
+never a JSON copy). `hr.json` no longer carries any `roles[]` / per-site counts; the map
+derives each site's open-count from the live roles. `crawl-careers.ts` + `enrich-roles.ts`
+are **retired**, collapsed into **`scripts/pull-jobs.ts`**: `jobs.xml` (robots-allowed) is
+the spine + the automatable refresh; the `--services` department/days-open enrichment stays
+the **manual, owner-authorised** pass (the policy below is unchanged — never cron
+`/services/`). A jobs.xml-only auto-refresh would need to preserve existing dept/days for
+unchanged gids rather than wipe them. Current snapshot (2026-06-15): **71 real roles — 32
+strategic / 39 US retail-bars**, all 71 with descriptions in the DB, 70 with department.
+
 **Shipped from this pull:** 60 real vacancies (3 evergreen "talent pool" posts excluded;
 a >365-day standing req excluded from "oldest vacancy") — 29 at strategic sites, 31 US
 retail/bars. `src/data/feeds/careers.json` + the Supabase row + the HR lens markers/KPIs

@@ -25,6 +25,24 @@ export type CareerSnapshot = {
   sites: CareerSite[];
 };
 
+/**
+ * One open role, exactly as stored in Supabase (the single source of truth —
+ * no copy in any JSON). `siteId` is the strategic-site key it maps to, or null
+ * for the US retail/cigar-bar postings. Title + family + days-open come from the
+ * SuccessFactors `/services` pull; the full `description` + `applyUrl` come from
+ * STG's robots-allowed `jobs.xml` feed. Served live by /api/feeds/careers?roles=1.
+ */
+export type CareerRole = {
+  gid: string;
+  siteId: string | null;
+  title: string;
+  family?: string;
+  daysOpen?: number | null;
+  location?: string;
+  applyUrl?: string;
+  description?: string;
+};
+
 /** The single oldest open role across all sites (the "ageing vacancy" signal). */
 export function oldestDaysOpen(sites: CareerSite[]): number {
   return sites.reduce((max, s) => Math.max(max, s.oldestDaysOpen), 0);

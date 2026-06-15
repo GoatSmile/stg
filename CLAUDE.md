@@ -127,19 +127,21 @@ track (reference only).
   and `/api/feeds/freight` (FRED Brent crude → Supply, needs `FRED_API_KEY`) read live with
   offline-safe cached fallbacks; other lens `asOf`/marker values
   remain hardcoded snapshots in `src/data/`.
-  The careers feed now holds **real data** — an owner-authorised pull of STG's SuccessFactors
-  RMK API (`/services/recruiting/v1/jobs`), refreshed **2026-06-15** to **64 real open
-  vacancies** (evergreen "talent pool" posts excluded), 28 at strategic sites + 36 US
-  retail/bars; the illustrative `49` seed is gone. Each HR site's detail card now **lists its
-  actual open roles** — title + real department + days-open (e.g. DR's five are all SAP ERP
-  consultants), carried as a `roles[]` array on the HR markers (`src/data/layers/hr.json`).
-  **Clicking a role opens a popup with its full real job description** + a "View full posting"
-  link, sourced by `scripts/enrich-roles.ts` from STG's **`/jobs.xml`** syndication feed — which
-  robots.txt **ALLOWS** (only `/services/` is disallowed), so it carries the description honestly
-  and *is* the "automate some other way" candidate. `scripts/crawl-careers.ts` (the `/services/`
-  search pull, for counts + department + days-open) stays **manual-only** — the rich API is
-  robots-disallowed, so per owner decision it is **not** wired to a daily job against `/services/`
-  — see `docs/careers-scrape-decision.md` (now RESOLVED). Freight / commodity-prices etc. are
+  The careers feed holds **real data**, and **the DB is its single source of truth** (owner
+  directive 2026-06-15: "everything live from the DB, nowhere else"). A one-time owner-authorised
+  pull found **71 real open vacancies** (evergreen "talent pool" posts excluded), **32 at strategic
+  sites + 39 US retail/bars**, all 71 with full descriptions stored in `varsel_careers_snapshots.roles`.
+  Per-role data (title · real department · days-open · full description · apply URL) lives **only**
+  in the DB — the app reads it **live** via `/api/feeds/careers?roles=1` (live-only — empty if the DB
+  is down, never a JSON copy). `hr.json` carries **no** `roles[]`/counts; the map derives each site's
+  open-count badge + detail role-list from the live roles, keyed by `siteId`. The 39 US retail/bar
+  roles attach to a single **"US retail & bars"** map marker. **Clicking a role opens a popup with its
+  full real job description** + a "View full posting" link. The pull is one script —
+  **`scripts/pull-jobs.ts`** (replaces the retired `crawl-careers.ts` + `enrich-roles.ts`): STG's
+  robots-**allowed** **`/jobs.xml`** is the spine (complete set + descriptions + apply links + employer)
+  and the automatable refresh; the `--services` department/days-open enrichment (robots-**disallowed**
+  RMK API) stays the **manual, owner-authorised** pass — never cron `/services/`. See
+  `docs/careers-scrape-decision.md` (RESOLVED). Freight / commodity-prices etc. are
   designed, not yet wired.
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
@@ -374,12 +376,35 @@ repeated to the client: owner decides, always.
   the crawler UA tokens (`VarselResearch/1.0` etc.) — not buyer-facing. `tsc` clean + `next build`
   green (16 routes, OG image compiles with the longer wordmark); verified in-browser (header/title/
   hero/footer, no console errors).
+- **Roles → DB single source of truth; live-from-DB refactor — (2026-06-15).** Per owner ("DB is
+  the only source of truth and the only spot to store this data — nowhere else; everything live from
+  the DB"). (1) **Finished + fixed the interrupted DB write.** The prior session died mid-MCP-write at
+  47/71 roles, and verification exposed **50/71 hand-transcription drifts** (these descriptions are
+  dense with bullets / smart quotes / em-dashes / accented multilingual text — too lossy to retype
+  through `execute_sql`, in both sessions). No re-crawl needed — the verified `/tmp/roles-final.json`
+  survived — so all 71 were rewritten **byte-identical via a service-key REST PATCH** (zero
+  transcription; `src agg == db agg == 31b93f7b…`, 71 roles / 71 desc / 70 dept). (2) **App reads roles
+  live.** `/api/feeds/careers?roles=1` → latest snapshot's `roles` (live-only, `[]` if DB down;
+  `CareerRole` type in `src/lib/careers.ts`). `PulseDashboard` fetches on the HR lens, groups by
+  `siteId`, and **derives each marker's open-count badge + detail role-list from those same live roles**
+  (badge and list can't disagree); the 39 retail roles attach to a new **"US retail & bars"** marker.
+  (3) **Stripped the duplication.** `hr.json` markers lost all `roles[]`/`openPositions`/`oldestDaysOpen`
+  (and the stale hardcoded "Open positions 64" KPI — the live count is the CareersStrip); `roles?`
+  removed from the `Marker` type; `careers.json` regenerated from the DB (aggregate KPIs only — 71 =
+  32+39, no roles). (4) **One pull path.** `crawl-careers.ts` + `enrich-roles.ts` **retired** → one
+  **`scripts/pull-jobs.ts`**: robots-**allowed** `/jobs.xml` is the spine (complete set + descriptions +
+  links + employer) and the automatable refresh; `--services` dept/days enrichment stays manual-only.
+  `SUPABASE_SERVICE_ROLE_KEY` now in `.env.local` (owner-added; this shell HAS network — the old
+  "sandbox has no network" note was the cowork VM, not this env). `tsc` clean + `next build` green;
+  verified in-browser (HR lens `live:true` 71; DR → 5 SAP roles → real description popup; us-retail →
+  39 roles; map badges live `8/5/7/…/39`; no new console errors — only a pre-existing theme-`<script>`
+  dev warning).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
   **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`
   in Vercel env + redeploy (gate built, not yet active in prod); fill `[wife]` + `[video link]` in
   `docs/outreach.md`. Optional: a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane
-  freight rate (paid Freightos FBX). (DB roles column is now populated — see above.) Open decisions
+  freight rate (paid Freightos FBX). (Roles are now DB-only + served live — see above.) Open decisions
   in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { X, ArrowRight, ChevronRight, ExternalLink } from "lucide-react";
 import {
@@ -22,21 +22,76 @@ import { Card } from "@/components/ui/card";
 import {
   lenses, sites, defaultLensId, getLens, provenanceMeta, type Marker,
 } from "@/lib/lenses";
+import type { CareerRole } from "@/lib/careers";
 import { cn } from "@/lib/utils";
 
-type Role = NonNullable<Marker["roles"]>[number];
+// A role open > 1 year reads as a "standing req", not "open N days" (matches the
+// careers feed's oldest-vacancy rule). The sentinel siteId for the US retail/bar
+// marker that collects every role with no strategic-site mapping.
+const STANDING_DAYS = 365;
+const RETAIL_SITE_ID = "us-retail";
+
+function roleMeta(r: CareerRole): string {
+  const fam = r.family || "—";
+  if (r.daysOpen != null && r.daysOpen > STANDING_DAYS) return `${fam} · standing req`;
+  if (r.daysOpen != null) return `${fam} · open ${r.daysOpen} ${r.daysOpen === 1 ? "day" : "days"}`;
+  return fam;
+}
 
 export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {}) {
   const [activeId, setActiveId] = useState(() =>
     lenses.some((l) => l.id === initialLensId) ? (initialLensId as string) : defaultLensId,
   );
-  const [selected, setSelected] = useState<Marker | null>(null);
-  const [openRole, setOpenRole] = useState<Role | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [openRole, setOpenRole] = useState<CareerRole | null>(null);
+  const [roles, setRoles] = useState<CareerRole[] | null>(null);
   const lens = getLens(activeId);
+
+  // Roles are live-only from the DB (single source of truth — no JSON copy).
+  // Fetch once, the first time the HR lens is shown.
+  useEffect(() => {
+    if (lens.id !== "hr" || roles !== null) return;
+    let on = true;
+    fetch("/api/feeds/careers?roles=1")
+      .then((r) => r.json())
+      .then((j: { roles?: CareerRole[] }) => { if (on) setRoles(j.roles ?? []); })
+      .catch(() => { if (on) setRoles([]); });
+    return () => { on = false; };
+  }, [lens.id, roles]);
+
+  // Group the live roles by strategic siteId (null → the US-retail sentinel).
+  const rolesBySite = useMemo(() => {
+    const map = new Map<string, CareerRole[]>();
+    for (const r of roles ?? []) {
+      const key = r.siteId ?? RETAIL_SITE_ID;
+      const arr = map.get(key);
+      if (arr) arr.push(r); else map.set(key, [r]);
+    }
+    return map;
+  }, [roles]);
+
+  // On the HR lens, derive each marker's open-count + oldest vacancy from those
+  // same roles, so the map dot badge and the detail role-list can never disagree.
+  const markers = useMemo(() => {
+    if (lens.id !== "hr") return lens.markers;
+    return lens.markers.map((m) => {
+      const rs = m.siteId ? rolesBySite.get(m.siteId) : undefined;
+      if (!rs || rs.length === 0) return m;
+      const oldest = rs.reduce(
+        (mx, r) => (r.daysOpen != null && r.daysOpen <= STANDING_DAYS ? Math.max(mx, r.daysOpen) : mx),
+        0,
+      );
+      return { ...m, openPositions: rs.length, oldestDaysOpen: oldest };
+    });
+  }, [lens, rolesBySite]);
+
+  // `selected` is derived (not stored) so it always reflects the live-enriched marker.
+  const selected = useMemo(() => markers.find((m) => m.id === selectedId) ?? null, [markers, selectedId]);
+  const rolesForSelected = selected?.siteId ? rolesBySite.get(selected.siteId) ?? [] : [];
 
   function switchLens(id: string) {
     setActiveId(id);
-    setSelected(null);
+    setSelectedId(null);
     setOpenRole(null);
   }
 
@@ -72,14 +127,14 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
       {lens.feed === "enso" && <EnsoStrip />}
       {lens.feed === "freight" && <FreightStrip />}
 
-      <PulseMap sites={sites} markers={lens.markers} selectedId={selected?.id} onSelect={setSelected} />
+      <PulseMap sites={sites} markers={markers} selectedId={selectedId} onSelect={(m) => setSelectedId(m.id)} />
 
       <ProvenanceLegend lens={lens} />
 
       {selected ? (
         <Card className="relative">
           <button
-            onClick={() => setSelected(null)}
+            onClick={() => setSelectedId(null)}
             aria-label="Close detail"
             className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
           >
@@ -107,43 +162,34 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
               </div>
             )}
             {selected.detail && <p className="text-sm leading-relaxed">{selected.detail}</p>}
-            {selected.roles && selected.roles.length > 0 && (
+            {rolesForSelected.length > 0 && (
               <div className="mt-1 flex flex-col gap-1.5">
                 <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Open roles ({selected.roles.length})
+                  Open roles ({rolesForSelected.length})
                 </div>
                 <ul className="flex max-h-60 flex-col gap-1.5 overflow-auto pr-1">
-                  {selected.roles.map((r, i) => {
-                    const sub = `${r.family ?? "—"}${
-                      r.standing
-                        ? " · standing req"
-                        : r.days != null
-                          ? ` · open ${r.days} ${r.days === 1 ? "day" : "days"}`
-                          : ""
-                    }`;
-                    return (
-                      <li key={i}>
-                        {r.description ? (
-                          <button
-                            type="button"
-                            onClick={() => setOpenRole(r)}
-                            className="group flex w-full items-center gap-2 rounded-md bg-secondary/60 px-2.5 py-1.5 text-left transition-colors hover:bg-secondary"
-                          >
-                            <span className="min-w-0 flex-1">
-                              <span className="block text-sm font-medium leading-snug">{r.title}</span>
-                              <span className="text-[11px] text-muted-foreground">{sub}</span>
-                            </span>
-                            <ChevronRight className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
-                          </button>
-                        ) : (
-                          <div className="rounded-md bg-secondary/60 px-2.5 py-1.5">
-                            <div className="text-sm font-medium leading-snug">{r.title}</div>
-                            <div className="text-[11px] text-muted-foreground">{sub}</div>
-                          </div>
-                        )}
-                      </li>
-                    );
-                  })}
+                  {rolesForSelected.map((r) => (
+                    <li key={r.gid}>
+                      {r.description ? (
+                        <button
+                          type="button"
+                          onClick={() => setOpenRole(r)}
+                          className="group flex w-full items-center gap-2 rounded-md bg-secondary/60 px-2.5 py-1.5 text-left transition-colors hover:bg-secondary"
+                        >
+                          <span className="min-w-0 flex-1">
+                            <span className="block text-sm font-medium leading-snug">{r.title}</span>
+                            <span className="text-[11px] text-muted-foreground">{roleMeta(r)}</span>
+                          </span>
+                          <ChevronRight className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+                        </button>
+                      ) : (
+                        <div className="rounded-md bg-secondary/60 px-2.5 py-1.5">
+                          <div className="text-sm font-medium leading-snug">{r.title}</div>
+                          <div className="text-[11px] text-muted-foreground">{roleMeta(r)}</div>
+                        </div>
+                      )}
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
@@ -182,10 +228,10 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
                 {[
                   openRole.family,
                   selected?.label,
-                  openRole.standing
+                  openRole.daysOpen != null && openRole.daysOpen > STANDING_DAYS
                     ? "standing req"
-                    : openRole.days != null
-                      ? `open ${openRole.days} ${openRole.days === 1 ? "day" : "days"}`
+                    : openRole.daysOpen != null
+                      ? `open ${openRole.daysOpen} ${openRole.daysOpen === 1 ? "day" : "days"}`
                       : null,
                 ]
                   .filter(Boolean)

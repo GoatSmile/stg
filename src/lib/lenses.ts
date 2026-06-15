@@ -27,17 +27,8 @@ export type Marker = {
   // lens-specific extras
   siteId?: string; employees?: number; openPositions?: number;
   oldestDaysOpen?: number; retirementRisk?: number; impact?: boolean; radar?: boolean;
-  // HR lens: the actual open roles at a site (title + real department + days open).
-  // description + applyUrl come from STG's robots-allowed jobs.xml syndication feed.
-  roles?: {
-    title: string;
-    family?: string;
-    days?: number;
-    standing?: boolean;
-    description?: string;
-    applyUrl?: string;
-    gid?: string;
-  }[];
+  // HR open-role counts (openPositions/oldestDaysOpen) are derived live from the
+  // careers feed at render time, keyed by siteId — never stored on the marker.
 };
 
 export type Regime = { country: string; status: "banned" | "restricted" | "open" };
