@@ -1,21 +1,105 @@
 {
-  "_note": "Cached careers snapshot — the offline-safe fallback for /api/feeds/careers when Supabase is unreachable or unconfigured. Mirrors the latest row in Supabase (varsel_careers_snapshots, as_of 2026-06-14). Real one-time pull from careers.st-group.com (SAP SuccessFactors RMK, /services/recruiting/v1/jobs), 2026-06-14. totalOpen counts real vacancies (3 evergreen 'talent pool' posts excluded); sites = strategic STG sites only, so other = totalOpen − Σsites = US retail/bars + smaller offices. The UI labels this 'cached' honestly.",
-  "asOf": "2026-06-14",
+  "_note": "Cached careers snapshot — offline-safe fallback for /api/feeds/careers. Mirrors the latest Supabase row. Real one-time pull from careers.st-group.com (SAP SuccessFactors RMK), 2026-06-15. totalOpen counts real vacancies (evergreen 'talent pool' posts excluded); sites = strategic STG sites, so other = totalOpen - Σsites = US retail/bars.",
+  "asOf": "2026-06-15",
   "source": "careers.st-group.com (SAP SuccessFactors)",
-  "totalOpen": 60,
-  "crawledAt": "2026-06-14T09:59:41+00:00",
+  "totalOpen": 64,
+  "crawledAt": "2026-06-15T04:49:07+00:00",
   "sites": [
-    { "siteId": "sales-pt", "label": "Carnaxide / Lisbon", "lat": 38.72, "lng": -9.24, "openPositions": 9, "oldestDaysOpen": 124 },
-    { "siteId": "fac-dr", "label": "Dominican Republic", "lat": 19.45, "lng": -70.7, "openPositions": 5, "oldestDaysOpen": 75 },
-    { "siteId": "office-bethlehem", "label": "Bethlehem, PA", "lat": 40.63, "lng": -75.38, "openPositions": 5, "oldestDaysOpen": 52 },
-    { "siteId": "leaf-lk", "label": "Sri Lanka — Biyagama", "lat": 6.95, "lng": 79.96, "openPositions": 2, "oldestDaysOpen": 54 },
-    { "siteId": "hq-gentofte", "label": "Copenhagen / Gentofte", "lat": 55.756, "lng": 12.547, "openPositions": 2, "oldestDaysOpen": 32 },
-    { "siteId": "office-richmond", "label": "Richmond, VA", "lat": 37.54, "lng": -77.44, "openPositions": 1, "oldestDaysOpen": 118 },
-    { "siteId": "sales-es", "label": "Madrid", "lat": 40.46, "lng": -3.69, "openPositions": 1, "oldestDaysOpen": 33 },
-    { "siteId": "sales-de", "label": "Bremen", "lat": 53.083, "lng": 8.802, "openPositions": 1, "oldestDaysOpen": 27 },
-    { "siteId": "fac-ni", "label": "Nicaragua — Estelí", "lat": 13.09, "lng": -86.35, "openPositions": 1, "oldestDaysOpen": 2 },
-    { "siteId": "fac-id", "label": "Indonesia — Semarang", "lat": -6.97, "lng": 110.42, "openPositions": 1, "oldestDaysOpen": 2 },
-    { "siteId": "fac-be", "label": "Belgium — Lummen/Westerlo", "lat": 50.99, "lng": 5.2, "openPositions": 1, "oldestDaysOpen": 0 },
-    { "siteId": "fac-hn", "label": "Honduras — Danlí", "lat": 14.02, "lng": -86.58, "openPositions": 0, "oldestDaysOpen": 0 }
+    {
+      "siteId": "sales-pt",
+      "label": "Carnaxide / Lisbon",
+      "lat": 38.72,
+      "lng": -9.24,
+      "openPositions": 7,
+      "oldestDaysOpen": 125
+    },
+    {
+      "siteId": "office-bethlehem",
+      "label": "Bethlehem, PA",
+      "lat": 40.63,
+      "lng": -75.38,
+      "openPositions": 6,
+      "oldestDaysOpen": 53
+    },
+    {
+      "siteId": "fac-dr",
+      "label": "Dominican Republic",
+      "lat": 19.45,
+      "lng": -70.7,
+      "openPositions": 5,
+      "oldestDaysOpen": 76
+    },
+    {
+      "siteId": "leaf-lk",
+      "label": "Sri Lanka — Biyagama",
+      "lat": 6.95,
+      "lng": 79.96,
+      "openPositions": 2,
+      "oldestDaysOpen": 55
+    },
+    {
+      "siteId": "office-richmond",
+      "label": "Richmond, VA",
+      "lat": 37.54,
+      "lng": -77.44,
+      "openPositions": 2,
+      "oldestDaysOpen": 119
+    },
+    {
+      "siteId": "hq-gentofte",
+      "label": "Copenhagen / Gentofte",
+      "lat": 55.756,
+      "lng": 12.547,
+      "openPositions": 1,
+      "oldestDaysOpen": 33
+    },
+    {
+      "siteId": "sales-es",
+      "label": "Madrid",
+      "lat": 40.46,
+      "lng": -3.69,
+      "openPositions": 1,
+      "oldestDaysOpen": 34
+    },
+    {
+      "siteId": "sales-de",
+      "label": "Bremen",
+      "lat": 53.083,
+      "lng": 8.802,
+      "openPositions": 1,
+      "oldestDaysOpen": 28
+    },
+    {
+      "siteId": "fac-ni",
+      "label": "Nicaragua — Estelí",
+      "lat": 13.09,
+      "lng": -86.35,
+      "openPositions": 1,
+      "oldestDaysOpen": 3
+    },
+    {
+      "siteId": "fac-id",
+      "label": "Indonesia — Semarang",
+      "lat": -6.97,
+      "lng": 110.42,
+      "openPositions": 1,
+      "oldestDaysOpen": 3
+    },
+    {
+      "siteId": "fac-be",
+      "label": "Belgium — Lummen/Westerlo",
+      "lat": 50.99,
+      "lng": 5.2,
+      "openPositions": 1,
+      "oldestDaysOpen": 0
+    },
+    {
+      "siteId": "fac-hn",
+      "label": "Honduras — Danlí",
+      "lat": 14.02,
+      "lng": -86.58,
+      "openPositions": 0,
+      "oldestDaysOpen": 0
+    }
   ]
 }

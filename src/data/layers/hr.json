@@ -5,26 +5,365 @@
   "icon": "users",
   "feed": "careers",
   "blurb": "The company's people footprint, live. Headcount by site, open roles + days-open from the careers feed, and (illustrative) retirement risk.",
-  "asOf": "2026-06-14",
+  "asOf": "2026-06-15",
   "kpis": [
-    { "label": "Employees", "value": "8,858", "sub": "year-end 2025", "flag": "C" },
-    { "label": "Open positions", "value": "60", "sub": "live · 29 strategic + 31 retail/bar", "flag": "C" },
-    { "label": "Group turnover", "value": "18.7%", "sub": "2025 (was 22.7%)", "flag": "C" },
-    { "label": "Retirement-risk roles", "value": "~310*", "sub": "illustrative — needs PeopleHub", "flag": "fab" }
+    {
+      "label": "Employees",
+      "value": "8,858",
+      "sub": "year-end 2025",
+      "flag": "C"
+    },
+    {
+      "label": "Open positions",
+      "value": "64",
+      "sub": "live · 28 strategic + 36 retail/bar",
+      "flag": "C"
+    },
+    {
+      "label": "Group turnover",
+      "value": "18.7%",
+      "sub": "2025 (was 22.7%)",
+      "flag": "C"
+    },
+    {
+      "label": "Retirement-risk roles",
+      "value": "~310*",
+      "sub": "illustrative — needs PeopleHub",
+      "flag": "fab"
+    }
   ],
   "markers": [
-    { "id": "hr-pt", "siteId": "sales-pt", "lat": 38.72, "lng": -9.24, "label": "Carnaxide / Lisbon", "employees": 71, "openPositions": 9, "oldestDaysOpen": 124, "retirementRisk": 10, "provenance": "public", "sourceRef": "careers", "detail": "The SDO / IT delivery hub — 9 open roles (SAP Data Engineer, ServiceNow, Analytics Lead, Senior Tax Analyst, Sourcing). The site STG is staffing up hardest, for the group ERP rollout." },
-    { "id": "hr-dr", "siteId": "fac-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "employees": 1626, "openPositions": 5, "oldestDaysOpen": 75, "retirementRisk": 95, "provenance": "public", "sourceRef": "AR2025 p96 + careers", "detail": "Largest site. 5 open roles — all SAP ERP-support consultants (San Pedro de Macorís support centre, FI/MM/PP/EWM). *Retirement-risk illustrative." },
-    { "id": "hr-us-beth", "siteId": "office-bethlehem", "lat": 40.63, "lng": -75.38, "label": "Bethlehem, PA", "employees": 500, "openPositions": 5, "oldestDaysOpen": 52, "retirementRisk": 30, "provenance": "public", "sourceRef": "careers", "detail": "Cigars International HQ. 5 open roles incl. IT Application Security, Senior Network Engineer, SEO + retail. Oldest ~52 days." },
-    { "id": "hr-lk", "siteId": "leaf-lk", "lat": 6.95, "lng": 79.96, "label": "Sri Lanka — Biyagama", "employees": 1264, "openPositions": 2, "oldestDaysOpen": 54, "retirementRisk": 40, "provenance": "public", "sourceRef": "AR2025 p96 + careers", "detail": "2 open roles (Foreman/Superintendent, Machinist - workshop operations)." },
-    { "id": "hr-dk", "siteId": "hq-gentofte", "lat": 55.756, "lng": 12.547, "label": "Copenhagen / Gentofte", "employees": 300, "openPositions": 2, "oldestDaysOpen": 32, "retirementRisk": 25, "provenance": "public", "sourceRef": "careers", "detail": "Group HQ. 2 student-assistant roles (Legal & Public Affairs, People & Culture)." },
-    { "id": "hr-us-rich", "siteId": "office-richmond", "lat": 37.54, "lng": -77.44, "label": "Richmond, VA", "employees": 200, "openPositions": 1, "oldestDaysOpen": 118, "retirementRisk": 45, "provenance": "public", "sourceRef": "careers", "detail": "Forged Cigars commercial office (Sutliff factory here closed Feb 2025). 1 open role (Director, Trade & Channel Marketing) — the oldest strategic vacancy at ~118 days." },
-    { "id": "hr-es", "siteId": "sales-es", "lat": 40.46, "lng": -3.69, "label": "Madrid", "employees": 62, "openPositions": 1, "oldestDaysOpen": 33, "retirementRisk": 15, "provenance": "public", "sourceRef": "careers", "detail": "1 open role (Business Analyst, Iberia)." },
-    { "id": "hr-de", "siteId": "sales-de", "lat": 53.083, "lng": 8.802, "label": "Bremen", "employees": 88, "openPositions": 1, "oldestDaysOpen": 27, "retirementRisk": 20, "provenance": "public", "sourceRef": "careers", "detail": "1 open role (Inventory Control Coordinator, Europe)." },
-    { "id": "hr-ni", "siteId": "fac-ni", "lat": 13.09, "lng": -86.35, "label": "Nicaragua — Estelí", "employees": 361, "openPositions": 1, "oldestDaysOpen": 2, "retirementRisk": 35, "provenance": "public", "sourceRef": "AR2025 + careers", "detail": "1 open role (Expedition Supervisor)." },
-    { "id": "hr-id", "siteId": "fac-id", "lat": -6.97, "lng": 110.42, "label": "Indonesia — Semarang", "employees": 1409, "openPositions": 1, "oldestDaysOpen": 2, "retirementRisk": 70, "provenance": "public", "sourceRef": "AR2025 p96 + careers", "detail": "1 open role (Head of Finance & Accounting, Pandaan)." },
-    { "id": "hr-be", "siteId": "fac-be", "lat": 50.99, "lng": 5.20, "label": "Belgium — Lummen/Westerlo", "employees": 763, "openPositions": 1, "oldestDaysOpen": 0, "retirementRisk": 55, "provenance": "public", "sourceRef": "AR2025 + careers", "detail": "Machine-rolled cigar workforce. 1 standing technician requisition (continuously reposted, so not counted as an ageing vacancy)." },
-    { "id": "hr-hn", "siteId": "fac-hn", "lat": 14.02, "lng": -86.58, "label": "Honduras — Danlí", "employees": 1382, "openPositions": 0, "oldestDaysOpen": 0, "retirementRisk": 60, "provenance": "public", "sourceRef": "AR2025 p96", "detail": "Handmade cigar workforce. No open roles in the latest crawl." }
+    {
+      "id": "hr-pt",
+      "siteId": "sales-pt",
+      "lat": 38.72,
+      "lng": -9.24,
+      "label": "Carnaxide / Lisbon",
+      "employees": 71,
+      "openPositions": 7,
+      "oldestDaysOpen": 125,
+      "retirementRisk": 10,
+      "provenance": "public",
+      "sourceRef": "careers",
+      "detail": "The SDO / IT + finance delivery hub — where STG is staffing up hardest for the OneProcess (SAP) transformation.",
+      "roles": [
+        {
+          "title": "Sourcing Specialist - Fleet & Travel",
+          "family": "Procurement",
+          "days": 125
+        },
+        {
+          "title": "Senior Tax Analyst",
+          "family": "Finance",
+          "days": 68
+        },
+        {
+          "title": "Junior Collections Officer",
+          "family": "Finance",
+          "days": 47
+        },
+        {
+          "title": "Reporting & Analytics Lead",
+          "family": "Finance",
+          "days": 38
+        },
+        {
+          "title": "Data Management Analyst",
+          "family": "Finance",
+          "days": 19
+        },
+        {
+          "title": "SAP ERP Support - Order-to-Cash (SAP SD Consultant)",
+          "family": "Corporate Affairs",
+          "days": 10
+        },
+        {
+          "title": "Senior SAP Data Engineer",
+          "family": "Digital & IT",
+          "days": 7
+        }
+      ]
+    },
+    {
+      "id": "hr-dr",
+      "siteId": "fac-dr",
+      "lat": 19.45,
+      "lng": -70.7,
+      "label": "Dominican Republic",
+      "employees": 1626,
+      "openPositions": 5,
+      "oldestDaysOpen": 76,
+      "retirementRisk": 95,
+      "provenance": "public",
+      "sourceRef": "AR2025 p96 + careers",
+      "detail": "Largest site. The open roles are the San Pedro de Macorís SAP ERP-support team — the transformation, staffed here. *Retirement-risk illustrative.",
+      "roles": [
+        {
+          "title": "SAP ERP Support - Plan-to-Deliver (SAP PP Consultant)",
+          "family": "Digital & IT",
+          "days": 76
+        },
+        {
+          "title": "SAP ERP Support - Plan-to-Deliver (SAP EWM/WM Consultant)",
+          "family": "Digital & IT",
+          "days": 76
+        },
+        {
+          "title": "SAP ERP Support - Record-to-Report (SAP FI Consultant)",
+          "family": "Digital & IT",
+          "days": 76
+        },
+        {
+          "title": "SAP ERP Support - Source-to-Pay (SAP MM Consultant)",
+          "family": "Digital & IT",
+          "days": 76
+        },
+        {
+          "title": "Analista de cuentas por pagar",
+          "family": "Finance",
+          "days": 27
+        }
+      ]
+    },
+    {
+      "id": "hr-us-beth",
+      "siteId": "office-bethlehem",
+      "lat": 40.63,
+      "lng": -75.38,
+      "label": "Bethlehem, PA",
+      "employees": 500,
+      "openPositions": 6,
+      "oldestDaysOpen": 53,
+      "retirementRisk": 30,
+      "provenance": "public",
+      "sourceRef": "careers",
+      "detail": "Cigars International HQ — a mix of IT, marketing and retail roles.",
+      "roles": [
+        {
+          "title": "IT Application Security Analyst",
+          "family": "Digital & IT",
+          "days": 53
+        },
+        {
+          "title": "Part-Time Retail Associate - Bethlehem, PA",
+          "family": "Sales",
+          "days": 53
+        },
+        {
+          "title": "SEO Associate",
+          "family": "Marketing",
+          "days": 53
+        },
+        {
+          "title": "Retail Sales Associate - Bethlehem, PA",
+          "family": "Sales",
+          "days": 11
+        },
+        {
+          "title": "Senior IT Support",
+          "family": "Digital & IT",
+          "days": 11
+        },
+        {
+          "title": "PIT Operator",
+          "family": "Supply Chain",
+          "days": 6
+        }
+      ]
+    },
+    {
+      "id": "hr-lk",
+      "siteId": "leaf-lk",
+      "lat": 6.95,
+      "lng": 79.96,
+      "label": "Sri Lanka — Biyagama",
+      "employees": 1264,
+      "openPositions": 2,
+      "oldestDaysOpen": 55,
+      "retirementRisk": 40,
+      "provenance": "public",
+      "sourceRef": "AR2025 p96 + careers",
+      "detail": "Wrapper/binder leaf site — workshop & production roles.",
+      "roles": [
+        {
+          "title": "Foreman / Superintendent - P & B",
+          "family": "Manufacturing",
+          "days": 55
+        },
+        {
+          "title": "Machinist - Workshop Operations",
+          "family": "Manufacturing",
+          "days": 14
+        }
+      ]
+    },
+    {
+      "id": "hr-dk",
+      "siteId": "hq-gentofte",
+      "lat": 55.756,
+      "lng": 12.547,
+      "label": "Copenhagen / Gentofte",
+      "employees": 300,
+      "openPositions": 1,
+      "oldestDaysOpen": 33,
+      "retirementRisk": 25,
+      "provenance": "public",
+      "sourceRef": "careers",
+      "detail": "Group HQ — corporate-function roles.",
+      "roles": [
+        {
+          "title": "Student Assistant - Legal & Public Affairs",
+          "family": "Quality, Legal & Compliance",
+          "days": 33
+        }
+      ]
+    },
+    {
+      "id": "hr-us-rich",
+      "siteId": "office-richmond",
+      "lat": 37.54,
+      "lng": -77.44,
+      "label": "Richmond, VA",
+      "employees": 200,
+      "openPositions": 2,
+      "oldestDaysOpen": 119,
+      "retirementRisk": 45,
+      "provenance": "public",
+      "sourceRef": "careers",
+      "detail": "Forged Cigars commercial office (the Sutliff factory at this site closed Feb 2025).",
+      "roles": [
+        {
+          "title": "Director Trade and Channel Marketing",
+          "family": "Marketing",
+          "days": 119
+        },
+        {
+          "title": "Account Representative - Forged Cigars (Illinois, NW Indiana)",
+          "family": "Sales",
+          "days": 10
+        }
+      ]
+    },
+    {
+      "id": "hr-es",
+      "siteId": "sales-es",
+      "lat": 40.46,
+      "lng": -3.69,
+      "label": "Madrid",
+      "employees": 62,
+      "openPositions": 1,
+      "oldestDaysOpen": 34,
+      "retirementRisk": 15,
+      "provenance": "public",
+      "sourceRef": "careers",
+      "detail": "Iberia commercial office.",
+      "roles": [
+        {
+          "title": "Business Analyst - Iberia",
+          "family": "Sales",
+          "days": 34
+        }
+      ]
+    },
+    {
+      "id": "hr-de",
+      "siteId": "sales-de",
+      "lat": 53.083,
+      "lng": 8.802,
+      "label": "Bremen",
+      "employees": 88,
+      "openPositions": 1,
+      "oldestDaysOpen": 28,
+      "retirementRisk": 20,
+      "provenance": "public",
+      "sourceRef": "careers",
+      "detail": "European inventory / logistics coordination.",
+      "roles": [
+        {
+          "title": "Inventory Control Coordinator Europe",
+          "family": "Supply Chain",
+          "days": 28
+        }
+      ]
+    },
+    {
+      "id": "hr-ni",
+      "siteId": "fac-ni",
+      "lat": 13.09,
+      "lng": -86.35,
+      "label": "Nicaragua — Estelí",
+      "employees": 361,
+      "openPositions": 1,
+      "oldestDaysOpen": 3,
+      "retirementRisk": 35,
+      "provenance": "public",
+      "sourceRef": "AR2025 + careers",
+      "detail": "Handmade cigar workforce (Estelí).",
+      "roles": [
+        {
+          "title": "Expedition Supervisor",
+          "family": "Supply Chain",
+          "days": 3
+        }
+      ]
+    },
+    {
+      "id": "hr-id",
+      "siteId": "fac-id",
+      "lat": -6.97,
+      "lng": 110.42,
+      "label": "Indonesia — Semarang",
+      "employees": 1409,
+      "openPositions": 1,
+      "oldestDaysOpen": 3,
+      "retirementRisk": 70,
+      "provenance": "public",
+      "sourceRef": "AR2025 p96 + careers",
+      "detail": "Machine-rolled cigars + leaf — a senior finance hire.",
+      "roles": [
+        {
+          "title": "Head of Finance and Accounting",
+          "family": "Finance",
+          "days": 3
+        }
+      ]
+    },
+    {
+      "id": "hr-be",
+      "siteId": "fac-be",
+      "lat": 50.99,
+      "lng": 5.2,
+      "label": "Belgium — Lummen/Westerlo",
+      "employees": 763,
+      "openPositions": 1,
+      "oldestDaysOpen": 0,
+      "retirementRisk": 55,
+      "provenance": "public",
+      "sourceRef": "AR2025 + careers",
+      "detail": "Machine-rolled cigar workforce — a continuously-reposted technician role.",
+      "roles": [
+        {
+          "title": "Technieker",
+          "days": 1183,
+          "standing": true
+        }
+      ]
+    },
+    {
+      "id": "hr-hn",
+      "siteId": "fac-hn",
+      "lat": 14.02,
+      "lng": -86.58,
+      "label": "Honduras — Danlí",
+      "employees": 1382,
+      "openPositions": 0,
+      "oldestDaysOpen": 0,
+      "retirementRisk": 60,
+      "provenance": "public",
+      "sourceRef": "AR2025 p96",
+      "detail": "Handmade cigar workforce. No open roles in the latest crawl.",
+      "roles": []
+    }
   ],
   "agentNote": "Open-positions + days-open come from STG's public SuccessFactors careers feed (careers.st-group.com). Strategic sites are mapped to markers; US retail / cigar-bar roles are counted in the total but bucketed (not the strategy). Evergreen 'talent pool' posts are excluded. Real one-time pull 2026-06-14; a scheduled refresh first-seen-stamps each role to derive days-open. Retirement-risk is illustrative (needs PeopleHub)."
 }

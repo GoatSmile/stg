@@ -124,11 +124,12 @@ track (reference only).
   and `/api/feeds/freight` (FRED Brent crude → Supply, needs `FRED_API_KEY`) read live with
   offline-safe cached fallbacks; other lens `asOf`/marker values
   remain hardcoded snapshots in `src/data/`.
-  The careers feed now holds **real data** — a one-time, owner-authorised pull (2026-06-14)
-  of STG's SuccessFactors RMK API (`/services/recruiting/v1/jobs`) found **60 real open
-  vacancies** (3 evergreen "talent pool" posts excluded), 29 at strategic sites + 31 US
-  retail/bars; the illustrative `49` seed is gone (Supabase + `careers.json` + HR markers
-  rewritten). `scripts/crawl-careers.ts` parses the real payload but stays **manual-only**:
+  The careers feed now holds **real data** — an owner-authorised pull of STG's SuccessFactors
+  RMK API (`/services/recruiting/v1/jobs`), refreshed **2026-06-15** to **64 real open
+  vacancies** (evergreen "talent pool" posts excluded), 28 at strategic sites + 36 US
+  retail/bars; the illustrative `49` seed is gone. Each HR site's detail card now **lists its
+  actual open roles** — title + real department + days-open (e.g. DR's five are all SAP ERP
+  consultants), carried as a `roles[]` array on the HR markers (`src/data/layers/hr.json`). `scripts/crawl-careers.ts` parses the real payload but stays **manual-only**:
   the rich API is robots-disallowed, so per owner decision it is **not** wired to a daily
   job against `/services/` ("automate some other way" later) — see
   `docs/careers-scrape-decision.md` (now RESOLVED). Freight / commodity-prices etc. are
@@ -311,6 +312,16 @@ repeated to the client: owner decides, always.
   footer + a new "About this prototype" block on `/transparency`. The 3-min demo-script was also
   refreshed for the finished app (`docs/demo-script.md`, now with a shot list). `tsc` clean +
   `next build` green; verified in-browser (home, gate cover, OG image, ESG deep-link), no console errors.
+- **HR site role lists shipped — (2026-06-15).** Clicking an HR site now lists its **actual open
+  roles** in the detail card (stacked, not a comma string): each = title + real department +
+  days-open (e.g. DR's five all "SAP ERP Support… · Digital & IT · open 76 days" — the OneProcess
+  hiring, visible). Carried as a `roles[]` array on the HR markers (added to the `Marker` type in
+  `src/lib/lenses.ts`, rendered in `PulseDashboard`). No fabricated descriptions — only the real
+  title/family/age from the pull (honesty spine). To keep counts == list length, re-pulled the
+  careers data (one-time, authorised) and refreshed the snapshot to **2026-06-15 / 64 open** across
+  `hr.json` + `careers.json` + the Supabase row (06-14 row replaced; velocity stays "accruing").
+  `tsc` clean + `next build` green; verified in-browser (DR card lists 5 SAP roles), `/api/feeds/
+  careers` live:true 64, no console errors.
 - **Next (video deferred per owner):** the platform is complete + polished (7 lenses, 5 live
   feeds) and now **self-explains for a cold forwarded reader**. **To send:** record the video
   (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD` in Vercel env + redeploy

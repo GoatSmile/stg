@@ -27,6 +27,8 @@ export type Marker = {
   // lens-specific extras
   siteId?: string; employees?: number; openPositions?: number;
   oldestDaysOpen?: number; retirementRisk?: number; impact?: boolean; radar?: boolean;
+  // HR lens: the actual open roles at a site (title + real department + days open).
+  roles?: { title: string; family?: string; days?: number; standing?: boolean }[];
 };
 
 export type Regime = { country: string; status: "banned" | "restricted" | "open" };

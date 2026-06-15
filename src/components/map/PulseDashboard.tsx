@@ -96,6 +96,28 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
               </div>
             )}
             {selected.detail && <p className="text-sm leading-relaxed">{selected.detail}</p>}
+            {selected.roles && selected.roles.length > 0 && (
+              <div className="mt-1 flex flex-col gap-1.5">
+                <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Open roles ({selected.roles.length})
+                </div>
+                <ul className="flex max-h-60 flex-col gap-1.5 overflow-auto pr-1">
+                  {selected.roles.map((r, i) => (
+                    <li key={i} className="rounded-md bg-secondary/60 px-2.5 py-1.5">
+                      <div className="text-sm font-medium leading-snug">{r.title}</div>
+                      <div className="text-[11px] text-muted-foreground">
+                        {r.family ?? "—"}
+                        {r.standing
+                          ? " · standing req"
+                          : r.days != null
+                            ? ` · open ${r.days} ${r.days === 1 ? "day" : "days"}`
+                            : ""}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
               {selected.sourceRef && <span>source: {selected.sourceRef}</span>}
               {selected.asOf && <span>as of {selected.asOf}</span>}
