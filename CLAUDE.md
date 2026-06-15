@@ -25,8 +25,9 @@ track (reference only).
 - Deploy: Vercel, push-to-`main` → prod at `https://stg-azure.vercel.app`. A **password
   gate is built** — env-driven: set `SITE_PASSWORD` and `src/middleware.ts` redirects
   unauthenticated visitors to a styled `/gate` page (shared password, forwardable; cookie
-  validated by a SHA-256 of the password). It's **off when `SITE_PASSWORD` is unset** (so
-  local dev / any env without it stays open). **Prod is still public until you set
+  validated by a SHA-256 of the password). `/opengraph-image` is allow-listed through the
+  gate so forwarded-link previews still render while the app itself stays locked. It's **off
+  when `SITE_PASSWORD` is unset** (so local dev / any env without it stays open). **Prod is still public until you set
   `SITE_PASSWORD` in Vercel env + redeploy** — do that before the link goes out. (Vercel's
   own Password Protection is the zero-code alternative but needs Pro; this in-app gate is
   free + in our control.)
