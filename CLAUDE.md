@@ -351,18 +351,23 @@ repeated to the client: owner decides, always.
   - **`/jobs.xml` is robots-allowed → resolves the "automate some other way" question** in
     `docs/careers-scrape-decision.md`: the description/link refresh *can* be automated (the feed is
     permitted), unlike the `/services/` search pull which stays manual.
-  - **DB roles column not yet populated:** the local `SUPABASE_SERVICE_ROLE_KEY` is the old
-    rotated/revoked one, so `enrich-roles.ts` wrote `hr.json` but skipped the DB. To persist the
-    descriptions to `varsel_careers_snapshots.roles`, run it where the live service key lives:
-    `SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… node --experimental-strip-types scripts/enrich-roles.ts`.
-    (The descriptions are already durably stored + versioned in `hr.json`.)
+  - **DB roles column now populated — (2026-06-15).** The 28 enriched roles (full descriptions +
+    apply URLs) were written straight into `varsel_careers_snapshots.roles` (row `as_of=2026-06-15`,
+    id 4) **via the Supabase MCP** — no service key needed (the local `SUPABASE_SERVICE_ROLE_KEY` is
+    still the rotated placeholder; the MCP is server-side with its own connectivity, which is exactly
+    why it's the right tool here — the sandbox has no network so `enrich-roles.ts` can't reach
+    Supabase locally anyway). Reset the column to `[]`, appended the roles in 4 chunks, then
+    **verified byte-identical to `hr.json`**: an aggregate md5 over every role's description (md5 +
+    char/byte length), title, family, days, siteId and applyUrl matches on both sides
+    (`21cb2443ef3f342928b4c430d867643b`, 28/28). `enrich-roles.ts`'s own REST write-path stays the
+    route for future automated refreshes (it just needs the live key in the env where it runs).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
   **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`
   in Vercel env + redeploy (gate built, not yet active in prod); fill `[wife]` + `[video link]` in
-  `docs/outreach.md`. Optional: run `enrich-roles.ts` with the live key to populate the DB roles
-  column; a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane freight rate (paid
-  Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
+  `docs/outreach.md`. Optional: a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane
+  freight rate (paid Freightos FBX). (DB roles column is now populated — see above.) Open decisions
+  in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
