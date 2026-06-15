@@ -12,6 +12,18 @@
   **manual-only**; it must NOT be wired to a cron/Action against `/services/`. A future
   refresh, if wanted, uses a robots-allowed source or an arrangement with STG.
 
+**Update 2026-06-15 — the "some other way" is `/jobs.xml`.** Beyond the sitemap (found
+below, but it lacks dates + descriptions), STG also publishes **`/jobs.xml`** — its
+Google-Jobs/Indeed RSS syndication feed. `robots.txt` does **not** disallow it (only
+`/services/`, `/apply*`, `/talentcommunity` etc.), and it carries the **full job
+description**, canonical apply link, location and a stable `g:id` per posting — i.e. the
+one thing the sitemap and the disallowed search API each couldn't give cleanly. So:
+`scripts/enrich-roles.ts` reads `/jobs.xml` to attach real descriptions + apply links to
+the HR-lens roles (the role-click popup), and **because the feed is robots-allowed it is a
+legitimate candidate to automate** (unlike the `/services/` search pull). Counts +
+department + days-open still come from the manual `/services/` pull (the feed lacks job
+family + a start date).
+
 **Shipped from this pull:** 60 real vacancies (3 evergreen "talent pool" posts excluded;
 a >365-day standing req excluded from "oldest vacancy") — 29 at strategic sites, 31 US
 retail/bars. `src/data/feeds/careers.json` + the Supabase row + the HR lens markers/KPIs

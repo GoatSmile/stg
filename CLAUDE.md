@@ -130,10 +130,14 @@ track (reference only).
   vacancies** (evergreen "talent pool" posts excluded), 28 at strategic sites + 36 US
   retail/bars; the illustrative `49` seed is gone. Each HR site's detail card now **lists its
   actual open roles** — title + real department + days-open (e.g. DR's five are all SAP ERP
-  consultants), carried as a `roles[]` array on the HR markers (`src/data/layers/hr.json`). `scripts/crawl-careers.ts` parses the real payload but stays **manual-only**:
-  the rich API is robots-disallowed, so per owner decision it is **not** wired to a daily
-  job against `/services/` ("automate some other way" later) — see
-  `docs/careers-scrape-decision.md` (now RESOLVED). Freight / commodity-prices etc. are
+  consultants), carried as a `roles[]` array on the HR markers (`src/data/layers/hr.json`).
+  **Clicking a role opens a popup with its full real job description** + a "View full posting"
+  link, sourced by `scripts/enrich-roles.ts` from STG's **`/jobs.xml`** syndication feed — which
+  robots.txt **ALLOWS** (only `/services/` is disallowed), so it carries the description honestly
+  and *is* the "automate some other way" candidate. `scripts/crawl-careers.ts` (the `/services/`
+  search pull, for counts + department + days-open) stays **manual-only** — the rich API is
+  robots-disallowed, so per owner decision it is **not** wired to a daily job against `/services/`
+  — see `docs/careers-scrape-decision.md` (now RESOLVED). Freight / commodity-prices etc. are
   designed, not yet wired.
 - **Illustrative data is asterisked, not hidden.** Figures STG doesn't publish
   (per-site turnover, retirement-risk, derived DKK bands) are fabricated-plausible
@@ -323,13 +327,40 @@ repeated to the client: owner decides, always.
   `hr.json` + `careers.json` + the Supabase row (06-14 row replaced; velocity stays "accruing").
   `tsc` clean + `next build` green; verified in-browser (DR card lists 5 SAP roles), `/api/feeds/
   careers` live:true 64, no console errors.
-- **Next (video deferred per owner):** the platform is complete + polished (7 lenses, 5 live
-  feeds) and now **self-explains for a cold forwarded reader**. **To send:** record the video
-  (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD` in Vercel env + redeploy
-  (the gate is built, not yet activated in prod); add the phone to `src/lib/contact.ts`; fill the
-  email placeholders in `docs/outreach.md`. Remaining optional: a leaf-price (FRED/USDA) overlay
-  on Procurement; a real per-lane freight rate (paid Freightos FBX). Open decisions in
-  `docs/ceo-play.md` §8.
+- **Map camera + role-description popups + contact, OG-gate fix — `706351e..7fdc104` (2026-06-15).**
+  A four-part pass: (1) **OG-through-gate fix committed** (`706351e`) — `/opengraph-image` is in the
+  gate's `ALWAYS_ALLOW`, so a gated prod still previews the share card (the in-flight change the
+  prior session left uncommitted). (2) **Contact** (`f75f130`) — email → `nazar@valent.dk`
+  everywhere (the gate page now reads `CONTACT` instead of hardcoding), phone `+45 50 36 71 11` set
+  in `src/lib/contact.ts` (now shows in footer + gate + About), outreach placeholders filled
+  (`[name]`/site/phone; `[wife]` + `[video link]` left for owner). (3) **Map camera** (`bf4d878`) —
+  a **World · Americas · Europe** preset control + **click-to-zoom** (marker click flies in ~2.3×
+  then settles back), both via a CSS-transitioned transform on one wrapper `<g>` (projection stays
+  static → SSR-safe); region extents fit each region's points at module load. APAC leaf shows only
+  in World. (4) **HR role popups** (`7fdc104`) — clicking an open role opens a dialog with the
+  **real full job description** + a "View full posting" link to the live STG page. Source is the
+  honest find: `/services/` (search API) is robots-DISALLOWED + has no description, but
+  **`/jobs.xml`** (STG's Google-Jobs/Indeed syndication feed) is robots-**ALLOWED** and carries the
+  full description + canonical link + g:id. `scripts/enrich-roles.ts` reads that feed and attaches
+  `description`/`applyUrl` to each `hr.json` role (28/28 matched by title+location), and mirrors them
+  into `varsel_careers_snapshots.roles` when run with the service key. New `dialog.tsx` (radix-ui
+  umbrella). `tsc` clean + `next build` green; verified in-browser (3 region cameras, click-zoom,
+  DR SAP role → real S/4HANA description popup), no console/a11y warnings.
+  - **`/jobs.xml` is robots-allowed → resolves the "automate some other way" question** in
+    `docs/careers-scrape-decision.md`: the description/link refresh *can* be automated (the feed is
+    permitted), unlike the `/services/` search pull which stays manual.
+  - **DB roles column not yet populated:** the local `SUPABASE_SERVICE_ROLE_KEY` is the old
+    rotated/revoked one, so `enrich-roles.ts` wrote `hr.json` but skipped the DB. To persist the
+    descriptions to `varsel_careers_snapshots.roles`, run it where the live service key lives:
+    `SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… node --experimental-strip-types scripts/enrich-roles.ts`.
+    (The descriptions are already durably stored + versioned in `hr.json`.)
+- **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
+  self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
+  **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`
+  in Vercel env + redeploy (gate built, not yet active in prod); fill `[wife]` + `[video link]` in
+  `docs/outreach.md`. Optional: run `enrich-roles.ts` with the live key to populate the DB roles
+  column; a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane freight rate (paid
+  Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
