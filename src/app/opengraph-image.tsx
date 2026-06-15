@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Varsel — what a regulation is worth to STG, in DKK, on its own footprint";
+export const alt = "Varsel for STG — what a regulation is worth, in DKK, on its own footprint";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -23,7 +23,7 @@ export default function OpengraphImage() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
           <div style={{ width: "12px", height: "60px", background: "#950b31", borderRadius: "6px" }} />
-          <div style={{ fontSize: "60px", fontWeight: 700, letterSpacing: "-0.01em" }}>Varsel</div>
+          <div style={{ fontSize: "60px", fontWeight: 700, letterSpacing: "-0.01em" }}>Varsel for STG</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>

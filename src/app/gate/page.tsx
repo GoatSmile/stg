@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { CONTACT } from "@/lib/contact";
 
-export const metadata = { title: "Varsel — private preview" };
+export const metadata = { title: "Varsel for STG — private preview" };
 
 export default async function Gate({
   searchParams,
@@ -20,7 +20,7 @@ export default async function Gate({
       <div className="w-full max-w-md rounded-xl border border-border bg-card p-6">
         <div className="mb-3 flex items-center gap-2.5">
           <span aria-hidden className="h-5 w-[3px] rounded-full bg-primary" />
-          <span className="font-heading text-xl font-medium tracking-tight">Varsel</span>
+          <span className="font-heading text-xl font-medium tracking-tight">Varsel for STG</span>
         </div>
 
         <p className="text-sm leading-relaxed">

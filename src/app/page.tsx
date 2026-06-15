@@ -15,7 +15,7 @@ export default async function Home({
           What a regulation is worth to STG — in kroner, on its own footprint
         </h1>
         <p className="max-w-3xl text-muted-foreground">
-          Varsel turns a live tobacco or nicotine regulation into a DKK EBITDA impact band on
+          Varsel for STG turns a live tobacco or nicotine regulation into a DKK EBITDA impact band on
           Scandinavian Tobacco Group&apos;s published footprint — built only on public data, framed
           strictly as internal scenario prep. One map, seven departments; click a threat to open the
           worked example and watch the band move on your own assumptions.

@@ -12,14 +12,14 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://stg-azure.vercel.app"),
-  title: "Varsel — what a regulation is worth to STG",
+  title: "Varsel for STG — what a regulation is worth, in DKK",
   description:
     "A regulation→P&L early-warning room for Scandinavian Tobacco Group: turns a live tobacco/nicotine regulation into a DKK impact band on STG's own published footprint. Built on public data only; internal scenario-prep, not investor-facing.",
   openGraph: {
-    title: "Varsel — what a regulation is worth to STG",
+    title: "Varsel for STG — what a regulation is worth, in DKK",
     description:
       "Turns a live tobacco/nicotine regulation into a DKK impact band on STG's published footprint. Built on public data only.",
-    siteName: "Varsel",
+    siteName: "Varsel for STG",
     type: "website",
   },
   twitter: { card: "summary_large_image" },
@@ -49,8 +49,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
               <Link href="/" className="flex items-center gap-2.5">
                 <span aria-hidden className="h-5 w-[3px] rounded-full bg-primary" />
-                <span className="font-heading text-xl font-medium tracking-tight">Varsel</span>
-                <span className="text-xs text-muted-foreground">STG operations pulse</span>
+                <span className="font-heading text-xl font-medium tracking-tight">Varsel for STG</span>
+                <span className="text-xs text-muted-foreground">operations pulse</span>
               </Link>
               <div className="flex items-center gap-1">
                 <nav className="flex gap-1 text-sm">
@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
 
           <footer className="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground">
-            Varsel — a prototype by {CONTACT.name} / valent.dk ·{" "}
+            Varsel for STG — a prototype by {CONTACT.name} / valent.dk ·{" "}
             <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2">
               {CONTACT.email}
             </a>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ImpactRoom } from "@/components/impact/ImpactRoom";
 import { getScenario, isModeled, unmodeled, scenariosAsOf } from "@/lib/impact-data";
 
-export const metadata = { title: "Impact Room — Varsel" };
+export const metadata = { title: "Impact Room — Varsel for STG" };
 
 export default async function Impact({
   searchParams,

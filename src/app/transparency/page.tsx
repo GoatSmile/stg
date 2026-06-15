@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
 
-export const metadata = { title: "Transparency — Varsel" };
+export const metadata = { title: "Transparency — Varsel for STG" };
 
 function Dot({ color }: { color: string }) {
   return <span className="mr-2 inline-block size-2.5 rounded-full align-middle" style={{ background: color }} />;
@@ -13,7 +13,7 @@ export default function Transparency() {
       <div>
         <h1 className="font-heading text-3xl font-medium tracking-tight">What&apos;s real, what&apos;s not</h1>
         <p className="mt-2 text-muted-foreground">
-          Varsel is a prototype. Its whole credibility rests on being honest about where every
+          Varsel for STG is a prototype. Its whole credibility rests on being honest about where every
           number comes from. So here it is, in full. Nothing on this site is STG internal data —
           it is built from STG&apos;s published disclosures and public regulatory texts, plus
           clearly-marked illustrative figures.
@@ -23,7 +23,7 @@ export default function Transparency() {
       <section className="flex flex-col gap-2">
         <h2 className="font-heading text-xl font-medium tracking-tight">About this prototype</h2>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Varsel is a working prototype — a regulation→P&amp;L early-warning room that turns a live
+          Varsel for STG is a working prototype — a regulation→P&amp;L early-warning room that turns a live
           tobacco or nicotine regulation into a DKK impact band on STG&apos;s published footprint.
           One map, seven department lenses, five live public-data feeds. It was built by{" "}
           {CONTACT.name} ({CONTACT.org}) as an independent demonstration: it shows the <em>shape</em>{" "}
@@ -82,7 +82,7 @@ export default function Transparency() {
           <li>
             The visual language (warm palette + serif) is informed by STG&apos;s own public brand,
             as a courtesy — we deliberately do <em>not</em> use STG&apos;s logo or lion mark, and
-            Varsel is not affiliated with or endorsed by STG.
+            Varsel for STG is not affiliated with or endorsed by STG.
           </li>
           <li>
             Data current as of 14 June 2026. The full fact base lives in the project&apos;s

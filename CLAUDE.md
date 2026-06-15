@@ -2,7 +2,9 @@
 
 Pitch prototype targeting Scandinavian Tobacco Group (STG) — built by
 Jensen Production / valent.dk as a consulting calling card. **Varsel** (Danish:
-a warning / advance notice / forecast) is a regulation→P&L early-warning room:
+a warning / advance notice / forecast; **the display name shown in-app is "Varsel
+for STG"** as of 2026-06-15 — "Varsel" stays the internal codename in docs / code
+comments / crawler UA strings) is a regulation→P&L early-warning room:
 it turns a live tobacco/nicotine regulatory event into a DKK EBITDA/volume/margin
 band on STG's own footprint (a scenario range, not a point estimate). First recipient is
 **Yulia Lyusina, SVP Strategy, Transformation & Sustainability** (warm intro via
@@ -361,6 +363,17 @@ repeated to the client: owner decides, always.
     char/byte length), title, family, days, siteId and applyUrl matches on both sides
     (`21cb2443ef3f342928b4c430d867643b`, 28/28). `enrich-roles.ts`'s own REST write-path stays the
     route for future automated refreshes (it just needs the live key in the env where it runs).
+- **App renamed to "Varsel for STG" — (2026-06-15).** The user-facing **display name** is now
+  "Varsel for STG" everywhere it's shown to the recipient: header wordmark (subtitle trimmed
+  "STG operations pulse" → "operations pulse" to avoid double-STG), browser/OG `<title>` ("Varsel
+  for STG — what a regulation is worth, in DKK" — dropped the now-redundant "to STG" tagline),
+  `siteName`, the OG share image wordmark + `alt`, the `/gate` cover + title, the home hero, the
+  footer, and the four route titles (Pulse/Impact/Radar/Transparency). `/transparency` keeps "Varsel
+  for STG is not affiliated with or endorsed by STG" (the repetition is deliberate). **Internal
+  "Varsel" codename kept** in code comments (`globals.css`), the `varsel-theme` localStorage key, and
+  the crawler UA tokens (`VarselResearch/1.0` etc.) — not buyer-facing. `tsc` clean + `next build`
+  green (16 routes, OG image compiles with the longer wordmark); verified in-browser (header/title/
+  hero/footer, no console errors).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
   **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`

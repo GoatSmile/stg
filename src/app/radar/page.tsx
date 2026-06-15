@@ -10,7 +10,7 @@ import {
 } from "@/lib/radar";
 import { CitationChip } from "@/components/impact/CitationChip";
 
-export const metadata = { title: "Pouch Radar — Varsel" };
+export const metadata = { title: "Pouch Radar — Varsel for STG" };
 
 const KPIS = [
   { label: "XQS share, Sweden", value: "13.6%", sub: "from 7.8% (2024) · #2" },
