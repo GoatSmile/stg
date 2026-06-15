@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT } from "@/lib/contact";
 
 export const metadata = { title: "Transparency — Varsel" };
 
@@ -18,6 +19,24 @@ export default function Transparency() {
           clearly-marked illustrative figures.
         </p>
       </div>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="font-heading text-xl font-medium tracking-tight">About this prototype</h2>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Varsel is a working prototype — a regulation→P&amp;L early-warning room that turns a live
+          tobacco or nicotine regulation into a DKK impact band on STG&apos;s published footprint.
+          One map, seven department lenses, five live public-data feeds. It was built by{" "}
+          {CONTACT.name} ({CONTACT.org}) as an independent demonstration: it shows the <em>shape</em>{" "}
+          of the impact on public data, so the &quot;plug in your real numbers&quot; story can be
+          judged before any data agreement. It is <strong>not</strong> investor-facing material, not
+          affiliated with or endorsed by STG, and holds no STG internal data.
+        </p>
+        <p className="text-sm leading-relaxed">
+          Questions, or want it run on STG&apos;s actual figures? Email{" "}
+          <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2">{CONTACT.email}</a>
+          {CONTACT.phone ? ` or call ${CONTACT.phone}` : ""}.
+        </p>
+      </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-heading text-xl font-medium tracking-tight">The three flags you&apos;ll see</h2>

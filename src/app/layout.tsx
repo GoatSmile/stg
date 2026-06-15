@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CONTACT } from "@/lib/contact";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -10,9 +11,18 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Varsel — STG operations pulse",
+  metadataBase: new URL("https://stg-azure.vercel.app"),
+  title: "Varsel — what a regulation is worth to STG",
   description:
-    "A department-switchable map of Scandinavian Tobacco Group's footprint. Built on public data; some figures are illustrative.",
+    "A regulation→P&L early-warning room for Scandinavian Tobacco Group: turns a live tobacco/nicotine regulation into a DKK impact band on STG's own published footprint. Built on public data only; internal scenario-prep, not investor-facing.",
+  openGraph: {
+    title: "Varsel — what a regulation is worth to STG",
+    description:
+      "Turns a live tobacco/nicotine regulation into a DKK impact band on STG's published footprint. Built on public data only.",
+    siteName: "Varsel",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 const nav = [
@@ -68,8 +78,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
 
           <footer className="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground">
-            Varsel — a prototype by Nazar Taras / valent.dk. Internal scenario-prep, not
-            investor-facing. Public data only; illustrative figures marked *.
+            Varsel — a prototype by {CONTACT.name} / valent.dk ·{" "}
+            <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2">
+              {CONTACT.email}
+            </a>
+            {CONTACT.phone ? ` · ${CONTACT.phone}` : ""}. Internal scenario-prep, not
+            investor-facing; public data only, illustrative figures marked *.
           </footer>
         </div>
       </body>

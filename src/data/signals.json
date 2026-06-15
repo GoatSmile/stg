@@ -1,0 +1,39 @@
+{
+  "_note": "Curated 'on the radar' signals for the home page — real, dated, public-sourced events, hand-maintained like the regulatory corpus. NOT a live news scrape (deliberately — keeps the credibility spine: every line is sourced + dated). Refresh by editing this file. Keep it to 3, spanning a threat, a growth signal and an operational one.",
+  "asOf": "2026-06-14",
+  "signals": [
+    {
+      "id": "eu-etd",
+      "tag": "regulatory",
+      "title": "EU tobacco-tax revision reaches the cigar & pipe core",
+      "status": "proposed · in Council",
+      "date": "2025-07-16",
+      "source": "COM(2025) 580",
+      "why": "Would raise excise minimums on cigars, cigarillos and pipe from 2028. STG's combustible core is ~50% of group net sales — this is the one to put a kroner number on.",
+      "href": "/impact?event=eu-etd",
+      "cta": "See what it's worth"
+    },
+    {
+      "id": "xqs-growth",
+      "tag": "growth",
+      "title": "XQS keeps taking pouch share from Zyn and Velo",
+      "status": "Q1 2026",
+      "date": "2026-05-20",
+      "source": "STG Q1 2026 report",
+      "why": "XQS reached 13.6% share in Sweden (from 7.8% in 2024) — STG's clearest growth leg, in a category now squarely under regulatory pressure.",
+      "href": "/radar",
+      "cta": "Open Pouch Radar"
+    },
+    {
+      "id": "id-water",
+      "tag": "operations",
+      "title": "STG's Central Java leaf sits in 'extremely high' water stress",
+      "status": "WRI baseline",
+      "date": "2026-06-14",
+      "source": "WRI Aqueduct 4.0",
+      "why": "The Semarang leaf region rates Extremely High baseline water stress (>80% of supply withdrawn) — a quiet sourcing risk on the handmade supply chain, on top of live ENSO climate swings.",
+      "href": "/?lens=sustainability#map",
+      "cta": "Open the ESG lens"
+    }
+  ]
+}

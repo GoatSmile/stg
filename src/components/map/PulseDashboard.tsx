@@ -17,8 +17,10 @@ import {
 } from "@/lib/lenses";
 import { cn } from "@/lib/utils";
 
-export function PulseDashboard() {
-  const [activeId, setActiveId] = useState(defaultLensId);
+export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {}) {
+  const [activeId, setActiveId] = useState(() =>
+    lenses.some((l) => l.id === initialLensId) ? (initialLensId as string) : defaultLensId,
+  );
   const [selected, setSelected] = useState<Marker | null>(null);
   const lens = getLens(activeId);
 

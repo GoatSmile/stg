@@ -16,15 +16,22 @@ export default async function Gate({
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-4">
-      <div className="w-full max-w-sm rounded-xl border border-border bg-card p-6">
-        <div className="mb-1 flex items-center gap-2.5">
+      <div className="w-full max-w-md rounded-xl border border-border bg-card p-6">
+        <div className="mb-3 flex items-center gap-2.5">
           <span aria-hidden className="h-5 w-[3px] rounded-full bg-primary" />
           <span className="font-heading text-xl font-medium tracking-tight">Varsel</span>
         </div>
-        <p className="mb-4 text-sm text-muted-foreground">
-          This preview is private. Enter the password from your invitation to continue.
+
+        <p className="text-sm leading-relaxed">
+          A regulation→P&amp;L early-warning room for Scandinavian Tobacco Group. It turns a live
+          tobacco or nicotine regulation into a DKK impact band on STG&apos;s own published
+          footprint — built on public data only.
         </p>
-        <form action="/api/gate" method="POST" className="flex flex-col gap-3">
+        <p className="mt-3 text-sm text-muted-foreground">
+          This is a private preview. Enter the password from your invitation to continue.
+        </p>
+
+        <form action="/api/gate" method="POST" className="mt-4 flex flex-col gap-3">
           <input type="hidden" name="from" value={from} />
           <input
             type="password"
@@ -43,9 +50,10 @@ export default async function Gate({
             Enter
           </button>
         </form>
-        <p className="mt-4 text-[11px] leading-snug text-muted-foreground">
-          Varsel — a prototype by Nazar Taras / valent.dk. Built on public data; internal
-          scenario-prep, not investor-facing.
+
+        <p className="mt-4 border-t border-border pt-3 text-[11px] leading-snug text-muted-foreground">
+          A prototype by Nazar Taras / valent.dk — internal scenario-prep, not investor-facing.
+          Questions? <a href="mailto:nt@valent.dk" className="underline underline-offset-2">nt@valent.dk</a>.
         </p>
       </div>
     </div>

@@ -297,13 +297,27 @@ repeated to the client: owner decides, always.
   cached fallback (`src/data/feeds/freight.json`), `FreightStrip` via `lens.feed === "freight"`.
   Verified live end-to-end (`live:true`, Brent $97.46, −12.9% easing). `FRED_API_KEY` is in
   `.env.local` + Vercel. All seven lenses now carry real data; five lenses have live feeds.
-- **Next (video deferred per owner):** the seven-lens platform is complete + polished, with
-  five live feeds. **To gate prod: set `SITE_PASSWORD` in Vercel env + redeploy** (any value
-  you'll share with Yulia) — the gate is built, just not activated in prod. Remaining optional:
-  a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane freight rate (paid Freightos
-  FBX). (WRI Aqueduct water-stress on ESG is now done.) The ~3-min video + forwardable link (GTM in
-  `docs/outreach.md` + `docs/demo-script.md`; open decisions in `docs/ceo-play.md` §8) is
-  parked, not dropped.
+- **Cold-reader orientation layer shipped — (2026-06-14).** Reworked the forwarded-link
+  experience for a recipient with zero context: (1) **signals-led home** — `/` now opens with a
+  value-prop hero + an **"On the radar"** section of 3 curated/dated/sourced signal cards
+  (`src/data/signals.json` → `RadarSignals.tsx`: EU-ETD → Impact Room, XQS growth → Radar,
+  Indonesia water-stress → ESG) that route into the app, then the map below. (2) **Lens
+  deep-link** — `/?lens=<id>` selects a lens (PulseDashboard `initialLensId`), so the ESG signal
+  lands on the ESG lens. (3) **Gate cover** — `/gate` now explains what Varsel is + who made it +
+  contact, before the password. (4) **Link-preview polish** — custom favicon (`app/icon.svg`,
+  claret tile + serif V), a generated OG share image (`app/opengraph-image.tsx`, parchment/claret,
+  verified 62KB PNG), richer share `metadata`. (5) **Contact + about** — `src/lib/contact.ts`
+  (email nt@valent.dk; **phone is blank — set it there to surface site-wide**), wired into the
+  footer + a new "About this prototype" block on `/transparency`. The 3-min demo-script was also
+  refreshed for the finished app (`docs/demo-script.md`, now with a shot list). `tsc` clean +
+  `next build` green; verified in-browser (home, gate cover, OG image, ESG deep-link), no console errors.
+- **Next (video deferred per owner):** the platform is complete + polished (7 lenses, 5 live
+  feeds) and now **self-explains for a cold forwarded reader**. **To send:** record the video
+  (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD` in Vercel env + redeploy
+  (the gate is built, not yet activated in prod); add the phone to `src/lib/contact.ts`; fill the
+  email placeholders in `docs/outreach.md`. Remaining optional: a leaf-price (FRED/USDA) overlay
+  on Procurement; a real per-lane freight rate (paid Freightos FBX). Open decisions in
+  `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
