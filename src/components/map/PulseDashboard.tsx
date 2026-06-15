@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, ChevronRight, ExternalLink } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { PulseMap } from "./PulseMap";
 import { LensSwitcher } from "./LensSwitcher";
 import { LiveFxStrip } from "./LiveFxStrip";
@@ -17,16 +24,20 @@ import {
 } from "@/lib/lenses";
 import { cn } from "@/lib/utils";
 
+type Role = NonNullable<Marker["roles"]>[number];
+
 export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {}) {
   const [activeId, setActiveId] = useState(() =>
     lenses.some((l) => l.id === initialLensId) ? (initialLensId as string) : defaultLensId,
   );
   const [selected, setSelected] = useState<Marker | null>(null);
+  const [openRole, setOpenRole] = useState<Role | null>(null);
   const lens = getLens(activeId);
 
   function switchLens(id: string) {
     setActiveId(id);
     setSelected(null);
+    setOpenRole(null);
   }
 
   return (
@@ -102,19 +113,37 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
                   Open roles ({selected.roles.length})
                 </div>
                 <ul className="flex max-h-60 flex-col gap-1.5 overflow-auto pr-1">
-                  {selected.roles.map((r, i) => (
-                    <li key={i} className="rounded-md bg-secondary/60 px-2.5 py-1.5">
-                      <div className="text-sm font-medium leading-snug">{r.title}</div>
-                      <div className="text-[11px] text-muted-foreground">
-                        {r.family ?? "—"}
-                        {r.standing
-                          ? " · standing req"
-                          : r.days != null
-                            ? ` · open ${r.days} ${r.days === 1 ? "day" : "days"}`
-                            : ""}
-                      </div>
-                    </li>
-                  ))}
+                  {selected.roles.map((r, i) => {
+                    const sub = `${r.family ?? "—"}${
+                      r.standing
+                        ? " · standing req"
+                        : r.days != null
+                          ? ` · open ${r.days} ${r.days === 1 ? "day" : "days"}`
+                          : ""
+                    }`;
+                    return (
+                      <li key={i}>
+                        {r.description ? (
+                          <button
+                            type="button"
+                            onClick={() => setOpenRole(r)}
+                            className="group flex w-full items-center gap-2 rounded-md bg-secondary/60 px-2.5 py-1.5 text-left transition-colors hover:bg-secondary"
+                          >
+                            <span className="min-w-0 flex-1">
+                              <span className="block text-sm font-medium leading-snug">{r.title}</span>
+                              <span className="text-[11px] text-muted-foreground">{sub}</span>
+                            </span>
+                            <ChevronRight className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+                          </button>
+                        ) : (
+                          <div className="rounded-md bg-secondary/60 px-2.5 py-1.5">
+                            <div className="text-sm font-medium leading-snug">{r.title}</div>
+                            <div className="text-[11px] text-muted-foreground">{sub}</div>
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
@@ -143,6 +172,47 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
       ) : lens.agentNote ? (
         <p className="text-xs italic text-muted-foreground">{lens.agentNote}</p>
       ) : null}
+
+      <Dialog open={!!openRole} onOpenChange={(o) => !o && setOpenRole(null)}>
+        {openRole && (
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{openRole.title}</DialogTitle>
+              <DialogDescription>
+                {[
+                  openRole.family,
+                  selected?.label,
+                  openRole.standing
+                    ? "standing req"
+                    : openRole.days != null
+                      ? `open ${openRole.days} ${openRole.days === 1 ? "day" : "days"}`
+                      : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="overflow-auto whitespace-pre-line text-sm leading-relaxed text-foreground/90">
+              {openRole.description}
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border pt-3">
+              <span className="text-[11px] text-muted-foreground">
+                Public — STG careers feed
+              </span>
+              {openRole.applyUrl && (
+                <a
+                  href={openRole.applyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:opacity-90"
+                >
+                  View full posting <ExternalLink className="size-3.5" />
+                </a>
+              )}
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
     </div>
   );
 }

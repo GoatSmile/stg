@@ -28,7 +28,16 @@ export type Marker = {
   siteId?: string; employees?: number; openPositions?: number;
   oldestDaysOpen?: number; retirementRisk?: number; impact?: boolean; radar?: boolean;
   // HR lens: the actual open roles at a site (title + real department + days open).
-  roles?: { title: string; family?: string; days?: number; standing?: boolean }[];
+  // description + applyUrl come from STG's robots-allowed jobs.xml syndication feed.
+  roles?: {
+    title: string;
+    family?: string;
+    days?: number;
+    standing?: boolean;
+    description?: string;
+    applyUrl?: string;
+    gid?: string;
+  }[];
 };
 
 export type Regime = { country: string; status: "banned" | "restricted" | "open" };
