@@ -334,18 +334,20 @@ repeated to the client: owner decides, always.
   everywhere (the gate page now reads `CONTACT` instead of hardcoding), phone `+45 50 36 71 11` set
   in `src/lib/contact.ts` (now shows in footer + gate + About), outreach placeholders filled
   (`[name]`/site/phone; `[wife]` + `[video link]` left for owner). (3) **Map camera** (`bf4d878`) —
-  a **World · Americas · Europe** preset control + **click-to-zoom** (marker click flies in ~2.3×
-  then settles back), both via a CSS-transitioned transform on one wrapper `<g>` (projection stays
-  static → SSR-safe); region extents fit each region's points at module load. APAC leaf shows only
-  in World. (4) **HR role popups** (`7fdc104`) — clicking an open role opens a dialog with the
+  a **World · Americas · Europe** preset control + **hover-to-zoom** (hovering a marker magnifies
+  ~1.7× *around that dot* — it stays put under the cursor, no recenter/flicker — settling back on
+  mouse-out; click just opens the detail card), both via a CSS-transitioned transform on one wrapper
+  `<g>` (projection stays static → SSR-safe); region extents fit each region's points at module load.
+  APAC leaf shows only in World. (Hover replaced the initial click-zoom per owner.) (4) **HR role
+  popups** (`7fdc104`) — clicking an open role opens a dialog with the
   **real full job description** + a "View full posting" link to the live STG page. Source is the
   honest find: `/services/` (search API) is robots-DISALLOWED + has no description, but
   **`/jobs.xml`** (STG's Google-Jobs/Indeed syndication feed) is robots-**ALLOWED** and carries the
   full description + canonical link + g:id. `scripts/enrich-roles.ts` reads that feed and attaches
   `description`/`applyUrl` to each `hr.json` role (28/28 matched by title+location), and mirrors them
   into `varsel_careers_snapshots.roles` when run with the service key. New `dialog.tsx` (radix-ui
-  umbrella). `tsc` clean + `next build` green; verified in-browser (3 region cameras, click-zoom,
-  DR SAP role → real S/4HANA description popup), no console/a11y warnings.
+  umbrella). `tsc` clean + `next build` green; verified in-browser (3 region cameras, hover-zoom
+  with the dot held in place, DR SAP role → real S/4HANA description popup), no console/a11y warnings.
   - **`/jobs.xml` is robots-allowed → resolves the "automate some other way" question** in
     `docs/careers-scrape-decision.md`: the description/link refresh *can* be automated (the feed is
     permitted), unlike the `/services/` search pull which stays manual.

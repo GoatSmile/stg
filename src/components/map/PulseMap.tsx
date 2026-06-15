@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { geoNaturalEarth1, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
@@ -90,7 +90,7 @@ const REGIONS: { id: string; label: string; view: View }[] = [
 ];
 
 const css = (v: View) => `translate(${v.x}px, ${v.y}px) scale(${v.k})`;
-const TRANSITION = "transform 750ms cubic-bezier(0.4, 0, 0.2, 1)";
+const EASE = "cubic-bezier(0.4, 0, 0.2, 1)";
 
 const severityRing: Record<string, string> = {
   high: "var(--threat-high)",
@@ -110,33 +110,32 @@ export function PulseMap({
   onSelect: (m: Marker) => void;
 }) {
   const [regionId, setRegionId] = useState("world");
-  // Transient click-zoom: zoom in on the clicked marker, then settle back to the
-  // active region view. null = no transient zoom (showing the region view).
+  // Hover-to-zoom: while a marker is hovered/focused we magnify around it; null
+  // shows the plain region view. Region changes use a slower camera tween.
   const [focus, setFocus] = useState<View | null>(null);
-  const timer = useRef<number | null>(null);
+  const [durMs, setDurMs] = useState(700);
 
   const base = REGIONS.find((r) => r.id === regionId)?.view ?? WORLD;
   const view = focus ?? base;
 
-  useEffect(
-    () => () => {
-      if (timer.current) window.clearTimeout(timer.current);
-    },
-    [],
-  );
-
   function setRegion(id: string) {
-    if (timer.current) window.clearTimeout(timer.current);
     setFocus(null);
+    setDurMs(700);
     setRegionId(id);
   }
 
-  function handleSelect(m: Marker, px: number, py: number) {
-    onSelect(m);
-    const k = Math.max(base.k * 1.7, 2.3);
-    if (timer.current) window.clearTimeout(timer.current);
-    setFocus({ k, x: W / 2 - k * px, y: H / 2 - k * py });
-    timer.current = window.setTimeout(() => setFocus(null), 1150);
+  // Magnify around the marker's *current on-screen point* so the dot stays put
+  // under the cursor — recentering it would slide it out from under the pointer
+  // and cause hover flicker (mouse-leave → zoom out → mouse-enter → repeat).
+  function focusMarker(px: number, py: number) {
+    const k = Math.min(base.k * 1.7, 3.2);
+    setDurMs(350);
+    setFocus({ k, x: base.x + px * (base.k - k), y: base.y + py * (base.k - k) });
+  }
+
+  function clearFocus() {
+    setDurMs(350);
+    setFocus(null);
   }
 
   return (
@@ -168,7 +167,7 @@ export function PulseMap({
         aria-label="World map of STG's footprint with the active department layer"
         style={{ display: "block", background: "var(--map-bg)", borderRadius: "var(--radius-lg)" }}
       >
-        <g style={{ transform: css(view), transformBox: "view-box", transformOrigin: "0 0", transition: TRANSITION }}>
+        <g style={{ transform: css(view), transformBox: "view-box", transformOrigin: "0 0", transition: `transform ${durMs}ms ${EASE}` }}>
           <g>
             {countryPaths.map((d, i) => (
               <path
@@ -204,14 +203,20 @@ export function PulseMap({
                   key={m.id}
                   transform={`translate(${p[0]},${p[1]})`}
                   style={{ cursor: "pointer" }}
-                  onClick={() => handleSelect(m, p[0], p[1])}
+                  onClick={() => onSelect(m)}
+                  onMouseEnter={() => focusMarker(p[0], p[1])}
+                  onMouseLeave={clearFocus}
+                  onFocus={() => focusMarker(p[0], p[1])}
+                  onBlur={clearFocus}
                   role="button"
                   aria-label={`${m.label}${m.value ? `: ${m.value}` : ""}`}
                   tabIndex={0}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") handleSelect(m, p[0], p[1]);
+                    if (e.key === "Enter" || e.key === " ") onSelect(m);
                   }}
                 >
+                  {/* enlarged transparent hit target for easier hover/click */}
+                  <circle r={r + 7} fill="transparent" />
                   {ring && (
                     <circle
                       r={r + 5}
