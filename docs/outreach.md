@@ -13,7 +13,7 @@ Internal colleague, casual, no commitment asked beyond "watch a 3-min video."
 She is the credibility bridge — she should not pitch, just vouch and tee up.
 
 > **Verbal / Teams:**
-> "Hi Yulia — totally outside my lane, but my husband [name] builds AI tools
+> "Hi Yulia — totally outside my lane, but my husband Nazar builds AI tools
 > for a living, and he got a bit obsessed with the regulatory pressure on our
 > categories — the France ban, the EU tax stuff. He built a working thing, in
 > his own time, that turns those into a P&L view on our own footprint, all from
@@ -36,7 +36,7 @@ decided what your problem is):
 > Hi Yulia,
 >
 > [wife] mentioned I'd be in touch. I build AI software for a living
-> ([valent.dk]), and I built a working prototype that sits squarely in your
+> (valent.dk), and I built a working prototype that sits squarely in your
 > world.
 >
 > Every regulatory event hitting tobacco and nicotine right now — the EU's
@@ -59,8 +59,8 @@ decided what your problem is):
 > through it live. If not, no follow-up — you'll have lost three minutes.
 >
 > Best,
-> [name]
-> [valent.dk] · [phone]
+> Nazar Taras
+> valent.dk · +45 50 36 71 11
 
 **Notes:**
 - ~190 words. One link. One ask (reply). No attachment.

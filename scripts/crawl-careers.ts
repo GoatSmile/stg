@@ -31,7 +31,7 @@ const DRY_RUN = process.argv.includes("--dry-run");
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const JOBS_URL = process.env.CAREERS_JOBS_URL ?? "https://careers.st-group.com/services/recruiting/v1/jobs";
-const USER_AGENT = "VarselResearch/1.0 (+https://valent.dk; one-time research pull; contact nt@valent.dk)";
+const USER_AGENT = "VarselResearch/1.0 (+https://valent.dk; one-time research pull; contact nazar@valent.dk)";
 const CACHE_PATH = join(process.cwd(), "src/data/feeds/careers.json");
 const STANDING_DAYS = 365; // older than this = a continuously-reposted standing req, not an ageing vacancy
 

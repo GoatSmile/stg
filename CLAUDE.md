@@ -309,7 +309,7 @@ repeated to the client: owner decides, always.
   contact, before the password. (4) **Link-preview polish** — custom favicon (`app/icon.svg`,
   claret tile + serif V), a generated OG share image (`app/opengraph-image.tsx`, parchment/claret,
   verified 62KB PNG), richer share `metadata`. (5) **Contact + about** — `src/lib/contact.ts`
-  (email nt@valent.dk; **phone is blank — set it there to surface site-wide**), wired into the
+  (email nazar@valent.dk; phone +45 50 36 71 11 — both surface site-wide), wired into the
   footer + a new "About this prototype" block on `/transparency`. The 3-min demo-script was also
   refreshed for the finished app (`docs/demo-script.md`, now with a shot list). `tsc` clean +
   `next build` green; verified in-browser (home, gate cover, OG image, ESG deep-link), no console errors.

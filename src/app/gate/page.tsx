@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { CONTACT } from "@/lib/contact";
 
 export const metadata = { title: "Varsel — private preview" };
 
@@ -52,8 +53,8 @@ export default async function Gate({
         </form>
 
         <p className="mt-4 border-t border-border pt-3 text-[11px] leading-snug text-muted-foreground">
-          A prototype by Nazar Taras / valent.dk — internal scenario-prep, not investor-facing.
-          Questions? <a href="mailto:nt@valent.dk" className="underline underline-offset-2">nt@valent.dk</a>.
+          A prototype by {CONTACT.name} / valent.dk — internal scenario-prep, not investor-facing.
+          Questions? <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2">{CONTACT.email}</a>.
         </p>
       </div>
     </div>

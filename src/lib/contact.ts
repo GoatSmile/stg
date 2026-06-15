@@ -4,7 +4,7 @@
 export const CONTACT = {
   name: "Nazar Taras",
   org: "valent.dk",
-  email: "nt@valent.dk",
-  phone: "", // ← add your number here (e.g. "+45 12 34 56 78") to surface it site-wide
+  email: "nazar@valent.dk",
+  phone: "+45 50 36 71 11",
   site: "https://valent.dk",
 };
