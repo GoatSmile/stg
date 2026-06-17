@@ -4,10 +4,11 @@ import {
   pouchRadar,
   pricesForMarket,
   maxPriceDkk,
+  maxRepStrengthMg,
+  pricePerMg,
   isStgBrand,
   eventsByDate,
   trackedBrands,
-  untrackedBrands,
   brandWithOwner,
   type RadarEventType,
 } from "@/lib/radar";
@@ -31,34 +32,35 @@ const EVENT_STYLE: Record<RadarEventType, { label: string; cls: string }> = {
 
 export default function Radar() {
   const max = maxPriceDkk();
+  const maxStrength = maxRepStrengthMg();
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-5">
       <div>
         <h1 className="font-heading text-3xl font-medium tracking-tight">Pouch Radar</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          XQS vs VELO vs ZYN across STG&apos;s pouch focus markets — price, strength and online
-          rank, plus the launch &amp; compliance feed. As of {pouchRadar.asOf}.
+          XQS vs VELO, ZYN &amp; Nordic Spirit across STG&apos;s pouch focus markets — sourced
+          strength &amp; flavour, plus the launch &amp; compliance feed. As of {pouchRadar.asOf}.
         </p>
       </div>
 
       <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/5 px-3 py-2 text-[13px] leading-snug">
         <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden="true" />
         <span>
-          <span className="font-medium">v1 curated snapshot.</span> Brand/market structure and XQS
-          shares are public/sourced; the per-can <span className="text-amber-600 dark:text-amber-400">prices, ranks, strengths &amp; flavour counts are illustrative*</span>{" "}
-          until the first ToS-permitted crawl. The crawler (<code className="rounded bg-secondary px-1 py-0.5 text-[12px]">scripts/crawl-radar.ts</code>)
-          is built and gated on a per-retailer terms-of-service read.
+          <span className="font-medium">v1 curated snapshot.</span> Brand/market structure, XQS
+          shares and the <span className="font-medium text-foreground">strengths, flavours &amp; pack counts</span>{" "}
+          are public/sourced (a citation per row; UK high-confidence, SE/DK medium). The per-can{" "}
+          <span className="text-amber-600 dark:text-amber-400">prices, online ranks &amp; the derived price-per-mg stay illustrative*</span>{" "}
+          until a ToS-permitted price source — the crawler (<code className="rounded bg-secondary px-1 py-0.5 text-[12px]">scripts/crawl-radar.ts</code>) stays gated.
         </span>
       </div>
 
       <p className="text-[12px] leading-snug text-muted-foreground">
-        <span className="font-medium text-foreground">Tracked here:</span>{" "}
+        <span className="font-medium text-foreground">Tracked:</span>{" "}
         {trackedBrands.map(brandWithOwner).join(", ")}.{" "}
-        <span className="font-medium text-foreground">Coverage gaps, disclosed:</span>{" "}
-        {untrackedBrands.map(brandWithOwner).join(", ")}{" "}
-        {untrackedBrands.length === 1 ? "isn't tracked yet" : "aren't tracked yet"}, and ZYN
-        isn&apos;t in the Denmark board below.
+        <span className="font-medium text-foreground">Known gaps, disclosed:</span>{" "}
+        Nordic Spirit&apos;s Denmark availability post-cap is unconfirmed, so it&apos;s left out of the
+        DK board rather than guessed; On! (Altria) and smaller brands aren&apos;t tracked yet.
       </p>
 
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -74,7 +76,7 @@ export default function Radar() {
       {pouchRadar.markets.map((m) => {
         const prices = pricesForMarket(m.code);
         return (
-          <div key={m.code} className="flex flex-col gap-2.5 rounded-lg border border-border p-4">
+          <div key={m.code} className="flex flex-col gap-3 rounded-lg border border-border p-4">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <h2 className="text-base font-medium">{m.name}</h2>
               {m.xqsShare && (
@@ -84,20 +86,53 @@ export default function Radar() {
               )}
               <span className="text-[12px] text-muted-foreground">{m.note}</span>
             </div>
+
+            {/* real, sourced block — strength + flavour */}
+            <div className="flex flex-col gap-1.5">
+              <div className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                Strength &amp; flavour · sourced
+              </div>
+              {prices.map((p) => {
+                const stg = isStgBrand(p.brand);
+                const w = Math.max(6, Math.round((p.repStrengthMg / maxStrength) * 100));
+                return (
+                  <div key={p.brand} className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5">
+                    <span className={`w-28 shrink-0 text-[13px] ${stg ? "font-semibold text-primary" : ""}`}>
+                      {p.brand}
+                      {stg && <span className="ml-1 text-[10px] font-normal text-muted-foreground">STG</span>}
+                    </span>
+                    <div className="h-2.5 w-20 shrink-0 overflow-hidden rounded bg-secondary sm:w-28" title={`representative ${p.repStrengthMg} mg/pouch`}>
+                      <div
+                        className={`h-2.5 rounded ${stg ? "bg-primary" : "bg-muted-foreground/40"}`}
+                        style={{ width: `${w}%` }}
+                      />
+                    </div>
+                    <span className="text-[12px] tabular-nums">{p.strengthMg}</span>
+                    <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                      · {p.flavourCount != null && <span className="tabular-nums">≈{p.flavourCount} flavours · </span>}
+                      {p.flavourStyle}
+                      <CitationChip sourceRef={p.specSource} />
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* illustrative* block — price, online rank, derived price-per-mg */}
             <div className="rounded-md border border-dashed border-amber-500/40 bg-amber-500/[0.04] p-2.5">
               <div className="mb-2 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wide text-amber-700 dark:text-amber-400">
                 <AlertTriangle className="size-3 shrink-0" aria-hidden="true" />
-                illustrative layout · live prices, ranks, strengths &amp; flavour counts pending ToS-permitted crawl
+                illustrative* · per-can price, online rank &amp; price-per-mg — placeholder until a ToS-permitted price source
               </div>
               <div className="flex flex-col gap-1.5">
                 {prices.map((p) => {
                   const stg = isStgBrand(p.brand);
                   const width = Math.max(8, Math.round((p.priceDkk / max) * 100));
+                  const ppm = pricePerMg(p);
                   return (
                     <div key={p.brand} className="flex items-center gap-3">
                       <span className={`w-28 shrink-0 text-[13px] ${stg ? "font-semibold text-primary" : ""}`}>
                         {p.brand}
-                        {stg && <span className="ml-1 text-[10px] font-normal text-muted-foreground">STG</span>}
                       </span>
                       <div className="relative h-5 flex-1 rounded bg-secondary">
                         <div
@@ -107,8 +142,8 @@ export default function Radar() {
                           {p.priceLocal}
                         </div>
                       </div>
-                      <span className="w-40 shrink-0 text-[11px] text-muted-foreground tabular-nums">
-                        #{p.rank} · {p.strengthMg} mg · {p.flavours} flavours
+                      <span className="w-32 shrink-0 text-right text-[11px] text-muted-foreground tabular-nums">
+                        #{p.rank} · {ppm != null ? `${ppm.toFixed(2)} DKK/mg` : "—"}
                       </span>
                     </div>
                   );
@@ -146,8 +181,8 @@ export default function Radar() {
           </div>
         ))}
         <p className="text-[12px] text-muted-foreground">
-          Internal scenario prep, not investor-facing. Public e-commerce data only; the crawl is
-          gated on a per-retailer ToS read (build-plan §4).
+          Internal scenario prep, not investor-facing. Public data only; the price crawl is gated on a
+          per-retailer ToS read (build-plan §4).
         </p>
       </div>
 

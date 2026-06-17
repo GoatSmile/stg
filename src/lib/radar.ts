@@ -14,14 +14,22 @@ export type RadarMarket = {
   note: string;
 };
 export type RadarBrand = { brand: string; owner: string; isStg?: boolean; tracked?: boolean };
+export type SpecConfidence = "HIGH" | "MED" | "LOW";
 export type RadarPrice = {
   market: string;
   brand: string;
+  // illustrative* (no ToS-permitted price source yet)
   priceLocal: string;
   priceDkk: number;
-  strengthMg: string;
   rank: number;
-  flavours: string | number;
+  // real, sourced product specs
+  strengthMg: string; // display range, e.g. "6–17 mg"
+  repStrengthMg: number; // representative SKU strength, mg/pouch — for the strength bar + price-per-mg
+  packCount: number; // pouches per can
+  flavourCount: number | null; // null where a precise count isn't sourced (e.g. DK post-cap)
+  flavourStyle: string;
+  specSource: string;
+  specConfidence: SpecConfidence;
 };
 export type RadarEventType = "compliance" | "launch" | "share" | "distribution";
 export type RadarEvent = {
@@ -36,6 +44,7 @@ export type RadarSource = { name: string; url: string; use: string; tos: string 
 export type PouchRadar = {
   asOf: string;
   crawledAt: string | null;
+  specsProvenance: string;
   pricesProvenance: string;
   sources: RadarSource[];
   markets: RadarMarket[];
@@ -54,6 +63,22 @@ export function pricesForMarket(code: string): RadarPrice[] {
 /** Max DKK price across the whole snapshot — used to scale the price bars consistently. */
 export function maxPriceDkk(): number {
   return pouchRadar.prices.reduce((m, p) => Math.max(m, p.priceDkk), 0);
+}
+
+/** Max representative strength across the snapshot — scales the (real) strength bars consistently. */
+export function maxRepStrengthMg(): number {
+  return pouchRadar.prices.reduce((m, p) => Math.max(m, p.repStrengthMg), 0);
+}
+
+/**
+ * Illustrative* price-per-mg = price/can ÷ (pouches/can × mg/pouch), in DKK per mg of nicotine.
+ * The strength + pack count are REAL; the price is an illustrative placeholder, so the ratio is
+ * illustrative until a real price source lands. Returns null if the inputs can't form a ratio.
+ */
+export function pricePerMg(p: RadarPrice): number | null {
+  const totalMg = p.packCount * p.repStrengthMg;
+  if (!totalMg) return null;
+  return p.priceDkk / totalMg;
 }
 
 export function isStgBrand(brand: string): boolean {

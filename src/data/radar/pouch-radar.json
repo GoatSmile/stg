@@ -1,11 +1,13 @@
 {
-  "_note": "Pouch Radar v1 — a curated, dated snapshot. Brand/market STRUCTURE and XQS market shares are public/sourced (STG AR2025 / Q1 2026); the specific per-can PRICES, online bestseller RANKS, strength ranges and flavour counts are illustrative* placeholders until the first ToS-permitted crawl. The crawler (scripts/crawl-radar.ts) is built and GATED on a per-retailer ToS read (build-plan §4). Sources: Haypp Media & Insights, nicotine-pouches.org. SCOPE (disclosed on-page, not omitted silently): the board tracks the three brands we can source per market — XQS (STG), VELO (BAT), ZYN (PMI). JTI's Nordic Spirit (a 4th major, tracked:false below) and ZYN in Denmark are known competitors not yet in this snapshot.",
+  "_note": "Pouch Radar v1 — a curated, dated snapshot. STRENGTHS (mg/pouch), FLAVOUR style/counts and PACK COUNTS are now REAL, curated from public manufacturer product pages + the free Haypp Nicotine Pouch Report 2025 + reputable retailer/comparison listings — each row carries a source ref + a confidence (UK = HIGH; Sweden = MED, wider ranges aggregated from review/retailer sites; Denmark = MED, the post-cap surviving-SKU naming leans on a retailer guide + sik.dk). Per-can PRICES, online bestseller RANKS, and the derived PRICE-PER-MG remain illustrative* placeholders — there is no ToS-permitted price source yet (the paid Haypp feed / a nicotine-pouches.org snapshot is the upgrade path; the crawler scripts/crawl-radar.ts stays gated). COVERAGE (disclosed, not silently omitted): the board tracks XQS (STG), VELO (BAT), ZYN (PMI) and Nordic Spirit (JTI); ZYN is now included in Denmark. Nordic Spirit's Denmark availability post-cap is UNVERIFIED, so it is deliberately left out of the DK board rather than faked. On! (Altria) and smaller brands are not yet tracked.",
   "asOf": "2026-06-17",
   "crawledAt": null,
+  "specsProvenance": "sourced",
   "pricesProvenance": "fabricated",
   "sources": [
-    { "name": "Haypp Media & Insights", "url": "https://www.haypp.com", "use": "per-market price + online bestseller rank", "tos": "ToS read PENDING — automated collection gated; the paid Media & Insights feed is the clean fallback (build-plan §4)." },
-    { "name": "nicotine-pouches.org", "url": "https://nicotine-pouches.org", "use": "catalogue, strengths, flavour counts", "tos": "ToS read PENDING — prefer sitemap-diffing over HTML scraping." }
+    { "name": "Haypp Nicotine Pouch Report 2025", "url": "https://www.haypp.com/uk/nicotine-report/2025", "use": "UK market structure + leaderboard (VELO #1, Nordic Spirit #2; mint = 58% of cans) — the strongest public spec source", "tos": "Free published report — used as a cited source, not crawled." },
+    { "name": "Manufacturer & retailer product listings", "url": "https://www.zyn.com/gb/en/zyn-flavours.html", "use": "per-brand strengths, flavour ranges & pack counts (zyn.com, northerner, snusdaddy, thesnusoutlet, sik.dk for the DK cap)", "tos": "Public product-spec pages — curated by hand + dated, never request-time scraped. UK HIGH / SE-DK MED confidence." },
+    { "name": "Haypp Media & Insights", "url": "https://www.haypp.com", "use": "real per-can price + online bestseller rank (the illustrative fields)", "tos": "ToS read PENDING — automated collection gated; the paid Media & Insights feed is the clean fallback (build-plan §4)." }
   ],
   "markets": [
     { "code": "SE", "name": "Sweden", "lat": 59.33, "lng": 18.07, "currency": "SEK", "xqsShare": "13.6%", "shareFlag": "C", "note": "World's largest pouch market. XQS is #2 (share 7.8%→13.6% since 2024)." },
@@ -16,17 +18,20 @@
     { "brand": "XQS", "owner": "STG", "isStg": true },
     { "brand": "VELO", "owner": "BAT" },
     { "brand": "ZYN", "owner": "PMI" },
-    { "brand": "Nordic Spirit", "owner": "JTI", "tracked": false }
+    { "brand": "Nordic Spirit", "owner": "JTI" }
   ],
   "prices": [
-    { "market": "SE", "brand": "VELO", "priceLocal": "SEK 36", "priceDkk": 23, "strengthMg": "6–10", "rank": 1, "flavours": 14 },
-    { "market": "SE", "brand": "XQS", "priceLocal": "SEK 33", "priceDkk": 21, "strengthMg": "8–12", "rank": 2, "flavours": 12 },
-    { "market": "SE", "brand": "ZYN", "priceLocal": "SEK 35", "priceDkk": 22, "strengthMg": "6–11", "rank": 3, "flavours": 10 },
-    { "market": "UK", "brand": "VELO", "priceLocal": "£4.95", "priceDkk": 44, "strengthMg": "6–10", "rank": 1, "flavours": 12 },
-    { "market": "UK", "brand": "ZYN", "priceLocal": "£5.00", "priceDkk": 44, "strengthMg": "3–11", "rank": 2, "flavours": 8 },
-    { "market": "UK", "brand": "XQS", "priceLocal": "£4.50", "priceDkk": 40, "strengthMg": "6–11", "rank": 4, "flavours": 9 },
-    { "market": "DK", "brand": "VELO", "priceLocal": "DKK 38", "priceDkk": 38, "strengthMg": "≤ 9 (capped)", "rank": 1, "flavours": 6 },
-    { "market": "DK", "brand": "XQS", "priceLocal": "DKK 35", "priceDkk": 35, "strengthMg": "≤ 9 (capped)", "rank": 3, "flavours": 4 }
+    { "market": "SE", "brand": "VELO", "priceLocal": "SEK 36", "priceDkk": 23, "rank": 1, "strengthMg": "4–17 mg", "repStrengthMg": 11, "packCount": 20, "flavourCount": 20, "flavourStyle": "mint-led + Ice fruit series", "specSource": "snuscore / whitepouches (2026)", "specConfidence": "MED" },
+    { "market": "SE", "brand": "XQS", "priceLocal": "SEK 33", "priceDkk": 21, "rank": 2, "strengthMg": "4–17 mg", "repStrengthMg": 8, "packCount": 20, "flavourCount": 10, "flavourStyle": "fruit/fusion + mint line", "specSource": "snusforsale / Haypp (2026)", "specConfidence": "MED" },
+    { "market": "SE", "brand": "ZYN", "priceLocal": "SEK 35", "priceDkk": 22, "rank": 3, "strengthMg": "3–15+ mg", "repStrengthMg": 11, "packCount": 21, "flavourCount": 12, "flavourStyle": "mint/menthol + Swedish (cherry, coffee)", "specSource": "snusforsale / poucharoos (2026)", "specConfidence": "MED" },
+    { "market": "SE", "brand": "Nordic Spirit", "priceLocal": "SEK 34", "priceDkk": 22, "rank": 4, "strengthMg": "3–17 mg", "repStrengthMg": 11, "packCount": 20, "flavourCount": 12, "flavourStyle": "mint-led + berry/tropical", "specSource": "snusdaddy / HitSnus (2026)", "specConfidence": "MED" },
+    { "market": "UK", "brand": "VELO", "priceLocal": "£4.95", "priceDkk": 44, "rank": 1, "strengthMg": "6–17 mg", "repStrengthMg": 11, "packCount": 20, "flavourCount": 20, "flavourStyle": "mint-led + Ice fruit series", "specSource": "Haypp 2025 / northerner", "specConfidence": "HIGH" },
+    { "market": "UK", "brand": "Nordic Spirit", "priceLocal": "£4.60", "priceDkk": 41, "rank": 2, "strengthMg": "6–17 mg", "repStrengthMg": 9, "packCount": 20, "flavourCount": 11, "flavourStyle": "mint-led + berry", "specSource": "Haypp 2025 / northerner", "specConfidence": "HIGH" },
+    { "market": "UK", "brand": "ZYN", "priceLocal": "£5.00", "priceDkk": 44, "rank": 3, "strengthMg": "1.5–16.5 mg", "repStrengthMg": 6, "packCount": 20, "flavourCount": 10, "flavourStyle": "mint/menthol core + fruit frosts", "specSource": "zyn.com/gb / Haypp 2025", "specConfidence": "HIGH" },
+    { "market": "UK", "brand": "XQS", "priceLocal": "£4.50", "priceDkk": 40, "rank": 4, "strengthMg": "4–11 mg", "repStrengthMg": 8, "packCount": 20, "flavourCount": 9, "flavourStyle": "fruit/fusion (Cola Lime, Fizzy Peach) + mint hedge", "specSource": "Haypp 2025 / brand site", "specConfidence": "HIGH" },
+    { "market": "DK", "brand": "VELO", "priceLocal": "DKK 38", "priceDkk": 38, "rank": 1, "strengthMg": "≤ 9 mg (cap) · Ice Cool 6 mg", "repStrengthMg": 6, "packCount": 20, "flavourCount": null, "flavourStyle": "menthol/mint only (post-cap)", "specSource": "sik.dk / thesnusoutlet (2026)", "specConfidence": "MED" },
+    { "market": "DK", "brand": "ZYN", "priceLocal": "DKK 37", "priceDkk": 37, "rank": 2, "strengthMg": "≤ 9 mg (cap) · Cool Mint 3 / 6 mg", "repStrengthMg": 6, "packCount": 20, "flavourCount": null, "flavourStyle": "menthol/mint only (post-cap)", "specSource": "sik.dk / thesnusoutlet (2026)", "specConfidence": "MED" },
+    { "market": "DK", "brand": "XQS", "priceLocal": "DKK 35", "priceDkk": 35, "rank": 3, "strengthMg": "≤ 9 mg (cap) · Mint 4 mg", "repStrengthMg": 4, "packCount": 20, "flavourCount": null, "flavourStyle": "menthol/mint only (fruit/fusion delisted)", "specSource": "sik.dk / thesnusoutlet (2026)", "specConfidence": "MED" }
   ],
   "events": [
     { "date": "2026-04-01", "market": "DK", "type": "compliance", "text": "Denmark 9 mg cap + tobacco/menthol-only flavours in force — XQS flavour-led SKUs delisted in DK.", "sourceRef": "sik.dk" },
