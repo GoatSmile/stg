@@ -27,14 +27,14 @@ export type CareerSnapshot = {
 
 /**
  * One open role, exactly as stored in Supabase (the single source of truth —
- * no copy in any JSON). `siteId` is the strategic-site key it maps to, or null
- * for the US retail/cigar-bar postings. Title + family + days-open come from the
+ * no copy in any JSON). `siteId` is always a bucket key — a strategic-site id, or
+ * `us-retail` / `eu-other` for unmapped roles. Title + family + days-open come from the
  * SuccessFactors `/services` pull; the full `description` + `applyUrl` come from
  * STG's robots-allowed `jobs.xml` feed. Served live by /api/feeds/careers?roles=1.
  */
 export type CareerRole = {
   gid: string;
-  siteId: string | null;
+  siteId: string;
   title: string;
   family?: string;
   daysOpen?: number | null;

@@ -57,7 +57,7 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 type Role = {
   gid: string;
-  siteId: string | null;
+  siteId: string;
   title: string;
   family: string;
   daysOpen: number | null;
@@ -68,10 +68,11 @@ type Role = {
 type SnapshotSite = { siteId: string; label: string; lat: number; lng: number; openPositions: number; oldestDaysOpen: number };
 
 // Strategic STG sites placed on the map. A posting matches a site if its location
-// contains one of `match`. US retail superstores / cigar bars don't match any site
-// (siteId null) — counted in totalOpen, shown under the "US retail & bars" marker.
+// contains one of `match`. Anything that doesn't match a strategic site is bucketed
+// (see bucketOf): US locations → "us-retail" (Cigars International stores/bars),
+// any other location → "eu-other" (EU field sales + unmapped roles, e.g. Holstebro DK).
 const SITES: { siteId: string; label: string; lat: number; lng: number; match: string[] }[] = [
-  { siteId: "sales-pt", label: "Carnaxide / Lisbon", lat: 38.72, lng: -9.24, match: ["carnaxide", "lisbon", "2790", "2794"] },
+  { siteId: "sales-pt", label: "Carnaxide / Lisbon", lat: 38.72, lng: -9.24, match: ["carnaxide", "lisbon", "alcântara", "alcantara", "1300", "2790", "2794"] },
   { siteId: "fac-dr", label: "Dominican Republic", lat: 19.45, lng: -70.7, match: ["santiago", "dominican", "san pedro de macoris", "macoris", "51000", "21000"] },
   { siteId: "office-bethlehem", label: "Bethlehem, PA", lat: 40.63, lng: -75.38, match: ["bethlehem", "18015", "18017"] },
   { siteId: "leaf-lk", label: "Sri Lanka — Biyagama", lat: 6.95, lng: 79.96, match: ["biyagama", "colombo", "sri lanka", "11672"] },
@@ -88,6 +89,11 @@ const siteOf = (loc: string): string | null => {
   const h = loc.toLowerCase();
   return SITES.find((s) => s.match.some((m) => h.includes(m)))?.siteId ?? null;
 };
+// Roles with no strategic-site match fall into an honest bucket — never mislabel a
+// European role as US retail. US (anything but Bethlehem/Richmond, which match above)
+// → "us-retail"; everything else → "eu-other".
+const isUS = (loc: string): boolean => /,\s*USA?\b/.test(loc); // ", US" or ", USA"
+const bucketOf = (loc: string): string => siteOf(loc) ?? (isUS(loc) ? "us-retail" : "eu-other");
 
 // ── HTML entity decode + description cleaner (jobs.xml CDATA holds encoded HTML) ──
 const NAMED: Record<string, string> = {
@@ -214,7 +220,7 @@ function buildRoles(feed: Feed[], svc: Svc[]): Role[] {
       const s = matchSvc(f);
       return {
         gid: f.gid,
-        siteId: siteOf(f.location),
+        siteId: bucketOf(f.location),
         title: f.title,
         family: s?.family ?? "",
         daysOpen: s?.daysOpen ?? null,

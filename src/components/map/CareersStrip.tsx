@@ -68,7 +68,7 @@ export function CareersStrip() {
       {data && !loading && (
         <>
           <div className="flex flex-wrap gap-x-8 gap-y-2">
-            <Stat label="Open roles" value={String(data.totalOpen)} sub={`${strat} strategic · ${other} retail/bar`} />
+            <Stat label="Open roles" value={String(data.totalOpen)} sub={`${strat} strategic · ${other} retail & field`} />
             <Stat
               label="Oldest vacancy"
               value={`${oldest}d`}
@@ -87,9 +87,9 @@ export function CareersStrip() {
           </div>
           <p className="text-[11px] leading-snug text-muted-foreground">
             Roles, locations + posting dates come from STG&apos;s public SuccessFactors careers feed
-            → days-open. Strategic sites are mapped; US retail / cigar-bar roles are counted but
-            bucketed. Snapshots persist in Supabase (EU), so hiring velocity is real once history
-            accrues.{" "}
+            → days-open. Strategic sites are mapped individually; US retail / cigar-bar roles and
+            unmapped EU field roles are bucketed. Snapshots persist in Supabase (EU), so hiring
+            velocity is real once history accrues.{" "}
             <a
               href="https://careers.st-group.com"
               target="_blank"

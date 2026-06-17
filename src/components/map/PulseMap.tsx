@@ -6,7 +6,7 @@ import { feature } from "topojson-client";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import worldData from "@/data/world-110m.json";
 import { type Marker, type Site, sites as allSites, lenses, provenanceMeta } from "@/lib/lenses";
-import { radiusFromEmployees } from "@/lib/format";
+import { radiusFromEmployees, radiusFromCount, compactCount } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 const W = 960;
@@ -92,6 +92,14 @@ const REGIONS: { id: string; label: string; view: View }[] = [
 const css = (v: View) => `translate(${v.x}px, ${v.y}px) scale(${v.k})`;
 const EASE = "cubic-bezier(0.4, 0, 0.2, 1)";
 
+// Bubble-size metric (HR lens): the dot's size + number both reflect ONE measure,
+// so size and label never disagree. Default = open positions.
+type Metric = "positions" | "headcount";
+const METRICS: { id: Metric; label: string; title: string }[] = [
+  { id: "positions", label: "Positions", title: "Bubble size = open positions" },
+  { id: "headcount", label: "Headcount", title: "Bubble size = employees" },
+];
+
 const severityRing: Record<string, string> = {
   high: "var(--threat-high)",
   medium: "var(--threat-medium)",
@@ -103,13 +111,17 @@ export function PulseMap({
   markers,
   selectedId,
   onSelect,
+  metricToggle,
 }: {
   sites: Site[];
   markers: Marker[];
   selectedId?: string | null;
   onSelect: (m: Marker) => void;
+  /** Show the Positions/Headcount bubble-size toggle (HR lens only). */
+  metricToggle?: boolean;
 }) {
   const [regionId, setRegionId] = useState("world");
+  const [metric, setMetric] = useState<Metric>("positions");
   // Hover-to-zoom: while a marker is hovered/focused we magnify around it; null
   // shows the plain region view. Region changes use a slower camera tween.
   const [focus, setFocus] = useState<View | null>(null);
@@ -140,24 +152,48 @@ export function PulseMap({
 
   return (
     <div className="relative">
-      {/* camera presets */}
-      <div className="absolute right-2 top-2 z-10 flex gap-0.5 rounded-md border border-border bg-card/85 p-0.5 backdrop-blur-sm">
-        {REGIONS.map((r) => (
-          <button
-            key={r.id}
-            type="button"
-            onClick={() => setRegion(r.id)}
-            aria-pressed={regionId === r.id}
-            className={cn(
-              "rounded px-2 py-1 text-[11px] font-medium transition-colors",
-              regionId === r.id
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {r.label}
-          </button>
-        ))}
+      {/* camera presets + (HR) bubble-size metric toggle */}
+      <div className="absolute right-2 top-2 z-10 flex flex-col items-end gap-1">
+        <div className="flex gap-0.5 rounded-md border border-border bg-card/85 p-0.5 backdrop-blur-sm">
+          {REGIONS.map((r) => (
+            <button
+              key={r.id}
+              type="button"
+              onClick={() => setRegion(r.id)}
+              aria-pressed={regionId === r.id}
+              className={cn(
+                "rounded px-2 py-1 text-[11px] font-medium transition-colors",
+                regionId === r.id
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+        {metricToggle && (
+          <div className="flex items-center gap-0.5 rounded-md border border-border bg-card/85 p-0.5 backdrop-blur-sm">
+            <span className="px-1 text-[10px] uppercase tracking-wide text-muted-foreground">bubble</span>
+            {METRICS.map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                onClick={() => setMetric(m.id)}
+                aria-pressed={metric === m.id}
+                title={m.title}
+                className={cn(
+                  "rounded px-2 py-1 text-[11px] font-medium transition-colors",
+                  metric === m.id
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <svg
@@ -195,7 +231,20 @@ export function PulseMap({
             {markers.map((m) => {
               const p = project(m.lng, m.lat);
               if (!p) return null;
-              const r = radiusFromEmployees(m.employees);
+              const headcount = metricToggle && metric === "headcount";
+              const r =
+                metricToggle && metric === "positions"
+                  ? radiusFromCount(m.openPositions)
+                  : radiusFromEmployees(m.employees);
+              // Number inside the dot reflects the SAME metric as its size. In
+              // headcount mode only label dots big enough to hold the figure.
+              const badge = headcount
+                ? m.employees != null && r >= 11
+                  ? compactCount(m.employees)
+                  : null
+                : m.openPositions
+                  ? String(m.openPositions)
+                  : null;
               const selected = selectedId === m.id;
               const ring = m.severity ? severityRing[m.severity] : null;
               return (
@@ -236,9 +285,9 @@ export function PulseMap({
                     strokeWidth={selected ? 2.5 : 1}
                     vectorEffect="non-scaling-stroke"
                   />
-                  {m.openPositions ? (
+                  {badge ? (
                     <text textAnchor="middle" dy="0.32em" fontSize={9} fill="#fff" fontWeight={600}>
-                      {m.openPositions}
+                      {badge}
                     </text>
                   ) : null}
                   <title>{`${m.label}${m.value ? ` — ${m.value}` : ""}`}</title>

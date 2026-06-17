@@ -4,6 +4,19 @@ export function radiusFromEmployees(n?: number): number {
   return Math.max(5, Math.min(26, Math.sqrt(n) * 0.55));
 }
 
+/** Marker radius from open-position count (sqrt scale; min 5 so a site always shows). */
+export function radiusFromCount(n?: number): number {
+  if (!Number.isFinite(n)) return 5;
+  return Math.max(5, Math.min(26, Math.sqrt(Math.max(n as number, 0)) * 4.5));
+}
+
+/** Compact integer for a marker badge that must fit inside a dot: 1626 → "1.6k", 95 → "95". */
+export function compactCount(n: number): string {
+  if (n < 1000) return String(n);
+  const k = n / 1000;
+  return `${k >= 10 ? Math.round(k) : Math.round(k * 10) / 10}k`;
+}
+
 export function cn(...parts: Array<string | false | null | undefined>): string {
   return parts.filter(Boolean).join(" ");
 }

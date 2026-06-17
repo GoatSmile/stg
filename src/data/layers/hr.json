@@ -174,12 +174,22 @@
     {
       "id": "hr-us-retail",
       "siteId": "us-retail",
-      "lat": 30,
-      "lng": -89,
+      "lat": 33,
+      "lng": -87,
       "label": "US retail & bars",
       "provenance": "public",
       "sourceRef": "careers.st-group.com",
-      "detail": "STG North America retail & cigar-bar footprint — Cigars International superstores, lounges and bars across FL, TX, TN, KY, PA, NY and more. Counted in the live total; click to see the open roles."
+      "detail": "STG United States retail & cigar-bar footprint — Cigars International superstores, lounges and bars across the US (FL, TX, TN, KY, PA, NY and more). Counted in the live total; click to see the open roles."
+    },
+    {
+      "id": "hr-eu-other",
+      "siteId": "eu-other",
+      "lat": 52.8,
+      "lng": 6.5,
+      "label": "Europe — field & other",
+      "provenance": "public",
+      "sourceRef": "careers.st-group.com",
+      "detail": "STG roles across Europe not tied to a mapped site — field sales (Netherlands, Sweden, UK) plus support / production roles such as Holstebro (DK). Counted in the live total; click to see them."
     }
   ],
   "agentNote": "Open-positions + days-open come from STG's public SuccessFactors careers feed (careers.st-group.com). Strategic sites are mapped to markers; US retail / cigar-bar roles are counted in the total but bucketed (not the strategy). Evergreen 'talent pool' posts are excluded. Real one-time pull 2026-06-14; a scheduled refresh first-seen-stamps each role to derive days-open. Retirement-risk is illustrative (needs PeopleHub)."

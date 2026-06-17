@@ -129,13 +129,17 @@ track (reference only).
   remain hardcoded snapshots in `src/data/`.
   The careers feed holds **real data**, and **the DB is its single source of truth** (owner
   directive 2026-06-15: "everything live from the DB, nowhere else"). A one-time owner-authorised
-  pull found **71 real open vacancies** (evergreen "talent pool" posts excluded), **32 at strategic
-  sites + 39 US retail/bars**, all 71 with full descriptions stored in `varsel_careers_snapshots.roles`.
+  daily pull holds the live open vacancies (evergreen "talent pool" posts excluded) — currently
+  **68: 30 strategic-site + 33 US retail/bar + 5 unmapped-EU** (the count shifts day-to-day as
+  postings open/close) — each with a full description stored in `varsel_careers_snapshots.roles`.
   Per-role data (title · real department · days-open · full description · apply URL) lives **only**
   in the DB — the app reads it **live** via `/api/feeds/careers?roles=1` (live-only — empty if the DB
   is down, never a JSON copy). `hr.json` carries **no** `roles[]`/counts; the map derives each site's
-  open-count badge + detail role-list from the live roles, keyed by `siteId`. The 39 US retail/bar
-  roles attach to a single **"US retail & bars"** map marker. **Clicking a role opens a popup with its
+  open-count badge + detail role-list from the live roles, keyed by `siteId`. **Every role is bucketed
+  by location** into one of the 12 strategic sites, **`us-retail`** (US Cigars-International
+  stores/bars — marker on US land) or **`eu-other`** (non-US unmapped roles: Holstebro DK factory,
+  NL/SE/UK field sales — its own "Europe — field & other" marker) — an EU role is never mislabeled as
+  US retail; the matcher is `pull-jobs.ts` `siteOf`/`isUS`/`bucketOf`. **Clicking a role opens a popup with its
   full real job description** + a "View full posting" link. The pull is one script —
   **`scripts/pull-jobs.ts`** (replaces the retired `crawl-careers.ts` + `enrich-roles.ts`): STG's
   robots-**allowed** **`/jobs.xml`** is the spine (complete set + descriptions + apply links + employer)
@@ -399,6 +403,23 @@ repeated to the client: owner decides, always.
   verified in-browser (HR lens `live:true` 71; DR → 5 SAP roles → real description popup; us-retail →
   39 roles; map badges live `8/5/7/…/39`; no new console errors — only a pre-existing theme-`<script>`
   dev warning).
+- **Bucketing accuracy + map bubble-size toggle — (2026-06-16).** (1) **Every role now buckets by
+  location** into one of the 12 strategic sites / `us-retail` / `eu-other`. An independent 3-classifier
+  audit (workflow) over all distinct locations came back unanimous and caught that the old catch-all had
+  mixed **7 European roles** into a marker labeled "US retail" — 2 Lisbon/Alcântara (→ now `sales-pt`)
+  and Holstebro-DK + NL/SE/UK field sales (→ new `eu-other`). Fixed in `pull-jobs.ts` (`siteOf` gains
+  Lisbon/Alcântara tokens; new `isUS`/`bucketOf` → US-unmapped = `us-retail`, else `eu-other`) and
+  re-applied to the live DB row (re-derived `siteId` from each stored location via service-key REST —
+  descriptions byte-unchanged, only `siteId` moved). `hr.json` moved the **`us-retail` marker onto US
+  land** (was floating in the Gulf of Mexico) and added a **"Europe — field & other"** (`eu-other`)
+  marker; `careers.json` regenerated; CareersStrip relabeled "X strategic · Y retail & field". Live
+  split today: 68 = 30 + 33 + 5. (2) **Map bubble-size toggle** (HR lens): a second button row under
+  World/Americas/Europe — **Positions** (default) / **Headcount** — where the dot's **size AND number
+  both** reflect the selected metric (fixes the old size=headcount-but-number=openings mismatch).
+  `radiusFromCount`/`compactCount` in `format.ts`; `PulseMap` gains a `metricToggle` prop, set on the HR
+  lens. Positions-default also spreads the bubbles (us-retail biggest, in the US), easing the
+  Central-America headcount overlap. `tsc` clean + `next build` green; verified in-browser (both modes'
+  radii + badges; us-retail 33 / eu-other 5 / sales-pt 7 role lists; no console errors).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
   **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`

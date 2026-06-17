@@ -59,7 +59,8 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
     return () => { on = false; };
   }, [lens.id, roles]);
 
-  // Group the live roles by strategic siteId (null → the US-retail sentinel).
+  // Group the live roles by siteId (always a bucket key: a strategic site,
+  // "us-retail" or "eu-other"; the ?? below is just a defensive fallback).
   const rolesBySite = useMemo(() => {
     const map = new Map<string, CareerRole[]>();
     for (const r of roles ?? []) {
@@ -127,7 +128,7 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
       {lens.feed === "enso" && <EnsoStrip />}
       {lens.feed === "freight" && <FreightStrip />}
 
-      <PulseMap sites={sites} markers={markers} selectedId={selectedId} onSelect={(m) => setSelectedId(m.id)} />
+      <PulseMap sites={sites} markers={markers} selectedId={selectedId} onSelect={(m) => setSelectedId(m.id)} metricToggle={lens.id === "hr"} />
 
       <ProvenanceLegend lens={lens} />
 
