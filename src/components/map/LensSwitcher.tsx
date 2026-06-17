@@ -38,11 +38,6 @@ export function LensSwitcher({
           >
             <Icon className="size-4" aria-hidden="true" />
             <span>{l.label}</span>
-            {l.status === "stub" && (
-              <span className={cn("ml-0.5 text-[10px]", active ? "opacity-80" : "text-muted-foreground/70")}>
-                ·soon
-              </span>
-            )}
           </button>
         );
       })}

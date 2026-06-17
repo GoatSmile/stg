@@ -35,9 +35,10 @@ export type Regime = { country: string; status: "banned" | "restricted" | "open"
 
 export type Lens = {
   id: string; dept: string; label: string; icon: string; blurb: string;
-  status?: "stub"; asOf: string; kpis: Kpi[]; markers: Marker[];
+  asOf: string; kpis: Kpi[]; markers: Marker[];
   regimes?: Regime[]; agentNote?: string;
-  /** A live agent feed to render on this lens (currently "fx" = ECB rates on Finance). */
+  /** A live agent feed to render on this lens: "fx" (Finance), "careers" (HR),
+   *  "weather" (Procurement), "enso" (ESG), "freight" (Supply). */
   feed?: string;
 };
 

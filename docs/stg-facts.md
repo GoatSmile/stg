@@ -190,15 +190,21 @@ Full table + sources in [research-brief.md](research-brief.md) §2. Summary:
 
 - Portal: `careers.st-group.com` (SAP SuccessFactors Recruiting / RMK; tenant
   `st-group-careers.jobs.hr.cloud.sap`).
-- **~49 open roles** (snapshot 2026-06-13). Job URL encodes city + postal code +
-  req id: `/job/{City}-{Title}-{Postal}/{reqId}/` → geocodable. Detail pages show
-  **"Posting Start Date"** → days-open computable. No public JSON (headless scrape
-  or LinkedIn pull; refresh on a schedule, stamp first-seen date).
-- Live snapshot by location: Lisbon/Carnaxide 8 (SDO+IT) · DR 7 (SAP support) ·
-  Bethlehem PA 6 · Madrid 4 · Richmond VA 3 · Estelí 2 · Biyagama 2 · Waalre 2 ·
-  Copenhagen 2 · East Ridge TN 2 · + Bremen, Westerlo, Holstebro, Pasuruan,
-  Eskilstuna, UK, NY 1 each. Six career areas: Solution Delivery Org, Digital &
-  IT, Global Commercial, Supply Chain–Manufacturing, Business Support, NA Commercial.
+- **Open roles are live + daily, not a fixed snapshot** — count shifts as postings
+  open/close (e.g. **68 on 2026-06-16**: 30 strategic-site · 33 US retail/bars · 5
+  unmapped-EU field/other). The robots-**allowed** `/jobs.xml` syndication feed is the
+  spine (complete set + full descriptions + apply links); the `/services/` department +
+  days-open enrichment is a manual, owner-authorised pass. Posting URL encodes city +
+  postal + req id (`/job/{City}-{Title}-{Postal}/{reqId}/` → geocodable); detail pages
+  carry **"Posting Start Date"** → days-open.
+- **Source of truth is the DB, served live** — every role (title · real department ·
+  days-open · full description · apply URL) lives only in `varsel_careers_snapshots.roles`
+  (Supabase EU) and the app reads it live via `/api/feeds/careers?roles=1`; `hr.json`
+  carries no roles. Each role is bucketed by location into one of the 12 strategic sites,
+  `us-retail` (US Cigars-International stores/bars) or `eu-other` (Holstebro DK + NL/SE/UK
+  field sales). Six career areas seen: Solution Delivery Org, Digital & IT, Global
+  Commercial, Supply Chain–Manufacturing, Business Support, NA Commercial. (The 06-13
+  "~49 / per-location" snapshot this section used to quote is superseded.)
 
 ## 10. Public live-data feeds an AI agent can fetch (the "agents go get it" story)
 

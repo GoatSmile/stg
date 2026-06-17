@@ -24,7 +24,7 @@ unsourced number. Not a product — a credible, honest, forwardable demo.
 
 ## 1. Architecture
 
-- **Next.js 15 App Router + TypeScript + Tailwind + shadcn/ui** (style
+- **Next.js 16 App Router + TypeScript + Tailwind + shadcn/ui** (style
   `radix-nova` — do NOT re-init; copy components.json + the registry approach
   from jensen-fms). Server-render by default; client components only for the
   interactive surfaces (map, sliders).
@@ -160,9 +160,10 @@ propagates into a number shown to a CEO — this block is cheap insurance.
   ```
   **Band = min/max of ΔEBITDA over the full grid** of {elasticity, passThrough}
   low/base/high from `elasticity-priors.json` — this guarantees the band brackets
-  the base point and can never invert (the ±0.30 shortcut could). **Unit-tested
-  with Vitest** — the math is repeated to a CFO; pin cases incl. the band-brackets
-  invariant and a zero-exposed-share case.
+  the base point and can never invert (the ±0.30 shortcut could). _(Planned a Vitest
+  unit-suite here to pin the band-brackets invariant + a zero-exposed-share case;
+  later dropped per CLAUDE.md "out of scope" — manual smoke-test discipline instead.
+  Revisit if this graduates to a pilot.)_
 - **`exposedShare` is a first-class, visible input** — the model never applies
   an excise *minimum* across 100% of a category (a minimum only bites below the
   floor). Default conservative, labelled "assumption — which markets sit below

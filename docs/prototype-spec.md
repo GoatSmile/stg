@@ -60,7 +60,7 @@ banned demand migrates) — advocacy evidence + growth-capture signal.
 
 ## Stack
 
-Per CLAUDE.md: Next.js 15 (App Router) + TypeScript + Tailwind + shadcn/ui
+Per CLAUDE.md: Next.js 16 (App Router) + TypeScript + Tailwind + shadcn/ui
 (radix-nova), Vercel behind SSO. **No database in v0** — segment model + curated
 regulatory corpus + golden responses are versioned JSON in `/src/data/`. The
 Pouch Radar crawler output is cached JSON, refreshed on a schedule (not at

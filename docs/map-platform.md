@@ -203,6 +203,13 @@ a database if useful.")
 
 ## 8. How this connects to the build plan
 
+> **Update (2026-06):** this section is the original phasing plan and is kept for
+> history. It has since shipped in full — **all 7 lenses are now built out, zero
+> stubs** (Regulatory, HR, Finance, Sales, Procurement, Supply, ESG), with 5 live
+> feeds. Read the "Status & handoff" + "Demo shortcuts" log in `CLAUDE.md` for the
+> current state; the "other lenses stubbed" rows below describe the plan at the time,
+> not today.
+
 Revises [build-plan.md](build-plan.md) — the phases still hold, re-scoped:
 
 | Build-plan phase | Was | Now (platform) |

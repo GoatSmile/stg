@@ -85,7 +85,8 @@ export default function Transparency() {
             Varsel for STG is not affiliated with or endorsed by STG.
           </li>
           <li>
-            Data current as of 14 June 2026. The full fact base lives in the project&apos;s
+            Curated data is current as of June 2026; the live feeds (FX, careers, weather, climate,
+            freight) refresh on their own schedule. The full fact base lives in the project&apos;s
             <code className="mx-1 rounded bg-secondary px-1 py-0.5 text-[12px]">stg-facts.md</code>.
           </li>
         </ul>
