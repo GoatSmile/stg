@@ -454,14 +454,42 @@ repeated to the client: owner decides, always.
   and the `/transparency` agent-fetched bullet corrected to the real 5 feeds (Brent/FRED + ENSO; dropped
   Freightos + competitor-e-commerce, which aren't live). `tsc` clean + `next build` green (16 routes);
   verified in-browser (home, radar, OG image, procurement KPI), no console errors.
+- **Impact Room: in-force France ban + DK cap modeled — `5c5e4b2` (2026-06-17).** Closed panel #2's
+  highest-leverage move: the Impact Room had only the proposed EU-ETD (2028, immaterial) exhibit, which
+  undercut the "early-warning" promise. Added the two **in-force** regulations as worked examples.
+  (1) **New restriction mechanism** in `impact-model.ts` (`computeRestrictionImpact`): a ban/cap removes
+  revenue rather than raising a price, so the math is **lost revenue (net of recapture) × contribution
+  margin**, NOT the EU-ETD elasticity×pass-through excise walk. Band = min/max over the
+  {recapture × margin} grid → always brackets the base, can't invert (same guarantee as the excise model).
+  (2) **France** (`fr-ban`, Décret 2025-898, total ban → ~0 recapture → DKK 9–17m/yr, base 13m) and
+  **Denmark** (`dk-cap`, 9mg + flavour cap → SKU delisting *with* recapture → DKK 2–5m/yr, base ~3m)
+  scenarios in `impact-scenarios.json` — sourced facts, `kind`-tagged editable assumptions,
+  pinned abstentions (FR/DK pouch revenue + XQS share are **not published** by STG → set via an editable
+  market-share, **never** presented as STG's own figure). Both use the published NGP pouch base (DKK 428m).
+  (3) **Growth-at-risk anchor card**: the direct P&L hit is small (pouches ~5% of group), so the real
+  point is the **foreclosed pouch revenue vs the stated DKK 1bn+ ambition** (FR ≈3%, DK ≈1%). The card
+  **self-captions** its basis — the figure follows from the editable market-share assumption (illustrative,
+  not STG's own number), shown against the future ambition as a *sense of scale, not a precise contribution*
+  (closed a review finding: the band card's "illustrative" tag didn't extend to this card). (4) **AI route**
+  is mechanism- + **status-aware** (in-force → present tense; proposed → "would") with **per-scenario
+  goldens** (`impact-fr-ban.json`, `impact-dk-cap.json`) for offline mode; citation rail unchanged — the
+  ~620m French cigar figure still abstains by value-match (not in any scenario's `facts`). (5) **Scenario
+  switcher** on `/impact` (in-force claret vs proposed amber dot); FR/DK markers gained `impact:true` →
+  "Open the Impact Room". Folded in a 17-finding adversarial review (model math, citation rails, abstentions,
+  status framing all verified clean — note: ~half its verify agents died on the prior session's rate-limit,
+  so the substantive findings were re-verified by hand this session); fixed the growth-card caption + the FR
+  marker copy ("forecloses France **as a** growth market", not existing growth). `tsc` clean + `next build`
+  green (16 routes); verified in-browser (FR/DK bands, EU-ETD regression unchanged, abstentions pinned,
+  switcher + marker entry path, no console errors).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
   record the video (script + shot list in `docs/demo-script.md`); fill `[wife]` + `[video link]` in
-  `docs/outreach.md`. **Highest-leverage product move still open (panel #2):** model the **France
-  oral-nicotine ban + DK 9mg cap** (both in-force *now*) to a DKK band in the Impact Room — it currently
-  has only the one EU-ETD (2028, immaterial) exhibit, which undercuts an "early-warning" promise; the
-  engine exists. Then Pouch Radar P1 (make strength/flavour real → price-per-mg) + P2 (owner roll-up +
+  `docs/outreach.md`. **Panel #2's highest-leverage move is now DONE** (`5c5e4b2`): the France ban + DK cap
+  are modeled in the Impact Room — three worked examples now (EU-ETD proposed + FR/DK in-force), so the
+  "early-warning" promise is no longer undercut by a single immaterial 2028 exhibit. **Highest-leverage move
+  still open:** Pouch Radar P1 (make strength/flavour real → price-per-mg — turns the page's biggest fake-data
+  liability into its most honest chart; offered to the owner, awaiting go-ahead) + P2 (owner roll-up +
   strength×flavour regulatory-exposure band → Impact Room). Optional: leaf-price (FRED/USDA) overlay on
   Procurement; real per-lane freight (paid Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
