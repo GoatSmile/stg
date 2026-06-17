@@ -225,11 +225,12 @@ repeated to the client: owner decides, always.
 - **Surface B — Pouch Radar shipped — `2ef485b` (2026-06-14).** The Sales-lens
   drill-down (`/radar`, static / SSR-safe): XQS vs VELO vs ZYN price/strength/rank
   bars across SE/UK/DK + a launch & compliance feed with source chips. v1 is a
-  curated snapshot — structure/shares sourced, per-can prices/ranks/strengths/flavours
-  illustrative* (P0 hardening 2026-06-17 `e6a1aa0`: quarantined in a dashed "illustrative
-  layout" panel + Nordic Spirit/ZYN-DK gaps disclosed on-page) — with the crawler
-  (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan
-  §4). Sales lens un-stubbed; Sweden/UK markers deep-link to it (`Marker.radar`).
+  curated snapshot. Structure/shares sourced; **strengths, flavours & pack counts are now REAL +
+  per-row sourced (P1, `d00891e` 2026-06-17)** — only per-can prices/ranks + the derived price-per-mg
+  stay illustrative* (P0 hardening 2026-06-17 `e6a1aa0`: quarantined in a dashed "illustrative
+  layout" panel; P1 split the real strength/flavour block out above it) — with the crawler
+  (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan §4). Sales lens un-stubbed;
+  Sweden/UK markers deep-link to it (`Marker.radar`).
 - **Careers DB moved to its own Supabase project — (2026-06-14; infra + gitignored env + this doc, no app-code change).**
   `varsel_careers_snapshots` migrated from the shared "Jensen" project
   (`jzlphajunfrqvpogzsiz`, eu-west-1) to a dedicated **"Valent - proposals"** project
@@ -481,17 +482,38 @@ repeated to the client: owner decides, always.
   marker copy ("forecloses France **as a** growth market", not existing growth). `tsc` clean + `next build`
   green (16 routes); verified in-browser (FR/DK bands, EU-ETD regression unchanged, abstentions pinned,
   switcher + marker entry path, no console errors).
+- **Pouch Radar P1: real sourced strength/flavour + price-per-mg — `d00891e` (2026-06-17).** Owner
+  directive: "maximise the board — real where we honestly can, **keep** the illustrative data, no
+  payment/API hassle." Insight: price is the *only* genuinely ToS-gated field; strength, flavour and
+  pack count are public manufacturer specs, so they're now curated the project's way (cited, dated) —
+  **no crawl needed**. (1) **Strength (mg/pouch), flavour style/count, pack count are now REAL** with a
+  per-row `specSource` + `specConfidence` (UK HIGH; SE/DK MED — DK surviving-SKU naming leans on sik.dk
+  + a retailer guide), promoted into a "Strength & flavour · sourced" block with a citation chip per row
+  + scaled strength bars. Sourced via a research agent (manufacturer pages + the free Haypp Nicotine
+  Pouch Report 2025). (2) **Coverage widened**: Nordic Spirit (JTI) added to SE+UK, ZYN added to DK —
+  closes the two gaps P0 disclosed. **Nordic Spirit DK availability post-cap is UNVERIFIED → deliberately
+  omitted from DK (disclosed on-page), not faked.** (3) **price-per-mg** derived (`price ÷ pouches × mg`,
+  a metric no competitor dashboard shows) but kept in the dashed illustrative panel + labelled, because
+  the price input is still a placeholder (real strength ÷ fake price = illustrative). (4) Per-can prices
+  + ranks **preserved** as illustrative* (not deleted), quarantined with price-per-mg. `radar.ts`:
+  `RadarPrice` gains `repStrengthMg`/`packCount`/`flavourCount`/`flavourStyle`/`specSource`/
+  `specConfidence`; new `pricePerMg`/`maxRepStrengthMg` selectors. `tsc` clean + `next build` green (16
+  routes); verified in-browser (SE/UK/DK blocks, price-per-mg math, source chips, DK null-flavour rows,
+  no console errors). **P1b (full real price-per-mg table) still needs a real price source** (paid Haypp
+  feed or a ToS-cleared nicotine-pouches.org snapshot — owner declined the payment/API route for now).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
   record the video (script + shot list in `docs/demo-script.md`); fill `[wife]` + `[video link]` in
   `docs/outreach.md`. **Panel #2's highest-leverage move is now DONE** (`5c5e4b2`): the France ban + DK cap
   are modeled in the Impact Room — three worked examples now (EU-ETD proposed + FR/DK in-force), so the
-  "early-warning" promise is no longer undercut by a single immaterial 2028 exhibit. **Highest-leverage move
-  still open:** Pouch Radar P1 (make strength/flavour real → price-per-mg — turns the page's biggest fake-data
-  liability into its most honest chart; offered to the owner, awaiting go-ahead) + P2 (owner roll-up +
-  strength×flavour regulatory-exposure band → Impact Room). Optional: leaf-price (FRED/USDA) overlay on
-  Procurement; real per-lane freight (paid Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
+  "early-warning" promise is no longer undercut by a single immaterial 2028 exhibit. **Pouch Radar P1 also
+  DONE** (`d00891e`): strength/flavour/pack-count now real + per-row sourced, board widened (+Nordic Spirit,
+  +ZYN-DK), price-per-mg derived (illustrative until a real price source). **Highest-leverage moves still
+  open:** Radar **P1b** — the full real price-per-mg table — needs a real price source (paid Haypp feed or a
+  ToS-cleared nicotine-pouches.org snapshot; owner declined the payment/API route for now). Then Radar **P2**
+  (owner roll-up + strength×flavour regulatory-exposure band → Impact Room). Optional: leaf-price (FRED/USDA)
+  overlay on Procurement; real per-lane freight (paid Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
