@@ -532,9 +532,25 @@ repeated to the client: owner decides, always.
   per-market XQS SKU grids — saved to **`src/data/radar/xqs-skus.json`** (generated programmatically from
   the snapshot, not hand-transcribed) with computed flavour-cap exposure: a tobacco/menthol-only rule delists
   **SE 79% / UK 68% / DK 12%** of XQS's nicotine SKUs (DK is pre-trimmed to mint, which is why it's low).
-  `wiredIntoImpactRoom:false` — see P2 below for the modelling choice this sets up. `tsc` clean + `next build`
+  (`wiredIntoImpactRoom` is now `true` — see Radar P2 below.) `tsc` clean + `next build`
   green (16 routes); verified in-browser (SE/DK price rows, verified badges, real price-per-mg 0.13–0.44 DKK/mg,
   DK XQS low-end caveat, corrected "6 mg floor", no console errors).
+- **Pouch Radar P2: XQS SKU exposure wired into the Impact Room — (2026-06-17).** The captured XQS SKU grid
+  (`src/data/radar/xqs-skus.json`) now grounds the `dk-cap` `affectedShare` assumption (was a hand-set 0.65 guess).
+  **Owner basis decision (taken): measure against XQS's full SE/UK range** — the assortment the cap removes —
+  **not** Denmark's already-mint-trimmed shelf; **keep the 0.65 default** (the conservative end, since these are
+  SKU counts not revenue — mint over-indexes on volume). The SKU evidence *brackets* 0.65 rather than moving it
+  (UK 68% / SE 79%), which is the credibility win. (1) `radar.ts` gains a `xqsFlavourCapExposure` summary selector
+  reading the grid (single source — the Impact Room never re-hardcodes the numbers). (2) `affectedShare` in
+  `impact-scenarios.json` keeps default 0.65 but gains `sourceRef:"Pouch Radar XQS SKU grid"` + a SKU-grounded note
+  ("delists 23 of 34 UK and 27 of 34 SE SKUs"); the slider now shows a citation chip. (3) New gated **SKU-exposure
+  card** in `ImpactRoom.tsx` (shown only when `scenario.skuExposureLens === "flavour-cap"`, set on dk-cap): SE/UK as
+  the basis bracketing 0.65, real example delisted flavours, **DK 12% labelled as the residual ("the survivors — the
+  cap already trimmed DK to mint")**, and a **SKU-count-≠-revenue caveat** (recapture slider carries it). `Scenario`
+  type gains `skuExposureLens?`. The band is **unchanged** (default 0.65 → DKK 3m base, regression-safe); the AI route
+  + goldens + abstentions are untouched (affectedShare is an editable assumption, never a cited fact). `tsc` clean +
+  `next build` green (16 routes); verified in-browser (dk-cap shows the card + grounded slider; eu-etd default shows
+  no card; no console errors).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
@@ -545,16 +561,16 @@ repeated to the client: owner decides, always.
   DONE** (`d00891e`): strength/flavour/pack-count now real + per-row sourced, board widened (+Nordic Spirit,
   +ZYN-DK). **Pouch Radar P1b also DONE** (2026-06-17): the owner-cleared price snapshot is **wired in** —
   per-can prices + price-per-mg are now **real** (UK+DK cross-verified, SE sourced/re-verify-pending), the
-  dashed illustrative panel removed, the board fully sourced. **Highest-leverage move now open: Radar P2** —
-  feed the captured XQS SKU grid (`src/data/radar/xqs-skus.json`) into the Impact Room's `dk-cap`
-  `affectedShare` (today a hand-set 0.65) so the delisted-share is SKU-grounded, with the breakdown shown.
-  **Owner decision P2 needs first:** *which* XQS range to measure exposure against — a flavour cap delists
-  **SE 79% / UK 68%** of the full flavoured catalogue but only **12%** of the already-mint-trimmed DK range,
-  so 0.65 is well-supported by the broad SE/UK figure; pick the basis before it drives a CFO-facing band
-  (this is why P2 isn't auto-wired). Optional, lower-leverage: SE price independent re-verify (the agent that
-  died), the full Haypp-feed price table, leaf-price (FRED/USDA) overlay on Procurement, real per-lane freight
-  (paid Freightos FBX). The **video** is still parked (record per `docs/demo-script.md`; fill `[wife]` +
-  `[video link]` in `docs/outreach.md`). Open decisions in `docs/ceo-play.md` §8.
+  dashed illustrative panel removed, the board fully sourced; **SE was re-verified this session** (its dead verify
+  agent re-run → all 4 SE prices cross-verified vs Nettotobak; ZYN SE can corrected 21→20). **Pouch Radar P2 also
+  DONE** (2026-06-17): the XQS SKU grid is wired into the Impact Room's `dk-cap` `affectedShare` (SKU-grounded, SE/UK
+  basis, 0.65 kept, DK 12% shown as the residual, SKU-vs-revenue caveat). **The whole Pouch Radar track (P0→P2) is
+  now closed.** Remaining open work is all **lower-leverage / optional**: the full Haypp-feed price table (a broader
+  priced-SKU set), a leaf-price (FRED/USDA) overlay on Procurement, real per-lane freight (paid Freightos FBX), and
+  new es-cap (0.99 mg strength) / PL-flavour Impact-Room scenarios off the same SKU grid (the strength-cap exposure
+  — UK 41% / SE 21% / DK 12% >9 mg — is already computed in `xqs-skus.json`). The **video** is the main parked item
+  (record per `docs/demo-script.md`; fill `[wife]` + `[video link]` in `docs/outreach.md`). Open decisions in
+  `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,

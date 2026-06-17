@@ -1,4 +1,5 @@
 import data from "@/data/radar/pouch-radar.json";
+import xqsGrid from "@/data/radar/xqs-skus.json";
 
 // Pouch Radar (Surface B) — the Sales-lens drill-down. v1 reads a curated, dated
 // snapshot (no request-time scraping); the live crawler is gated on a ToS read.
@@ -104,3 +105,54 @@ export function brandWithOwner(b: RadarBrand): string {
 export const eventsByDate: RadarEvent[] = [...pouchRadar.events].sort((a, b) =>
   a.date < b.date ? 1 : a.date > b.date ? -1 : 0,
 );
+
+// ─────────────────────────────────────────────────────────────────────────────
+// XQS SKU regulatory-exposure (Radar P2) — feeds the Impact Room's dk-cap
+// `affectedShare`. Captured by the owner-cleared 2026-06-17 snapshot; the grid
+// of record is src/data/radar/xqs-skus.json (this is the single source — the
+// Impact Room reads the summary below, it never re-hardcodes the numbers).
+
+export type XqsFlavourCategory = "tobacco" | "menthol-mint" | "fruit-fusion" | "other";
+export type XqsSku = { sku: string; mg: number; flavour: string; flavourCategory: XqsFlavourCategory };
+export type XqsMarketGrid = {
+  code: string;
+  name: string;
+  exposure: { nicotineSkus: number; flavourCap_delisted: number; flavourCap_delistedShare: number };
+  skus: XqsSku[];
+};
+
+const grid = xqsGrid as unknown as { asOf: string; source: string; markets: XqsMarketGrid[] };
+export const xqsGridAsOf: string = grid.asOf;
+export const xqsGridSource: string = grid.source;
+
+/** One market's flavour-cap exposure, summarised for the Impact Room card. */
+export type XqsFlavourCapExposure = {
+  code: string;
+  name: string;
+  delisted: number; // nicotine SKUs delisted by a tobacco/menthol-only rule
+  total: number; // total nicotine SKUs
+  share: number; // delisted / total, 0..1
+  examples: string[]; // a few distinct delisted flavours, for a concrete "e.g. …"
+};
+
+function summariseFlavourCap(m: XqsMarketGrid): XqsFlavourCapExposure {
+  const delistedFlavours = m.skus
+    .filter((s) => s.mg > 0 && (s.flavourCategory === "fruit-fusion" || s.flavourCategory === "other"))
+    .map((s) => s.flavour);
+  const examples = [...new Set(delistedFlavours)].slice(0, 3);
+  return {
+    code: m.code,
+    name: m.name,
+    delisted: m.exposure.flavourCap_delisted,
+    total: m.exposure.nicotineSkus,
+    share: m.exposure.flavourCap_delistedShare,
+    examples,
+  };
+}
+
+/** Flavour-cap exposure per market, broad-range first (SE, UK) then the pre-trimmed DK shelf. */
+export const xqsFlavourCapExposure: XqsFlavourCapExposure[] = grid.markets.map(summariseFlavourCap);
+
+export function flavourCapExposureFor(code: string): XqsFlavourCapExposure | undefined {
+  return xqsFlavourCapExposure.find((e) => e.code === code);
+}

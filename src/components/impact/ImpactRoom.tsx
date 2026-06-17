@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AlertTriangle, Lock, TrendingDown } from "lucide-react";
+import { AlertTriangle, Layers, Lock, TrendingDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ScenarioControls } from "./ScenarioControls";
 import { AiRead } from "./AiRead";
@@ -9,6 +9,7 @@ import { CitationChip } from "./CitationChip";
 import { Abstain } from "./Abstain";
 import { computeImpact, computeRestrictionImpact, spreadTriple } from "@/lib/impact-model";
 import { type Scenario } from "@/lib/impact-data";
+import { xqsFlavourCapExposure, xqsGridAsOf } from "@/lib/radar";
 import { dkkM, pct } from "@/lib/format";
 
 function dkkRange(a: number, b: number): string {
@@ -26,6 +27,12 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
   );
 
   const isRestriction = scenario.mechanism === "restriction";
+
+  // Radar P2 — real XQS SKU exposure behind `affectedShare` (flavour-cap scenarios only).
+  const skuExp = scenario.skuExposureLens === "flavour-cap" ? xqsFlavourCapExposure : [];
+  const skuBroad = skuExp.filter((e) => e.code !== "DK"); // SE/UK = the pre-cap range the rule removes
+  const skuDk = skuExp.find((e) => e.code === "DK"); // the already-trimmed shelf = the residual
+  const skuExamples = (skuExp.find((e) => e.code === "UK")?.examples ?? []).join(", ");
 
   const view = useMemo(() => {
     const cfg = (key: string) => scenario.assumptions.find((a) => a.key === key);
@@ -215,6 +222,48 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
             The foreclosed figure follows from the editable {`${scenario.marketLabel} share`}{" "}
             assumption — illustrative, not STG&apos;s own number — and is shown against the stated
             future ambition as a sense of scale, not a precise contribution.
+          </p>
+        </Card>
+      )}
+
+      {/* Radar P2 — the real XQS SKU range behind the delisted-share assumption. The slider
+          default isn't a guess: it's bracketed by XQS's actual flavoured catalogue. */}
+      {scenario.skuExposureLens === "flavour-cap" && skuBroad.length > 0 && (
+        <Card className="flex flex-col gap-2 p-4">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <Layers className="size-3.5" aria-hidden="true" />
+            What the delisted share is built on — XQS&apos;s real SKU range
+            <CitationChip sourceRef="Pouch Radar XQS SKU grid" asOf={xqsGridAsOf} />
+          </div>
+          <p className="text-[13px] leading-relaxed">
+            A tobacco/menthol-only rule delists most of XQS&apos;s flavoured range. Measured on XQS&apos;s
+            full range in unrestricted markets — the assortment the cap removes:
+          </p>
+          <div className="flex flex-col gap-1">
+            {skuBroad.map((e) => (
+              <div key={e.code} className="flex items-center justify-between gap-2 text-[13px]">
+                <span className="text-muted-foreground">{e.name}</span>
+                <span className="tabular-nums">
+                  {e.delisted} of {e.total} SKUs · <span className="font-medium">{pct(e.share)}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+          {skuExamples && (
+            <p className="text-[12px] leading-snug text-muted-foreground">
+              e.g. {skuExamples} — all delisted. The {pct(0.65)} slider default sits inside this SE/UK band.
+            </p>
+          )}
+          {skuDk && (
+            <p className="border-t border-border pt-2 text-[12px] leading-snug text-muted-foreground">
+              Denmark&apos;s own shelf shows only {skuDk.delisted} of {skuDk.total} ({pct(skuDk.share)}) —
+              but that&apos;s the <span className="font-medium">survivors</span>: the cap already trimmed DK
+              to mint, so exposure is measured against the full range above, not the post-cap shelf.
+            </p>
+          )}
+          <p className="text-[11px] leading-snug text-muted-foreground">
+            SKU counts, not revenue — mint over-indexes on volume, so the revenue-weighted share is lower;
+            the recapture slider carries that. Illustrative, not STG&apos;s own figure.
           </p>
         </Card>
       )}

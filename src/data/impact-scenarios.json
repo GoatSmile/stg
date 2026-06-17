@@ -185,6 +185,7 @@
       "exposedBaseNote": "NGP (nicotine-pouch) net sales FY2025 — STG's published pouch base (incl. XQS). STG does not split it by market, so Denmark's share is the editable assumption below.",
       "ambitionDkkM": 1000,
       "ambitionSourceRef": "Tobacco Insider 2025",
+      "skuExposureLens": "flavour-cap",
       "assumptions": [
         {
           "key": "marketShare",
@@ -206,7 +207,8 @@
           "max": 0.9,
           "step": 0.05,
           "unit": "pct",
-          "note": "Share of the DK XQS range that is non-tobacco/menthol or >9 mg, hence delisted. XQS is flavour-led (research-brief), so most of the range — you set it."
+          "sourceRef": "Pouch Radar XQS SKU grid",
+          "note": "SKU-grounded (Pouch Radar): a tobacco/menthol-only rule delists 23 of 34 UK and 27 of 34 SE XQS nicotine SKUs (68% / 79%) — 0.65 is the conservative anchor inside that band. Measured against XQS's full SE/UK range, not Denmark's already-mint-trimmed shelf (only 12% there — the survivors). SKU counts, not revenue (mint over-indexes on volume) — still editable."
         },
         {
           "key": "recapture",

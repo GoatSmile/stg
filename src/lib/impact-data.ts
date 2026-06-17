@@ -43,6 +43,8 @@ export type Scenario = {
   /** For restriction scenarios: the cited pouch ambition the foreclosed revenue is measured against. */
   ambitionDkkM?: number;
   ambitionSourceRef?: string;
+  /** When set, the Impact Room shows the real XQS SKU exposure (Pouch Radar P2) behind `affectedShare`. */
+  skuExposureLens?: "flavour-cap";
   assumptions: Assumption[];
   facts: ScenarioFact[];
   abstain: ScenarioAbstain[];
