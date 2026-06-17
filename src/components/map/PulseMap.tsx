@@ -238,15 +238,21 @@ export function PulseMap({
               if (!p) return null;
               const headcount = metricToggle && metric === "headcount";
               const r = radiusOf(m);
-              // Number inside the dot reflects the SAME metric as its size. In
-              // headcount mode only label dots big enough to hold the figure.
+              // Number inside the dot reflects the SAME metric as its size, and is
+              // ALWAYS shown — a small dot just lets the figure spill (the text halo
+              // below keeps it readable over the parchment), so e.g. Richmond's 200
+              // never disappears just because its headcount bubble is small.
               const badge = headcount
-                ? m.employees != null && r >= 11
+                ? m.employees != null
                   ? compactCount(m.employees)
                   : null
                 : m.openPositions
                   ? String(m.openPositions)
                   : null;
+              // Distinct fill per metric so the active mode reads at a glance:
+              // headcount = brand claret (the workforce in STG's own colour),
+              // positions = the marker's provenance colour (public-blue on HR).
+              const fill = headcount ? "var(--primary)" : provenanceMeta[m.provenance].color;
               const selected = selectedId === m.id;
               const ring = m.severity ? severityRing[m.severity] : null;
               return (
@@ -282,14 +288,25 @@ export function PulseMap({
                   )}
                   <circle
                     r={r}
-                    fill={provenanceMeta[m.provenance].color}
+                    fill={fill}
                     fillOpacity={0.85}
                     stroke="var(--map-marker-stroke)"
                     strokeWidth={selected ? 2.5 : 1}
                     vectorEffect="non-scaling-stroke"
                   />
                   {badge ? (
-                    <text textAnchor="middle" dy="0.32em" fontSize={9} fill="#fff" fontWeight={600}>
+                    <text
+                      textAnchor="middle"
+                      dy="0.32em"
+                      fontSize={9}
+                      fontWeight={600}
+                      fill="#fff"
+                      stroke="rgba(20,14,10,0.55)"
+                      strokeWidth={2.25}
+                      paintOrder="stroke"
+                      strokeLinejoin="round"
+                      style={{ pointerEvents: "none" }}
+                    >
                       {badge}
                     </text>
                   ) : null}
