@@ -51,11 +51,11 @@ export default function Radar() {
           <span className="font-medium">v1 curated snapshot, {pouchRadar.asOf}.</span> Brand/market
           structure, XQS shares, <span className="font-medium text-foreground">strengths, flavours, pack counts</span>{" "}
           and <span className="font-medium text-foreground">per-can prices</span> are all public/sourced — a citation
-          per row. <span className="text-foreground">UK &amp; Denmark prices were each independently cross-verified</span>{" "}
-          against a second shop; Sweden&apos;s are sourced from Haypp SE + Snusbolaget with the independent re-verify
-          still pending. Prices are single-can <span className="font-medium text-foreground">list</span> prices
-          (multibuy is cheaper); DKK uses ECB cross-rates (GBP 8.72, SEK 0.66). Price-per-mg is derived = price ÷
-          (pouches × mg). This was an owner-cleared one-time snapshot — the live crawler
+          per row. <span className="text-foreground">UK, Denmark &amp; Sweden prices were each independently
+          cross-verified</span> against a second shop. Prices are single-can <span className="font-medium text-foreground">list</span>{" "}
+          prices and reflect one shop&apos;s listing (multibuy is cheaper; cross-shop variation ~±10%); DKK uses ECB
+          cross-rates (GBP 8.72, SEK 0.66). Price-per-mg is derived = price ÷ (pouches × mg). This was an
+          owner-cleared one-time snapshot — the live crawler
           (<code className="rounded bg-secondary px-1 py-0.5 text-[12px]">scripts/crawl-radar.ts</code>) stays gated.
         </span>
       </div>

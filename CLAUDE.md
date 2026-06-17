@@ -227,10 +227,11 @@ repeated to the client: owner decides, always.
   bars across SE/UK/DK + a launch & compliance feed with source chips. v1 is a
   curated snapshot. Structure/shares sourced; **strengths, flavours & pack counts are now REAL +
   per-row sourced (P1, `d00891e` 2026-06-17)**; **per-can prices + the derived price-per-mg are now
-  REAL too (P1b, 2026-06-17 — owner-cleared one-time snapshot)**: UK + DK prices each independently
-  cross-verified vs a 2nd shop (HIGH, `priceVerified:true`), SE sourced from Haypp SE + Snusbolaget
-  but its independent re-verify pass died on a session limit, so SE ships MED / `priceVerified:false`
-  (never claimed double-verified). Price-per-mg = priceDkk ÷ (packCount × repStrengthMg) is now a real
+  REAL too (P1b, 2026-06-17 — owner-cleared one-time snapshot)**: UK, DK **and SE** prices each
+  independently cross-verified vs a 2nd shop (HIGH, `priceVerified:true`). SE's verify pass originally
+  died on a session limit and was **re-run this session** — it passed (corroborated vs Nettotobak, exact
+  1-pack matches) and corrected ZYN's SE can from 21→20 pouches. Price-per-mg = priceDkk ÷ (packCount ×
+  repStrengthMg) is now a real
   derived metric. The dashed "illustrative" price panel is GONE — the only thing dropped is the online
   bestseller **rank** (never separately sourced; `rank` now just orders rows). `pricesProvenance:"sourced"`.
   The crawler (`scripts/crawl-radar.ts`) **stays gated** — this was a manual owner-authorised snapshot,
@@ -514,9 +515,11 @@ repeated to the client: owner decides, always.
   prices replace the fabricated placeholders in `pouch-radar.json`. **UK** (nicotine-pouches.org/Haypp UK)
   and **DK** (din-ecigaret.dk) each **independently cross-verified against a 2nd shop** → `priceVerified:true`,
   HIGH. **SE** (Haypp SE + Snusbolaget) was cross-checked at fetch but its **verify agent died on the prior
-  session's limit**, so SE ships `priceVerified:false` / MED with "independent re-verify pending" — never
-  claimed as double-verified (honesty spine). DK XQS carries a `priceNote` (listed 35 kr; both corroborating
-  shops run ~39 kr → flagged low-end). (2) **price-per-mg is now a REAL derived metric** = `priceDkk ÷
+  session's limit** — so it was **re-run this session** (a single targeted SE verify agent, not the whole
+  workflow): all four SE prices corroborated against an independent third shop (Nettotobak, exact 1-pack
+  matches), so SE is now `priceVerified:true` / HIGH too. The re-run also **corrected ZYN's SE can from 21→20
+  pouches** (current product pages show 20; an older FAQ said 21) — a real-data fix. DK XQS carries a
+  `priceNote` (listed 35 kr; both corroborating shops run ~39 kr → flagged low-end). (2) **price-per-mg is now a REAL derived metric** = `priceDkk ÷
   (packCount × repStrengthMg)`; each row names its `pricedSku` so the ratio is self-documenting. (3) **The
   dashed "illustrative" price panel is GONE** — the board is now fully sourced (strength/flavour + price +
   ppm), with only confidence levels + the SE caveat as honest footnotes. The **only** thing dropped is the
