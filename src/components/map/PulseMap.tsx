@@ -130,6 +130,12 @@ export function PulseMap({
   const base = REGIONS.find((r) => r.id === regionId)?.view ?? WORLD;
   const view = focus ?? base;
 
+  // Bubble radius for the active metric; also used to z-order markers (largest
+  // drawn first / underneath, smallest last / on top) so a small dot near a big
+  // one is never buried and stays clickable.
+  const radiusOf = (m: Marker) =>
+    metricToggle && metric === "positions" ? radiusFromCount(m.openPositions) : radiusFromEmployees(m.employees);
+
   function setRegion(id: string) {
     setFocus(null);
     setDurMs(700);
@@ -174,7 +180,6 @@ export function PulseMap({
         </div>
         {metricToggle && (
           <div className="flex items-center gap-0.5 rounded-md border border-border bg-card/85 p-0.5 backdrop-blur-sm">
-            <span className="px-1 text-[10px] uppercase tracking-wide text-muted-foreground">bubble</span>
             {METRICS.map((m) => (
               <button
                 key={m.id}
@@ -228,14 +233,11 @@ export function PulseMap({
 
           {/* active lens markers */}
           <g>
-            {markers.map((m) => {
+            {[...markers].sort((a, b) => radiusOf(b) - radiusOf(a)).map((m) => {
               const p = project(m.lng, m.lat);
               if (!p) return null;
               const headcount = metricToggle && metric === "headcount";
-              const r =
-                metricToggle && metric === "positions"
-                  ? radiusFromCount(m.openPositions)
-                  : radiusFromEmployees(m.employees);
+              const r = radiusOf(m);
               // Number inside the dot reflects the SAME metric as its size. In
               // headcount mode only label dots big enough to hold the figure.
               const badge = headcount
@@ -264,8 +266,9 @@ export function PulseMap({
                     if (e.key === "Enter" || e.key === " ") onSelect(m);
                   }}
                 >
-                  {/* enlarged transparent hit target for easier hover/click */}
-                  <circle r={r + 7} fill="transparent" />
+                  {/* enlarged transparent hit target for easier hover/click (kept
+                      modest so adjacent dots don't overlap each other's click area) */}
+                  <circle r={r + 5} fill="transparent" />
                   {ring && (
                     <circle
                       r={r + 5}

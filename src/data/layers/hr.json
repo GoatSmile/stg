@@ -126,8 +126,8 @@
     {
       "id": "hr-ni",
       "siteId": "fac-ni",
-      "lat": 13.09,
-      "lng": -86.35,
+      "lat": 12.4,
+      "lng": -85,
       "label": "Nicaragua — Estelí",
       "employees": 361,
       "retirementRisk": 35,
@@ -162,8 +162,8 @@
     {
       "id": "hr-hn",
       "siteId": "fac-hn",
-      "lat": 14.02,
-      "lng": -86.58,
+      "lat": 15.2,
+      "lng": -88,
       "label": "Honduras — Danlí",
       "employees": 1382,
       "retirementRisk": 60,
@@ -184,8 +184,8 @@
     {
       "id": "hr-eu-other",
       "siteId": "eu-other",
-      "lat": 52.8,
-      "lng": 6.5,
+      "lat": 52.3,
+      "lng": -1.5,
       "label": "Europe — field & other",
       "provenance": "public",
       "sourceRef": "careers.st-group.com",
