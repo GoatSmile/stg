@@ -9,9 +9,12 @@ export type EcbRates = Record<string, number>;
 
 /** Parse the ECB eurofxref-daily.xml body. Returns the publication date + EUR-based rates. */
 export function parseEcbRates(xml: string): { date: string; rates: EcbRates } {
-  const date = xml.match(/time="(\d{4}-\d{2}-\d{2})"/)?.[1] ?? "";
+  // ECB serves the attributes with single quotes (time='…', currency='USD'
+  // rate='…'); accept either quote style so a delimiter change can't silently
+  // fail the parse and drop the feed back to the cached snapshot.
+  const date = xml.match(/time=["'](\d{4}-\d{2}-\d{2})["']/)?.[1] ?? "";
   const rates: EcbRates = { EUR: 1 };
-  const re = /currency="([A-Z]{3})"\s+rate="([\d.]+)"/g;
+  const re = /currency=["']([A-Z]{3})["']\s+rate=["']([\d.]+)["']/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(xml)) !== null) {
     rates[m[1]] = parseFloat(m[2]);
