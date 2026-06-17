@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Varsel for STG — what a regulation is worth, in DKK, on its own footprint";
+export const alt = "Varsel for STG — where the next surprise to your P&L comes from, sized in kroner";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -28,10 +28,10 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div style={{ fontSize: "54px", fontWeight: 700, lineHeight: 1.1, maxWidth: "960px" }}>
-            What a regulation is worth to STG — in kroner, on its own footprint
+            Where the next surprise to your P&amp;L comes from
           </div>
-          <div style={{ fontSize: "27px", color: "#6b5d52", maxWidth: "900px", lineHeight: 1.35 }}>
-            A regulation→P&amp;L early-warning room for Scandinavian Tobacco Group. Built on public data only.
+          <div style={{ fontSize: "27px", color: "#6b5d52", maxWidth: "920px", lineHeight: 1.35 }}>
+            One live map of STG&apos;s risk surface — regulation, FX, leaf, the SAP rollout, pouches, hiring — the regulatory threat sized to a DKK band. Public data only.
           </div>
         </div>
 

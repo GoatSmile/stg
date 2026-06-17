@@ -12,13 +12,13 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://stg-azure.vercel.app"),
-  title: "Varsel for STG — what a regulation is worth, in DKK",
+  title: "Varsel for STG — the next surprise to your P&L, sized in kroner",
   description:
-    "A regulation→P&L early-warning room for Scandinavian Tobacco Group: turns a live tobacco/nicotine regulation into a DKK impact band on STG's own published footprint. Built on public data only; internal scenario-prep, not investor-facing.",
+    "One live map of Scandinavian Tobacco Group's whole risk surface — regulation, FX, leaf and climate, the SAP rollout, pouch competition, hiring — each a tracked signal, with the regulatory threat worked down to a DKK EBITDA band on STG's own published footprint. Built on public data only; internal scenario prep, not investor-facing.",
   openGraph: {
-    title: "Varsel for STG — what a regulation is worth, in DKK",
+    title: "Varsel for STG — the next surprise to your P&L, sized in kroner",
     description:
-      "Turns a live tobacco/nicotine regulation into a DKK impact band on STG's published footprint. Built on public data only.",
+      "See the tail before it surprises you — on public data, in DKK.",
     siteName: "Varsel for STG",
     type: "website",
   },

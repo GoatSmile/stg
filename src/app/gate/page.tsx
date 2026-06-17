@@ -24,9 +24,10 @@ export default async function Gate({
         </div>
 
         <p className="text-sm leading-relaxed">
-          A regulation→P&amp;L early-warning room for Scandinavian Tobacco Group. It turns a live
-          tobacco or nicotine regulation into a DKK impact band on STG&apos;s own published
-          footprint — built on public data only.
+          Where the next surprise to your P&amp;L could come from — regulation, FX, leaf and climate,
+          the SAP rollout, pouch competition, hiring — each a tracked signal on Scandinavian Tobacco
+          Group&apos;s own published footprint, with the regulatory threat sized to a DKK band, on
+          public data only.
         </p>
         <p className="mt-3 text-sm text-muted-foreground">
           This is a private preview. Enter the password from your invitation to continue.

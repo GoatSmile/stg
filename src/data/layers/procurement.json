@@ -6,7 +6,7 @@
     { "label": "Strategic leaf suppliers", "value": ">70", "sub": "Sustainable Tobacco Program", "flag": "C" },
     { "label": "Primary leaf origins", "value": "5", "sub": "DR, HN, NI, ID, LK", "flag": "C" },
     { "label": "Cultivation stake", "value": "20%", "sub": "Caribbean Cigar Holdings", "flag": "C" },
-    { "label": "Leaf price index", "value": "live*", "sub": "FRED/USDA feed", "flag": "I" }
+    { "label": "Leaf price index", "value": "designed*", "sub": "FRED/USDA — not yet wired", "flag": "I" }
   ],
   "markers": [
     { "id": "proc-dr", "lat": 19.45, "lng": -70.70, "label": "Dominican Republic", "value": "wrapper/binder", "provenance": "public", "sourceRef": "AR2025 + STP", "detail": "Largest origin — wrapper/binder + handmade. Live weather/crop risk above (Open-Meteo)." },

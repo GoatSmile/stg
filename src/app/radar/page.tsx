@@ -6,6 +6,9 @@ import {
   maxPriceDkk,
   isStgBrand,
   eventsByDate,
+  trackedBrands,
+  untrackedBrands,
+  brandWithOwner,
   type RadarEventType,
 } from "@/lib/radar";
 import { CitationChip } from "@/components/impact/CitationChip";
@@ -43,11 +46,20 @@ export default function Radar() {
         <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden="true" />
         <span>
           <span className="font-medium">v1 curated snapshot.</span> Brand/market structure and XQS
-          shares are public/sourced; the per-can <span className="text-amber-600 dark:text-amber-400">prices and online ranks are illustrative*</span>{" "}
+          shares are public/sourced; the per-can <span className="text-amber-600 dark:text-amber-400">prices, ranks, strengths &amp; flavour counts are illustrative*</span>{" "}
           until the first ToS-permitted crawl. The crawler (<code className="rounded bg-secondary px-1 py-0.5 text-[12px]">scripts/crawl-radar.ts</code>)
           is built and gated on a per-retailer terms-of-service read.
         </span>
       </div>
+
+      <p className="text-[12px] leading-snug text-muted-foreground">
+        <span className="font-medium text-foreground">Tracked here:</span>{" "}
+        {trackedBrands.map(brandWithOwner).join(", ")}.{" "}
+        <span className="font-medium text-foreground">Coverage gaps, disclosed:</span>{" "}
+        {untrackedBrands.map(brandWithOwner).join(", ")}{" "}
+        {untrackedBrands.length === 1 ? "isn't tracked yet" : "aren't tracked yet"}, and ZYN
+        isn&apos;t in the Denmark board below.
+      </p>
 
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
         {KPIS.map((k) => (
@@ -72,35 +84,37 @@ export default function Radar() {
               )}
               <span className="text-[12px] text-muted-foreground">{m.note}</span>
             </div>
-            <div className="flex flex-col gap-1.5">
-              {prices.map((p) => {
-                const stg = isStgBrand(p.brand);
-                const width = Math.max(8, Math.round((p.priceDkk / max) * 100));
-                return (
-                  <div key={p.brand} className="flex items-center gap-3">
-                    <span className={`w-28 shrink-0 text-[13px] ${stg ? "font-semibold text-primary" : ""}`}>
-                      {p.brand}
-                      {stg && <span className="ml-1 text-[10px] font-normal text-muted-foreground">STG</span>}
-                    </span>
-                    <div className="relative h-5 flex-1 rounded bg-secondary">
-                      <div
-                        className={`flex h-5 items-center justify-end overflow-hidden rounded pr-2 text-[11px] whitespace-nowrap tabular-nums ${stg ? "bg-primary text-primary-foreground" : "bg-muted-foreground/30 text-foreground"}`}
-                        style={{ width: `${width}%` }}
-                      >
-                        {p.priceLocal}
+            <div className="rounded-md border border-dashed border-amber-500/40 bg-amber-500/[0.04] p-2.5">
+              <div className="mb-2 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wide text-amber-700 dark:text-amber-400">
+                <AlertTriangle className="size-3 shrink-0" aria-hidden="true" />
+                illustrative layout · live prices, ranks, strengths &amp; flavour counts pending ToS-permitted crawl
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {prices.map((p) => {
+                  const stg = isStgBrand(p.brand);
+                  const width = Math.max(8, Math.round((p.priceDkk / max) * 100));
+                  return (
+                    <div key={p.brand} className="flex items-center gap-3">
+                      <span className={`w-28 shrink-0 text-[13px] ${stg ? "font-semibold text-primary" : ""}`}>
+                        {p.brand}
+                        {stg && <span className="ml-1 text-[10px] font-normal text-muted-foreground">STG</span>}
+                      </span>
+                      <div className="relative h-5 flex-1 rounded bg-secondary">
+                        <div
+                          className={`flex h-5 items-center justify-end overflow-hidden rounded pr-2 text-[11px] whitespace-nowrap tabular-nums ${stg ? "bg-primary text-primary-foreground" : "bg-muted-foreground/30 text-foreground"}`}
+                          style={{ width: `${width}%` }}
+                        >
+                          {p.priceLocal}
+                        </div>
                       </div>
+                      <span className="w-40 shrink-0 text-[11px] text-muted-foreground tabular-nums">
+                        #{p.rank} · {p.strengthMg} mg · {p.flavours} flavours
+                      </span>
                     </div>
-                    <span className="w-40 shrink-0 text-[11px] text-muted-foreground tabular-nums">
-                      #{p.rank} · {p.strengthMg} mg · {p.flavours} flavours
-                    </span>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-            <span className="text-[11px] text-muted-foreground">
-              <span className="text-amber-600 dark:text-amber-400">*</span> prices ≈ DKK-converted, and
-              online ranks, are illustrative until the live crawl.
-            </span>
           </div>
         );
       })}

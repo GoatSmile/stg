@@ -13,7 +13,7 @@ export type RadarMarket = {
   shareFlag?: string;
   note: string;
 };
-export type RadarBrand = { brand: string; owner: string; isStg?: boolean };
+export type RadarBrand = { brand: string; owner: string; isStg?: boolean; tracked?: boolean };
 export type RadarPrice = {
   market: string;
   brand: string;
@@ -58,6 +58,15 @@ export function maxPriceDkk(): number {
 
 export function isStgBrand(brand: string): boolean {
   return pouchRadar.brands.find((b) => b.brand === brand)?.isStg ?? false;
+}
+
+/** Brands shown in the board (tracked !== false) vs. known-but-not-yet-tracked. */
+export const trackedBrands: RadarBrand[] = pouchRadar.brands.filter((b) => b.tracked !== false);
+export const untrackedBrands: RadarBrand[] = pouchRadar.brands.filter((b) => b.tracked === false);
+
+/** "Brand (Owner)" label, e.g. "XQS (STG)". */
+export function brandWithOwner(b: RadarBrand): string {
+  return `${b.brand} (${b.owner})`;
 }
 
 /** Events newest-first. */

@@ -1,6 +1,6 @@
 {
-  "_note": "Pouch Radar v1 — a curated, dated snapshot. Brand/market STRUCTURE and XQS market shares are public/sourced (STG AR2025 / Q1 2026); the specific per-can PRICES and online bestseller RANKS are illustrative* placeholders until the first ToS-permitted crawl. The crawler (scripts/crawl-radar.ts) is built and GATED on a per-retailer ToS read (build-plan §4). Sources: Haypp Media & Insights, nicotine-pouches.org.",
-  "asOf": "2026-06-13",
+  "_note": "Pouch Radar v1 — a curated, dated snapshot. Brand/market STRUCTURE and XQS market shares are public/sourced (STG AR2025 / Q1 2026); the specific per-can PRICES, online bestseller RANKS, strength ranges and flavour counts are illustrative* placeholders until the first ToS-permitted crawl. The crawler (scripts/crawl-radar.ts) is built and GATED on a per-retailer ToS read (build-plan §4). Sources: Haypp Media & Insights, nicotine-pouches.org. SCOPE (disclosed on-page, not omitted silently): the board tracks the three brands we can source per market — XQS (STG), VELO (BAT), ZYN (PMI). JTI's Nordic Spirit (a 4th major, tracked:false below) and ZYN in Denmark are known competitors not yet in this snapshot.",
+  "asOf": "2026-06-17",
   "crawledAt": null,
   "pricesProvenance": "fabricated",
   "sources": [
@@ -16,7 +16,7 @@
     { "brand": "XQS", "owner": "STG", "isStg": true },
     { "brand": "VELO", "owner": "BAT" },
     { "brand": "ZYN", "owner": "PMI" },
-    { "brand": "Nordic Spirit", "owner": "JTI" }
+    { "brand": "Nordic Spirit", "owner": "JTI", "tracked": false }
   ],
   "prices": [
     { "market": "SE", "brand": "VELO", "priceLocal": "SEK 36", "priceDkk": 23, "strengthMg": "6–10", "rank": 1, "flavours": 14 },
@@ -31,7 +31,7 @@
   "events": [
     { "date": "2026-04-01", "market": "DK", "type": "compliance", "text": "Denmark 9 mg cap + tobacco/menthol-only flavours in force — XQS flavour-led SKUs delisted in DK.", "sourceRef": "sik.dk" },
     { "date": "2026-04-01", "market": "FR", "type": "compliance", "text": "France oral-nicotine ban in force — France removed from XQS's expansion map.", "sourceRef": "Décret 2025-898" },
-    { "date": "2026-05-20", "market": "SE", "type": "share", "text": "XQS Sweden share 12.3% → 13.6%; XQS volume +38% vs +21% category (Q1 2026).", "sourceRef": "STG Q1 2026" },
+    { "date": "2026-05-20", "market": "SE", "type": "share", "text": "XQS Sweden share 12.3% (Q4 2025) → 13.6% (Q1 2026), up from 7.8% in 2024; XQS volume +38% vs +21% category.", "sourceRef": "STG Q1 2026" },
     { "date": "2026-01-01", "market": "UK", "type": "launch", "text": "XQS entering the mint segment — an explicit hedge against flavour regulation.", "sourceRef": "Focus2030" },
     { "date": "2024-07-01", "market": "US", "type": "distribution", "text": "STG discontinued third-party ZYN distribution (NAOR) — drove NGP organic −17%.", "sourceRef": "STG AR2025" }
   ]

@@ -23,9 +23,11 @@ export default function Transparency() {
       <section className="flex flex-col gap-2">
         <h2 className="font-heading text-xl font-medium tracking-tight">About this prototype</h2>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Varsel for STG is a working prototype — a regulation→P&amp;L early-warning room that turns a live
-          tobacco or nicotine regulation into a DKK impact band on STG&apos;s published footprint.
-          One map, seven department lenses, five live public-data feeds. It was built by{" "}
+          Varsel for STG is a working prototype — one live map of STG&apos;s whole risk surface
+          (regulation, FX, leaf and climate, the SAP rollout, pouch competition, hiring), with the
+          regulatory threat worked all the way down to a DKK impact band on STG&apos;s published
+          footprint as the worked example. Seven department lenses, five live public-data feeds. It
+          was built by{" "}
           {CONTACT.name} ({CONTACT.org}) as an independent demonstration: it shows the <em>shape</em>{" "}
           of the impact on public data, so the &quot;plug in your real numbers&quot; story can be
           judged before any data agreement. It is <strong>not</strong> investor-facing material, not
@@ -51,8 +53,8 @@ export default function Transparency() {
             <Dot color="var(--prov-agent)" />
             <span className="font-medium">Agent-fetched</span> — public data an AI agent pulls on a
             schedule and keeps current: STG&apos;s SuccessFactors careers feed (open roles), ECB FX
-            rates, Open-Meteo weather over leaf regions, Freightos freight rates, competitor
-            e-commerce. Real, just not hand-entered.
+            rates, Open-Meteo leaf-region weather, NOAA ENSO climate, and Brent crude as a
+            freight-cost proxy (FRED). Real, just not hand-entered.
           </li>
           <li className="rounded-lg border border-border p-3">
             <Dot color="var(--prov-internal)" />
