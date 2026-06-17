@@ -1,0 +1,13 @@
+{
+  "_note": "Pre-reviewed golden for the France oral-nicotine ban, served when DEMO_MODE=offline or no ANTHROPIC_API_KEY. The presenter says 'offline mode' out loud. Status is IN FORCE (not 'proposed'). Line items run through the same citation rail as a live call; the last two are deliberate abstentions (France pouch revenue + XQS France share are not published).",
+  "model": "claude-sonnet-4-6",
+  "narrative": "France's oral-nicotine ban (Décret 2025-898) has been in force since April 2026 — a total ban, with a Conseil d'État merits ruling expected June 2026. The direct EBITDA hit is modest: pouches are only ~5% of STG's group (NGP net sales were DKK 428m in FY2025) and France was never an XQS focus market. The sharper cost is strategic — with no compliant oral-nicotine product, the foreclosed France pouch revenue is gone, not deferred, removing a market from STG's stated DKK 1bn+ pouch ambition. France's pouch revenue is not published by STG, so it is an editable assumption here, not STG's own figure; the French machine-rolled cigar core is a separate exposure this ban does not touch.",
+  "lineItems": [
+    { "claim": "STG pouch base — NGP net sales (FY2025)", "value": "DKK 428m", "sourceRef": "AR2025", "abstain": false, "reason": null },
+    { "claim": "STG group net sales (FY2025)", "value": "DKK 9,036m", "sourceRef": "AR2025", "abstain": false, "reason": null },
+    { "claim": "CEO's stated pouch ambition", "value": "DKK 1bn+", "sourceRef": "Tobacco Insider 2025", "abstain": false, "reason": null },
+    { "claim": "France oral-nicotine ban — instrument & status", "value": "Décret 2025-898, in force Apr 2026", "sourceRef": "Décret 2025-898", "abstain": false, "reason": null },
+    { "claim": "France pouch / oral-nicotine revenue for STG", "value": null, "sourceRef": null, "abstain": true, "reason": "not published by STG — set via the editable 'France share', never presented as STG's own figure" },
+    { "claim": "XQS market share in France", "value": null, "sourceRef": null, "abstain": true, "reason": "not stated in source — needs human lookup" }
+  ]
+}

@@ -21,8 +21,14 @@ export type Assumption = {
 export type ScenarioFact = { claim: string; value: string; sourceRef: string; provenance: string };
 export type ScenarioAbstain = { claim: string; reason: string };
 
+/** "excise" = the EU-ETD price-rise walk; "restriction" = an in-force ban/cap (lost revenue × margin). */
+export type ScenarioMechanism = "excise" | "restriction";
+
 export type Scenario = {
   eventId: string;
+  mechanism: ScenarioMechanism;
+  /** For restriction scenarios: the market name shown in the walk ("France", "Denmark"). */
+  marketLabel?: string;
   title: string;
   instrument: string;
   celex?: string;
@@ -34,6 +40,9 @@ export type Scenario = {
   exposedBaseSourceRef: string;
   exposedBaseDerived: boolean;
   exposedBaseNote: string;
+  /** For restriction scenarios: the cited pouch ambition the foreclosed revenue is measured against. */
+  ambitionDkkM?: number;
+  ambitionSourceRef?: string;
   assumptions: Assumption[];
   facts: ScenarioFact[];
   abstain: ScenarioAbstain[];
@@ -45,6 +54,11 @@ const scenarios = (data as { scenarios: Record<string, Scenario> }).scenarios;
 export const scenariosAsOf = (data as { asOf: string }).asOf;
 export const unmodeled = (data as { unmodeled: Unmodeled[] }).unmodeled;
 export const defaultEventId = "eu-etd";
+
+/** The modeled scenarios, for the Impact-Room switcher (insertion order: EU-ETD, France, Denmark). */
+export const modeledScenarios: { eventId: string; title: string; status: string }[] = Object.values(
+  scenarios,
+).map((s) => ({ eventId: s.eventId, title: s.title, status: s.status }));
 
 export function getScenario(eventId?: string): Scenario {
   return (eventId ? scenarios[eventId] : undefined) ?? scenarios[defaultEventId];

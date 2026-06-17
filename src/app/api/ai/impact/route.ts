@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getScenario, type Scenario } from "@/lib/impact-data";
-import { computeImpact, spreadTriple } from "@/lib/impact-model";
+import { computeImpact, computeRestrictionImpact, spreadTriple } from "@/lib/impact-model";
 import { validateLineItems, type RawLineItem, type KnownFact } from "@/lib/citation-rail";
 import goldenEtd from "@/data/golden/impact-eu-etd.json";
+import goldenFrBan from "@/data/golden/impact-fr-ban.json";
+import goldenDkCap from "@/data/golden/impact-dk-cap.json";
 
 // The Anthropic SDK needs the Node runtime (not edge); the call must stay server-side.
 export const runtime = "nodejs";
@@ -13,11 +15,31 @@ export const runtime = "nodejs";
 const MODEL = "claude-sonnet-4-6";
 
 type Golden = { narrative: string; lineItems: RawLineItem[] };
-const goldens: Record<string, Golden> = { "eu-etd": goldenEtd as unknown as Golden };
+const goldens: Record<string, Golden> = {
+  "eu-etd": goldenEtd as unknown as Golden,
+  "fr-ban": goldenFrBan as unknown as Golden,
+  "dk-cap": goldenDkCap as unknown as Golden,
+};
+
+/** Just the at-risk magnitudes the route reports — both model shapes expose these. */
+type AtRisk = { atRiskBest: number; atRiskBase: number; atRiskWorst: number };
 
 /** Recompute the band locally — the AI never produces the number, only the prose around it. */
-function bandFor(scenario: Scenario, values: Record<string, number>) {
+function bandFor(scenario: Scenario, values: Record<string, number>): AtRisk {
   const a = Object.fromEntries(scenario.assumptions.map((x) => [x.key, values[x.key] ?? x.default]));
+
+  if (scenario.mechanism === "restriction") {
+    const rc = scenario.assumptions.find((x) => x.key === "recapture")!;
+    const cm = scenario.assumptions.find((x) => x.key === "contributionMargin")!;
+    const marketBase = scenario.exposedBaseDkkM * (a.marketShare ?? 0);
+    return computeRestrictionImpact({
+      marketBase,
+      affectedShare: a.affectedShare ?? 0,
+      recapture: spreadTriple(a.recapture ?? 0, rc.spread ?? 0.15, rc.min, rc.max),
+      contributionMargin: spreadTriple(a.contributionMargin ?? 0, cm.spread ?? 0.1, cm.min, cm.max),
+    });
+  }
+
   const pt = scenario.assumptions.find((x) => x.key === "passThrough")!;
   const el = scenario.assumptions.find((x) => x.key === "elasticity")!;
   const exposedBase = scenario.exposedBaseDkkM * (a.exposedShare ?? 0);
@@ -44,13 +66,13 @@ const SYSTEM = [
   "Hard rules, in priority order:",
   "1. Cite ONLY from the facts provided in the user message, by their exact sourceRef and exact value. Never invent, round, or adjust a figure.",
   "2. If a number is not in the provided facts, you MUST abstain: set abstain=true, value=null, sourceRef=null, and a short reason. A wrong figure shown to a CFO is worse than an abstention.",
-  "3. The regulation is a PROPOSAL in Council negotiation — describe it as proposed, never as enacted, law, or in force. Use 'would', not 'will'.",
+  "3. Respect the scenario's stated status EXACTLY (given below). If it is a PROPOSAL, describe it as proposed and use 'would' — never 'will', 'enacted' or 'in force'. If it is IN FORCE, describe it in the present tense as in force — do not understate it as a proposal.",
   "4. This is internal decision-support / scenario prep, NOT investor-facing. Produce no earnings guidance or investor-facing language (EU MAR).",
   "5. The DKK band is a model on STG's published splits, not STG's own figure — say so.",
   "Output strictly as the requested JSON: a short narrative (2–4 sentences) and 4–6 line items.",
 ].join("\n");
 
-function buildPrompt(scenario: Scenario, result: ReturnType<typeof computeImpact>): string {
+function buildPrompt(scenario: Scenario, result: AtRisk): string {
   const facts = scenario.facts.map((f) => `- ${f.claim}: ${f.value}   [cite as sourceRef: ${f.sourceRef}]`).join("\n");
   const gaps = scenario.abstain.map((a) => `- ${a.claim}`).join("\n");
   return [
@@ -65,7 +87,6 @@ function buildPrompt(scenario: Scenario, result: ReturnType<typeof computeImpact
     "",
     "Known gaps — you MUST abstain on these (abstain=true, value=null, sourceRef=null):",
     gaps,
-    "- Any France-specific machine-rolled cigar revenue figure (e.g. ~DKK 620m): not in this corpus.",
     "",
     "Write the narrative and the line items now. Cite only from the facts above; abstain on everything else.",
   ].join("\n");

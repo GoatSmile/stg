@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { ImpactRoom } from "@/components/impact/ImpactRoom";
-import { getScenario, isModeled, unmodeled, scenariosAsOf } from "@/lib/impact-data";
+import {
+  getScenario,
+  isModeled,
+  unmodeled,
+  modeledScenarios,
+  scenariosAsOf,
+} from "@/lib/impact-data";
 
 export const metadata = { title: "Impact Room — Varsel for STG" };
 
@@ -24,6 +30,33 @@ export default async function Impact({
         </p>
       </div>
 
+      {/* scenario switcher — flip between the worked examples */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="mr-1 text-xs uppercase tracking-wide text-muted-foreground">Threat</span>
+        {modeledScenarios.map((s) => {
+          const active = s.eventId === scenario.eventId;
+          const inForce = !/propos/i.test(s.status);
+          return (
+            <Link
+              key={s.eventId}
+              href={`/impact?event=${s.eventId}`}
+              aria-current={active ? "page" : undefined}
+              className={
+                active
+                  ? "inline-flex items-center gap-1.5 rounded-md border border-primary bg-primary/10 px-2.5 py-1 text-[13px] font-medium text-primary"
+                  : "inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-[13px] text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              }
+            >
+              <span
+                aria-hidden
+                className={`size-1.5 rounded-full ${inForce ? "bg-primary" : "bg-amber-500"}`}
+              />
+              {s.title}
+            </Link>
+          );
+        })}
+      </div>
+
       {requestedUnmodeled && (
         <div className="rounded-md border border-dashed border-border px-3 py-2 text-[13px] text-muted-foreground">
           <span className="font-medium text-foreground">{requestedUnmodeled.label}</span> isn&apos;t
@@ -35,8 +68,8 @@ export default async function Impact({
 
       <div className="flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
         <span>
-          Worked example: EU-ETD. Other tracked threats (France ban, DK cap, ES cap, US tariffs)
-          model separately — coming.
+          Worked examples: EU-ETD (proposed, 2028), plus the France ban and Denmark cap that are in
+          force now. Spain&apos;s cap and US tariffs model separately — coming.
         </span>
         <Link href="/" className="underline underline-offset-2">
           ← back to the pulse

@@ -3,6 +3,7 @@
   "scenarios": {
     "eu-etd": {
       "eventId": "eu-etd",
+      "mechanism": "excise",
       "title": "EU tobacco-tax revision (ETD)",
       "instrument": "COM(2025) 580",
       "celex": "52025PC0580",
@@ -90,11 +91,162 @@
           "reason": "COM(2025) 580 sets minima, not a single headline rate — modeled as a scenario, not quoted as fact"
         }
       ]
+    },
+    "fr-ban": {
+      "eventId": "fr-ban",
+      "mechanism": "restriction",
+      "marketLabel": "France",
+      "title": "France oral-nicotine ban",
+      "instrument": "Décret 2025-898",
+      "status": "in force — Apr 2026",
+      "sourceUrl": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052146600",
+      "appliesFrom": "in force 1 Apr 2026 · Conseil d'État merits ruling ~Jun 2026",
+      "summary": "France's total ban on oral nicotine (Décret 2025-898) removes the pouch category outright — there is no compliant product to recapture, so the affected revenue is lost, not deferred. The direct P&L hit is modest (pouches are ~5% of group), but the ban forecloses a market from STG's DKK 1bn+ pouch ambition. This models the foreclosed pouch revenue and its EBITDA on STG's published pouch base. The French machine-rolled cigar core (~DKK 620m, an analyst derivation) is a SEPARATE exposure — this ban does not touch it.",
+      "exposedBaseDkkM": 428,
+      "exposedBaseSourceRef": "AR2025",
+      "exposedBaseDerived": false,
+      "exposedBaseNote": "NGP (nicotine-pouch) net sales FY2025 — STG's published pouch base (incl. XQS), ~5% of group. STG does not split it by market, so France's share is the editable assumption below, not an STG figure.",
+      "ambitionDkkM": 1000,
+      "ambitionSourceRef": "Tobacco Insider 2025",
+      "assumptions": [
+        {
+          "key": "marketShare",
+          "label": "France share of STG's pouch (NGP) base",
+          "kind": "assumption",
+          "default": 0.08,
+          "min": 0.01,
+          "max": 0.25,
+          "step": 0.01,
+          "unit": "pct",
+          "note": "STG does not publish France pouch revenue — you set it. France was never an XQS focus market (Sweden/UK are), so the default is low."
+        },
+        {
+          "key": "affectedShare",
+          "label": "Share of the France pouch base hit by the ban",
+          "kind": "scenario",
+          "sourceRef": "Décret 2025-898",
+          "default": 1.0,
+          "min": 0.9,
+          "max": 1.0,
+          "step": 0.01,
+          "unit": "pct",
+          "note": "A TOTAL ban on oral nicotine — only medicinal NRT is exempt — so this is ~100%."
+        },
+        {
+          "key": "recapture",
+          "label": "Revenue recaptured via compliant products",
+          "kind": "assumption",
+          "default": 0.05,
+          "min": 0.0,
+          "max": 0.25,
+          "step": 0.05,
+          "spread": 0.1,
+          "unit": "pct",
+          "note": "There is no compliant oral-nicotine product in France post-ban — recapture is near zero. Drives the band."
+        },
+        {
+          "key": "contributionMargin",
+          "label": "Contribution margin on lost pouch revenue",
+          "kind": "assumption",
+          "default": 0.4,
+          "min": 0.25,
+          "max": 0.55,
+          "step": 0.01,
+          "spread": 0.1,
+          "unit": "pct",
+          "note": "STG does not disclose pouch contribution margin (NGP gross margin was 35.2% in Q1 2026, but gross ≠ contribution) — an assumption. Drives the band."
+        }
+      ],
+      "facts": [
+        { "claim": "NGP (nicotine-pouch) net sales — the pouch base (FY2025)", "value": "DKK 428m", "sourceRef": "AR2025", "provenance": "public" },
+        { "claim": "STG group net sales (FY2025)", "value": "DKK 9,036m", "sourceRef": "AR2025", "provenance": "public" },
+        { "claim": "CEO's stated pouch ambition", "value": "DKK 1bn+", "sourceRef": "Tobacco Insider 2025", "provenance": "public" },
+        { "claim": "France oral-nicotine ban — instrument & status", "value": "Décret 2025-898, in force Apr 2026", "sourceRef": "Décret 2025-898", "provenance": "public" }
+      ],
+      "abstain": [
+        { "claim": "France pouch / oral-nicotine revenue for STG", "reason": "not published by STG — you set it via 'France share' (an analyst assumption, never STG's figure)" },
+        { "claim": "XQS market share in France", "reason": "not stated in source — needs human lookup" },
+        { "claim": "Pouch own-price elasticity / contribution margin", "reason": "no public consensus for pouches — contribution margin is an editable assumption, not a cited figure" }
+      ]
+    },
+    "dk-cap": {
+      "eventId": "dk-cap",
+      "mechanism": "restriction",
+      "marketLabel": "Denmark",
+      "title": "Denmark 9 mg + flavour cap",
+      "instrument": "sik.dk",
+      "status": "in force — full effect Apr 2026",
+      "sourceUrl": "https://www.sik.dk/",
+      "appliesFrom": "phased from 1 Jul 2025 · full effect 1 Apr 2026",
+      "summary": "Denmark caps pouches at 9 mg/pouch and allows tobacco/menthol flavours only — delisting XQS's flavour-led, higher-strength SKUs in STG's home market. Unlike the France ban this is a restriction, so some volume recaptures into compliant SKUs (XQS has hedged into mint) — the recapture rate is the big unknown and drives the band. Modeled on STG's published pouch base; Denmark's pouch share and the delisted-SKU share are editable assumptions, not STG figures.",
+      "exposedBaseDkkM": 428,
+      "exposedBaseSourceRef": "AR2025",
+      "exposedBaseDerived": false,
+      "exposedBaseNote": "NGP (nicotine-pouch) net sales FY2025 — STG's published pouch base (incl. XQS). STG does not split it by market, so Denmark's share is the editable assumption below.",
+      "ambitionDkkM": 1000,
+      "ambitionSourceRef": "Tobacco Insider 2025",
+      "assumptions": [
+        {
+          "key": "marketShare",
+          "label": "Denmark share of STG's pouch (NGP) base",
+          "kind": "assumption",
+          "default": 0.06,
+          "min": 0.01,
+          "max": 0.2,
+          "step": 0.01,
+          "unit": "pct",
+          "note": "STG does not publish DK pouch revenue — you set it. Denmark is the home market but small (2.5% of group across all products)."
+        },
+        {
+          "key": "affectedShare",
+          "label": "Delisted share (flavoured / >9 mg SKUs)",
+          "kind": "assumption",
+          "default": 0.65,
+          "min": 0.3,
+          "max": 0.9,
+          "step": 0.05,
+          "unit": "pct",
+          "note": "Share of the DK XQS range that is non-tobacco/menthol or >9 mg, hence delisted. XQS is flavour-led (research-brief), so most of the range — you set it."
+        },
+        {
+          "key": "recapture",
+          "label": "Volume recaptured into compliant SKUs",
+          "kind": "assumption",
+          "default": 0.5,
+          "min": 0.2,
+          "max": 0.8,
+          "step": 0.05,
+          "spread": 0.15,
+          "unit": "pct",
+          "note": "Customers switching to compliant ≤9 mg tobacco/menthol SKUs (XQS hedged into mint). The biggest unknown — drives the band."
+        },
+        {
+          "key": "contributionMargin",
+          "label": "Contribution margin on lost pouch revenue",
+          "kind": "assumption",
+          "default": 0.4,
+          "min": 0.25,
+          "max": 0.55,
+          "step": 0.01,
+          "spread": 0.1,
+          "unit": "pct",
+          "note": "STG does not disclose pouch contribution margin (NGP gross margin was 35.2% in Q1 2026, but gross ≠ contribution) — an assumption. Drives the band."
+        }
+      ],
+      "facts": [
+        { "claim": "NGP (nicotine-pouch) net sales — the pouch base (FY2025)", "value": "DKK 428m", "sourceRef": "AR2025", "provenance": "public" },
+        { "claim": "Denmark net sales — all products (FY2025)", "value": "DKK 222m", "sourceRef": "AR2025", "provenance": "public" },
+        { "claim": "CEO's stated pouch ambition", "value": "DKK 1bn+", "sourceRef": "Tobacco Insider 2025", "provenance": "public" },
+        { "claim": "Denmark 9 mg cap + tobacco/menthol-only flavours", "value": "in force, full effect Apr 2026", "sourceRef": "sik.dk", "provenance": "public" }
+      ],
+      "abstain": [
+        { "claim": "Denmark pouch revenue for STG", "reason": "not published by STG — you set it via 'Denmark share' (an analyst assumption, never STG's figure)" },
+        { "claim": "XQS market share in Denmark", "reason": "not stated in source — needs human lookup" },
+        { "claim": "Pouch own-price elasticity / contribution margin", "reason": "no public consensus for pouches — contribution margin is an editable assumption, not a cited figure" }
+      ]
     }
   },
   "unmodeled": [
-    { "eventId": "fr-ban", "label": "France oral-nicotine ban", "why": "a ban (in-market volume → 0), not an excise band — a separate model" },
-    { "eventId": "dk-cap", "label": "Denmark 9mg + flavour cap", "why": "a pouch-format restriction — separate model" },
     { "eventId": "es-prop", "label": "Spain 0.99mg cap (proposed)", "why": "a pouch-strength cap — separate model" },
     { "eventId": "us-tariff", "label": "US handmade tariff lines", "why": "an import-cost shock — separate model" }
   ]

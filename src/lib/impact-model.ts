@@ -109,3 +109,94 @@ export function spreadTriple(base: number, spread: number, min: number, max: num
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
   return { low: clamp(base - spread), base: clamp(base), high: clamp(base + spread) };
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Restriction / ban model — for in-force format rules (Denmark 9mg + flavour cap)
+// and outright bans (France oral-nicotine ban). NOT an excise walk: a ban/cap
+// removes affected revenue rather than raising a price, so the mechanism is
+// "lost revenue (net of recapture) × contribution margin", not elasticity ×
+// pass-through. Kept pure + unit-checkable, same as the excise model above.
+//
+// The band is the min/max of ΔEBITDA over the {recapture × margin} grid — the two
+// genuinely-uncertain levers — so it always brackets the base and can't invert.
+
+export type ImpactRestrictionInputs = {
+  /** DKK m of pouch revenue in the affected market (= the published pouch base × an editable market-share). */
+  marketBase: number;
+  /** Share of that market base hit by the rule. A total ban = 1.0; a flavour/strength cap = the delisted-SKU share. */
+  affectedShare: number;
+  /** Share of affected revenue RETAINED via compliant substitutes (≤cap SKUs, other markets) — 0 for a total ban. */
+  recapture: Triple;
+  /** Contribution margin on the lost revenue. STG does not disclose it — an assumption. */
+  contributionMargin: Triple;
+};
+
+export type ImpactRestrictionWalk = {
+  affectedRevenue: number; // marketBase × affectedShare
+  retainedRevenue: number; // affectedRevenue × recapture
+  lostRevenue: number; // affectedRevenue × (1 − recapture) — the foreclosed top-line
+  ebitdaAtRisk: number; // lostRevenue × contributionMargin
+};
+
+export type ImpactRestrictionResult = {
+  ebitdaBase: number;
+  ebitdaBest: number; // least negative
+  ebitdaWorst: number; // most negative
+  atRiskBase: number;
+  atRiskBest: number; // smallest at-risk DKK
+  atRiskWorst: number; // largest at-risk DKK
+  /** Foreclosed top-line revenue at base assumptions — the "growth-at-risk" anchor (≈ % of the pouch ambition). */
+  lostRevenueBase: number;
+  walk: ImpactRestrictionWalk;
+};
+
+function deltaEbitdaRestriction(
+  marketBase: number,
+  affectedShare: number,
+  recapture: number,
+  contributionMargin: number,
+): number {
+  const lostRevenue = marketBase * affectedShare * (1 - recapture);
+  return -(lostRevenue * contributionMargin); // negative = at risk
+}
+
+export function computeRestrictionImpact(inp: ImpactRestrictionInputs): ImpactRestrictionResult {
+  const recaptures = [inp.recapture.low, inp.recapture.base, inp.recapture.high];
+  const margins = [inp.contributionMargin.low, inp.contributionMargin.base, inp.contributionMargin.high];
+
+  let worst = Infinity; // most negative
+  let best = -Infinity; // least negative
+  for (const r of recaptures) {
+    for (const m of margins) {
+      const d = deltaEbitdaRestriction(inp.marketBase, inp.affectedShare, r, m);
+      if (d < worst) worst = d;
+      if (d > best) best = d;
+    }
+  }
+
+  const ebitdaBase = deltaEbitdaRestriction(
+    inp.marketBase,
+    inp.affectedShare,
+    inp.recapture.base,
+    inp.contributionMargin.base,
+  );
+
+  const affectedRevenue = inp.marketBase * inp.affectedShare;
+  const retainedRevenue = affectedRevenue * inp.recapture.base;
+  const lostRevenue = affectedRevenue * (1 - inp.recapture.base);
+  const ebitdaAtRisk = lostRevenue * inp.contributionMargin.base;
+
+  const ebitdaWorst = Math.min(worst, ebitdaBase);
+  const ebitdaBest = Math.max(best, ebitdaBase);
+
+  return {
+    ebitdaBase,
+    ebitdaBest,
+    ebitdaWorst,
+    atRiskBase: -ebitdaBase,
+    atRiskBest: -ebitdaBest,
+    atRiskWorst: -ebitdaWorst,
+    lostRevenueBase: lostRevenue,
+    walk: { affectedRevenue, retainedRevenue, lostRevenue, ebitdaAtRisk },
+  };
+}

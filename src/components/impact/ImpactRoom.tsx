@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AlertTriangle, Lock } from "lucide-react";
+import { AlertTriangle, Lock, TrendingDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ScenarioControls } from "./ScenarioControls";
 import { AiRead } from "./AiRead";
 import { CitationChip } from "./CitationChip";
 import { Abstain } from "./Abstain";
-import { computeImpact, spreadTriple } from "@/lib/impact-model";
+import { computeImpact, computeRestrictionImpact, spreadTriple } from "@/lib/impact-model";
 import { type Scenario } from "@/lib/impact-data";
 import { dkkM, pct } from "@/lib/format";
 
@@ -17,35 +17,118 @@ function dkkRange(a: number, b: number): string {
   return `${dkkM(lo)} – ${dkkM(hi)}`;
 }
 
+/** A row in the transparent "how the base case is built" walk. */
+type WalkRow = { label: string; value: string; chip?: React.ReactNode; strong?: boolean };
+
 export function ImpactRoom({ scenario }: { scenario: Scenario }) {
   const [values, setValues] = useState<Record<string, number>>(() =>
     Object.fromEntries(scenario.assumptions.map((a) => [a.key, a.default])),
   );
 
-  const ptCfg = scenario.assumptions.find((a) => a.key === "passThrough")!;
-  const elCfg = scenario.assumptions.find((a) => a.key === "elasticity")!;
+  const isRestriction = scenario.mechanism === "restriction";
 
-  const result = useMemo(() => {
+  const view = useMemo(() => {
+    const cfg = (key: string) => scenario.assumptions.find((a) => a.key === key);
+
+    if (isRestriction) {
+      const rcCfg = cfg("recapture")!;
+      const cmCfg = cfg("contributionMargin")!;
+      const marketShare = values.marketShare ?? 0;
+      const affectedShare = values.affectedShare ?? 0;
+      const marketBase = scenario.exposedBaseDkkM * marketShare;
+      const r = computeRestrictionImpact({
+        marketBase,
+        affectedShare,
+        recapture: spreadTriple(values.recapture ?? 0, rcCfg.spread ?? 0.15, rcCfg.min, rcCfg.max),
+        contributionMargin: spreadTriple(
+          values.contributionMargin ?? 0,
+          cmCfg.spread ?? 0.1,
+          cmCfg.min,
+          cmCfg.max,
+        ),
+      });
+      const market = scenario.marketLabel ?? "this market";
+      const walk: WalkRow[] = [
+        {
+          label: "STG pouch base — NGP net sales",
+          value: dkkM(scenario.exposedBaseDkkM),
+          chip: (
+            <CitationChip
+              sourceRef={scenario.exposedBaseSourceRef}
+              derived={scenario.exposedBaseDerived}
+            />
+          ),
+        },
+        { label: `× ${market} share ${pct(marketShare)}`, value: `= ${dkkM(marketBase)} ${market} base` },
+        { label: `× affected share ${pct(affectedShare)}`, value: `= ${dkkM(r.walk.affectedRevenue)} affected` },
+        { label: `− recaptured via compliant SKUs ${pct(values.recapture ?? 0)}`, value: dkkM(r.walk.retainedRevenue) },
+        { label: "= lost (foreclosed) revenue", value: dkkM(r.walk.lostRevenue) },
+        { label: `× contribution margin ${pct(values.contributionMargin ?? 0)}`, value: dkkM(r.walk.ebitdaAtRisk) },
+        { label: "= EBITDA at risk (base)", value: `${dkkM(r.atRiskBase)} / yr`, strong: true },
+      ];
+      const ambition = scenario.ambitionDkkM ?? 0;
+      return {
+        band: { best: r.atRiskBest, base: r.atRiskBase, worst: r.atRiskWorst },
+        walk,
+        bandDrivers: "recapture × contribution-margin grid",
+        anchor: ambition
+          ? {
+              lostRevenue: r.lostRevenueBase,
+              shareOfAmbition: r.lostRevenueBase / ambition,
+              ambitionDkkM: ambition,
+              ambitionSourceRef: scenario.ambitionSourceRef ?? "",
+            }
+          : null,
+      };
+    }
+
+    // excise (EU-ETD)
+    const ptCfg = cfg("passThrough")!;
+    const elCfg = cfg("elasticity")!;
     const exposedShare = values.exposedShare ?? 0;
     const exposedBase = scenario.exposedBaseDkkM * exposedShare;
-    return computeImpact({
+    const r = computeImpact({
       exposedBase,
       priceIncreasePct: values.priceIncreasePct ?? 0,
       contributionMargin: values.contributionMargin ?? 0,
       passThrough: spreadTriple(values.passThrough ?? 0, ptCfg.spread ?? 0.15, ptCfg.min, ptCfg.max),
       elasticity: spreadTriple(values.elasticity ?? 0, elCfg.spread ?? 0.2, elCfg.min, elCfg.max),
     });
-  }, [values, scenario, ptCfg, elCfg]);
+    const walk: WalkRow[] = [
+      {
+        label: "EU cigar/pipe base",
+        value: dkkM(scenario.exposedBaseDkkM),
+        chip: (
+          <CitationChip sourceRef={scenario.exposedBaseSourceRef} derived={scenario.exposedBaseDerived} />
+        ),
+      },
+      { label: `× exposed share ${pct(exposedShare)}`, value: `= ${dkkM(exposedBase)} exposed` },
+      { label: "Volume lost (after elasticity)", value: dkkM(r.walk.volumeLossDkk) },
+      { label: "— margin lost on that volume", value: dkkM(r.walk.marginLossOnVol) },
+      { label: "— excise STG absorbs (not passed on)", value: dkkM(r.walk.absorbedExcise) },
+      { label: "= EBITDA at risk (base)", value: `${dkkM(r.atRiskBase)} / yr`, strong: true },
+    ];
+    return {
+      band: { best: r.atRiskBest, base: r.atRiskBase, worst: r.atRiskWorst },
+      walk,
+      bandDrivers: "elasticity × pass-through grid",
+      anchor: null as null | {
+        lostRevenue: number;
+        shareOfAmbition: number;
+        ambitionDkkM: number;
+        ambitionSourceRef: string;
+      },
+    };
+  }, [values, scenario, isRestriction]);
 
-  const exposedBase = scenario.exposedBaseDkkM * (values.exposedShare ?? 0);
-  const denom = Math.max(result.atRiskWorst, 1);
-  const bestPct = (result.atRiskBest / denom) * 100;
-  const basePct = (result.atRiskBase / denom) * 100;
+  const denom = Math.max(view.band.worst, 1);
+  const bestPct = (view.band.best / denom) * 100;
+  const basePct = (view.band.base / denom) * 100;
   const proposed = /propos/i.test(scenario.status);
 
   return (
     <div className="flex flex-col gap-5">
-      {/* scenario header — status is shown, never dressed up as enacted */}
+      {/* scenario header — status is shown verbatim, never dressed up or down */}
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2">
           <h2 className="font-heading text-xl font-medium tracking-tight">{scenario.title}</h2>
@@ -53,7 +136,7 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
             className={
               proposed
                 ? "rounded bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-400"
-                : "rounded bg-secondary px-2 py-0.5 text-xs text-muted-foreground"
+                : "rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
             }
           >
             {scenario.status}
@@ -72,10 +155,10 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
               Annual EBITDA at risk
             </div>
             <div className="mt-1 text-3xl font-semibold tabular-nums text-foreground">
-              {dkkRange(result.atRiskBest, result.atRiskWorst)}
+              {dkkRange(view.band.best, view.band.worst)}
             </div>
             <div className="mt-0.5 text-sm text-muted-foreground tabular-nums">
-              base case ≈ {dkkM(result.atRiskBase)} / year
+              base case ≈ {dkkM(view.band.base)} / year
             </div>
           </div>
           <span className="inline-flex items-center gap-1 rounded-md border border-amber-500/30 bg-amber-500/5 px-2 py-1 text-[11px] text-amber-700 dark:text-amber-400">
@@ -97,14 +180,44 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
           />
         </div>
         <div className="flex justify-between text-[11px] text-muted-foreground tabular-nums">
-          <span>{dkkM(result.atRiskBest)} (best)</span>
-          <span>{dkkM(result.atRiskWorst)} (worst)</span>
+          <span>{dkkM(view.band.best)} (best)</span>
+          <span>{dkkM(view.band.worst)} (worst)</span>
         </div>
         <p className="text-[11px] text-muted-foreground">
-          Band = the full range of outcomes across the elasticity × pass-through grid, so it always
-          brackets the base case. Internal scenario prep — not investor-facing (EU MAR).
+          Band = the full range of outcomes across the {view.bandDrivers}, so it always brackets the
+          base case. Internal scenario prep — not investor-facing (EU MAR).
         </p>
       </Card>
+
+      {/* growth-at-risk anchor (restriction scenarios): the small P&L hit is not the point —
+          the foreclosed share of the stated pouch ambition is. */}
+      {view.anchor && (
+        <Card className="flex flex-col gap-1.5 border-primary/30 bg-primary/5 p-4">
+          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-primary">
+            <TrendingDown className="size-3.5" aria-hidden="true" />
+            The growth at risk, not just the P&amp;L
+          </div>
+          <p className="text-sm leading-relaxed">
+            The current-year hit is modest because pouches are ~5% of group — but this forecloses{" "}
+            <span className="font-semibold tabular-nums">{dkkM(view.anchor.lostRevenue)}/yr</span>{" "}
+            of pouch revenue, ≈{" "}
+            <span className="font-semibold tabular-nums">{pct(view.anchor.shareOfAmbition)}</span>{" "}
+            of STG&apos;s stated{" "}
+            <span className="inline-flex items-center gap-1">
+              DKK 1bn+ pouch ambition
+              <CitationChip sourceRef={view.anchor.ambitionSourceRef} />
+            </span>
+            {scenario.eventId === "fr-ban"
+              ? " — and with no compliant product in France, that revenue is gone, not deferred."
+              : " — the growth leg the Focus2030 story leans on."}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            The foreclosed figure follows from the editable {`${scenario.marketLabel} share`}{" "}
+            assumption — illustrative, not STG&apos;s own number — and is shown against the stated
+            future ambition as a sense of scale, not a precise contribution.
+          </p>
+        </Card>
+      )}
 
       <AiRead eventId={scenario.eventId} assumptions={values} />
 
@@ -122,36 +235,22 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
           {/* the contribution-margin walk — the math, in the open */}
           <div className="flex flex-col gap-1.5">
             <h3 className="text-sm font-medium">How the base case is built</h3>
-            <div className="flex items-center justify-between gap-2 text-[13px]">
-              <span className="text-muted-foreground">EU cigar/pipe base</span>
-              <span className="flex items-center gap-2 tabular-nums">
-                {dkkM(scenario.exposedBaseDkkM)}
-                <CitationChip
-                  sourceRef={scenario.exposedBaseSourceRef}
-                  derived={scenario.exposedBaseDerived}
-                />
-              </span>
-            </div>
-            <div className="flex items-center justify-between text-[13px]">
-              <span className="text-muted-foreground">× exposed share {pct(values.exposedShare ?? 0)}</span>
-              <span className="tabular-nums">= {dkkM(exposedBase)} exposed</span>
-            </div>
-            <div className="flex items-center justify-between text-[13px]">
-              <span className="text-muted-foreground">Volume lost (after elasticity)</span>
-              <span className="tabular-nums">{dkkM(result.walk.volumeLossDkk)}</span>
-            </div>
-            <div className="flex items-center justify-between text-[13px]">
-              <span className="text-muted-foreground">— margin lost on that volume</span>
-              <span className="tabular-nums">{dkkM(result.walk.marginLossOnVol)}</span>
-            </div>
-            <div className="flex items-center justify-between text-[13px]">
-              <span className="text-muted-foreground">— excise STG absorbs (not passed on)</span>
-              <span className="tabular-nums">{dkkM(result.walk.absorbedExcise)}</span>
-            </div>
-            <div className="mt-0.5 flex items-center justify-between border-t border-border pt-1.5 text-[13px] font-medium">
-              <span>= EBITDA at risk (base)</span>
-              <span className="tabular-nums">{dkkM(result.atRiskBase)} / yr</span>
-            </div>
+            {view.walk.map((row, i) => (
+              <div
+                key={i}
+                className={
+                  row.strong
+                    ? "mt-0.5 flex items-center justify-between border-t border-border pt-1.5 text-[13px] font-medium"
+                    : "flex items-center justify-between gap-2 text-[13px]"
+                }
+              >
+                <span className={row.strong ? undefined : "text-muted-foreground"}>{row.label}</span>
+                <span className="flex items-center gap-2 tabular-nums">
+                  {row.value}
+                  {row.chip}
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* citation rail */}

@@ -1,0 +1,13 @@
+{
+  "_note": "Pre-reviewed golden for the Denmark 9mg + flavour cap, served when DEMO_MODE=offline or no ANTHROPIC_API_KEY. The presenter says 'offline mode' out loud. Status is IN FORCE (full effect Apr 2026). Line items run through the same citation rail as a live call; the last two are deliberate abstentions (DK pouch revenue + XQS DK share are not published).",
+  "model": "claude-sonnet-4-6",
+  "narrative": "Denmark's 9 mg/pouch cap and tobacco/menthol-only flavour rule are in force, with full effect from April 2026 (sik.dk), delisting XQS's flavour-led, higher-strength SKUs in STG's home market. As a restriction rather than a ban, some volume recaptures into compliant ≤9 mg tobacco/menthol SKUs (XQS has hedged into mint), so the recapture rate is the main driver of the band. The direct EBITDA hit is small — pouches are ~5% of group (NGP DKK 428m FY2025) and Denmark is a small market (DKK 222m of group net sales across all products) — but it constrains the DKK 1bn+ pouch growth ambition. Denmark's pouch revenue is not published by STG, so it is an editable assumption here, not STG's own figure.",
+  "lineItems": [
+    { "claim": "STG pouch base — NGP net sales (FY2025)", "value": "DKK 428m", "sourceRef": "AR2025", "abstain": false, "reason": null },
+    { "claim": "Denmark net sales — all products (FY2025)", "value": "DKK 222m", "sourceRef": "AR2025", "abstain": false, "reason": null },
+    { "claim": "CEO's stated pouch ambition", "value": "DKK 1bn+", "sourceRef": "Tobacco Insider 2025", "abstain": false, "reason": null },
+    { "claim": "Denmark 9 mg cap + tobacco/menthol-only flavours", "value": "in force, full effect Apr 2026", "sourceRef": "sik.dk", "abstain": false, "reason": null },
+    { "claim": "Denmark pouch revenue for STG", "value": null, "sourceRef": null, "abstain": true, "reason": "not published by STG — set via the editable 'Denmark share', never presented as STG's own figure" },
+    { "claim": "XQS market share in Denmark", "value": null, "sourceRef": null, "abstain": true, "reason": "not stated in source — needs human lookup" }
+  ]
+}
