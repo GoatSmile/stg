@@ -1,0 +1,626 @@
+{
+  "_note": "XQS per-SKU regulatory-exposure grid — the input for Pouch Radar P2 (the regulatory-exposure band into the Impact Room). CAPTURED by the owner-cleared one-time price snapshot (2026-06-17), the same pass that sourced the radar prices; NOT yet wired into the Impact Room. Each SKU is flavour-classified (tobacco + menthol-mint survive a DK-style tobacco/menthol-only flavour rule; fruit-fusion + other are delisted) and carries its mg/pouch (for a strength cap: DK 9 mg in force, Spain 0.99 mg proposed). 0%-nicotine display SKUs are listed but EXCLUDED from the delisted-share denominators (they are a separate product, unaffected by a strength cap). MODELLING CHOICE (the owner's call before P2 ships): exposure depends on WHICH range you measure. The DK in-market range is already mint-skewed (the colour line is all menthol-mint), so a DK-measured flavour-cap exposure (~10-15%) UNDERSTATES what a flavour ban does to XQS's BROAD flavoured catalogue (SE/UK are ~75-80% fruit). For a market where XQS still sells its full range, the SE/UK figure is the relevant one; DK shows what a pre-trimmed range looks like. The Impact Room's dk-cap `affectedShare` is today a hand-set 0.65 — P2 would replace that guess with one of these SKU-grounded figures, with the SKU breakdown shown. Flavour classification is the snapshot agents' best read of public listings; treat as MED confidence and re-review before it drives a CFO-facing band.",
+  "asOf": "2026-06-17",
+  "source": "Owner-cleared price snapshot (2026-06-17) — nicotine-pouches.org/Haypp UK, Haypp SE/Snusbolaget, din-ecigaret.dk +xqs.com/dk",
+  "wiredIntoImpactRoom": false,
+  "markets": [
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "exposure": {
+        "totalSkus": 39,
+        "nicotineSkus": 34,
+        "zeroNicotineSkus": 5,
+        "flavourCap_delisted": 27,
+        "flavourCap_survive": 7,
+        "flavourCap_delistedShare": 0.794,
+        "strengthCap9mg_delisted": 7,
+        "strengthCap9mg_delistedShare": 0.206,
+        "strengthCap099mg_delisted": 34,
+        "strengthCap099mg_delistedShare": 1.0
+      },
+      "skus": [
+        {
+          "sku": "XQS Citrus Cooling 4mg",
+          "mg": 4,
+          "flavour": "Citrus",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Citrus Cooling 8mg",
+          "mg": 8,
+          "flavour": "Citrus",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Blueberry Mint 4mg",
+          "mg": 4,
+          "flavour": "Blueberry & mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Blueberry Mint 8mg",
+          "mg": 8,
+          "flavour": "Blueberry & mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Tropical 4mg",
+          "mg": 4,
+          "flavour": "Tropical fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Tropical 8mg",
+          "mg": 8,
+          "flavour": "Tropical fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Black Cherry 4mg",
+          "mg": 4,
+          "flavour": "Black cherry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Black Cherry 8mg",
+          "mg": 8,
+          "flavour": "Black cherry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Wintergreen 4mg",
+          "mg": 4,
+          "flavour": "Wintergreen",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Wintergreen 8mg",
+          "mg": 8,
+          "flavour": "Wintergreen",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Orange Apple 4mg",
+          "mg": 4,
+          "flavour": "Orange & apple",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Orange Apple 8mg",
+          "mg": 8,
+          "flavour": "Orange & apple",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Elderflower 4mg",
+          "mg": 4,
+          "flavour": "Elderflower",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Hallon Lakrits 8mg",
+          "mg": 8,
+          "flavour": "Raspberry & licorice",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Cola Lime 8mg",
+          "mg": 8,
+          "flavour": "Cola & lime",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Berrynana Twist 8mg",
+          "mg": 8,
+          "flavour": "Banana & berry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Strawberry Kiwi 8mg",
+          "mg": 8,
+          "flavour": "Strawberry & kiwi",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Apple Crisp 8mg",
+          "mg": 8,
+          "flavour": "Apple & menthol",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Raspberry Blackcurrant 8mg",
+          "mg": 8,
+          "flavour": "Raspberry & blackcurrant",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Twin Apple 8mg",
+          "mg": 8,
+          "flavour": "Green & red apple",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Cactus Sour 8mg",
+          "mg": 8,
+          "flavour": "Cactus",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Fizzy Peach 8mg",
+          "mg": 8,
+          "flavour": "Peach",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Hallonsoda 8mg",
+          "mg": 8,
+          "flavour": "Raspberry soda",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Orange Squeeze 8mg",
+          "mg": 8,
+          "flavour": "Orange, lemon & menthol",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Dark Banana 8mg",
+          "mg": 8,
+          "flavour": "Banana & dark chocolate",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Fruzzle 8mg",
+          "mg": 8,
+          "flavour": "Mixed fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS The Peppermint 10mg",
+          "mg": 10,
+          "flavour": "Peppermint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS The Spearmint 6mg",
+          "mg": 6,
+          "flavour": "Spearmint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS The Menthol 11mg",
+          "mg": 11,
+          "flavour": "Menthol",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS The Menthol 17mg",
+          "mg": 17,
+          "flavour": "Menthol",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Arctic Freeze 11,2mg",
+          "mg": 11.2,
+          "flavour": "Peppermint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Pink Lemon Fizz 10mg (Limited Edition)",
+          "mg": 10,
+          "flavour": "Grapefruit & lemon",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Pink Lemon Fizz 14mg (Limited Edition)",
+          "mg": 14,
+          "flavour": "Grapefruit & lemon",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Cucumber Fizz 10mg (Limited Edition)",
+          "mg": 10,
+          "flavour": "Cucumber",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Virgin Peppermint 0mg (nicotine-free)",
+          "mg": 0,
+          "flavour": "Peppermint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Citrus Cooling 0mg (nicotine-free)",
+          "mg": 0,
+          "flavour": "Citrus",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Blueberry Mint 0mg (nicotine-free)",
+          "mg": 0,
+          "flavour": "Blueberry & mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Tropical 0mg (nicotine-free)",
+          "mg": 0,
+          "flavour": "Tropical fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Black Cherry 0mg (nicotine-free)",
+          "mg": 0,
+          "flavour": "Black cherry",
+          "flavourCategory": "fruit-fusion"
+        }
+      ]
+    },
+    {
+      "code": "UK",
+      "name": "United Kingdom",
+      "exposure": {
+        "totalSkus": 38,
+        "nicotineSkus": 34,
+        "zeroNicotineSkus": 4,
+        "flavourCap_delisted": 23,
+        "flavourCap_survive": 11,
+        "flavourCap_delistedShare": 0.676,
+        "strengthCap9mg_delisted": 14,
+        "strengthCap9mg_delistedShare": 0.412,
+        "strengthCap099mg_delisted": 34,
+        "strengthCap099mg_delistedShare": 1.0
+      },
+      "skus": [
+        {
+          "sku": "XQS Citrus Cooling 0% Nicotine",
+          "mg": 0,
+          "flavour": "Citrus / cooling",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Blueberry Mint 0% Nicotine",
+          "mg": 0,
+          "flavour": "Blueberry / mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Tropical 0% Nicotine",
+          "mg": 0,
+          "flavour": "Pineapple/mango/passion fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Black Cherry 0% Nicotine",
+          "mg": 0,
+          "flavour": "Black cherry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Tropical 4mg",
+          "mg": 4,
+          "flavour": "Pineapple/mango/passion fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Wintergreen 4mg",
+          "mg": 4,
+          "flavour": "Wintergreen (mint)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Elderflower 4mg",
+          "mg": 4,
+          "flavour": "Elderflower",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Orange Apple 4mg",
+          "mg": 4,
+          "flavour": "Orange / apple",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS The Spearmint 6mg",
+          "mg": 6,
+          "flavour": "Spearmint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Tropical 8mg",
+          "mg": 8,
+          "flavour": "Pineapple/mango/passion fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Spearmint 8.8mg",
+          "mg": 8.8,
+          "flavour": "Spearmint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Raspberry Blackcurrant 8mg",
+          "mg": 8,
+          "flavour": "Raspberry / blackcurrant",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Fizzy Peach 8mg",
+          "mg": 8,
+          "flavour": "Peach (fizzy)",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Berrynana Twist 8mg",
+          "mg": 8,
+          "flavour": "Banana / berry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Cola Lime 8mg",
+          "mg": 8,
+          "flavour": "Cola / lime",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Blueberry Mint 8mg",
+          "mg": 8,
+          "flavour": "Blueberry / mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Strawberry Kiwi 8mg",
+          "mg": 8,
+          "flavour": "Strawberry / kiwi",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Citrus Cooling 8mg",
+          "mg": 8,
+          "flavour": "Citrus / cooling",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Black Cherry 8mg",
+          "mg": 8,
+          "flavour": "Black cherry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Watermelon Blizz 8mg",
+          "mg": 8,
+          "flavour": "Watermelon / mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Elderflower 8mg",
+          "mg": 8,
+          "flavour": "Elderflower",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS Twin Apple 8mg",
+          "mg": 8,
+          "flavour": "Apple blend",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Orange Apple 8mg",
+          "mg": 8,
+          "flavour": "Orange / apple",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Cactus Sour 8mg",
+          "mg": 8,
+          "flavour": "Cactus (sour)",
+          "flavourCategory": "other"
+        },
+        {
+          "sku": "XQS The Peppermint 10mg",
+          "mg": 10,
+          "flavour": "Peppermint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS The Menthol 11mg",
+          "mg": 11,
+          "flavour": "Menthol",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Citrus Cooling 10mg",
+          "mg": 10,
+          "flavour": "Citrus / cooling",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Fizzy Peach 10mg",
+          "mg": 10,
+          "flavour": "Peach (fizzy)",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Tropical 10mg",
+          "mg": 10,
+          "flavour": "Pineapple/mango/passion fruit",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Raspberry Blackcurrant 10mg",
+          "mg": 10,
+          "flavour": "Raspberry / blackcurrant",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Berrynana Twist 10mg",
+          "mg": 10,
+          "flavour": "Banana / berry",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Blueberry Mint 10mg",
+          "mg": 10,
+          "flavour": "Blueberry / mint",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Cool Ice 9.6mg",
+          "mg": 9.6,
+          "flavour": "Cool ice (mint)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Arctic Freeze 11.2mg",
+          "mg": 11.2,
+          "flavour": "Arctic freeze (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Crisp Ice 12mg",
+          "mg": 12,
+          "flavour": "Crisp ice (mint)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Frost Bite 12mg",
+          "mg": 12,
+          "flavour": "Frost bite (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Double Mint 12mg",
+          "mg": 12,
+          "flavour": "Double mint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS The Menthol 17mg",
+          "mg": 17,
+          "flavour": "Menthol",
+          "flavourCategory": "menthol-mint"
+        }
+      ]
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "exposure": {
+        "totalSkus": 17,
+        "nicotineSkus": 17,
+        "zeroNicotineSkus": 0,
+        "flavourCap_delisted": 2,
+        "flavourCap_survive": 15,
+        "flavourCap_delistedShare": 0.118,
+        "strengthCap9mg_delisted": 2,
+        "strengthCap9mg_delistedShare": 0.118,
+        "strengthCap099mg_delisted": 17,
+        "strengthCap099mg_delistedShare": 1.0
+      },
+      "skus": [
+        {
+          "sku": "XQS Black 8mg",
+          "mg": 8,
+          "flavour": "Black (mint/menthol blend)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Black Pocket 6mg",
+          "mg": 6,
+          "flavour": "Black (mint/menthol, mini/pocket)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Blue 9mg",
+          "mg": 9,
+          "flavour": "Blue (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Grey 9mg",
+          "mg": 9,
+          "flavour": "Grey (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Indigo 8mg",
+          "mg": 8,
+          "flavour": "Indigo (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Navy 8mg",
+          "mg": 8,
+          "flavour": "Navy (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Navy Pocket 6mg",
+          "mg": 6,
+          "flavour": "Navy (mint/menthol, mini/pocket)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Red 9mg",
+          "mg": 9,
+          "flavour": "Red (mint/menthol)",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Arctic Freeze 11.2mg",
+          "mg": 11.2,
+          "flavour": "Peppermint / strong cooling",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Double Mint 7.7mg",
+          "mg": 7.7,
+          "flavour": "Peppermint + spearmint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Frost Bite 8.8mg",
+          "mg": 8.8,
+          "flavour": "Menthol-forward mint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Frost Bite 11.6mg",
+          "mg": 11.6,
+          "flavour": "Menthol-forward mint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Hokkaido Freeze 5.5mg",
+          "mg": 5.5,
+          "flavour": "Spearmint + menthol",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Hokkaido Freeze 7.7mg",
+          "mg": 7.7,
+          "flavour": "Spearmint + menthol",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Blueberry Mint 8mg",
+          "mg": 8,
+          "flavour": "Blueberry + mint",
+          "flavourCategory": "menthol-mint"
+        },
+        {
+          "sku": "XQS Tropical 8mg",
+          "mg": 8,
+          "flavour": "Pineapple / passion fruit / mango",
+          "flavourCategory": "fruit-fusion"
+        },
+        {
+          "sku": "XQS Black Cherry 8mg",
+          "mg": 8,
+          "flavour": "Dark cherry",
+          "flavourCategory": "fruit-fusion"
+        }
+      ]
+    }
+  ]
+}

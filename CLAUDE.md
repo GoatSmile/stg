@@ -226,11 +226,16 @@ repeated to the client: owner decides, always.
   drill-down (`/radar`, static / SSR-safe): XQS vs VELO vs ZYN price/strength/rank
   bars across SE/UK/DK + a launch & compliance feed with source chips. v1 is a
   curated snapshot. Structure/shares sourced; **strengths, flavours & pack counts are now REAL +
-  per-row sourced (P1, `d00891e` 2026-06-17)** — only per-can prices/ranks + the derived price-per-mg
-  stay illustrative* (P0 hardening 2026-06-17 `e6a1aa0`: quarantined in a dashed "illustrative
-  layout" panel; P1 split the real strength/flavour block out above it) — with the crawler
-  (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan §4). Sales lens un-stubbed;
-  Sweden/UK markers deep-link to it (`Marker.radar`).
+  per-row sourced (P1, `d00891e` 2026-06-17)**; **per-can prices + the derived price-per-mg are now
+  REAL too (P1b, 2026-06-17 — owner-cleared one-time snapshot)**: UK + DK prices each independently
+  cross-verified vs a 2nd shop (HIGH, `priceVerified:true`), SE sourced from Haypp SE + Snusbolaget
+  but its independent re-verify pass died on a session limit, so SE ships MED / `priceVerified:false`
+  (never claimed double-verified). Price-per-mg = priceDkk ÷ (packCount × repStrengthMg) is now a real
+  derived metric. The dashed "illustrative" price panel is GONE — the only thing dropped is the online
+  bestseller **rank** (never separately sourced; `rank` now just orders rows). `pricesProvenance:"sourced"`.
+  The crawler (`scripts/crawl-radar.ts`) **stays gated** — this was a manual owner-authorised snapshot,
+  not the automated crawl (build-plan §4). Sales lens un-stubbed; Sweden/UK markers deep-link to it
+  (`Marker.radar`).
 - **Careers DB moved to its own Supabase project — (2026-06-14; infra + gitignored env + this doc, no app-code change).**
   `varsel_careers_snapshots` migrated from the shared "Jensen" project
   (`jzlphajunfrqvpogzsiz`, eu-west-1) to a dedicated **"Valent - proposals"** project
@@ -501,6 +506,32 @@ repeated to the client: owner decides, always.
   routes); verified in-browser (SE/UK/DK blocks, price-per-mg math, source chips, DK null-flavour rows,
   no console errors). **P1b (full real price-per-mg table) still needs a real price source** (paid Haypp
   feed or a ToS-cleared nicotine-pouches.org snapshot — owner declined the payment/API route for now).
+- **Pouch Radar P1b: real per-can prices wired → price-per-mg now REAL — (2026-06-17).** The owner
+  **cleared the ToS** ("I clear. go"), so the prior session ran an adversarially-verified one-time price
+  snapshot (a 6-agent workflow: a price-fetch + an independent price-verify per market). The session hit
+  its limit the instant the workflow finished, so **the verified prices were never wired in** — this
+  session picked that up from the session export. (1) **Prices are now REAL**: per-can single-can LIST
+  prices replace the fabricated placeholders in `pouch-radar.json`. **UK** (nicotine-pouches.org/Haypp UK)
+  and **DK** (din-ecigaret.dk) each **independently cross-verified against a 2nd shop** → `priceVerified:true`,
+  HIGH. **SE** (Haypp SE + Snusbolaget) was cross-checked at fetch but its **verify agent died on the prior
+  session's limit**, so SE ships `priceVerified:false` / MED with "independent re-verify pending" — never
+  claimed as double-verified (honesty spine). DK XQS carries a `priceNote` (listed 35 kr; both corroborating
+  shops run ~39 kr → flagged low-end). (2) **price-per-mg is now a REAL derived metric** = `priceDkk ÷
+  (packCount × repStrengthMg)`; each row names its `pricedSku` so the ratio is self-documenting. (3) **The
+  dashed "illustrative" price panel is GONE** — the board is now fully sourced (strength/flavour + price +
+  ppm), with only confidence levels + the SE caveat as honest footnotes. The **only** thing dropped is the
+  online bestseller **rank** (never separately sourced; `rank` now just orders rows). (4) **Real-data fix**:
+  DK XQS strength was wrong (the snapshot found **no 4 mg XQS in DK — the range floors at 6 mg**); corrected
+  `repStrengthMg` 4→6 + the display + flavour note ("2 fruit SKUs delisted"). (5) **`pricesProvenance` →
+  `sourced`**; `_note`/sources/banner rewritten (single-can list, ECB cross-rates GBP 8.72 / SEK 0.66, the
+  UK+DK-verified / SE-pending split, crawler stays gated). `RadarPrice` gains `pricedSku`/`priceSource`/
+  `priceConfidence`/`priceVerified`/`priceNote?`. (6) **P2 input captured**: the snapshot also captured the
+  per-market XQS SKU grids — saved to **`src/data/radar/xqs-skus.json`** (generated programmatically from
+  the snapshot, not hand-transcribed) with computed flavour-cap exposure: a tobacco/menthol-only rule delists
+  **SE 79% / UK 68% / DK 12%** of XQS's nicotine SKUs (DK is pre-trimmed to mint, which is why it's low).
+  `wiredIntoImpactRoom:false` — see P2 below for the modelling choice this sets up. `tsc` clean + `next build`
+  green (16 routes); verified in-browser (SE/DK price rows, verified badges, real price-per-mg 0.13–0.44 DKK/mg,
+  DK XQS low-end caveat, corrected "6 mg floor", no console errors).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
@@ -509,11 +540,18 @@ repeated to the client: owner decides, always.
   are modeled in the Impact Room — three worked examples now (EU-ETD proposed + FR/DK in-force), so the
   "early-warning" promise is no longer undercut by a single immaterial 2028 exhibit. **Pouch Radar P1 also
   DONE** (`d00891e`): strength/flavour/pack-count now real + per-row sourced, board widened (+Nordic Spirit,
-  +ZYN-DK), price-per-mg derived (illustrative until a real price source). **Highest-leverage moves still
-  open:** Radar **P1b** — the full real price-per-mg table — needs a real price source (paid Haypp feed or a
-  ToS-cleared nicotine-pouches.org snapshot; owner declined the payment/API route for now). Then Radar **P2**
-  (owner roll-up + strength×flavour regulatory-exposure band → Impact Room). Optional: leaf-price (FRED/USDA)
-  overlay on Procurement; real per-lane freight (paid Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
+  +ZYN-DK). **Pouch Radar P1b also DONE** (2026-06-17): the owner-cleared price snapshot is **wired in** —
+  per-can prices + price-per-mg are now **real** (UK+DK cross-verified, SE sourced/re-verify-pending), the
+  dashed illustrative panel removed, the board fully sourced. **Highest-leverage move now open: Radar P2** —
+  feed the captured XQS SKU grid (`src/data/radar/xqs-skus.json`) into the Impact Room's `dk-cap`
+  `affectedShare` (today a hand-set 0.65) so the delisted-share is SKU-grounded, with the breakdown shown.
+  **Owner decision P2 needs first:** *which* XQS range to measure exposure against — a flavour cap delists
+  **SE 79% / UK 68%** of the full flavoured catalogue but only **12%** of the already-mint-trimmed DK range,
+  so 0.65 is well-supported by the broad SE/UK figure; pick the basis before it drives a CFO-facing band
+  (this is why P2 isn't auto-wired). Optional, lower-leverage: SE price independent re-verify (the agent that
+  died), the full Haypp-feed price table, leaf-price (FRED/USDA) overlay on Procurement, real per-lane freight
+  (paid Freightos FBX). The **video** is still parked (record per `docs/demo-script.md`; fill `[wife]` +
+  `[video link]` in `docs/outreach.md`). Open decisions in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,

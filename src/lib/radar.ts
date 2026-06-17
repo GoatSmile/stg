@@ -18,13 +18,18 @@ export type SpecConfidence = "HIGH" | "MED" | "LOW";
 export type RadarPrice = {
   market: string;
   brand: string;
-  // illustrative* (no ToS-permitted price source yet)
+  // real per-can list price (owner-cleared one-time snapshot, 2026-06-17)
   priceLocal: string;
-  priceDkk: number;
-  rank: number;
+  priceDkk: number; // single-can list price in DKK (ECB cross-rate); multibuy is cheaper
+  pricedSku: string; // the exact SKU the price is for (so price-per-mg is self-documenting)
+  priceSource: string;
+  priceConfidence: SpecConfidence;
+  priceVerified: boolean; // true = independently cross-verified vs a 2nd shop (UK/DK); false = sourced, re-verify pending (SE)
+  priceNote?: string; // honest caveat, e.g. a price at the low end of the observed range
+  rank: number; // row ordering only — not surfaced as a bestseller claim (never separately sourced)
   // real, sourced product specs
   strengthMg: string; // display range, e.g. "6–17 mg"
-  repStrengthMg: number; // representative SKU strength, mg/pouch — for the strength bar + price-per-mg
+  repStrengthMg: number; // representative/priced-SKU strength, mg/pouch — drives the strength bar + price-per-mg
   packCount: number; // pouches per can
   flavourCount: number | null; // null where a precise count isn't sourced (e.g. DK post-cap)
   flavourStyle: string;
@@ -71,9 +76,10 @@ export function maxRepStrengthMg(): number {
 }
 
 /**
- * Illustrative* price-per-mg = price/can ÷ (pouches/can × mg/pouch), in DKK per mg of nicotine.
- * The strength + pack count are REAL; the price is an illustrative placeholder, so the ratio is
- * illustrative until a real price source lands. Returns null if the inputs can't form a ratio.
+ * Real price-per-mg = price/can ÷ (pouches/can × mg/pouch of the priced SKU), in DKK per mg of
+ * nicotine. Price, pack count and strength are all real/sourced (owner-cleared snapshot), so the
+ * ratio is a real derived metric — a value-per-nicotine view no competitor dashboard shows.
+ * Returns null if the inputs can't form a ratio.
  */
 export function pricePerMg(p: RadarPrice): number | null {
   const totalMg = p.packCount * p.repStrengthMg;

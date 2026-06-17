@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AlertTriangle, ExternalLink } from "lucide-react";
+import { Info, ExternalLink, ShieldCheck } from "lucide-react";
 import {
   pouchRadar,
   pricesForMarket,
@@ -40,18 +40,23 @@ export default function Radar() {
         <h1 className="font-heading text-3xl font-medium tracking-tight">Pouch Radar</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           XQS vs VELO, ZYN &amp; Nordic Spirit across STG&apos;s pouch focus markets — sourced
-          strength &amp; flavour, plus the launch &amp; compliance feed. As of {pouchRadar.asOf}.
+          strength, flavour &amp; per-can price, the derived price-per-mg, plus the launch &amp;
+          compliance feed. As of {pouchRadar.asOf}.
         </p>
       </div>
 
-      <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/5 px-3 py-2 text-[13px] leading-snug">
-        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+      <div className="flex items-start gap-2 rounded-md border border-border bg-secondary/40 px-3 py-2 text-[13px] leading-snug">
+        <Info className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         <span>
-          <span className="font-medium">v1 curated snapshot.</span> Brand/market structure, XQS
-          shares and the <span className="font-medium text-foreground">strengths, flavours &amp; pack counts</span>{" "}
-          are public/sourced (a citation per row; UK high-confidence, SE/DK medium). The per-can{" "}
-          <span className="text-amber-600 dark:text-amber-400">prices, online ranks &amp; the derived price-per-mg stay illustrative*</span>{" "}
-          until a ToS-permitted price source — the crawler (<code className="rounded bg-secondary px-1 py-0.5 text-[12px]">scripts/crawl-radar.ts</code>) stays gated.
+          <span className="font-medium">v1 curated snapshot, {pouchRadar.asOf}.</span> Brand/market
+          structure, XQS shares, <span className="font-medium text-foreground">strengths, flavours, pack counts</span>{" "}
+          and <span className="font-medium text-foreground">per-can prices</span> are all public/sourced — a citation
+          per row. <span className="text-foreground">UK &amp; Denmark prices were each independently cross-verified</span>{" "}
+          against a second shop; Sweden&apos;s are sourced from Haypp SE + Snusbolaget with the independent re-verify
+          still pending. Prices are single-can <span className="font-medium text-foreground">list</span> prices
+          (multibuy is cheaper); DKK uses ECB cross-rates (GBP 8.72, SEK 0.66). Price-per-mg is derived = price ÷
+          (pouches × mg). This was an owner-cleared one-time snapshot — the live crawler
+          (<code className="rounded bg-secondary px-1 py-0.5 text-[12px]">scripts/crawl-radar.ts</code>) stays gated.
         </span>
       </div>
 
@@ -118,21 +123,21 @@ export default function Radar() {
               })}
             </div>
 
-            {/* illustrative* block — price, online rank, derived price-per-mg */}
-            <div className="rounded-md border border-dashed border-amber-500/40 bg-amber-500/[0.04] p-2.5">
-              <div className="mb-2 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wide text-amber-700 dark:text-amber-400">
-                <AlertTriangle className="size-3 shrink-0" aria-hidden="true" />
-                illustrative* · per-can price, online rank &amp; price-per-mg — placeholder until a ToS-permitted price source
+            {/* price & price-per-mg — real, sourced snapshot */}
+            <div className="flex flex-col gap-2">
+              <div className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                Price &amp; price-per-mg · sourced · single-can list
               </div>
-              <div className="flex flex-col gap-1.5">
-                {prices.map((p) => {
-                  const stg = isStgBrand(p.brand);
-                  const width = Math.max(8, Math.round((p.priceDkk / max) * 100));
-                  const ppm = pricePerMg(p);
-                  return (
-                    <div key={p.brand} className="flex items-center gap-3">
+              {prices.map((p) => {
+                const stg = isStgBrand(p.brand);
+                const width = Math.max(8, Math.round((p.priceDkk / max) * 100));
+                const ppm = pricePerMg(p);
+                return (
+                  <div key={p.brand} className="flex flex-col gap-0.5">
+                    <div className="flex items-center gap-3">
                       <span className={`w-28 shrink-0 text-[13px] ${stg ? "font-semibold text-primary" : ""}`}>
                         {p.brand}
+                        {stg && <span className="ml-1 text-[10px] font-normal text-muted-foreground">STG</span>}
                       </span>
                       <div className="relative h-5 flex-1 rounded bg-secondary">
                         <div
@@ -142,13 +147,29 @@ export default function Radar() {
                           {p.priceLocal}
                         </div>
                       </div>
-                      <span className="w-32 shrink-0 text-right text-[11px] text-muted-foreground tabular-nums">
-                        #{p.rank} · {ppm != null ? `${ppm.toFixed(2)} DKK/mg` : "—"}
+                      <span className="w-28 shrink-0 text-right text-[12px] font-medium tabular-nums">
+                        {ppm != null ? ppm.toFixed(2) : "—"}
+                        <span className="text-[10px] font-normal text-muted-foreground"> DKK/mg</span>
                       </span>
                     </div>
-                  );
-                })}
-              </div>
+                    <div className="ml-[7.75rem] flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[11px] text-muted-foreground">
+                      <span>{p.pricedSku}</span>
+                      {p.priceVerified && (
+                        <span
+                          className="inline-flex items-center gap-0.5 text-emerald-700 dark:text-emerald-400"
+                          title="price independently cross-verified against a second shop"
+                        >
+                          <ShieldCheck className="size-3" aria-hidden="true" /> verified
+                        </span>
+                      )}
+                      <CitationChip sourceRef={p.priceSource} />
+                      {p.priceNote && (
+                        <span className="text-amber-600 dark:text-amber-400">— {p.priceNote}</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         );
