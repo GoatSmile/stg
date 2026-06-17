@@ -420,6 +420,14 @@ repeated to the client: owner decides, always.
   lens. Positions-default also spreads the bubbles (us-retail biggest, in the US), easing the
   Central-America headcount overlap. `tsc` clean + `next build` green; verified in-browser (both modes'
   radii + badges; us-retail 33 / eu-other 5 / sales-pt 7 role lists; no console errors).
+- **HR bubble polish — `7c5de63` (2026-06-17).** Two follow-ups to the bubble toggle: (1) the figure
+  is **always rendered** inside the dot — dropped the headcount-mode `r >= 11` gate that hid the number
+  on small bubbles (Richmond's **200** was invisible); a small dot just lets the number spill, and a
+  dark text-halo (`stroke` + `paintOrder`) keeps it readable over the parchment. (2) **Distinct fill
+  per metric** so the active mode reads at a glance — **headcount = brand claret (`--primary`)**,
+  **positions = the marker's provenance colour (public-blue on HR)**; a single `fill` const in
+  `PulseMap`. `tsc` clean + `next build` green; verified in-browser (claret vs blue bubbles, all 12
+  strategic headcounts incl. 200, no console errors).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
   **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`
