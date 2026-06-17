@@ -29,10 +29,10 @@ track (reference only).
   unauthenticated visitors to a styled `/gate` page (shared password, forwardable; cookie
   validated by a SHA-256 of the password). `/opengraph-image` is allow-listed through the
   gate so forwarded-link previews still render while the app itself stays locked. It's **off
-  when `SITE_PASSWORD` is unset** (so local dev / any env without it stays open). **Prod is still public until you set
-  `SITE_PASSWORD` in Vercel env + redeploy** — do that before the link goes out. (Vercel's
-  own Password Protection is the zero-code alternative but needs Pro; this in-app gate is
-  free + in our control.)
+  when `SITE_PASSWORD` is unset** (so local dev / any env without it stays open). **Prod is now GATED
+  — `SITE_PASSWORD` is set in Vercel (owner-confirmed 2026-06-17); `stg-azure.vercel.app` requires the
+  shared password.** (Vercel's own Password Protection is the zero-code alternative but needs Pro; this
+  in-app gate is free + in our control.)
 - **JSON-first, one DB table.** All data is versioned JSON in `/src/data/`: the STG
   segment model (from published disclosures), the curated regulatory corpus,
   golden AI responses, and cached Pouch Radar crawler output. **Supabase (EU) is
@@ -225,8 +225,10 @@ repeated to the client: owner decides, always.
 - **Surface B — Pouch Radar shipped — `2ef485b` (2026-06-14).** The Sales-lens
   drill-down (`/radar`, static / SSR-safe): XQS vs VELO vs ZYN price/strength/rank
   bars across SE/UK/DK + a launch & compliance feed with source chips. v1 is a
-  curated snapshot — structure/shares sourced, per-can prices/ranks illustrative* —
-  with the crawler (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan
+  curated snapshot — structure/shares sourced, per-can prices/ranks/strengths/flavours
+  illustrative* (P0 hardening 2026-06-17 `e6a1aa0`: quarantined in a dashed "illustrative
+  layout" panel + Nordic Spirit/ZYN-DK gaps disclosed on-page) — with the crawler
+  (`scripts/crawl-radar.ts`) built and **ToS-gated** (build-plan
   §4). Sales lens un-stubbed; Sweden/UK markers deep-link to it (`Marker.radar`).
 - **Careers DB moved to its own Supabase project — (2026-06-14; infra + gitignored env + this doc, no app-code change).**
   `varsel_careers_snapshots` migrated from the shared "Jensen" project
@@ -236,8 +238,9 @@ repeated to the client: owner decides, always.
   jensen-fms tables untouched; confirmed 55→54). Local `.env.local` **and Vercel prod
   env** both re-pointed + redeployed — verified reading live (`live:true`, real
   `crawledAt`) from the new project. Exposed secret key **rotated** (old key confirmed
-  revoked/401); the new `sb_secret_…` lives where the scraper runs. Site gating (Vercel
-  SSO/password) is **on hold** per owner — prod is currently public. (The 2026-06-14 real
+  revoked/401); the new `sb_secret_…` lives where the scraper runs. (Site gating was on hold here
+  per owner; **now resolved — the in-app `SITE_PASSWORD` gate is live in prod as of 2026-06-17.**)
+  (The 2026-06-14 real
   careers pull below has since written a live row to this project via the MCP; running
   `crawl-careers.ts` with the service key to exercise its own write path is the only minor
   unexercised bit, and it stays manual-only.)
@@ -428,13 +431,39 @@ repeated to the client: owner decides, always.
   **positions = the marker's provenance colour (public-blue on HR)**; a single `fill` const in
   `PulseMap`. `tsc` clean + `next build` green; verified in-browser (claret vs blue bubbles, all 12
   strategic headcounts incl. 200, no console errors).
+- **Anti-surprise positioning reframe + Pouch Radar P0 + honesty fixes — `e6a1aa0` (2026-06-17).**
+  Driven by the prior session's buyer-seat panel (4 personas + Tenth Man) which found the engine is the
+  wow but it's buried under a regulation-only cover that *under-sells* (1 of 7 lenses) and *mis-routes*
+  the forward (a "tax tool" gets filed by Legal, away from the C-suite). (1) **Reframed the buyer-facing
+  copy** from "what a regulation is worth, in DKK" → the **anti-surprise risk-surface** framing across
+  the routing-critical surfaces: `<title>`/meta/OG (`layout.tsx`), the `/gate` cover, the OG share image,
+  the home hero, and the `/transparency` "About" block. Hero H1 = "Where the next surprise to STG's P&L
+  comes from — sized in kroner, before it lands"; the body names the surface (regulation, FX, leaf, SAP,
+  pouches, hiring) + the trust spine ("a model you can argue with: every number cites its source, or says
+  so when it can't"). (2) **Pouch Radar P0** (`/radar`): on-page scope line disclosing the Nordic Spirit
+  (JTI) / ZYN-in-DK coverage gaps (`tracked:false` in `pouch-radar.json` + `trackedBrands`/`untrackedBrands`
+  in `radar.ts`); the **fabricated** price/rank/strength/flavour bars quarantined in a dashed-amber
+  "illustrative layout" panel, visually split from the real share badge + sourced compliance feed; stale
+  `asOf` → 2026-06-17 (radar + home signals). (3) **Folded in an adversarial review** (28-agent workflow,
+  10/24 confirmed): narrowed the over-claim "each clickable down to a DKK band" → "each a tracked signal;
+  the **regulatory threat is the worked example**, the template the rest plug into next" (only `eu-etd`
+  has `impact:true` / a modeled scenario — saying "each" faked a capability); dropped the MAR-risky
+  "before the market sees it"; unified the forwarded-preview voice on "your P&L" (kills double-STG under
+  the wordmark); fixed two pre-existing fake-"live" claims the new copy spotlighted — Procurement
+  `Leaf price index` KPI "live*" → "designed* / not yet wired" (no such feed; lens feed is `weather`),
+  and the `/transparency` agent-fetched bullet corrected to the real 5 feeds (Brent/FRED + ENSO; dropped
+  Freightos + competitor-e-commerce, which aren't live). `tsc` clean + `next build` green (16 routes);
+  verified in-browser (home, radar, OG image, procurement KPI), no console errors.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
-  self-explains for a cold forwarded reader, with map camera presets + clickable role descriptions.
-  **To send:** record the video (script + shot list in `docs/demo-script.md`); set `SITE_PASSWORD`
-  in Vercel env + redeploy (gate built, not yet active in prod); fill `[wife]` + `[video link]` in
-  `docs/outreach.md`. Optional: a leaf-price (FRED/USDA) overlay on Procurement; a real per-lane
-  freight rate (paid Freightos FBX). (Roles are now DB-only + served live — see above.) Open decisions
-  in `docs/ceo-play.md` §8.
+  self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
+  role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
+  record the video (script + shot list in `docs/demo-script.md`); fill `[wife]` + `[video link]` in
+  `docs/outreach.md`. **Highest-leverage product move still open (panel #2):** model the **France
+  oral-nicotine ban + DK 9mg cap** (both in-force *now*) to a DKK band in the Impact Room — it currently
+  has only the one EU-ETD (2028, immaterial) exhibit, which undercuts an "early-warning" promise; the
+  engine exists. Then Pouch Radar P1 (make strength/flavour real → price-per-mg) + P2 (owner roll-up +
+  strength×flavour regulatory-exposure band → Impact Room). Optional: leaf-price (FRED/USDA) overlay on
+  Procurement; real per-lane freight (paid Freightos FBX). Open decisions in `docs/ceo-play.md` §8.
 - When phases ship, log them here (jensen-fms-style: what shipped, commit range,
   what's next) so a fresh session can pick up cold from this file + git history —
   and reconcile the Stack / Demo-shortcuts state above (stub count, live-feed count,
