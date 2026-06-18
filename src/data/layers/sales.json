@@ -3,7 +3,7 @@
   "blurb": "Per-market competitive position — XQS vs ZYN vs VELO. Click a pouch market to open the Pouch Radar.",
   "asOf": "2026-06-13",
   "kpis": [
-    { "label": "XQS share, Sweden", "value": "13.6%", "sub": "from 7.8% (2025)", "flag": "C" },
+    { "label": "XQS share, Sweden", "value": "13.6%", "sub": "from 7.8% (2024)", "flag": "C" },
     { "label": "XQS organic growth", "value": "+55%", "sub": "FY2025", "flag": "C" },
     { "label": "Active online consumers (US)", "value": "−3% YoY", "sub": "NAOR file", "flag": "C" },
     { "label": "Mint share of UK pouch cans", "value": "58%*", "sub": "Haypp-derived", "flag": "I" }

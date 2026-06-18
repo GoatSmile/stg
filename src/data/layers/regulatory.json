@@ -9,7 +9,7 @@
     { "label": "Active threats tracked", "value": "5", "sub": "EU + 4 markets", "flag": "C" },
     { "label": "Revenue in restricted/banned pouch markets", "value": "DKK ~390m*", "sub": "EU pouch line, modeled", "flag": "fab" },
     { "label": "Combustible core exposed to EU excise", "value": "50%", "sub": "of group net sales", "flag": "C" },
-    { "label": "Next ruling", "value": "Jun 2026", "sub": "France Conseil d'État merits", "flag": "C" }
+    { "label": "Next ruling", "value": "H2 2026", "sub": "France Conseil d'État merits", "flag": "C" }
   ],
   "markers": [
     { "id": "eu-etd", "lat": 50.85, "lng": 4.35, "label": "EU tobacco-tax revision", "value": "proposed", "severity": "high", "provenance": "public", "sourceRef": "COM(2025) 580", "asOf": "2025-07-16", "detail": "Proposal, in Council negotiation. Would raise excise minimums on cigars/cigarillos/pipe from a proposed 2028 (pouch minima phase 2030–2032). Reaches the cigar & pipe core. → opens the Impact Room.", "impact": true },

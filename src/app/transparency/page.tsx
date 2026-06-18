@@ -51,10 +51,12 @@ export default function Transparency() {
           </li>
           <li className="rounded-lg border border-border p-3">
             <Dot color="var(--prov-agent)" />
-            <span className="font-medium">Agent-fetched</span> — public data an AI agent pulls on a
-            schedule and keeps current: STG&apos;s SuccessFactors careers feed (open roles), ECB FX
-            rates, Open-Meteo leaf-region weather, NOAA ENSO climate, and Brent crude as a
-            freight-cost proxy (FRED). Real, just not hand-entered.
+            <span className="font-medium">Agent-fetched</span> — public data pulled programmatically,
+            not hand-entered. ECB FX, Open-Meteo leaf-region weather, NOAA ENSO climate and Brent
+            crude (FRED, a freight-cost proxy) refresh live on each request. STG&apos;s SuccessFactors
+            careers feed is a dated snapshot, read live from Supabase (EU) but refreshed on an
+            authorised manual cadence — not a standing crawl, because the role detail comes from a
+            permission-restricted endpoint.
           </li>
           <li className="rounded-lg border border-border p-3">
             <Dot color="var(--prov-internal)" />
@@ -87,8 +89,9 @@ export default function Transparency() {
             Varsel for STG is not affiliated with or endorsed by STG.
           </li>
           <li>
-            Curated data is current as of June 2026; the live feeds (FX, careers, weather, climate,
-            freight) refresh on their own schedule. The full fact base lives in the project&apos;s
+            Each datum carries its own date on the marker; the live feeds (FX, weather, climate,
+            freight) refresh on each request, and the careers snapshot is pulled on an authorised
+            cadence. The full fact base lives in the project&apos;s
             <code className="mx-1 rounded bg-secondary px-1 py-0.5 text-[12px]">stg-facts.md</code>.
           </li>
         </ul>

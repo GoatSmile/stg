@@ -75,8 +75,8 @@ export function WeatherStrip() {
           </div>
           <p className="text-[11px] leading-snug text-muted-foreground">
             Risk is a stated rule on Open-Meteo&apos;s 7-day forecast (dry &lt; 5mm · heat ≥ 35°C · wet
-            &gt; 120mm), not a black box. Weather is live; the leaf-price (FRED/USDA) and water-stress
-            (WRI Aqueduct) overlays are next.{" "}
+            &gt; 120mm), not a black box. Weather is live; per-site water stress (WRI Aqueduct) is on the
+            ESG lens, and a leaf-price (FRED/USDA) overlay is next.{" "}
             <a href={data.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-0.5 underline underline-offset-2">
               Open-Meteo <ExternalLink className="size-3" aria-hidden="true" />
             </a>

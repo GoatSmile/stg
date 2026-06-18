@@ -551,6 +551,31 @@ repeated to the client: owner decides, always.
   + goldens + abstentions are untouched (affectedShare is an editable assumption, never a cited fact). `tsc` clean +
   `next build` green (16 routes); verified in-browser (dk-cap shows the card + grounded slider; eu-etd default shows
   no card; no console errors).
+- **Sober-eyes audit pass: home reposition + honesty fixes — (2026-06-18).** Ran a buyer-seat review
+  workflow (per-surface audit + STG persona panel); it was cut short by a session limit, but 6/7 surface
+  audits + the **Yulia (recipient) persona** were recovered from the transcript and the concrete claims
+  verified by hand. Acted on the confirmed findings. **(A) Home reposition (the recipient's #1 lever):**
+  the cover led with the 7-lens map → pattern-matched "BI dashboard" and buried the engine. `src/app/page.tsx`
+  now leads with a **server-computed EU-ETD engine preview** (real band DKK 45–95m, base ≈72m, computed from
+  the same `computeImpact` model so it can't drift from the room it links to — band bar + illustrative tag +
+  "Open the Impact Room" CTA), and the map is demoted below **"the same engine, across STG's whole risk
+  surface."** **(B) Confirmed honesty/correctness fixes:** (1) the P2 SKU card claimed "65% sits **inside** the
+  SE/UK band" — but 65 < 68 (UK); reworded to "just below … a deliberately conservative read" (true + stronger).
+  (2) Careers was mislabelled as a scheduled **crawl** ("live · crawl", "an agent crawls … on a schedule",
+  "needs ≥2 daily crawls" + the `/transparency` "agent pulls on a schedule and keeps current") — but that data is
+  a manual-only pull from a robots-disallowed endpoint; relabelled to an honest **dated pull / snapshot** read
+  live from Supabase, and split out of the auto-refreshing feed group on `/transparency` (the other 4 feeds *are*
+  live-per-request — left as-is). (3) `CareersStrip` "Staffing up" truncated site labels via `split(" ")[0]`
+  ("Sri", "Bethlehem,") → clean `split(/[,—]/)`. (4) ENSO + Weather strips said WRI water-stress was "the next
+  overlay" — it's **already shipped** on the ESG markers; corrected. (5) regulatory KPI "Next ruling Jun 2026"
+  (stale on a forwarded link) → "H2 2026". (6) Sweden share base-year disagreed across surfaces (sales.json
+  "2025" vs 2024 elsewhere) → unified to 2024. (7) CLAUDE.md doc drift (SE "re-verify-pending" in the Next line)
+  → fixed. `tsc` clean + `next build` green (16 routes); verified in-browser (engine leads with the real band,
+  map demoted, careers reads "live · pulled", no console errors). **Parked for owner (the "full pass" option):**
+  the text rewrites (hero, OG description, restriction-scenario headline = strategic quantity, Lock-card
+  "precision"→"band"), and the breadth simplification (quarantine FX/weather/ENSO/freight behind a "what else
+  plugs in" tab). **Wow ideas teed up:** an interactive mini-scenario slider on the home preview; a
+  forward-ready one-pager export; a "this would have flagged the France ban N months early" hindsight proof.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
@@ -560,7 +585,7 @@ repeated to the client: owner decides, always.
   "early-warning" promise is no longer undercut by a single immaterial 2028 exhibit. **Pouch Radar P1 also
   DONE** (`d00891e`): strength/flavour/pack-count now real + per-row sourced, board widened (+Nordic Spirit,
   +ZYN-DK). **Pouch Radar P1b also DONE** (2026-06-17): the owner-cleared price snapshot is **wired in** —
-  per-can prices + price-per-mg are now **real** (UK+DK cross-verified, SE sourced/re-verify-pending), the
+  per-can prices + price-per-mg are now **real** (UK+DK+SE all independently cross-verified), the
   dashed illustrative panel removed, the board fully sourced; **SE was re-verified this session** (its dead verify
   agent re-run → all 4 SE prices cross-verified vs Nettotobak; ZYN SE can corrected 21→20). **Pouch Radar P2 also
   DONE** (2026-06-17): the XQS SKU grid is wired into the Impact Room's `dk-cap` `affectedShare` (SKU-grounded, SE/UK

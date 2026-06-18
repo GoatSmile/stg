@@ -53,13 +53,13 @@ export function CareersStrip() {
                 ? "inline-flex items-center gap-1 rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:text-emerald-400"
                 : "inline-flex items-center gap-1 rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-400"
             }
-            title={data.live ? "Latest crawl from Supabase" : "Supabase unreachable/unconfigured — cached snapshot"}
+            title={data.live ? "Read live from Supabase (EU); refreshed by an authorised manual pull, not a standing crawl" : "Supabase unreachable/unconfigured — cached snapshot"}
           >
-            {data.live ? `live · crawl ${data.asOf}` : `cached · ${data.asOf}`}
+            {data.live ? `live · pulled ${data.asOf}` : `cached · ${data.asOf}`}
           </span>
         )}
         <span className="ml-auto text-[11px] text-muted-foreground">
-          an agent crawls the SuccessFactors feed → Supabase
+          dated pull of STG&apos;s public careers feed → Supabase (EU)
         </span>
       </div>
 
@@ -76,13 +76,13 @@ export function CareersStrip() {
             />
             <Stat
               label="Staffing up"
-              value={top ? `${top.label.split(" ")[0]} · ${top.openPositions}` : "—"}
+              value={top ? `${top.label.split(/[,—]/)[0].trim()} · ${top.openPositions}` : "—"}
               sub="most open roles"
             />
             <Stat
               label="Hiring velocity"
               value={data.velocity ? `${data.velocity.deltaOpen >= 0 ? "+" : ""}${data.velocity.deltaOpen}` : "accruing"}
-              sub={data.velocity ? `since ${data.velocity.fromAsOf}` : "needs ≥2 daily crawls"}
+              sub={data.velocity ? `since ${data.velocity.fromAsOf}` : "needs ≥2 dated pulls"}
             />
           </div>
           <p className="text-[11px] leading-snug text-muted-foreground">

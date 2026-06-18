@@ -251,7 +251,8 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
           </div>
           {skuExamples && (
             <p className="text-[12px] leading-snug text-muted-foreground">
-              e.g. {skuExamples} — all delisted. The {pct(0.65)} slider default sits inside this SE/UK band.
+              e.g. {skuExamples} — all delisted. The {pct(0.65)} default sits just below this SE/UK band — a
+              deliberately conservative read, since these are SKU counts (not revenue) and mint over-indexes on volume.
             </p>
           )}
           {skuDk && (

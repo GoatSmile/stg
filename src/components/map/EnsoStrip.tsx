@@ -73,7 +73,7 @@ export function EnsoStrip() {
           </div>
           <p className="text-[11px] leading-snug text-muted-foreground">
             ENSO is the dominant climate swing over the tropical leaf base — the current state {data.note}.
-            Phase is NOAA&apos;s ±0.5°C ONI threshold; per-region water-stress (WRI Aqueduct) is the next overlay.{" "}
+            Phase is NOAA&apos;s ±0.5°C ONI threshold; per-site water stress (WRI Aqueduct 4.0) is already on the leaf markers.{" "}
             <a href={data.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-0.5 underline underline-offset-2">
               NOAA CPC <ExternalLink className="size-3" aria-hidden="true" />
             </a>
