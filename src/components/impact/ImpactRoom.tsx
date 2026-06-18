@@ -7,8 +7,8 @@ import { ScenarioControls } from "./ScenarioControls";
 import { AiRead } from "./AiRead";
 import { CitationChip } from "./CitationChip";
 import { Abstain } from "./Abstain";
-import { computeImpact, computeRestrictionImpact, spreadTriple } from "@/lib/impact-model";
 import { type Scenario } from "@/lib/impact-data";
+import { computeScenarioView } from "@/lib/impact-view";
 import { xqsFlavourCapExposure, xqsGridAsOf } from "@/lib/radar";
 import { dkkM, pct } from "@/lib/format";
 
@@ -18,15 +18,10 @@ function dkkRange(a: number, b: number): string {
   return `${dkkM(lo)} – ${dkkM(hi)}`;
 }
 
-/** A row in the transparent "how the base case is built" walk. */
-type WalkRow = { label: string; value: string; chip?: React.ReactNode; strong?: boolean };
-
 export function ImpactRoom({ scenario }: { scenario: Scenario }) {
   const [values, setValues] = useState<Record<string, number>>(() =>
     Object.fromEntries(scenario.assumptions.map((a) => [a.key, a.default])),
   );
-
-  const isRestriction = scenario.mechanism === "restriction";
 
   // Radar P2 — real XQS SKU exposure behind `affectedShare` (flavour-cap scenarios only).
   const skuExp = scenario.skuExposureLens === "flavour-cap" ? xqsFlavourCapExposure : [];
@@ -34,99 +29,7 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
   const skuDk = skuExp.find((e) => e.code === "DK"); // the already-trimmed shelf = the residual
   const skuExamples = (skuExp.find((e) => e.code === "UK")?.examples ?? []).join(", ");
 
-  const view = useMemo(() => {
-    const cfg = (key: string) => scenario.assumptions.find((a) => a.key === key);
-
-    if (isRestriction) {
-      const rcCfg = cfg("recapture")!;
-      const cmCfg = cfg("contributionMargin")!;
-      const marketShare = values.marketShare ?? 0;
-      const affectedShare = values.affectedShare ?? 0;
-      const marketBase = scenario.exposedBaseDkkM * marketShare;
-      const r = computeRestrictionImpact({
-        marketBase,
-        affectedShare,
-        recapture: spreadTriple(values.recapture ?? 0, rcCfg.spread ?? 0.15, rcCfg.min, rcCfg.max),
-        contributionMargin: spreadTriple(
-          values.contributionMargin ?? 0,
-          cmCfg.spread ?? 0.1,
-          cmCfg.min,
-          cmCfg.max,
-        ),
-      });
-      const market = scenario.marketLabel ?? "this market";
-      const walk: WalkRow[] = [
-        {
-          label: "STG pouch base — NGP net sales",
-          value: dkkM(scenario.exposedBaseDkkM),
-          chip: (
-            <CitationChip
-              sourceRef={scenario.exposedBaseSourceRef}
-              derived={scenario.exposedBaseDerived}
-            />
-          ),
-        },
-        { label: `× ${market} share ${pct(marketShare)}`, value: `= ${dkkM(marketBase)} ${market} base` },
-        { label: `× affected share ${pct(affectedShare)}`, value: `= ${dkkM(r.walk.affectedRevenue)} affected` },
-        { label: `− recaptured via compliant SKUs ${pct(values.recapture ?? 0)}`, value: dkkM(r.walk.retainedRevenue) },
-        { label: "= lost (foreclosed) revenue", value: dkkM(r.walk.lostRevenue) },
-        { label: `× contribution margin ${pct(values.contributionMargin ?? 0)}`, value: dkkM(r.walk.ebitdaAtRisk) },
-        { label: "= EBITDA at risk (base)", value: `${dkkM(r.atRiskBase)} / yr`, strong: true },
-      ];
-      const ambition = scenario.ambitionDkkM ?? 0;
-      return {
-        band: { best: r.atRiskBest, base: r.atRiskBase, worst: r.atRiskWorst },
-        walk,
-        bandDrivers: "recapture × contribution-margin grid",
-        anchor: ambition
-          ? {
-              lostRevenue: r.lostRevenueBase,
-              shareOfAmbition: r.lostRevenueBase / ambition,
-              ambitionDkkM: ambition,
-              ambitionSourceRef: scenario.ambitionSourceRef ?? "",
-            }
-          : null,
-      };
-    }
-
-    // excise (EU-ETD)
-    const ptCfg = cfg("passThrough")!;
-    const elCfg = cfg("elasticity")!;
-    const exposedShare = values.exposedShare ?? 0;
-    const exposedBase = scenario.exposedBaseDkkM * exposedShare;
-    const r = computeImpact({
-      exposedBase,
-      priceIncreasePct: values.priceIncreasePct ?? 0,
-      contributionMargin: values.contributionMargin ?? 0,
-      passThrough: spreadTriple(values.passThrough ?? 0, ptCfg.spread ?? 0.15, ptCfg.min, ptCfg.max),
-      elasticity: spreadTriple(values.elasticity ?? 0, elCfg.spread ?? 0.2, elCfg.min, elCfg.max),
-    });
-    const walk: WalkRow[] = [
-      {
-        label: "EU cigar/pipe base",
-        value: dkkM(scenario.exposedBaseDkkM),
-        chip: (
-          <CitationChip sourceRef={scenario.exposedBaseSourceRef} derived={scenario.exposedBaseDerived} />
-        ),
-      },
-      { label: `× exposed share ${pct(exposedShare)}`, value: `= ${dkkM(exposedBase)} exposed` },
-      { label: "Volume lost (after elasticity)", value: dkkM(r.walk.volumeLossDkk) },
-      { label: "— margin lost on that volume", value: dkkM(r.walk.marginLossOnVol) },
-      { label: "— excise STG absorbs (not passed on)", value: dkkM(r.walk.absorbedExcise) },
-      { label: "= EBITDA at risk (base)", value: `${dkkM(r.atRiskBase)} / yr`, strong: true },
-    ];
-    return {
-      band: { best: r.atRiskBest, base: r.atRiskBase, worst: r.atRiskWorst },
-      walk,
-      bandDrivers: "elasticity × pass-through grid",
-      anchor: null as null | {
-        lostRevenue: number;
-        shareOfAmbition: number;
-        ambitionDkkM: number;
-        ambitionSourceRef: string;
-      },
-    };
-  }, [values, scenario, isRestriction]);
+  const view = useMemo(() => computeScenarioView(scenario, values), [scenario, values]);
 
   const denom = Math.max(view.band.worst, 1);
   const bestPct = (view.band.best / denom) * 100;
@@ -297,7 +200,9 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
                 <span className={row.strong ? undefined : "text-muted-foreground"}>{row.label}</span>
                 <span className="flex items-center gap-2 tabular-nums">
                   {row.value}
-                  {row.chip}
+                  {row.sourceRef && (
+                    <CitationChip sourceRef={row.sourceRef} derived={row.derived} />
+                  )}
                 </span>
               </div>
             ))}

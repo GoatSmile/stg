@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} font-sans antialiased`}>
         <div className="flex min-h-screen flex-col">
-          <header className="border-b border-border">
+          <header className="border-b border-border print:hidden">
             <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
               <Link href="/" className="flex items-center gap-2.5">
                 <span aria-hidden className="h-5 w-[3px] rounded-full bg-primary" />
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
 
-          <footer className="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground">
+          <footer className="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground print:hidden">
             Varsel for STG — a prototype by {CONTACT.name} / valent.dk ·{" "}
             <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2">
               {CONTACT.email}

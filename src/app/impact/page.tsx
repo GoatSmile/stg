@@ -71,9 +71,14 @@ export default async function Impact({
           Worked examples: EU-ETD (proposed, 2028), plus the France ban and Denmark cap that are in
           force now. Spain&apos;s cap and US tariffs model separately — coming.
         </span>
-        <Link href="/" className="underline underline-offset-2">
-          ← back to the pulse
-        </Link>
+        <span className="flex items-center gap-3">
+          <Link href={`/onepager?event=${scenario.eventId}`} className="underline underline-offset-2">
+            forward-ready one-pager →
+          </Link>
+          <Link href="/" className="underline underline-offset-2">
+            ← back to the pulse
+          </Link>
+        </span>
       </div>
     </div>
   );

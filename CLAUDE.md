@@ -630,6 +630,26 @@ repeated to the client: owner decides, always.
   only honest way to substantiate "before it lands": "Varsel would have flagged the France ban N months early");
   a **forward-ready one-pager export** (execs forward attachments, not gated URLs); an **interactive mini-slider
   on the home preview**.
+- **Two wow builds: interactive home slider + forward-ready one-pager — (2026-06-18).** Built the two
+  panel-requested wows (the hindsight/backtest card is still parked). First, a **shared single-source helper**
+  `src/lib/impact-view.ts` (`computeScenarioView(scenario, values)` → band + walk + growth anchor) so the
+  Impact Room, the home preview and the one-pager can't show different numbers (drift = a credibility break).
+  **Refactored `ImpactRoom.tsx` to use it** (its inline useMemo → a one-liner; walk rows now carry `sourceRef`
+  not a JSX chip node) — verified regression-free in-browser across all 3 scenarios (eu-etd 45–95m, fr-ban,
+  dk-cap 2–5m; walks + citation chips + abstentions + the anchor-leads order + the P2 SKU card all unchanged).
+  **(A) #3 interactive home preview** (`src/components/HomeEnginePreview.tsx`, client): the EU-ETD engine
+  preview now has **one live slider — "exposed share of the EU base"** — and the band recomputes as you drag
+  (verified: 0.30→0.35 moved DKK 45–95m → 52–111m, exactly linear). The "argue with the model" moment in the
+  first 15 seconds, with the illustrative tag + "you set it" framing kept. Replaced the static server card in
+  `page.tsx`. **(B) #2 forward-ready one-pager** (`/onepager?event=<id>`): a print-clean, self-contained
+  snapshot of one scenario (band + growth anchor + the math walk + sourced facts + abstentions + the
+  public-data/not-affiliated/not-for-external footer), with a **Save-as-PDF** button (`PrintButton.tsx`, native
+  `window.print()`, zero deps) — the artifact a recipient forwards as an attachment, not a gated URL. App
+  header/footer get `print:hidden` so the PDF is clean. Entry links from the home preview + the Impact Room
+  bottom row. Shown at scenario defaults (the live app is where you tune). Fixed a JSX whitespace gremlin
+  ("1%of"→"1% of"). `tsc` clean + `next build` green (17 routes); verified in-browser (slider recompute,
+  Impact Room unchanged, one-pager for eu-etd + dk-cap, no console errors). **Still parked:** the
+  hindsight/backtest card (all 7 personas' top ask — substantiates "before it lands").
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
