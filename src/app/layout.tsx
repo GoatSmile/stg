@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://stg-azure.vercel.app"),
   title: "Varsel for STG — the next surprise to your P&L, sized in kroner",
   description:
-    "One live map of Scandinavian Tobacco Group's whole risk surface — regulation, FX, leaf and climate, the SAP rollout, pouch competition, hiring — each a tracked signal, with the regulatory threat worked down to a DKK EBITDA band on STG's own published footprint. Built on public data only; internal scenario prep, not investor-facing.",
+    "One map of Scandinavian Tobacco Group's whole risk surface — regulation, FX, leaf and climate, the SAP rollout, pouch competition, hiring — each a tracked signal, with the regulatory threat worked down to a DKK EBITDA band on STG's own published footprint. Built on public data only; internal scenario prep, not investor-facing.",
   openGraph: {
     title: "Varsel for STG — the next surprise to your P&L, sized in kroner",
     description:
-      "See the tail before it surprises you — on public data, in DKK.",
+      "Regulation, FX and leaf risk on STG's own published footprint, sized in DKK — internal scenario prep, public data only.",
     siteName: "Varsel for STG",
     type: "website",
   },

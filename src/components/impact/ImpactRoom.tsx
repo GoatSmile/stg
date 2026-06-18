@@ -154,6 +154,36 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
         <p className="text-xs text-muted-foreground">Applies: {scenario.appliesFrom}</p>
       </div>
 
+      {/* growth-at-risk anchor LEADS for restriction scenarios: the small annual P&L hit is not the
+          point — the foreclosed share of the stated pouch ambition is, so it wins the eye first. */}
+      {view.anchor && (
+        <Card className="flex flex-col gap-1.5 border-primary/30 bg-primary/5 p-4">
+          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-primary">
+            <TrendingDown className="size-3.5" aria-hidden="true" />
+            The growth at risk, not just the P&amp;L
+          </div>
+          <p className="text-sm leading-relaxed">
+            The current-year hit is modest because pouches are ~5% of group — but this forecloses{" "}
+            <span className="font-semibold tabular-nums">{dkkM(view.anchor.lostRevenue)}/yr</span>{" "}
+            of pouch revenue, ≈{" "}
+            <span className="font-semibold tabular-nums">{pct(view.anchor.shareOfAmbition)}</span>{" "}
+            of STG&apos;s stated{" "}
+            <span className="inline-flex items-center gap-1">
+              DKK 1bn+ pouch ambition
+              <CitationChip sourceRef={view.anchor.ambitionSourceRef} />
+            </span>
+            {scenario.eventId === "fr-ban"
+              ? " — and with no compliant product in France, that revenue is gone, not deferred."
+              : " — the growth leg the Focus2030 story leans on."}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            The foreclosed figure follows from the editable {`${scenario.marketLabel} share`}{" "}
+            assumption — illustrative, not STG&apos;s own number — and is shown against the stated
+            future ambition as a sense of scale, not a precise contribution.
+          </p>
+        </Card>
+      )}
+
       {/* the headline band + the eye-level illustrative tag */}
       <Card className="flex flex-col gap-3 p-5">
         <div className="flex flex-wrap items-end justify-between gap-2">
@@ -195,36 +225,6 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
           base case. Internal scenario prep — not investor-facing (EU MAR).
         </p>
       </Card>
-
-      {/* growth-at-risk anchor (restriction scenarios): the small P&L hit is not the point —
-          the foreclosed share of the stated pouch ambition is. */}
-      {view.anchor && (
-        <Card className="flex flex-col gap-1.5 border-primary/30 bg-primary/5 p-4">
-          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-primary">
-            <TrendingDown className="size-3.5" aria-hidden="true" />
-            The growth at risk, not just the P&amp;L
-          </div>
-          <p className="text-sm leading-relaxed">
-            The current-year hit is modest because pouches are ~5% of group — but this forecloses{" "}
-            <span className="font-semibold tabular-nums">{dkkM(view.anchor.lostRevenue)}/yr</span>{" "}
-            of pouch revenue, ≈{" "}
-            <span className="font-semibold tabular-nums">{pct(view.anchor.shareOfAmbition)}</span>{" "}
-            of STG&apos;s stated{" "}
-            <span className="inline-flex items-center gap-1">
-              DKK 1bn+ pouch ambition
-              <CitationChip sourceRef={view.anchor.ambitionSourceRef} />
-            </span>
-            {scenario.eventId === "fr-ban"
-              ? " — and with no compliant product in France, that revenue is gone, not deferred."
-              : " — the growth leg the Focus2030 story leans on."}
-          </p>
-          <p className="text-[11px] text-muted-foreground">
-            The foreclosed figure follows from the editable {`${scenario.marketLabel} share`}{" "}
-            assumption — illustrative, not STG&apos;s own number — and is shown against the stated
-            future ambition as a sense of scale, not a precise contribution.
-          </p>
-        </Card>
-      )}
 
       {/* Radar P2 — the real XQS SKU range behind the delisted-share assumption. The slider
           default isn't a guess: it's bracketed by XQS's actual flavoured catalogue. */}
@@ -330,9 +330,9 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
       <div className="flex items-start gap-2 rounded-md border border-border bg-secondary/40 px-3 py-2 text-[13px] text-muted-foreground">
         <Lock className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
         <span>
-          This models the <em>shape</em> of impact on STG&apos;s published segments. Plug in STG&apos;s
-          real volumes and price ladders (behind a data agreement) and the same model returns
-          finance-grade, SKU-level precision — the paid step, not a v1 claim.
+          This models the <em>shape</em> of impact from STG&apos;s published segments. Plug in your
+          real XQS volumes and price ladders (behind a data agreement) and the same model returns a
+          finance-grade, SKU-level band — the paid step, typically within a working week.
         </span>
       </div>
     </div>

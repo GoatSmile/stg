@@ -571,11 +571,28 @@ repeated to the client: owner decides, always.
   (stale on a forwarded link) → "H2 2026". (6) Sweden share base-year disagreed across surfaces (sales.json
   "2025" vs 2024 elsewhere) → unified to 2024. (7) CLAUDE.md doc drift (SE "re-verify-pending" in the Next line)
   → fixed. `tsc` clean + `next build` green (16 routes); verified in-browser (engine leads with the real band,
-  map demoted, careers reads "live · pulled", no console errors). **Parked for owner (the "full pass" option):**
-  the text rewrites (hero, OG description, restriction-scenario headline = strategic quantity, Lock-card
-  "precision"→"band"), and the breadth simplification (quarantine FX/weather/ENSO/freight behind a "what else
-  plugs in" tab). **Wow ideas teed up:** an interactive mini-scenario slider on the home preview; a
-  forward-ready one-pager export; a "this would have flagged the France ban N months early" hindsight proof.
+  map demoted, careers reads "live · pulled", no console errors).
+- **Full-pass text edits + restriction-hierarchy reorder — (2026-06-18).** The "full pass" copy work from the
+  audit: (1) **hero body tightened** (the 75-word run-on Yulia lost the thread in → 3 clean sentences, trust
+  line up front). (2) **OG/meta de-risked for MAR**: `openGraph.description` "See the tail before it surprises
+  you…" (reads as market-timing about a listed co. in a link preview) → "Regulation, FX and leaf risk on STG's
+  own published footprint, sized in DKK — internal scenario prep, public data only"; main meta "One live map" →
+  "One map". (3) **Restriction scenarios now LEAD with the strategic quantity**: in `ImpactRoom.tsx` the
+  growth-at-risk anchor card (foreclosed % of the DKK 1bn+ ambition) now renders ABOVE the band card for
+  restriction scenarios (fr-ban/dk-cap), so the small kroner figure no longer wins the eye; excise (eu-etd) is
+  unchanged (band only, no anchor). (4) **Lock card**: "shape of impact **on**" → "**from**", "STG's real volumes"
+  → "**your real XQS volumes**", "finance-grade, SKU-level **precision** — the paid step, not a v1 claim" →
+  "a finance-grade, SKU-level **band** — the paid step, typically within a working week" (precision is the word a
+  CFO trusts least; band matches our own discipline). `tsc` clean + `next build` green (16 routes); verified
+  in-browser (dk-cap growth-card-leads-band, eu-etd unchanged, hero, Lock card, no console errors).
+  **HELD (the one piece of the full pass I did NOT do, by judgment):** the **breadth quarantine** (hiding
+  FX/weather/ENSO/freight behind a "what else plugs in" tab). Rationale: the home reposition already demotes the
+  whole map and frames it as "the same engine across STG's whole risk surface" (= breadth/roadmap), which
+  addresses Yulia's "engineer showing off feeds" concern; hiding 4 of 7 lenses now would *undercut* that
+  "same engine everywhere" story and fragment a working UX. Surfaced to owner as a genuine fork (do nothing /
+  light visual grouping of the load-bearing 3 vs the feed-4 / full quarantine). **Wow ideas still teed up:**
+  interactive mini-scenario slider on the home preview; forward-ready one-pager export; "would have flagged the
+  France ban N months early" hindsight proof.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

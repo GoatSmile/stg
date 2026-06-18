@@ -43,12 +43,11 @@ export default async function Home({
           Where the next surprise to STG&apos;s P&amp;L comes from — sized in kroner, before it lands
         </h1>
         <p className="max-w-3xl text-muted-foreground">
-          One map of STG&apos;s whole risk surface — regulation, FX, leaf and climate, the SAP
-          rollout, pouch competition, hiring — each a tracked signal on Scandinavian Tobacco
-          Group&apos;s own published footprint. The regulatory threat is worked all the way down to a
-          DKK EBITDA band — a model you can argue with: every number cites its source, or says so
-          when it can&apos;t — the template the other surfaces plug into next. Built on public data
-          only, framed strictly as internal scenario prep.
+          Every signal sits on Scandinavian Tobacco Group&apos;s own published footprint, built on
+          public data only — and every number cites its source, or says so when it can&apos;t. The
+          regulatory threat is worked all the way down to a DKK EBITDA band you can argue with; the
+          rest of the risk surface plugs into the same engine. Internal scenario prep, never
+          investor-facing.
         </p>
       </div>
 
