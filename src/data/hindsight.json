@@ -1,0 +1,39 @@
+{
+  "_note": "Hindsight / lead-time illustration for the 'before it lands' claim. Each measure was in the PUBLIC record — a published decree, an adopted national rule, or a tabled EU proposal — months before it took effect. Varsel reads that same public record, so the P&L exposure surfaces when a rule is proposed/published, not when it lands. This is NOT a claim that Varsel ran historically and predicted these (it didn't exist then); it shows the lead time INHERENT in the public record that a monitor like this gives you. Every date is public and cited (sources in docs/ceo-research-digest.md). Lead labels are the fixed signal→effect gap, so they don't go stale.",
+  "items": [
+    {
+      "eventId": "fr-ban",
+      "label": "France — oral-nicotine ban",
+      "signalDate": "2025-09-05",
+      "signalWhat": "Décret 2025-898 published",
+      "effectDate": "2026-04-01",
+      "effectWhat": "sale / import / possession ban in force",
+      "leadLabel": "≈ 7 months",
+      "status": "in force",
+      "sourceRef": "Décret 2025-898",
+      "note": "The category-ban trend was visible earlier still — Belgium banned 2023, the Netherlands Jan 2025."
+    },
+    {
+      "eventId": "dk-cap",
+      "label": "Denmark — 9 mg + flavour cap",
+      "signalDate": "2025-07-01",
+      "signalWhat": "rules adopted; transition opens",
+      "effectDate": "2026-04-01",
+      "effectWhat": "9 mg + tobacco/menthol-only in full effect",
+      "leadLabel": "9 months",
+      "status": "in force",
+      "sourceRef": "sik.dk"
+    },
+    {
+      "eventId": "eu-etd",
+      "label": "EU tobacco-tax revision",
+      "signalDate": "2025-07-16",
+      "signalWhat": "COM(2025) 580 tabled",
+      "effectDate": "2028",
+      "effectWhat": "earliest application (proposed)",
+      "leadLabel": "≈ 30 months — on the radar now",
+      "status": "proposed",
+      "sourceRef": "COM(2025) 580"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { PulseDashboard } from "@/components/map/PulseDashboard";
 import { RadarSignals } from "@/components/RadarSignals";
 import { HomeEnginePreview } from "@/components/HomeEnginePreview";
+import { HindsightCard } from "@/components/HindsightCard";
 
 export default async function Home({
   searchParams,
@@ -26,6 +27,9 @@ export default async function Home({
 
       {/* The engine leads — the one differentiated thing, sized and live (drag a real assumption). */}
       <HomeEnginePreview />
+
+      {/* the "before it lands" proof — lead time inherent in the public record */}
+      <HindsightCard />
 
       <RadarSignals />
 

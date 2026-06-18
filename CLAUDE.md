@@ -648,8 +648,21 @@ repeated to the client: owner decides, always.
   header/footer get `print:hidden` so the PDF is clean. Entry links from the home preview + the Impact Room
   bottom row. Shown at scenario defaults (the live app is where you tune). Fixed a JSX whitespace gremlin
   ("1%of"→"1% of"). `tsc` clean + `next build` green (17 routes); verified in-browser (slider recompute,
-  Impact Room unchanged, one-pager for eu-etd + dk-cap, no console errors). **Still parked:** the
-  hindsight/backtest card (all 7 personas' top ask — substantiates "before it lands").
+  Impact Room unchanged, one-pager for eu-etd + dk-cap, no console errors).
+- **Hindsight / lead-time card shipped — the 3rd panel wow (all 7 personas' #1 ask) — (2026-06-18).**
+  The honest substantiation of "before it lands": `src/components/HindsightCard.tsx` + `src/data/hindsight.json`,
+  on the home page right after the engine preview. For each modeled measure it shows **signal date → effect
+  date = lead time**, all from REAL cited public dates pulled from `docs/ceo-research-digest.md`: **France**
+  Décret 2025-898 published **2025-09-05** → ban in force **2026-04-01** = **≈ 7 months**; **Denmark** rules
+  adopted/transition **2025-07-01** → full effect **2026-04-01** = **9 months**; **EU-ETD** COM(2025) 580 tabled
+  **2025-07-16** → application **2028** = **≈ 30 months — on the radar now**. **Honesty framing is explicit and
+  load-bearing:** the card states this is NOT a claim Varsel ran historically (it didn't exist then) — it's the
+  lead time *inherent in the public record* that a monitor reading that record gives you; every date is public +
+  carries a `CitationChip` (Décret 2025-898 / sik.dk / COM(2025) 580); lead labels are the fixed signal→effect
+  gap so they never go stale. France row notes the category-ban trend was visible earlier still (Belgium 2023,
+  NL Jan 2025 — also sourced). Each row links to its Impact Room scenario. `tsc` clean + `next build` green
+  (17 routes); verified in-browser (all 3 rows, real dates, citations, no console errors). **All three
+  panel-requested wows are now built** (interactive home slider, forward-ready one-pager, hindsight card).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
