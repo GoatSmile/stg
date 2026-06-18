@@ -53,10 +53,9 @@ export default function Transparency() {
             <Dot color="var(--prov-agent)" />
             <span className="font-medium">Agent-fetched</span> — public data pulled programmatically,
             not hand-entered. ECB FX, Open-Meteo leaf-region weather, NOAA ENSO climate and Brent
-            crude (FRED, a freight-cost proxy) refresh live on each request. STG&apos;s SuccessFactors
-            careers feed is a dated snapshot, read live from Supabase (EU) but refreshed on an
-            authorised manual cadence — not a standing crawl, because the role detail comes from a
-            permission-restricted endpoint.
+            crude (FRED, a freight-cost proxy) refresh live on each request. STG&apos;s public careers
+            feed is a dated snapshot, read live from Supabase (EU) and refreshed by a manual periodic
+            pull — not a standing automated crawl.
           </li>
           <li className="rounded-lg border border-border p-3">
             <Dot color="var(--prov-internal)" />
@@ -66,8 +65,8 @@ export default function Transparency() {
           </li>
           <li className="rounded-lg border border-border p-3">
             <Dot color="var(--prov-fab)" />
-            <span className="font-medium">Illustrative (marked *)</span> — plausible figures we
-            fabricated to show the app&apos;s ability, because the real data isn&apos;t public.
+            <span className="font-medium">Illustrative (marked *)</span> — plausible placeholders we
+            constructed to show the app&apos;s ability, because the real data isn&apos;t public.
             Always asterisked, never presented as fact, and likely obtainable in a real engagement.
           </li>
         </ul>

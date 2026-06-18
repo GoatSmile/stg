@@ -40,7 +40,7 @@ export default async function Home({
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <h1 className="font-heading text-3xl font-medium tracking-tight sm:text-4xl">
-          Where the next surprise to STG&apos;s P&amp;L comes from — sized in kroner, before it lands
+          What the next regulation is worth to STG&apos;s P&amp;L — sized in kroner
         </h1>
         <p className="max-w-3xl text-muted-foreground">
           Every signal sits on Scandinavian Tobacco Group&apos;s own published footprint, built on
@@ -66,7 +66,7 @@ export default async function Home({
         <div className="mt-1 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
           <div>
             <div className="text-xs uppercase tracking-wide text-muted-foreground">
-              Annual EBITDA at risk
+              EBITDA at risk — on public-data defaults
             </div>
             <div className="mt-1 text-3xl font-semibold tabular-nums sm:text-4xl">{rangeLabel}</div>
             <div className="mt-0.5 text-sm text-muted-foreground tabular-nums">
@@ -119,7 +119,7 @@ export default async function Home({
             The same engine, across STG&apos;s whole risk surface
           </span>
           <span className="text-[11px] text-muted-foreground">
-            seven teams, one map — switch the lens
+            the same DKK discipline, extended across the surface
           </span>
         </div>
         <PulseDashboard key={lens ?? "default"} initialLensId={lens} />

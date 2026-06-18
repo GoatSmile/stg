@@ -189,7 +189,7 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
         <div className="flex flex-wrap items-end justify-between gap-2">
           <div>
             <div className="text-xs text-muted-foreground uppercase tracking-wide">
-              Annual EBITDA at risk
+              EBITDA at risk — on these assumptions
             </div>
             <div className="mt-1 text-3xl font-semibold tabular-nums text-foreground">
               {dkkRange(view.band.best, view.band.worst)}
@@ -332,7 +332,8 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
         <span>
           This models the <em>shape</em> of impact from STG&apos;s published segments. Plug in your
           real XQS volumes and price ladders (behind a data agreement) and the same model returns a
-          finance-grade, SKU-level band — the paid step, typically within a working week.
+          finance-grade, SKU-level band — the paid step. The engine is already built; the work is your
+          data, not our software.
         </span>
       </div>
     </div>

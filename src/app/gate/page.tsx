@@ -24,10 +24,9 @@ export default async function Gate({
         </div>
 
         <p className="text-sm leading-relaxed">
-          Where the next surprise to your P&amp;L could come from — regulation, FX, leaf and climate,
-          the SAP rollout, pouch competition, hiring — each a tracked signal on Scandinavian Tobacco
-          Group&apos;s own published footprint, with the regulatory threat sized to a DKK band, on
-          public data only.
+          What the next regulation is worth to your P&amp;L — the regulatory threat sized to a DKK band
+          on Scandinavian Tobacco Group&apos;s own published footprint, on public data only. A model
+          you can argue with, built to be discussed internally.
         </p>
         <p className="mt-3 text-sm text-muted-foreground">
           This is a private preview. Enter the password from your invitation to continue.
@@ -54,7 +53,8 @@ export default async function Gate({
         </form>
 
         <p className="mt-4 border-t border-border pt-3 text-[11px] leading-snug text-muted-foreground">
-          A prototype by {CONTACT.name} / valent.dk — internal scenario-prep, not investor-facing.
+          An independent prototype by {CONTACT.name} / valent.dk — not affiliated with or endorsed by
+          STG. Public data only, no STG figures; internal scenario-prep, not for external distribution.
           Questions? <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-2">{CONTACT.email}</a>.
         </p>
       </div>

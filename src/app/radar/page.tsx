@@ -157,9 +157,9 @@ export default function Radar() {
                       {p.priceVerified && (
                         <span
                           className="inline-flex items-center gap-0.5 text-emerald-700 dark:text-emerald-400"
-                          title="price independently cross-verified against a second shop"
+                          title="price cross-checked against a second shop in the 2026-06-17 snapshot (one-time, not a maintained feed)"
                         >
-                          <ShieldCheck className="size-3" aria-hidden="true" /> verified
+                          <ShieldCheck className="size-3" aria-hidden="true" /> cross-checked
                         </span>
                       )}
                       <CitationChip sourceRef={p.priceSource} />

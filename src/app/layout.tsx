@@ -12,13 +12,13 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://stg-azure.vercel.app"),
-  title: "Varsel for STG — the next surprise to your P&L, sized in kroner",
+  title: "Varsel for STG — a public-data regulatory risk model, by valent.dk",
   description:
-    "One map of Scandinavian Tobacco Group's whole risk surface — regulation, FX, leaf and climate, the SAP rollout, pouch competition, hiring — each a tracked signal, with the regulatory threat worked down to a DKK EBITDA band on STG's own published footprint. Built on public data only; internal scenario prep, not investor-facing.",
+    "An independent valent.dk prototype that sizes regulatory and market risk on Scandinavian Tobacco Group's own published footprint — the regulatory threat worked down to a DKK EBITDA band. Public data only; internal scenario prep, not investor-facing. Not affiliated with or endorsed by STG.",
   openGraph: {
-    title: "Varsel for STG — the next surprise to your P&L, sized in kroner",
+    title: "Varsel for STG — a public-data regulatory risk model, by valent.dk",
     description:
-      "Regulation, FX and leaf risk on STG's own published footprint, sized in DKK — internal scenario prep, public data only.",
+      "An independent prototype sizing regulatory and leaf risk on STG's own published footprint, in DKK — public data only, internal scenario prep. Not affiliated with or endorsed by STG.",
     siteName: "Varsel for STG",
     type: "website",
   },
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="flex items-center gap-2.5">
                 <span aria-hidden className="h-5 w-[3px] rounded-full bg-primary" />
                 <span className="font-heading text-xl font-medium tracking-tight">Varsel for STG</span>
-                <span className="text-xs text-muted-foreground">operations pulse</span>
+                <span className="text-xs text-muted-foreground">public-data risk model</span>
               </Link>
               <div className="flex items-center gap-1">
                 <nav className="flex gap-1 text-sm">

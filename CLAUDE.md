@@ -593,6 +593,43 @@ repeated to the client: owner decides, always.
   light visual grouping of the load-bearing 3 vs the feed-4 / full quarantine). **Wow ideas still teed up:**
   interactive mini-scenario slider on the home preview; forward-ready one-pager export; "would have flagged the
   France ban N months early" hindsight proof.
+- **Buyer-panel rerun + forwardability hardening — (2026-06-18).** Re-ran the persona panel (7 personas +
+  synthesis) against the post-reposition app — it **completed cleanly** this time (the prior run died on a
+  session limit; recovered 6 audits + Yulia from the transcript). Verdict: **"mostly-lands — a method demo,
+  not yet a forwardable answer."** The honesty spine + engine-leads reposition are **unanimously validated
+  (do not revert)**; the block is that the panel would forward sideways/to an analyst now but **not cold up to
+  the CFO/CEO** until specific copy fixed. Acted on the confirmed, spine-safe findings (all verified
+  in-browser, `tsc`+`build` green, no console errors):
+  **(A) The escaping metadata (6/7 personas' #1 gap):** the `<title>` + `openGraph.title` still said "the next
+  surprise to your P&L, sized in kroner" — the one string that renders in a browser tab / Slack-Teams unfurl /
+  email preview **stripped of every caveat**, reading as quasi-guidance about a *named listed issuer*. (Prior
+  pass de-risked the OG *description* but missed both *titles*.) → both now "Varsel for STG — a public-data
+  regulatory risk model, by valent.dk" (mechanism-not-magnitude, vendor-attributed); meta/OG descriptions add
+  "Not affiliated with or endorsed by STG."
+  **(B) Headline reframed from fact to scenario:** home H1 "Where the next surprise … before it lands" →
+  "What the next regulation is worth to STG's P&L — sized in kroner" (the in-force FR/DK examples contradicted
+  "surprise/before-it-lands"); the band label "Annual EBITDA at risk" → "EBITDA at risk — on these assumptions"
+  (Impact) / "…on public-data defaults" (home preview), so the slider-driven number reads as the reader's
+  co-owned model, not the vendor's claim. Masthead subtitle "operations pulse" (a map-era leftover) →
+  "public-data risk model".
+  **(C) Trust-for-the-forwarder on surfaces that travel:** the gate cover (pre-password, seen by every
+  forwarded reader) + meta/OG now carry "an independent prototype, not affiliated with or endorsed by STG.
+  Public data only, no STG figures; not for external distribution." (Legal flagged the page-5-only disclaimer
+  didn't cure the claret+serif brand-confusion.)
+  **(D) Honesty optics:** the careers transparency line dropped the self-incriminating "authorised … because the
+  role detail comes from a permission-restricted endpoint" → "refreshed by a manual periodic pull, not a standing
+  automated crawl"; the provenance legend "figures we **fabricated**" → "placeholders we **constructed**" (a
+  quotable own-goal); the radar per-row "**verified**" ShieldCheck → "**cross-checked**" (the badge implied a
+  maintained feed for a one-time snapshot); the Lock card's "typically within a working week" delivery promise →
+  "the engine is already built; the work is your data, not our software" (capability, not a hostage-to-fortune).
+  **(E) Breadth — the prior "HELD" call OVERTURNED by the panel (4/6 senior personas):** done as **light
+  grouping**, not full quarantine — `LensSwitcher` now leads with the 3 thesis lenses (Regulatory/Sales/HR) and
+  puts the 4 feed-lenses (Finance/Procurement/Supply/ESG) under "and the same engine extends to —"; the map
+  sub-line "seven teams, one map" → "the same DKK discipline, extended across the surface".
+  **Unanimously-requested wow still teed up (not built):** a **hindsight/backtest card** (all 7 personas — the
+  only honest way to substantiate "before it lands": "Varsel would have flagged the France ban N months early");
+  a **forward-ready one-pager export** (execs forward attachments, not gated URLs); an **interactive mini-slider
+  on the home preview**.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
