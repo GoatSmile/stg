@@ -15,6 +15,13 @@ export type CareerSite = {
   oldestDaysOpen: number;
 };
 
+/**
+ * A bare open-count for a bucket (no geo). Used only for the cached map-badge
+ * fallback on the two unmapped buckets (`us-retail`, `eu-other`) — kept OUT of
+ * `sites[]` so the KPI strategic/other split (strategicOpen/otherOpen) stays correct.
+ */
+export type CareerCount = { siteId: string; openPositions: number; oldestDaysOpen: number };
+
 export type CareerSnapshot = {
   asOf: string;
   source: string;
@@ -23,6 +30,10 @@ export type CareerSnapshot = {
   crawledAt: string | null;
   // Strategic STG sites only — production / leaf / HQ / delivery offices.
   sites: CareerSite[];
+  // Cached open-counts for the unmapped buckets (us-retail, eu-other), so the map
+  // badges degrade to a labelled "cached" count when the live roles path (DB) is
+  // down, rather than silently zeroing. Absent on older snapshots.
+  unmapped?: CareerCount[];
 };
 
 /**

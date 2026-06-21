@@ -135,7 +135,10 @@ track (reference only).
   Per-role data (title · real department · days-open · full description · apply URL) lives **only**
   in the DB — the app reads it **live** via `/api/feeds/careers?roles=1` (live-only — empty if the DB
   is down, never a JSON copy). `hr.json` carries **no** `roles[]`/counts; the map derives each site's
-  open-count badge + detail role-list from the live roles, keyed by `siteId`. **Every role is bucketed
+  open-count badge + detail role-list from the live roles, keyed by `siteId`. **If the DB is down, the
+  per-site open-COUNTS fall back to the bundled `careers.json` snapshot (`sites[]` + the `unmapped`
+  us-retail/eu-other block), labeled "cached" on the map (gap-#5 fix, 2026-06-21); only the role
+  *descriptions* stay live-only — so badges degrade to a real cached count, never a silent zero.** **Every role is bucketed
   by location** into one of the 12 strategic sites, **`us-retail`** (US Cigars-International
   stores/bars — marker on US land) or **`eu-other`** (non-US unmapped roles: Holstebro DK factory,
   NL/SE/UK field sales — its own "Europe — field & other" marker) — an EU role is never mislabeled as
@@ -689,12 +692,38 @@ repeated to the client: owner decides, always.
   verified in-browser (branded 404, Impact AI resolves to offline-golden, OG new copy, weather live, no
   console errors). **DEFERRED (medium-effort, not a quick win): gap #5** — the HR map roles-down still
   degrades silently (the `?roles=1` path is live-only by owner directive); the fix is to fall the map
-  badges back to `careers.json`'s static `openPositions` + label the map "cached". Also flagged operational
+  badges back to `careers.json`'s static `openPositions` + label the map "cached". **(NOW DONE — see the
+  2026-06-21 gap-#5 entry below.)** Also flagged operational
   win: re-commit fresh feed snapshots right before sending the link (cached `asOf` dates are ~a week stale
   on a cold forward). **Docs:** `pilot-proposal.md` "Valent ApS" → **"Valent"** (the owner is unincorporated
   "for now" — the send-ready contracting identity must match); `commercial-strategy.md`'s *incorporate-an-ApS*
   lines left as forward-looking recommendations (flagged the precondition-vs-send-as-Valent tension to the
-  owner). No app code says ApS (it's "valent.dk").
+  owner). **(Tension NOW RESOLVED — owner chose send-as-Valent; softened below.)** No app code says ApS (it's "valent.dk").
+- **Gap #5 fixed (HR map roles-down no longer degrades silently) + commercial-strategy ApS tension resolved — (2026-06-21).**
+  Picked up cold from a prior session's export (the resilience-hardening session that shipped `f51903d`), which had
+  handed back exactly two non-blocking items. Owner decided both this session: (A) ship gap #5; (B) **sending as
+  unincorporated Valent now** (incorporate later). **(A) Gap #5 — HR map cached badge fallback.** Before: on the HR
+  lens, `PulseDashboard` fetched `/api/feeds/careers?roles=1` (live-only by owner directive); if Supabase was down,
+  every site badge silently **zeroed** while the `CareersStrip` KPI still showed the cached aggregate — a visible
+  contradiction on a forwarded link during an outage. Fix (4 files): `careers.json` gained an **`unmapped`** block
+  (us-retail 33 / eu-other 5 — the two buckets that aren't in `sites[]`, kept OUT of `sites[]` so
+  `strategicOpen`/`otherOpen` stay correct); `careers.ts` gained a `CareerCount` type + optional `unmapped?` on
+  `CareerSnapshot`; `pull-jobs.ts` now emits `unmapped` into the cache file on every pull (via a shared `countFor`
+  helper) so it stays maintained — NOT written to the DB row (no column); `PulseDashboard.tsx` now tracks live-vs-cached
+  (`{roles, live}` state; an empty/failed payload → `live:false`), derives badges from the **bundled** cached counts
+  when not live (instant, can't fail at runtime), and shows an amber **"Open-counts from a cached snapshot (asOf) — the
+  live careers DB is unreachable…"** caption + a per-marker "Cached open-count — live role list unavailable" note. Role
+  *descriptions* stay live-only (owner directive intact); only the aggregate *counts* fall back. **Verified in-browser
+  both paths:** live = `live:true`, 68 roles, badges 33/7/6/5/5/3/2/2/1… (sum 68), no caption; cached (roles fetch
+  stubbed to fail) = badges still render the cached counts (sum 68, us-retail 33 + eu-other 5 both resolved from
+  `unmapped` — without it the biggest dot would've zeroed), amber caption + detail note present, **zero console errors**;
+  live restores cleanly on reload. `tsc` clean + `next build` green (17 routes). **(B) `commercial-strategy.md` softened**
+  (owner: send as Valent now): dropped the "incorporate Valent ApS **before sending the video** / **the precondition** for
+  every retained-IP clause" framing → reframed incorporation as a **fast clean-up before *signing*, not a gate on
+  sending** (3 edits: §3 structure "under your own entity — Valent now; an ApS once incorporated", §5 IP section, §8
+  step 1). The retained-IP / Background-IP clauses hold for a sole proprietor too, so the pilot proposal (already
+  "Valent", fixed `f51903d`) and the strategy doc no longer contradict each other. Line 123 (ApS facts-firmness) +
+  step 2 (legal-kit this week) left as-is — independent of the gating question.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

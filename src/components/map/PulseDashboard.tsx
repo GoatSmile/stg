@@ -23,6 +23,7 @@ import {
   lenses, sites, defaultLensId, getLens, provenanceMeta, type Marker,
 } from "@/lib/lenses";
 import type { CareerRole } from "@/lib/careers";
+import cachedCareers from "@/data/feeds/careers.json";
 import { cn } from "@/lib/utils";
 
 // A role open > 1 year reads as a "standing req", not "open N days" (matches the
@@ -30,6 +31,19 @@ import { cn } from "@/lib/utils";
 // marker that collects every role with no strategic-site mapping.
 const STANDING_DAYS = 365;
 const RETAIL_SITE_ID = "us-retail";
+
+// Build-time bundled fallback: per-site open-counts from the last cached snapshot.
+// Roles (the descriptions) are live-only from the DB by design, but the open-COUNTS
+// degrade to this labelled "cached" snapshot when the DB is unreachable — so the map
+// badges can never silently zero out and contradict the "N open" KPI strip on a
+// forwarded link during an outage. Can't fail at runtime (bundled at build).
+const CACHED_COUNTS = new Map<string, { openPositions: number; oldestDaysOpen: number }>(
+  [...cachedCareers.sites, ...(cachedCareers.unmapped ?? [])].map((s) => [
+    s.siteId,
+    { openPositions: s.openPositions, oldestDaysOpen: s.oldestDaysOpen },
+  ]),
+);
+const CACHED_AS_OF = cachedCareers.asOf;
 
 function roleMeta(r: CareerRole): string {
   const fam = r.family || "—";
@@ -44,47 +58,67 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
   );
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [openRole, setOpenRole] = useState<CareerRole | null>(null);
-  const [roles, setRoles] = useState<CareerRole[] | null>(null);
+  // `roles` carries the live role list AND whether it's genuinely live; null = not
+  // fetched yet. An empty/failed payload is treated as NOT live so the map falls
+  // back to the cached counts instead of zeroing every badge.
+  const [careers, setCareers] = useState<{ roles: CareerRole[]; live: boolean } | null>(null);
   const lens = getLens(activeId);
 
-  // Roles are live-only from the DB (single source of truth — no JSON copy).
+  // Role detail is live-only from the DB (single source of truth — no JSON copy).
   // Fetch once, the first time the HR lens is shown.
   useEffect(() => {
-    if (lens.id !== "hr" || roles !== null) return;
+    if (lens.id !== "hr" || careers !== null) return;
     let on = true;
     fetch("/api/feeds/careers?roles=1")
-      .then((r) => r.json())
-      .then((j: { roles?: CareerRole[] }) => { if (on) setRoles(j.roles ?? []); })
-      .catch(() => { if (on) setRoles([]); });
+      .then((r) => { if (!r.ok) throw new Error(`careers ${r.status}`); return r.json(); })
+      .then((j: { live?: boolean; roles?: CareerRole[] }) => {
+        const rs = j.roles ?? [];
+        if (on) setCareers({ roles: rs, live: !!j.live && rs.length > 0 });
+      })
+      .catch(() => { if (on) setCareers({ roles: [], live: false }); });
     return () => { on = false; };
-  }, [lens.id, roles]);
+  }, [lens.id, careers]);
+
+  // True once the fetch resolved but the DB was down/empty — drives the "cached"
+  // map caption. While still loading (careers === null) we show cached counts but
+  // no caption (the fetch may still upgrade them to live).
+  const careersLive = careers?.live ?? false;
+  const careersCached = careers !== null && !careers.live;
 
   // Group the live roles by siteId (always a bucket key: a strategic site,
   // "us-retail" or "eu-other"; the ?? below is just a defensive fallback).
   const rolesBySite = useMemo(() => {
     const map = new Map<string, CareerRole[]>();
-    for (const r of roles ?? []) {
+    for (const r of careers?.roles ?? []) {
       const key = r.siteId ?? RETAIL_SITE_ID;
       const arr = map.get(key);
       if (arr) arr.push(r); else map.set(key, [r]);
     }
     return map;
-  }, [roles]);
+  }, [careers]);
 
-  // On the HR lens, derive each marker's open-count + oldest vacancy from those
-  // same roles, so the map dot badge and the detail role-list can never disagree.
+  // On the HR lens, derive each marker's open-count + oldest vacancy. Live: from the
+  // roles themselves, so the dot badge and the detail role-list can never disagree.
+  // DB down/empty (or still loading): from the bundled cached snapshot, so badges
+  // degrade to a real "cached" count rather than silently showing nothing.
   const markers = useMemo(() => {
     if (lens.id !== "hr") return lens.markers;
     return lens.markers.map((m) => {
-      const rs = m.siteId ? rolesBySite.get(m.siteId) : undefined;
-      if (!rs || rs.length === 0) return m;
-      const oldest = rs.reduce(
-        (mx, r) => (r.daysOpen != null && r.daysOpen <= STANDING_DAYS ? Math.max(mx, r.daysOpen) : mx),
-        0,
-      );
-      return { ...m, openPositions: rs.length, oldestDaysOpen: oldest };
+      if (!m.siteId) return m;
+      if (careersLive) {
+        const rs = rolesBySite.get(m.siteId);
+        if (!rs || rs.length === 0) return m;
+        const oldest = rs.reduce(
+          (mx, r) => (r.daysOpen != null && r.daysOpen <= STANDING_DAYS ? Math.max(mx, r.daysOpen) : mx),
+          0,
+        );
+        return { ...m, openPositions: rs.length, oldestDaysOpen: oldest };
+      }
+      const c = CACHED_COUNTS.get(m.siteId);
+      if (!c) return m;
+      return { ...m, openPositions: c.openPositions, oldestDaysOpen: c.oldestDaysOpen };
     });
-  }, [lens, rolesBySite]);
+  }, [lens, rolesBySite, careersLive]);
 
   // `selected` is derived (not stored) so it always reflects the live-enriched marker.
   const selected = useMemo(() => markers.find((m) => m.id === selectedId) ?? null, [markers, selectedId]);
@@ -129,6 +163,12 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
       {lens.feed === "freight" && <FreightStrip />}
 
       <PulseMap sites={sites} markers={markers} selectedId={selectedId} onSelect={(m) => setSelectedId(m.id)} metricToggle={lens.id === "hr"} />
+
+      {lens.id === "hr" && careersCached && (
+        <p className="text-[11px] text-amber-700 dark:text-amber-400">
+          Open-counts from a cached snapshot ({CACHED_AS_OF}) — the live careers DB is unreachable, so per-role detail is temporarily unavailable.
+        </p>
+      )}
 
       <ProvenanceLegend lens={lens} />
 
@@ -193,6 +233,11 @@ export function PulseDashboard({ initialLensId }: { initialLensId?: string } = {
                   ))}
                 </ul>
               </div>
+            )}
+            {careersCached && !!selected.siteId && !!selected.openPositions && rolesForSelected.length === 0 && (
+              <p className="text-[11px] italic text-muted-foreground">
+                Cached open-count — live role list unavailable.
+              </p>
             )}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
               {selected.sourceRef && <span>source: {selected.sourceRef}</span>}
