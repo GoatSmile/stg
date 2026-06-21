@@ -20,8 +20,13 @@ export async function GET() {
     const res = await fetch(OPEN_METEO, { next: { revalidate: 1800 }, signal: AbortSignal.timeout(4000) });
     if (!res.ok) throw new Error(`Open-Meteo responded ${res.status}`);
     const regions = parseOpenMeteo(await res.json(), LEAF_REGIONS);
-    if (!regions.length || regions.every((r) => r.tempC === 0 && r.maxTempC === 0)) {
-      throw new Error("unexpected Open-Meteo payload");
+    // Reject an empty/all-zero payload OR a partial one missing the daily forecast
+    // (current temps present but no daily block) — a partial payload would otherwise
+    // pass the all-zero check (maxTempC seeds from current temp) and fabricate a
+    // "dry/high" drought reading. On any of these, fall back to the cached snapshot.
+    const incomplete = regions.some((r) => (r.forecastDays ?? 0) < 3);
+    if (!regions.length || regions.every((r) => r.tempC === 0 && r.maxTempC === 0) || incomplete) {
+      throw new Error("unexpected or incomplete Open-Meteo payload");
     }
     return NextResponse.json({
       live: true,

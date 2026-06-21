@@ -663,6 +663,38 @@ repeated to the client: owner decides, always.
   NL Jan 2025 — also sourced). Each row links to its Impact Room scenario. `tsc` clean + `next build` green
   (17 routes); verified in-browser (all 3 rows, real dates, citations, no console errors). **All three
   panel-requested wows are now built** (interactive home slider, forward-ready one-pager, hindsight card).
+- **Resilience hardening (outage/forward-safety quick wins) + ApS→Valent doc fix — (2026-06-21).**
+  Ran a CTO-grade resilience audit (a workflow: 7 dependency domains each traced in code then
+  adversarially re-verified). Verdict: the **server-side spine is strong** (all 5 feed routes + the AI
+  route catch every failure class and return 200 with a cached/golden fallback, never faking live), but
+  the **forwarded-link edges** broke the "survive unattended forwarding" bar. Shipped the trivial/small
+  fixes: **(1) Error boundaries** — new `src/app/error.tsx` + `global-error.tsx` (inline-styled, so it
+  renders even if `globals.css` never loads) + `not-found.tsx`, all branded with the masthead +
+  not-affiliated/public-data disclaimers, so an SSR throw / bad path no longer drops to Next's naked,
+  disclaimer-stripped 500/404 (there were **zero** error boundaries before). **(2) Bounded the AI call** —
+  `export const maxDuration = 15` + `new Anthropic({ timeout: 9000, maxRetries: 0 })` + `max_tokens`
+  1024→2048 in `/api/ai/impact`; `AbortController` (12s) + `if(!res.ok) throw` in `AiRead.tsx`. The golden
+  is now the **deterministic floor** (returns at the ~9s SDK timeout, inside the 12s client abort + 15s
+  platform cap) — fixes the unbounded hang on slow/429 Claude AND the silent truncation-to-golden on
+  healthy calls. (Chose `maxRetries:0` over the audit's `1`: `timeout:8000 + retries:1` = ~16s > the 15s
+  cap, so the golden would lose the race.) **(3) OG share card** (`opengraph-image.tsx`) — de-risked the
+  retired MAR-risky "next surprise to your P&L" headline → "Regulatory and leaf risk on STG's footprint —
+  sized in DKK" + a "not affiliated · public data only" line (the gate-allow-listed surface that unfurls
+  in every Slack/Teams/email). **(4) Weather partial-payload guard** — added `forecastDays` to
+  `RegionWeather`; the route now rejects a payload with <3 forecast days → cached fallback, so a
+  current-temps-but-empty-daily payload no longer fabricates a "dry/high" drought alarm under a live badge
+  (verified live: fc=7, only DR genuinely dry). **(5) Honest strip error-states** — ported `LiveFxStrip`'s
+  `error` state + `if(!r.ok) throw` into the Weather/Enso/Freight/Careers strips (no more silent unlabeled
+  blank on a client fetch blip or a gate-redirect-to-HTML). `tsc` clean + `next build` green (17 routes);
+  verified in-browser (branded 404, Impact AI resolves to offline-golden, OG new copy, weather live, no
+  console errors). **DEFERRED (medium-effort, not a quick win): gap #5** — the HR map roles-down still
+  degrades silently (the `?roles=1` path is live-only by owner directive); the fix is to fall the map
+  badges back to `careers.json`'s static `openPositions` + label the map "cached". Also flagged operational
+  win: re-commit fresh feed snapshots right before sending the link (cached `asOf` dates are ~a week stale
+  on a cold forward). **Docs:** `pilot-proposal.md` "Valent ApS" → **"Valent"** (the owner is unincorporated
+  "for now" — the send-ready contracting identity must match); `commercial-strategy.md`'s *incorporate-an-ApS*
+  lines left as forward-looking recommendations (flagged the precondition-vs-send-as-Valent tension to the
+  owner). No app code says ApS (it's "valent.dk").
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

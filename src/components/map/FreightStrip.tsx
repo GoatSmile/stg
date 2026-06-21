@@ -31,13 +31,17 @@ const PRESSURE_CLS: Record<FreightPressure, string> = {
 export function FreightStrip() {
   const [data, setData] = useState<FreightResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let on = true;
     fetch("/api/feeds/freight")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`freight feed ${r.status}`);
+        return r.json();
+      })
       .then((j: FreightResponse) => on && (setData(j), setLoading(false)))
-      .catch(() => on && setLoading(false));
+      .catch(() => on && (setError(true), setLoading(false)));
     return () => {
       on = false;
     };
@@ -64,6 +68,9 @@ export function FreightStrip() {
       </div>
 
       {loading && <p className="text-sm text-muted-foreground">Reading the freight-cost signal…</p>}
+      {error && !loading && (
+        <p className="text-sm text-muted-foreground">Freight-cost signal unavailable — offline.</p>
+      )}
 
       {data && !loading && (
         <>

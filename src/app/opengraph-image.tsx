@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Varsel for STG — where the next surprise to your P&L comes from, sized in kroner";
+export const alt = "Varsel for STG — a public-data regulatory risk model, by valent.dk";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -28,15 +28,15 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div style={{ fontSize: "54px", fontWeight: 700, lineHeight: 1.1, maxWidth: "960px" }}>
-            Where the next surprise to your P&amp;L comes from
+            Regulatory and leaf risk on STG&apos;s footprint — sized in DKK
           </div>
           <div style={{ fontSize: "27px", color: "#6b5d52", maxWidth: "920px", lineHeight: 1.35 }}>
-            One live map of STG&apos;s risk surface — regulation, FX, leaf, the SAP rollout, pouches, hiring — the regulatory threat sized to a DKK band. Public data only.
+            An independent valent.dk prototype: the regulatory threat worked down to a DKK EBITDA band on STG&apos;s own published footprint. Public data only, internal scenario-prep.
           </div>
         </div>
 
         <div style={{ display: "flex", fontSize: "22px", color: "#8a7d70" }}>
-          valent.dk · internal scenario-prep, not investor-facing
+          valent.dk · not affiliated with or endorsed by STG · public data only
         </div>
       </div>
     ),

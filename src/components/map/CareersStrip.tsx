@@ -23,13 +23,17 @@ function Stat({ label, value, sub }: { label: string; value: string; sub?: strin
 export function CareersStrip() {
   const [data, setData] = useState<CareersResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let on = true;
     fetch("/api/feeds/careers")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`careers feed ${r.status}`);
+        return r.json();
+      })
       .then((j: CareersResponse) => on && (setData(j), setLoading(false)))
-      .catch(() => on && setLoading(false));
+      .catch(() => on && (setError(true), setLoading(false)));
     return () => {
       on = false;
     };
@@ -64,6 +68,9 @@ export function CareersStrip() {
       </div>
 
       {loading && <p className="text-sm text-muted-foreground">Loading the careers feed…</p>}
+      {error && !loading && (
+        <p className="text-sm text-muted-foreground">Careers feed unavailable — offline.</p>
+      )}
 
       {data && !loading && (
         <>

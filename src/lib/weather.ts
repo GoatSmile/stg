@@ -23,6 +23,10 @@ export type RegionWeather = RegionMeta & {
   humidity: number;
   weekPrecipMm: number;
   maxTempC: number;
+  // How many days of forecast actually came back. 0 means the daily block was
+  // missing — a partial payload the route must reject (else weekPrecipMm coerces
+  // to 0 and fabricates a "dry/high" drought alarm under a live badge).
+  forecastDays?: number;
 };
 
 export type WeatherRisk = {
@@ -49,8 +53,10 @@ export function parseOpenMeteo(payload: unknown, regions: RegionMeta[]): RegionW
   return regions.map((r, i) => {
     const cur = arr[i]?.current ?? {};
     const daily = arr[i]?.daily ?? {};
-    const week = (daily.precipitation_sum ?? []).reduce((a, b) => a + (b || 0), 0);
-    const maxT = (daily.temperature_2m_max ?? []).reduce((m, b) => Math.max(m, b || 0), cur.temperature_2m ?? 0);
+    const precip = daily.precipitation_sum ?? [];
+    const maxes = daily.temperature_2m_max ?? [];
+    const week = precip.reduce((a, b) => a + (b || 0), 0);
+    const maxT = maxes.reduce((m, b) => Math.max(m, b || 0), cur.temperature_2m ?? 0);
     return {
       ...r,
       tempC: cur.temperature_2m ?? 0,
@@ -58,6 +64,7 @@ export function parseOpenMeteo(payload: unknown, regions: RegionMeta[]): RegionW
       humidity: cur.relative_humidity_2m ?? 0,
       weekPrecipMm: Math.round(week),
       maxTempC: Math.round(maxT),
+      forecastDays: Math.min(precip.length, maxes.length),
     };
   });
 }

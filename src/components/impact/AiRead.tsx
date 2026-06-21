@@ -37,18 +37,27 @@ export function AiRead({
   const run = useCallback(async () => {
     setLoading(true);
     setError(false);
+    // Client-side backstop: the route serves the golden at its ~9s SDK timeout, so
+    // a 12s abort only fires if the whole function hangs — the spinner can never
+    // last forever on flaky wifi. !res.ok routes a platform 504/5xx to the retry UI
+    // instead of trying to JSON-parse an error/HTML body.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
     try {
       const res = await fetch("/api/ai/impact", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ eventId, assumptions }),
+        signal: controller.signal,
       });
+      if (!res.ok) throw new Error(`AI route responded ${res.status}`);
       const json = (await res.json()) as AiResponse;
       setData(json);
       setGeneratedKey(JSON.stringify({ eventId, assumptions }));
     } catch {
       setError(true);
     } finally {
+      clearTimeout(timer);
       setLoading(false);
     }
   }, [eventId, assumptions]);

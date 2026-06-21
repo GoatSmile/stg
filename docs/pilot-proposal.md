@@ -32,7 +32,7 @@ retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) a
 - *(Real-data mode)* the relevant revenue/volume figures under an NDA + a short data-processing agreement — EU-hosted, bands computed and returned, raw figures never leave the processing environment.
 - *(Public-data mode)* nothing — I run it on published segment data and label every derived figure as an analyst estimate.
 
-**Price & terms.** **DKK [110,000], fixed.** One regulation, ~3 weeks, the deliverables above. Public data only, framed strictly as internal decision-support — never investor-facing. Built and delivered by valent.dk (Valent ApS); the tool/method is licensed to STG, your data and the resulting analysis are yours (full terms overleaf).
+**Price & terms.** **DKK [110,000], fixed.** One regulation, ~3 weeks, the deliverables above. Public data only, framed strictly as internal decision-support — never investor-facing. Built and delivered by Valent (valent.dk); the tool/method is licensed to STG, your data and the resulting analysis are yours (full terms overleaf).
 
 **Why now.** In a year of ~DKK 275m special costs and a tightened payout, this is cheap insurance against the one surprise that isn't yet sized — and the natural first step before deciding whether to put your real numbers behind it.
 
@@ -44,7 +44,7 @@ retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) a
 
 | Term | Detail |
 |---|---|
-| **Supplier** | Valent ApS (CVR [●]), trading as valent.dk |
+| **Supplier** | Valent (valent.dk), CVR [●] |
 | **Deliverable** | A calibrated Impact-Room band for **one** named regulation: DKK EBITDA/volume/margin at-risk range; editable assumption model; citation + abstention rails; hosted private instance; 1-page PDF export; 90-min working session |
 | **Scope (in)** | One regulation; one market/segment footprint; the assumptions listed above; one round of revisions in the working session |
 | **Scope (out)** | Additional regulations, markets, or SKU-level detail; ongoing refresh; bespoke integrations — each a separate engagement or the retainer |
@@ -68,7 +68,7 @@ retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) a
 
 ### Intellectual property (English)
 
-> **1. Background IP.** The Consultant (Valent ApS) owns and retains all right, title and interest in the
+> **1. Background IP.** The Consultant (Valent) owns and retains all right, title and interest in the
 > "Varsel" software, engine, models, methodology, assumption templates, citation/abstention framework and
 > regulatory corpus, including all pre-existing materials and all enhancements, derivatives and generalisations
 > thereof, **whether or not conceived or developed during this engagement** ("Background IP").
@@ -95,7 +95,7 @@ retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) a
 
 ### Immaterielle rettigheder (dansk — udkast, til advokat-gennemsyn)
 
-> **1. Baggrundsrettigheder.** Konsulenten (Valent ApS) ejer og bevarer alle rettigheder til "Varsel"-softwaren,
+> **1. Baggrundsrettigheder.** Konsulenten (Valent) ejer og bevarer alle rettigheder til "Varsel"-softwaren,
 > -motoren, -modellerne, -metoden, antagelsesskabeloner, kilde-/forbeholdsrammen og det regulatoriske korpus,
 > herunder allerede eksisterende materiale samt alle forbedringer, afledninger og generaliseringer heraf,
 > **uanset om de er udtænkt eller udviklet under denne opgave** ("Baggrundsrettigheder").
@@ -114,5 +114,5 @@ retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) a
 > overdragelse af softwaren.
 
 **Companion documents to have ready** (templates, for advokat review): a mutual NDA with an EU-MAR clause; a
-GDPR Databehandleraftale (art. 28; STG controller, Valent ApS processor, EU hosting, sub-processor list, breach
+GDPR Databehandleraftale (art. 28; STG controller, Valent processor, EU hosting, sub-processor list, breach
 notification, deletion on termination); a liability cap at fee value; E&O insurance certificate.

@@ -26,13 +26,17 @@ const PHASE_CLS: Record<EnsoPhase, string> = {
 export function EnsoStrip() {
   const [data, setData] = useState<EnsoResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let on = true;
     fetch("/api/feeds/enso")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`enso feed ${r.status}`);
+        return r.json();
+      })
       .then((j: EnsoResponse) => on && (setData(j), setLoading(false)))
-      .catch(() => on && setLoading(false));
+      .catch(() => on && (setError(true), setLoading(false)));
     return () => {
       on = false;
     };
@@ -59,6 +63,9 @@ export function EnsoStrip() {
       </div>
 
       {loading && <p className="text-sm text-muted-foreground">Reading the ENSO index…</p>}
+      {error && !loading && (
+        <p className="text-sm text-muted-foreground">ENSO climate feed unavailable — offline.</p>
+      )}
 
       {data && !loading && (
         <>

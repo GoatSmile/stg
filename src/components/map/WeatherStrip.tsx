@@ -24,13 +24,17 @@ const RISK_CLS: Record<WeatherRisk["level"], string> = {
 export function WeatherStrip() {
   const [data, setData] = useState<WeatherResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let on = true;
     fetch("/api/feeds/weather")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`weather feed ${r.status}`);
+        return r.json();
+      })
       .then((j: WeatherResponse) => on && (setData(j), setLoading(false)))
-      .catch(() => on && setLoading(false));
+      .catch(() => on && (setError(true), setLoading(false)));
     return () => {
       on = false;
     };
@@ -57,6 +61,9 @@ export function WeatherStrip() {
       </div>
 
       {loading && <p className="text-sm text-muted-foreground">Fetching leaf-region weather…</p>}
+      {error && !loading && (
+        <p className="text-sm text-muted-foreground">Leaf-region weather unavailable — offline.</p>
+      )}
 
       {data && !loading && (
         <>

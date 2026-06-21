@@ -9,6 +9,9 @@ import goldenDkCap from "@/data/golden/impact-dk-cap.json";
 
 // The Anthropic SDK needs the Node runtime (not edge); the call must stay server-side.
 export const runtime = "nodejs";
+// Hard ceiling on the function so a slow/hung Claude can never outlast the platform
+// cap — the golden fallback (served at the ~9s SDK timeout) returns well inside this.
+export const maxDuration = 15;
 
 // CLAUDE.md + docs/build-plan.md §1: latest Sonnet-class for live-demo latency.
 // (The claude-api default is Opus; this is a deliberate project override for speed.)
@@ -142,10 +145,15 @@ export async function POST(req: Request) {
   }
 
   try {
-    const client = new Anthropic();
+    // Single bounded attempt: a 9s timeout (healthy Sonnet JSON completes in 3–7s)
+    // and no retries, so a slow/rate-limited call fails fast to the golden below
+    // (~9s) rather than racing — and never multiplies into the platform cap.
+    const client = new Anthropic({ timeout: 9000, maxRetries: 0 });
     const message = await client.messages.create({
       model: MODEL,
-      max_tokens: 1024,
+      // Headroom for the full narrative + 6 line items so a healthy call doesn't
+      // truncate (stop_reason=max_tokens → JSON.parse fail → silent golden).
+      max_tokens: 2048,
       system: SYSTEM,
       messages: [{ role: "user", content: buildPrompt(scenario, result) }],
       output_config: { format: { type: "json_schema", schema: SCHEMA } },
