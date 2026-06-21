@@ -1,10 +1,16 @@
 # Varsel — prototype spec (v0, pre-build)
 
-*Status: proposed, awaiting owner green-light. Working title "Varsel" (Danish:
-a warning / advance notice / forecast). The why lives in
-[ceo-play.md](ceo-play.md); the evidence in
-[ceo-research-digest.md](ceo-research-digest.md). The earlier HR/"Broen" spec is
-parked — see [ideas.md](ideas.md) header.*
+> **⚠️ Shipped — original pre-build spec, kept for the record.** The app is built, deployed and gated.
+> Superseded below: the home page is **not** the "Frederiksen Brief / five-questions" landing — it leads
+> with an interactive engine preview → a hindsight/lead-time card → the 7-lens map; the platform is
+> **7 department lenses**, not three surfaces; Supabase (EU) **is** wired (not "no DB in v0"); and the
+> gate is an in-app `SITE_PASSWORD` page (not Vercel SSO). Current state:
+> [CLAUDE.md](../CLAUDE.md) + [map-platform.md](map-platform.md).
+
+*Working title "Varsel" (Danish: a warning / advance notice / forecast); the in-app display name is
+"Varsel for STG". The why lives in [ceo-play.md](ceo-play.md); the evidence in
+[ceo-research-digest.md](ceo-research-digest.md). The earlier HR/"Broen" spec is parked — see
+[ideas.md](ideas.md) header.*
 
 ## One-liner
 

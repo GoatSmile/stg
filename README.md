@@ -1,19 +1,55 @@
-# Varsel — STG pitch prototype
+# Varsel for STG — regulation→P&L early-warning room
 
-A regulation→P&L early-warning room for Scandinavian Tobacco Group: it turns a
-live tobacco/nicotine regulatory event (EU excise revision, the France pouch
-ban, flavor caps, US tariffs) into a DKK EBITDA/volume/
-margin band on STG's own footprint — the thing no incumbent does. Aimed at the
-office of the CEO/CFO. Built as a consulting calling card by
-Nazar Taras / valent.dk.
+A pitch prototype for Scandinavian Tobacco Group, built by Nazar Taras / valent.dk.
+It turns a tobacco/nicotine regulation (EU excise revision, the France pouch ban, the
+Denmark nicotine cap, flavour caps) into a DKK EBITDA/volume/margin **band** on STG's own
+*published* footprint — a scenario range, not a point estimate — the thing no incumbent does.
+Aimed at the office of the CEO/CFO. **Built on public data only, zero STG internal data.**
 
-- **The strategy (live):** [docs/ceo-play.md](docs/ceo-play.md)
-- **What we're building:** [docs/prototype-spec.md](docs/prototype-spec.md)
-- **Evidence base (sourced):** [docs/ceo-research-digest.md](docs/ceo-research-digest.md)
-  · [docs/research-brief.md](docs/research-brief.md)
-- **Working agreements:** [CLAUDE.md](CLAUDE.md)
-- **Parked:** [docs/ideas.md](docs/ideas.md) — the earlier HR-track ideation
-  (reference only; a possible second expansion account)
+The in-app display name is **"Varsel for STG"**; "Varsel" stays the internal codename.
 
-Status: pre-build — strategy docs only. Code arrives with Phase 0
-(see [docs/ceo-play.md](docs/ceo-play.md) §7).
+## Status: shipped, deployed, gated
+
+Feature-complete and live (gated) at `https://stg-azure.vercel.app` — shared password
+(`SITE_PASSWORD`).
+
+- **7 department lenses, zero stubs** — Regulatory, HR, Finance, Sales, Procurement, Supply, ESG.
+- **5 live public-data feeds**, each with an offline-safe cached fallback — ECB FX, careers
+  (→ Supabase EU), Open-Meteo weather, NOAA ENSO climate, FRED Brent freight.
+- **Impact Room** (`/impact`) — three worked examples (EU-ETD proposed + France ban & Denmark cap
+  in-force): regulation → DKK band, with editable assumption sliders, citation + abstention rails,
+  and a live Claude narrative (golden offline fallback). The band is a deterministic local model —
+  the AI never produces the number.
+- **Pouch Radar** (`/radar`) — competitive nicotine-pouch tracking (strength / flavour / price /
+  price-per-mg), real + sourced, feeding the Impact Room's flavour-cap scenario.
+- **Home** (`/`) leads with an interactive engine preview + a hindsight/lead-time card, then the
+  7-lens map. **One-pager** (`/onepager`) is a print-clean PDF export. **Transparency**
+  (`/transparency`) is the honest-data contract.
+- **Resilience:** bounded AI call → golden fallback, cached feed fallbacks, branded error
+  boundaries, prod password gate.
+
+## Stack
+
+Next.js 16 (App Router) · TypeScript · React 19 · Tailwind 4 · shadcn/ui (radix-nova) · D3 +
+TopoJSON map · Anthropic Claude (`claude-sonnet-4-6`, server-side only) · Supabase (EU, one table) ·
+Vercel (push-to-`main` → prod).
+
+## The docs (deliverables — same rank as code)
+
+- **Current state / working agreements:** [CLAUDE.md](CLAUDE.md) — the authoritative status log.
+- **Strategy:** [docs/ceo-play.md](docs/ceo-play.md) · **platform architecture:**
+  [docs/map-platform.md](docs/map-platform.md) · **spec:** [docs/prototype-spec.md](docs/prototype-spec.md)
+  · **build plan:** [docs/build-plan.md](docs/build-plan.md)
+- **Evidence base (sourced):** [docs/ceo-research-digest.md](docs/ceo-research-digest.md) ·
+  [docs/research-brief.md](docs/research-brief.md) · [docs/stg-facts.md](docs/stg-facts.md)
+- **Commercial:** [docs/commercial-strategy.md](docs/commercial-strategy.md) ·
+  [docs/pilot-proposal.md](docs/pilot-proposal.md) · [docs/outreach.md](docs/outreach.md)
+- **Pitch prep:** [docs/demo-script.md](docs/demo-script.md) · [docs/qa-prep.md](docs/qa-prep.md)
+  (the C-level Q&A answer sheet)
+- **Parked:** [docs/ideas.md](docs/ideas.md) — the earlier HR/"Broen" track (reference only).
+
+## Dev
+
+`npm run dev` (:3000). The gate is **off** when `SITE_PASSWORD` is unset (local dev stays open).
+The Claude call is live when `ANTHROPIC_API_KEY` is set and `DEMO_MODE` ≠ `offline`; otherwise it
+serves the pre-reviewed golden, labelled "offline." `tsc --noEmit` + `next build` are the ship gates.

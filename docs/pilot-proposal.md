@@ -49,7 +49,10 @@ retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) a
 | **Scope (in)** | One regulation; one market/segment footprint; the assumptions listed above; one round of revisions in the working session |
 | **Scope (out)** | Additional regulations, markets, or SKU-level detail; ongoing refresh; bespoke integrations — each a separate engagement or the retainer |
 | **Mode** | **(a) Public-data** — published segments only, derived figures labelled, no DPA; or **(b) Real-data** — STG figures under NDA + GDPR DPA (art. 28), EU hosting, compute-and-return bands, raw data firewalled |
-| **Timeline** | ~3 weeks from signature (real-data mode: +the time to sign the DPA, run as its own milestone) |
+| **Timeline** | Target **~3 weeks** from the **later of** (i) signature + 50% payment and (ii) receipt of all inputs for the chosen mode (public-data: none; real-data: complete data + an executed DPA). A good-faith target, not a fixed deadline. |
+| **Client dependencies** | The timeline extends day-for-day for any delay in STG providing data, access or sign-off. If real-data inputs aren't available within **[10] business days** of signature, the sprint proceeds in **public-data mode** unless the parties agree otherwise — so the engagement never stalls on data. |
+| **Delay remedy** | If delivery slips for reasons within the Supplier's control, the Customer's **sole remedy is delivery** — no penalty or liquidated damages. The 50% delivery payment falls due only on delivery. |
+| **"Delivered" means** | The hosted private instance is live, the 1-page PDF export is provided, and the 90-minute working session is offered. |
 | **Fee** | **DKK [110,000] fixed.** 50% on signature, 50% on delivery. Plus VAT (moms) 25%. |
 | **Change orders** | Anything beyond scope quoted as a fixed add-on or, if hourly, at **DKK [15,000]/day**. No work beyond scope without written approval. |
 | **Conversion option** | If STG proceeds to a multi-regulation real-data build within [60] days of delivery, **[50]% of this fee is credited** against it. |

@@ -6,6 +6,14 @@ Strategy: [ceo-play.md](ceo-play.md). Surfaces: [mockups/](mockups/). Facts to
 cite: [ceo-research-digest.md](ceo-research-digest.md),
 [research-brief.md](research-brief.md).*
 
+> **⚠️ Shipped — this is the pre-build plan, kept for the record.** The app is built, deployed and
+> gated; all 7 lenses, 5 live feeds, the Impact Room and Pouch Radar are live. Two choices below were
+> superseded in the build: the gate is an in-app env-driven `SITE_PASSWORD` page (**not** Vercel SSO),
+> and Supabase (EU) **is** wired for the careers feed (**not** "no DB in v0"). Data-model filenames
+> also drifted (shipped as `operations.json` + `layers/*.json`, `impact-model.ts`, `lenses.ts`). For
+> current state, read the "Status & handoff" log in [CLAUDE.md](../CLAUDE.md) and
+> [map-platform.md](map-platform.md) §8.
+
 ---
 
 ## 0. Goal & definition of done

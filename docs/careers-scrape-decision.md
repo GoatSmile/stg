@@ -2,6 +2,15 @@
 
 **Status: RESOLVED — owner decided 2026-06-14.** What the owner authorised, and what shipped:
 
+> **Current state (read this first).** Roles are **DB-only**, served live via
+> `/api/feeds/careers?roles=1`; the scraper is the single script **`scripts/pull-jobs.ts`** — the old
+> `crawl-careers.ts` + `enrich-roles.ts` are **retired** (the investigation below still names them in
+> the present tense; treat that as history). Roles bucket three ways — strategic site / **`us-retail`** /
+> **`eu-other`** — and the count is live/daily (**68 on 2026-06-16: 30 strategic · 33 us-retail ·
+> 5 eu-other**; it shifts as postings open/close). Per-site open-COUNTS now also have a **cached
+> fallback** (`careers.json` `sites[]` + an `unmapped` block) so the map degrades to a labelled "cached"
+> count instead of zero when the DB is down (gap-#5, 2026-06-21).
+
 - **A one-time, real pull was authorised** ("get real complete data once… use the JSON
   API if necessary"). Done: a manual POST-paginate of `/services/recruiting/v1/jobs`
   (the robots-disallowed RMK API) pulled the full live job set on 2026-06-14. This
@@ -37,6 +46,8 @@ the **manual, owner-authorised** pass (the policy below is unchanged — never c
 `/services/`). A jobs.xml-only auto-refresh would need to preserve existing dept/days for
 unchanged gids rather than wipe them. Current snapshot (2026-06-15): **71 real roles — 32
 strategic / 39 US retail-bars**, all 71 with descriptions in the DB, 70 with department.
+*(Superseded — now 3-way bucketed; see the current-state banner at the top: 68 on 2026-06-16,
+30 / 33 / 5.)*
 
 **Shipped from this pull:** 60 real vacancies (3 evergreen "talent pool" posts excluded;
 a >365-day standing req excluded from "oldest vacancy") — 29 at strategic sites, 31 US

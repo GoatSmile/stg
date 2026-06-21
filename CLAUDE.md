@@ -724,6 +724,28 @@ repeated to the client: owner decides, always.
   step 1). The retained-IP / Background-IP clauses hold for a sole proprietor too, so the pilot proposal (already
   "Valent", fixed `f51903d`) and the strategy doc no longer contradict each other. Line 123 (ApS facts-firmness) +
   step 2 (legal-kit this week) left as-is — independent of the gating question.
+- **Docs freshness pass + C-level Q&A prep sheet + pilot 3-week clauses — (2026-06-21).** Ran a
+  full docs-vs-code staleness audit (agent, all 13 `/docs` + README cross-checked against the actual
+  code/data). Verdict: most docs current; **README.md was the one high-severity stale doc** ("Status:
+  pre-build — strategy docs only. Code arrives with Phase 0" on a fully-shipped, deployed, gated app)
+  + 3 minor (build-plan/prototype-spec still assumed Vercel-SSO + "no DB in v0"; careers-scrape-decision
+  body still named the retired `crawl-careers.ts`/`enrich-roles.ts`). Fixed all: **README.md rewritten**
+  to the shipped reality (7 lenses, 5 feeds, Impact Room, Radar, resilience, stack, full docs index incl.
+  qa-prep); **"⚠️ Shipped — kept for the record" banners** added to `build-plan.md` + `prototype-spec.md`
+  (kept as the pre-build record, not rewritten — the map-platform.md §8 pattern) noting the SSO→`SITE_PASSWORD`
+  + no-DB→Supabase + home-is-not-"Frederiksen-Brief" drift; **current-state banner** added to
+  `careers-scrape-decision.md` (DB-only, `pull-jobs.ts`, 3-way bucketing, the gap-#5 cached fallback) +
+  the stale "71/32/39" count tagged superseded. **New `docs/qa-prep.md`** — the authoritative C-level
+  answer sheet: §0 30-sec core, §1 credibility spine, §3–§7 per-persona (Yulia/Strategy, CEO Niels, bonus
+  CFO Marianne, CTO, Head of Sales — mapped to the real STG people), §6 the CTO deep-dive (stack, EU
+  residency, honest security model, 5-layer backup/DR answer, AI-never-produces-the-number), §8 objection
+  handling, §9 guardrails (never say), §10 the commercial/3-week answers, + a one-line tech cheat-sheet;
+  every tech claim grounded in code with file paths. **`pilot-proposal.md` Part B** gained the 3-week
+  delivery clauses (owner's contract questions): Timeline now starts from the **later of**
+  signature/inputs (real-data: complete data + executed DPA); **Client dependencies** (day-for-day
+  extension; falls back to public-data mode if real data isn't in within [10] business days); **Delay
+  remedy** (sole remedy = delivery, **no penalty/liquidated damages** — the right posture for a fixed-fee
+  ~DKK 110k sprint); a precise **"Delivered" means** definition. Docs-only — no app code touched.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
