@@ -186,6 +186,17 @@ Full transparency about what's real, what's agent-fetched, and what's fabricated
 
 ## 7. Database decision
 
+> **Update (2026-06): decided and shipped — this section is the original recommendation, kept for the
+> record.** Supabase (EU) **is wired**, exactly on the trigger anticipated below (the HR careers feed
+> with history). It now lives in a **dedicated project "Valent - proposals"** (eu-west-3, ref
+> `nphebbjrdtaldrgqlssn`), table `public.varsel_careers_snapshots`, **public-read RLS + service-role
+> writes** — migrated 2026-06-14 out of the shared jensen-fms "Jensen" project (`jzlphajunfrqvpogzsiz`),
+> so isolation is now by **separate project**, not just the `varsel_` prefix. Per-site open-counts also
+> gained a cached JSON fallback (gap-#5, 2026-06-21) so the map degrades to "cached" instead of zero if
+> the DB is unreachable; hiring velocity stays "accruing" until ≥2 snapshots (no faked trend).
+> Everything else stays versioned JSON, as below. Current detail: the **Stack** section of
+> [CLAUDE.md](../CLAUDE.md).
+
 v0 stays **no-DB / versioned JSON** for the static spine (operations + lens
 data) — it keeps the demo instant and offline-safe. **But** two features pull
 toward a lightweight DB sooner than the earlier plan assumed:

@@ -746,6 +746,16 @@ repeated to the client: owner decides, always.
   extension; falls back to public-data mode if real data isn't in within [10] business days); **Delay
   remedy** (sole remedy = delivery, **no penalty/liquidated damages** — the right posture for a fixed-fee
   ~DKK 110k sprint); a precise **"Delivered" means** definition. Docs-only — no app code touched.
+  **Follow-up (owner caught a tail the blanket "CURRENT" audit verdict missed):** the section-level
+  failure mode = "a section recommending/deciding something now executed, but reads as pending, with no
+  banner." Three such tails bannered: **map-platform.md §7 (Database decision)** — said "Add Supabase
+  when… near-term decision, not v0-blocking"; now reflects Supabase EU shipped + migrated to the
+  dedicated "Valent - proposals" project + the gap-#5 cached fallback. **ceo-play.md §8 (Open decisions)**
+  — most resolved (green-light/name/worked-example/API-key/gated-link DONE); only the Tamarind-Euromonitor
+  cigar-depth re-verify + the wife-intro confirmation remain genuinely open. **ceo-play.md §7 (Build
+  plan)** — all phases built; SSO→`SITE_PASSWORD` drift + video-still-unrecorded noted. A repo-wide sweep
+  for not-yet-done language ("recommendation:/near-term/vercel sso/will add/stub…") now comes back clean
+  (remaining hits are inside already-bannered docs or are STG's own research facts in ceo-research-digest).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

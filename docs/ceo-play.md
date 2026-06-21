@@ -230,6 +230,11 @@ the cleanest ladder of any concept evaluated — and the medium is the message:
 
 ## 7. Build plan (each phase independently demoable)
 
+> **Update (2026-06): all phases built — kept for the record.** Phases 0–4 shipped (the platform grew
+> to 7 lenses + 5 live feeds beyond this original scope). Two drifts in the table below: the gate is an
+> in-app `SITE_PASSWORD` page, **not** Vercel SSO (Phase 4); and only the **video** (Phase 4) remains
+> unrecorded. Current state: [CLAUDE.md](../CLAUDE.md) + [map-platform.md](map-platform.md) §8.
+
 | Phase | Scope | Est. |
 |---|---|---|
 | 0 | Scaffold (Next.js + shadcn radix-nova), the segment model + operations footprint (public AR2025 splits + site/store geo as versioned JSON), the Global Pulse map landing | ~half day–1 day |
@@ -242,6 +247,14 @@ The deliverable is the video + a forwardable link; Phase 3 is the live-data
 clincher. Visual targets are mocked in [mockups/](mockups/).
 
 ## 8. Open decisions (owner)
+
+> **Update (2026-06): mostly resolved — kept for the record.** #1 green-light (built + shipped),
+> #2 name ("Varsel for STG"), #3 worked example (EU-ETD is the lead; France + Denmark also modelled),
+> #4 Anthropic key (set), and #7 app link (yes, gated — prod is gated) are all **DONE**. #6's title is
+> confirmed and used everywhere ("SVP, Strategy, Transformation & Sustainability"). **Genuinely still
+> open:** #5 — re-verify Tamarind & Euromonitor's exact cigar/pipe depth before any *spoken* specific
+> claim — and the wife-intro confirmation in #6 (the `[wife]` placeholder in
+> [outreach.md](outreach.md) is still unfilled). See the "Status & handoff" log in [CLAUDE.md](../CLAUDE.md).
 
 1. **Green-light Varsel** as the build (vs. leaning harder into the Pouch Radar
    alone as a faster, lower-risk first wedge — judge #2's case).
