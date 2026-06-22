@@ -1,5 +1,7 @@
 # Varsel — commercial strategy
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *How to commercialise Varsel with STG, and whether there's a product beyond them.*
 *Compiled 2026-06-18 from a six-advisor panel (consulting-pricing · vertical-SaaS pricing · STG buyer-side/procurement · Danish commercial-legal · vertical-SaaS VC · a designated skeptic). Figures are reasoned negotiation anchors, not quotes — see §9.*
 

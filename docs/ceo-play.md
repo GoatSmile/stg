@@ -1,5 +1,7 @@
 # The CEO play — Varsel
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *Prepared 2026-06-12. The pivot doc. Supersedes the HR/"Broen" track (now
 parked — see [ideas.md](ideas.md) header). Evidence base:
 [ceo-research-digest.md](ceo-research-digest.md) (raw, sourced) and

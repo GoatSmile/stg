@@ -1,5 +1,7 @@
 # Varsel — detailed development plan
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *The end-to-end engineering plan. This is the plan-then-build artifact
 (CLAUDE.md convention) — no app code is written until the owner green-lights.
 Strategy: [ceo-play.md](ceo-play.md). Surfaces: [mockups/](mockups/). Facts to

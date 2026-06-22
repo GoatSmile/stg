@@ -1,5 +1,7 @@
 # Outreach — the intro and the email
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *The warm-intro sequence to Yulia Lyusina (SVP Strategy, Transformation &
 Sustainability). Placeholders in [brackets] — owner fills. Strategy:
 [ceo-play.md](ceo-play.md) §5. Tone: peer-to-peer, low-pressure, zero hype.

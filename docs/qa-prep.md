@@ -1,5 +1,7 @@
 # Q&A prep — Varsel for STG
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *Your authoritative answer sheet for the app + the project. Written so you can answer cold,
 in a room, without hedging. Every technical claim here is grounded in the actual code
 (file paths cited) so you can stand behind it.*

@@ -1,5 +1,7 @@
 # Video script — the 3-minute walkthrough
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *The email payload. ~3 min (hard ceiling 4). Owner to camera, intercut with
 screen share. Worked example: the **EU tobacco-tax revision** (hits the 50%
 combustible core — Yulia's strategy wheelhouse; France is the alternate, see

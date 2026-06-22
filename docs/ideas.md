@@ -1,5 +1,7 @@
 # STG × AI — ideation portfolio (HR track — PARKED)
 
+*Updated: 2026-06-22 09:59 CEST*
+
 > **⚠️ This track is parked (June 2026).** This document is the original
 > department-level (HR / People & Culture) ideation aimed at Anne-Marie
 > Tørnes-Hansen. The owner redirected to a **CEO-level** play that gets used

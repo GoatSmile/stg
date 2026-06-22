@@ -1,5 +1,7 @@
 # STG facts — the single source of truth
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *The canonical data-of-record for the prototype. Everything the app shows about
 STG traces here, and every datum carries a flag. Compiled 2026-06-13 from STG
 Annual Report 2025 (AR2025, published 2026-03-04), st-group.com, and the careers

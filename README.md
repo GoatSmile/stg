@@ -1,5 +1,7 @@
 # Varsel for STG — regulation→P&L early-warning room
 
+*Updated: 2026-06-22 09:59 CEST*
+
 A pitch prototype for Scandinavian Tobacco Group, built by Nazar Taras / valent.dk.
 It turns a tobacco/nicotine regulation (EU excise revision, the France pouch ban, the
 Denmark nicotine cap, flavour caps) into a DKK EBITDA/volume/margin **band** on STG's own

@@ -1,5 +1,7 @@
 # CEO-play research digest (raw)
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *Compiled 2026-06-12 by a four-agent web-research fan-out (CEO voice, commercial
 footprint, vendor landscape, competitive/regulatory battlefield), feeding the
 CEO-level product ideation in [ceo-play.md](ceo-play.md). Raw and dense by

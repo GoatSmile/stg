@@ -1,5 +1,7 @@
 # Varsel — prototype spec (v0, pre-build)
 
+*Updated: 2026-06-22 09:59 CEST*
+
 > **⚠️ Shipped — original pre-build spec, kept for the record.** The app is built, deployed and gated.
 > Superseded below: the home page is **not** the "Frederiksen Brief / five-questions" landing — it leads
 > with an interactive engine preview → a hindsight/lead-time card → the 7-lens map; the platform is

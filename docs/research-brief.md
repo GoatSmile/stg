@@ -1,5 +1,7 @@
 # Research brief — STG, pouch regulation, the buyer, the market
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *Compiled 2026-06-12 from open-web research. All claims sourced; uncertainties
 flagged. Companion to the internal "Research for N" document (not in this
 repo) and [ideas.md](ideas.md).*

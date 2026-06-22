@@ -1,5 +1,7 @@
 # Varsel — surface mockups (design reference)
 
+*Updated: 2026-06-22 09:59 CEST*
+
 Faithful spec of the three surfaces, mocked live in the planning chat
 (2026-06-12) as interactive widgets and described here so Phase 0 can rebuild
 them in Next.js + shadcn. All figures are real public AR2025 numbers; the

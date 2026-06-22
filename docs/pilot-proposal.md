@@ -1,5 +1,7 @@
 # Pilot proposal — "Regulatory Impact Sprint"
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *A send-ready one-pager for the first paid STG engagement, plus the commercial terms and the
 retained-IP contract clause. Pair with `docs/commercial-strategy.md` (the why) and `docs/outreach.md`
 (the intro).*

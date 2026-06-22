@@ -1,5 +1,7 @@
 # Varsel Pulse — the map as a department platform (re-architecture)
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *Owner's expanded scope (2026-06-13): the Global Pulse map is no longer a single
 regulatory view — it's a **department-switchable operations platform**. Flip a
 switch and the same world map re-skins with HR / Sales / Finance / Procurement /

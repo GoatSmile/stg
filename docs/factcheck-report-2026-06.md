@@ -1,5 +1,7 @@
 # Fact-check report — the three research docs (June 2026)
 
+*Updated: 2026-06-22 09:59 CEST*
+
 *Status: **analysis + proposed corrections only**. No client-facing doc has been
 edited. Per the escalation rule, edits to `stg-facts.md` / `ceo-research-digest.md`
 / `research-brief.md` (the canonical data the app cites) wait for owner sign-off.

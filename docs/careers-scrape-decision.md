@@ -1,5 +1,7 @@
 # Careers scraper — productionization decision memo
 
+*Updated: 2026-06-22 09:59 CEST*
+
 **Status: RESOLVED — owner decided 2026-06-14.** What the owner authorised, and what shipped:
 
 > **Current state (read this first).** Roles are **DB-only**, served live via
