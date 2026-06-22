@@ -8,3 +8,6 @@ next-env.d.ts
 .env*.local
 .claude/
 .vercel
+
+# generated print-ready PDFs (npm run docs:pdf)
+/docs/print/
