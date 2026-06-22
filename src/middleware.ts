@@ -26,7 +26,10 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
   url.pathname = "/gate";
   url.search = "";
-  url.searchParams.set("from", pathname);
+  // Preserve the full path + query so a forwarded deep-link (?lens=, ?event=)
+  // survives the login round-trip — the gate's same-site guards (leading "/" only)
+  // still hold for "/impact?event=fr-ban", and new URL(dest, req.url) re-attaches it.
+  url.searchParams.set("from", pathname + req.nextUrl.search);
   return NextResponse.redirect(url);
 }
 

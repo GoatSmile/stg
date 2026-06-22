@@ -27,10 +27,20 @@ export type ValidatedLineItem = {
 /** A citable fact from the corpus. `value` is null for qualitative sources (e.g. an instrument id). */
 export type KnownFact = { sourceRef: string; value: string | null };
 
-/** Pull the first number out of a value string: "DKK 3,270m" → 3270, "≈ 85%" → 85, "46.8%" → 46.8. */
+/** Pull the first number out of a value string, honouring a magnitude suffix.
+ *  Corpus/line-item figures are in DKK millions, so a "bn" suffix scales ×1000:
+ *  "DKK 3,270m" → 3270, "≈ 85%" → 85, "46.8%" → 46.8, "DKK 1bn+" → 1000.
+ *  (Without the suffix scaling, "1bn" parsed as 1 — matching only by the
+ *  coincidence that both sides wrote "1bn"; a "1,000m" corpus value would then
+ *  silently abstain a correct claim. The scaling makes the match value-true.) */
 function numFromValue(v: string): number | null {
-  const m = v.replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
-  return m ? parseFloat(m[0]) : null;
+  const m = v.replace(/,/g, "").match(/(-?\d+(?:\.\d+)?)\s*(bn|b|k)?/i);
+  if (!m) return null;
+  const n = parseFloat(m[1]);
+  const suffix = (m[2] ?? "").toLowerCase();
+  if (suffix === "bn" || suffix === "b") return n * 1000;
+  if (suffix === "k") return n / 1000;
+  return n;
 }
 
 function abstain(item: RawLineItem, reason: string): ValidatedLineItem {
