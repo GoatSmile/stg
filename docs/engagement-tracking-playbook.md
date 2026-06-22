@@ -286,6 +286,39 @@ export function UsageTracker() {
 
 > **Rename per project:** the `sessionStorage` keys `varsel_v` / `varsel_s`.
 
+### 7.1 — Exclude your own visits (owner opt-out)
+
+Without this, **your own visits and any real untagged visitor land in the same
+`(untagged)` bucket** — you can't tell them apart. Fix: a persistent per-browser
+opt-out. Visit `?notrack=1` once on each of your devices; from then on the tracker
+sends nothing from that browser (`localStorage` persists across sessions, unlike
+the `?v=` tag). Add these to `UsageTracker.tsx`:
+
+```ts
+const NOTRACK_KEY = "varsel_notrack";
+
+// ?notrack=1 sets a persistent opt-out for this browser; ?notrack=0 clears it.
+function syncNotrackFlag() {
+  try {
+    const url = new URL(window.location.href);
+    const nt = url.searchParams.get("notrack");
+    if (nt === null) return;
+    if (nt === "0") localStorage.removeItem(NOTRACK_KEY);
+    else localStorage.setItem(NOTRACK_KEY, "1");
+    url.searchParams.delete("notrack");
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+  } catch { /* ignore */ }
+}
+function isOptedOut(): boolean {
+  try { return localStorage.getItem(NOTRACK_KEY) === "1"; } catch { return false; }
+}
+```
+
+Then call `syncNotrackFlag()` in the mount effect (before the first send), and
+guard `send()` with `if (isOptedOut()) return;` as its first line. After this,
+`(untagged)` means only *real external* visitors who arrived without a tag — not
+you. (Per-browser, so set it on each device; doesn't clean rows already logged.)
+
 ---
 
 ## 8. Step 5 — mount it

@@ -19,6 +19,34 @@ function recipient(): string | null {
   }
 }
 
+// Owner opt-out. Visit any page with ?notrack=1 once to permanently exclude THIS
+// browser from tracking (persists in localStorage across sessions, unlike the ?v=
+// tag); ?notrack=0 clears it. Keeps your own visits out of the log, so "(untagged)"
+// means only real external visitors who arrived without a ?v= tag — not you.
+const NOTRACK_KEY = "varsel_notrack";
+
+function syncNotrackFlag() {
+  try {
+    const url = new URL(window.location.href);
+    const nt = url.searchParams.get("notrack");
+    if (nt === null) return;
+    if (nt === "0") localStorage.removeItem(NOTRACK_KEY);
+    else localStorage.setItem(NOTRACK_KEY, "1");
+    url.searchParams.delete("notrack");
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+  } catch {
+    /* ignore */
+  }
+}
+
+function isOptedOut(): boolean {
+  try {
+    return localStorage.getItem(NOTRACK_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 // Read the ?v= tag once, stash it, then strip it from the address bar so the
 // recipient sees a clean URL (nothing that reads as "tracking"). Use opaque
 // codes (?v=13) — they're meaningless to the viewer and gone a beat after load.
@@ -61,6 +89,7 @@ function device(): "mobile" | "desktop" {
 
 function send(event: "view" | "dwell", path: string, dwellMs: number, beacon: boolean) {
   try {
+    if (isOptedOut()) return;
     const body = JSON.stringify({
       event,
       path,
@@ -90,8 +119,10 @@ export function UsageTracker() {
   const curPath = useRef("");
   const enteredAt = useRef(0);
 
-  // Capture + strip the ?v= tag once, before any event is sent.
+  // Set the owner opt-out flag (if ?notrack is present) and capture + strip the
+  // ?v= tag, once, before any event is sent.
   useEffect(() => {
+    syncNotrackFlag();
     captureTag();
   }, []);
 
