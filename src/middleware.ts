@@ -9,7 +9,7 @@ import { GATE_COOKIE, gateToken } from "@/lib/gate";
 // /gate + its POST handler must be reachable to log in. /opengraph-image is a
 // public, no-data share card — it stays open so forwarded-link previews still
 // render once prod is gated (the app behind it still needs the password).
-const ALWAYS_ALLOW = ["/gate", "/api/gate", "/opengraph-image"];
+const ALWAYS_ALLOW = ["/gate", "/api/gate", "/opengraph-image", "/_vercel"];
 
 export async function middleware(req: NextRequest) {
   const pw = process.env.SITE_PASSWORD;

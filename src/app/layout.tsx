@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { UsageTracker } from "@/components/UsageTracker";
 import { CONTACT } from "@/lib/contact";
 import "./globals.css";
 
@@ -86,6 +88,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             investor-facing; public data only, illustrative figures marked *.
           </footer>
         </div>
+        <UsageTracker />
+        <Analytics />
       </body>
     </html>
   );
