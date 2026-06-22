@@ -13,14 +13,26 @@ import { usePathname } from "next/navigation";
 
 function recipient(): string | null {
   try {
-    const v = new URL(window.location.href).searchParams.get("v");
-    if (v) {
-      sessionStorage.setItem("varsel_v", v.slice(0, 40));
-      return v.slice(0, 40);
-    }
     return sessionStorage.getItem("varsel_v");
   } catch {
     return null;
+  }
+}
+
+// Read the ?v= tag once, stash it, then strip it from the address bar so the
+// recipient sees a clean URL (nothing that reads as "tracking"). Use opaque
+// codes (?v=13) — they're meaningless to the viewer and gone a beat after load.
+// Other params (?lens=, ?event=) are preserved.
+function captureTag() {
+  try {
+    const url = new URL(window.location.href);
+    const v = url.searchParams.get("v");
+    if (!v) return;
+    sessionStorage.setItem("varsel_v", v.slice(0, 40));
+    url.searchParams.delete("v");
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+  } catch {
+    /* ignore */
   }
 }
 
@@ -77,6 +89,11 @@ export function UsageTracker() {
   const pathname = usePathname();
   const curPath = useRef("");
   const enteredAt = useRef(0);
+
+  // Capture + strip the ?v= tag once, before any event is sent.
+  useEffect(() => {
+    captureTag();
+  }, []);
 
   useEffect(() => {
     const now = Date.now();

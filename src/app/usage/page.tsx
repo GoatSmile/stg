@@ -13,6 +13,16 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const ADMIN_KEY = process.env.ADMIN_KEY;
 const TABLE = "varsel_usage_events";
 
+// Optional owner-only map from opaque link codes to readable names, so only the
+// code ever travels in a URL (e.g. RECIPIENT_MAP={"13":"Yulia","14":"CFO"}).
+let RECIPIENT_MAP: Record<string, string> = {};
+try {
+  RECIPIENT_MAP = JSON.parse(process.env.RECIPIENT_MAP || "{}");
+} catch {
+  RECIPIENT_MAP = {};
+}
+const label = (code: string) => (RECIPIENT_MAP[code] ? `${RECIPIENT_MAP[code]} (${code})` : code);
+
 type Ev = {
   ts: string;
   event: string;
@@ -131,7 +141,7 @@ export default async function Usage({ searchParams }: { searchParams: Promise<{ 
                 const forwarded = r.countries.size > 1 || r.sessions.size > 1;
                 return (
                   <tr key={r.recipient} className="border-b border-border/50">
-                    <td className="py-1.5 pr-3 font-medium">{r.recipient}</td>
+                    <td className="py-1.5 pr-3 font-medium">{label(r.recipient)}</td>
                     <td className="py-1.5 pr-3">{r.opens}</td>
                     <td className="py-1.5 pr-3">{r.sessions.size}</td>
                     <td className="py-1.5 pr-3">{[...r.countries].join(", ") || "—"}</td>
@@ -215,7 +225,7 @@ export default async function Usage({ searchParams }: { searchParams: Promise<{ 
               {events.slice(0, 60).map((e, i) => (
                 <tr key={i} className="border-b border-border/50">
                   <td className="py-1.5 pr-3 whitespace-nowrap">{fmtWhen(e.ts)}</td>
-                  <td className="py-1.5 pr-3">{e.recipient ?? "(untagged)"}</td>
+                  <td className="py-1.5 pr-3">{e.recipient ? label(e.recipient) : "(untagged)"}</td>
                   <td className="py-1.5 pr-3">{e.event}</td>
                   <td className="py-1.5 pr-3 font-mono text-xs">{e.path ?? "—"}</td>
                   <td className="py-1.5 pr-3">{e.dwell_ms ? fmtDuration(e.dwell_ms) : "—"}</td>
