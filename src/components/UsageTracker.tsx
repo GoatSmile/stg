@@ -103,7 +103,11 @@ export function UsageTracker() {
     }
     curPath.current = pathname;
     enteredAt.current = now;
-    send("view", pathname, 0, false);
+    // Prefer sendBeacon for the view too (fall back to fetch). A keepalive fetch to
+    // /api/track gets dropped by privacy browsers/shields (Brave) that let the beacon
+    // through — observed in prod as dwells landing but views never arriving, which
+    // would zero out the "Opens" column. sendBeacon is the more reliable primitive here.
+    send("view", pathname, 0, true);
 
     const flush = () => {
       if (curPath.current && enteredAt.current) {

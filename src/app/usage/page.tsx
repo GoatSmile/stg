@@ -114,12 +114,19 @@ export default async function Usage({ searchParams }: { searchParams: Promise<{ 
         </p>
       </header>
 
-      {dbError && (
-        <p className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm">
-          No data yet — either the <code>varsel_usage_events</code> table doesn&apos;t exist, the DB is
-          unreachable, or no one has opened a tagged link. (Create the table, then send a <code>?v=name</code> link.)
+      {dbError ? (
+        <p className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm">
+          Can&apos;t read the engagement log — the database is unreachable, or{" "}
+          <code>SUPABASE_SERVICE_ROLE_KEY</code> / <code>SUPABASE_URL</code> is missing or invalid in
+          this environment. While this shows, <code>/api/track</code> can&apos;t write either — it needs
+          the same service-role key (the table has RLS on with no policies, so the anon key can&apos;t reach it).
         </p>
-      )}
+      ) : events.length === 0 ? (
+        <p className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm">
+          Database connected — no events yet. No one has opened a tagged link.
+          Send a <code>?v=&lt;code&gt;</code> link (e.g. <code>?v=11</code>) to start tracking.
+        </p>
+      ) : null}
 
       <section>
         <h2 className="mb-2 font-heading text-lg">By recipient</h2>
