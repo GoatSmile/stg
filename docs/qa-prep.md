@@ -197,12 +197,29 @@ Not in your original four, but she's the person who actually approves money and 
 > fee; I carry professional-indemnity (E&O) insurance. You're buying a sized scenario to inform your
 > own judgement, framed exactly that way in the agreement.
 
+**Q: What changes when we give you our data?** *(the "imagine with your data" beat — say it on the slider)*
+> The blindfold comes off — and you can watch it happen. Today every assumption is *wide* because I'm
+> guessing at your numbers; that's why the EU-excise band reads DKK 45–95m. Pin your real exposed share
+> and contribution margin and the same engine collapses that to a single defensible figure (illustratively
+> ~DKK 88m ± 5) — it stops being a range Strategy forwards and becomes a number Finance can book. Then it
+> *deepens*: from "DKK 45–95m somewhere in cigars" to "these SKUs, these markets, and the months you have
+> to act." Every `*` and every slider in this demo is a slot your data fills — I've shown you the gaps on
+> purpose; they're the spec for what your data turns this into. (Precision, never prediction — it sharpens
+> an internal scenario, it never becomes earnings guidance.)
+
 ---
 
 ## 6. CTO / Head of IT & Digital — the technical deep-dive
 
 This is the section to over-prepare. The instinct here is due-diligence: *can this break, leak, or
 lock us in?* Answer plainly, lead with the honest framing, and never oversell.
+
+> **The two-question reflex.** Every architecture question — hosting, security, resilience, DR, scale —
+> has *two* answers. Name which you're giving before you answer: **(1) the prototype in front of you** —
+> a public-data demo, deliberately lean because there's nothing sensitive to protect yet; and **(2) the
+> system we'd run for STG** — scoped with your security team: EU-hosted, DPA'd, SSO, monitored. Give both
+> in one breath. Never let a production due-diligence question get the demo's answer (sounds like a toy),
+> or the demo get a production claim (you'll trip a security review you don't need to pass yet — see §9).
 
 **Q: What's it built in?**
 > Next.js 16 (App Router) with TypeScript, React 19, Tailwind 4 and shadcn/ui (radix-nova). The world

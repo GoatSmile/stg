@@ -59,7 +59,9 @@ end). The app is now **complete — 7 department lenses, 5 live public-data feed
 >
 > The answer is a band, not a fake single number — and right up here it says what
 > it is: a public-data model, not STG's own figure. And the part I care about most
-> — these are *assumptions*, and they're yours to argue with."
+> — these are *assumptions*, and they're yours to argue with. And notice — every
+> slider here is me *guessing* at your number; hand me your real ones and this band
+> stops being a range and becomes a figure you can book."
 
 *Drag the assumption sliders — the band moves.*
 
@@ -108,7 +110,7 @@ forwards clean.*
 | 0:00–0:20 | **You, to camera** | reg lands as a number, worked by hand, late — I built it; 3 min | warm, no hype |
 | 0:20–0:50 | Map (Regulatory); switch **HR → Finance → Regulatory**; click **EU** marker | STG's footprint, public data only; one map per dept; open the EU threat | feeds pre-warmed |
 | 0:50–1:30 | **Impact Room** loads; let the **DKK band** sit | EU-ETD COM(2025) 580, in Council, from 2028; what's it worth? a band, labelled "not STG's figure" | read the on-screen band |
-| 1:30–2:00 | **Drag sliders**; point **citation chip**; point **abstention** line | assumptions are yours; no borrowed elasticity; cites every source; abstains where silent | the credibility beat |
+| 1:30–2:00 | **Drag sliders**; point **citation chip**; point **abstention** line | assumptions are yours; no borrowed elasticity; cites every source; abstains where silent; **sliders are my guesses → your data collapses the band to a bookable figure** | credibility beat + the "imagine with your data" seed |
 | 2:00–2:40 | Back to map; **flip to HR** (open roles, SAP/IT cluster); name the other live feeds | live, today — your real open roles, SAP hiring; 5 live feeds, nothing hand-typed | read the roles count |
 | 2:40–3:00 | **You, to camera** | cheap to stand up; wire real numbers → sharp; reply if useful | close, low-pressure |
 
