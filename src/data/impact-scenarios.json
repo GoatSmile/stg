@@ -154,7 +154,7 @@
           "step": 0.01,
           "spread": 0.1,
           "unit": "pct",
-          "note": "STG does not disclose pouch contribution margin (NGP gross margin was 35.2% in Q1 2026, but gross ≠ contribution) — an assumption. Drives the band."
+          "note": "STG does not disclose a pouch contribution margin (and discloses no reliable NGP gross-margin figure) — this is an editable assumption. Drives the band."
         }
       ],
       "facts": [
@@ -232,7 +232,7 @@
           "step": 0.01,
           "spread": 0.1,
           "unit": "pct",
-          "note": "STG does not disclose pouch contribution margin (NGP gross margin was 35.2% in Q1 2026, but gross ≠ contribution) — an assumption. Drives the band."
+          "note": "STG does not disclose a pouch contribution margin (and discloses no reliable NGP gross-margin figure) — this is an editable assumption. Drives the band."
         }
       ],
       "facts": [

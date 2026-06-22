@@ -31,7 +31,7 @@ This three-way flag is the spine of the transparency promise (see
 | Brands | ~200 | [C] |
 | Markets sold to | ~100 | [C] |
 | Manufacturing sites | ">10" | [C] |
-| Sales offices | ">20 in North America and Europe" | [C] |
+| Sales offices | "in North America and Europe" (no public count; ~20+ est.) | [I] |
 
 ## 2. Financials (FY2025, AR2025)
 
@@ -41,12 +41,12 @@ This three-way flag is the spine of the transparency promise (see
 | Organic growth | −3.1% | — | [C] |
 | EBITDA before special items | DKK 1,791m (19.8% margin) | 2,079m (22.6%) | [C] |
 | EBIT before special items | DKK 1,342m | — | [C] |
-| Net profit | DKK 669m | 944m | [C] |
+| Net profit | DKK 669m | 940m | [C] |
 | Free cash flow before acq. | DKK 595m | 931m | [C] |
 | Adjusted EPS | DKK 10.8 | 13.7 | [C] |
 | Dividend / share | DKK 4.50 (cut from 8.50) | 8.50 | [C] |
 | Leverage | 3.0x (target 2.5x by end-2026) | — | [C] |
-| ROIC | 7.8% (target ≥11% by 2030) | — | [C] |
+| ROIC | 7.9% (target ≥11% by 2030) | — | [C] |
 
 Focus2030 cost program: ~DKK 200m savings (~100m in 2026). Share ~DKK 67.50,
 P/E ~8.2, yield ~6.6% (11 Jun 2026). FY26 guidance: net sales −2%…+2% cc, EBIT
@@ -115,10 +115,11 @@ Conroe TX (30.31,−95.46) · Katy TX (29.79,−95.82) · Jacksonville FL
 | Dominican Republic | Santiago / Tamboril | Handmade + machine-rolled cigars, wrapper/binder leaf | factory+leaf | 19.45 | −70.70 | [C] (San Pedro site closed 2025) |
 | Honduras | Danlí | Handmade cigars | factory | 14.02 | −86.58 | [C] |
 | Nicaragua | Estelí | Handmade cigars | factory | 13.09 | −86.35 | [C] |
-| Indonesia | Semarang (HQ) + Pasuruan | Machine-rolled cigars, wrapper/binder leaf | factory+leaf | −6.97 | 110.42 | [C] |
+| Indonesia | Semarang + Pasuruan/Pandaan | Machine-rolled cigars, wrapper/binder leaf | factory+leaf | −6.97 | 110.42 | [I] city — AR2025 names no city; st-group.com lists Pandaan/Pasuruan (E Java). Coord = Semarang (Central Java); **verify before re-plotting** (also touches the ESG water-stress overlay) |
 | Sri Lanka | Biyagama (Greater Colombo) | Wrapper/binder leaf | factory+leaf | 6.95 | 79.96 | [C] city |
 | Belgium | Lummen + Westerlo | Machine-rolled cigars | factory | 50.99 | 5.20 | [C] |
-| Netherlands | Eersel/Waalre | Cigars (verify mfg vs commercial) | factory | 51.36 | 5.32 | [I] |
+| Italy | Lucca (Tuscany) | Machine-rolled cigars (Moderno Opificio del Sigaro Italiano, 85%-owned, acq. 2021; on AR2025 EU production map) | factory | 43.84 | 10.50 | [C] site / [I] city |
+| Netherlands | Eersel/Waalre | MRC production relocated post-Agio (2020) — **commercial/holding entity only, not a producing site per AR2025** | office | 51.36 | 5.32 | [I] |
 | Denmark | Assens | Pipe tobacco | factory | 55.27 | 9.90 | [C] |
 | Denmark | Svendborg | Pipe + fine-cut + **owned nicotine-pouch factory** | factory+pouch | 55.06 | 10.61 | [C] |
 | Denmark | Holstebro | Fine-cut tobacco | factory | 56.36 | 8.62 | [C] |
@@ -153,12 +154,12 @@ headcount is published — city-level allocation on the map is [I], e.g. DR 1,62
   ~6% volume share of international handmade. [C]
 - **Machine-rolled:** **Signature, La Paz, Mehari's, Panter**; Café Crème, Henri
   Wintermans, Colts (Canada), Gold (France). Key-European MRC volume share 26.8%
-  (2025, down from 27.9%); >50% Belgium & Nordics; market leader FR/UK/NL/ES. [C]
+  (2025, down from 27.9%); >50% Belgium (~90%); market leader FR/UK/NL/ES. [C]
 - **Pipe:** Captain Black, Erinmore, Borkum Riff, W.Ø. Larsen + Mac Baren,
   Amphora, Holger Danske. "Undisputed global leader in pipe tobacco." [C]
 - **Fine-cut:** Bugler (US), Break (DE), Bali Shag, Tiedemanns (NO) + Amsterdamer.
 - **Pouches:** **XQS** (flagship), ACE, GRITT. XQS organic +55% FY25; Sweden
-  share 7.8%→13.6%; UK launched 2024; focus markets Sweden + UK. [C]
+  share 7.8%→13.6%; UK launched 2024; focus markets Scandinavia + UK. [C]
 
 ## 7. Leadership (2026)
 
@@ -175,10 +176,12 @@ Regulatory Affairs **Peter Schøtt Knudsen** · SVP Scientific & Regulatory Affa
 Full table + sources in [research-brief.md](research-brief.md) §2. Summary:
 - **EU Tobacco Taxation Directive revision** — `COM(2025) 580` (CELEX
   52025PC0580), **a proposal, in Council negotiation** (Cyprus compromise failed
-  Jan 2026); would apply from 2028; pouch minima phase 2030–2032; raises
-  cigar/cigarillo/pipe minimums. [C] **The lead worked example.**
+  Jan 2026; file since passed to the Irish Presidency for H2 2026 — still under
+  Council unanimity, no agreement); would apply from 2028; pouch minima phase
+  2030–2032; raises cigar/cigarillo/pipe minimums. [C] **The lead worked example.**
 - **France** — total oral-nicotine ban in force Apr 2026 (Décret 2025-898);
-  Conseil d'État merits ruling ~June 2026. France is also STG's #1 MRC market. [C]
+  Conseil d'État merits ruling ~June 2026. France is also one of STG's largest EUB/MRC
+  markets (≈19% of EUB ≈ DKK 620m — analyst derivation, not an STG-stated rank). [C]/[I]
 - **Denmark** — 9 mg cap + tobacco/menthol-only flavours (full effect Apr 2026). [C]
 - **Spain** — 0.99 mg cap proposed. **Poland** — pouch excise 150→200 PLN/kg +
   proposed flavour/online-sale bans. **Belgium/NL/LU/FI** — banned/restricted.

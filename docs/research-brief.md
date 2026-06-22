@@ -40,7 +40,8 @@ Sources: [STG "Seeking the Single Truth"](https://www.st-group.com/press-media/n
 [Worksoft case study](https://www.worksoft.com/case-study-scandinavian-tobacco-group/).
 
 **Org notes:** US premium-cigar distribution reorganised effective 2 Feb 2026
-(General Cigar ↔ Forged brand shuffle; 56 SKUs discontinued). Mac Baren
+(General Cigar ↔ Forged brand shuffle; a few lines de-listed). *(The "56 SKUs
+discontinued" figure is a separate March 2025 event, not this Feb 2026 reorg.)* Mac Baren
 acquisition (DKK 535m, 2024 — incl. pouch brands ACE and GRITT) integration
 "on track". CEO Niels Frederiksen (2015), CFO Marianne Rørslev Bock (2018),
 CCO Régis Broersma (2024), **CHRO Thomas Kolber (2024)**. No confirmed large
@@ -51,11 +52,11 @@ named layoff round 2025–26 (widely-indexed halfwheel layoff article is from
 
 | Market | Status | Detail |
 |---|---|---|
-| **France** | **Banned** | Decree 2025-898 (Sept 2025), effective 1 Mar 2026 (some outlets say 1 Apr). Bans import, possession, **use** of all oral nicotine products incl. pouches; only medicinal NRT exempt. Conseil d'État (22 Dec 2025) suspended only manufacture/export provisions; sales/possession ban stands; **merits ruling expected June 2026** |
+| **France** | **Banned** | Decree 2025-898 (published 5 Sep 2025); sale/import/possession/**use** ban in force **1 Apr 2026**. Bans import, possession, **use** of all oral nicotine products incl. pouches; only medicinal NRT exempt. Conseil d'État (22 Dec 2025) suspended only manufacture/export provisions; sales/possession ban stands; **merits ruling expected June 2026** |
 | **Belgium** | Banned | Total ban since Oct 2023 |
 | **Netherlands** | Banned (retail) | Sale banned Jan 2025; possession legal |
 | **Luxembourg** | De facto banned | 0.048 mg nicotine cap |
-| **Finland** | Restricted | Effectively pharmacy/NRT-only |
+| **Finland** | Restricted | Moved into the Tobacco Act (2025): licensed **retail** sale (no longer pharmacy/NRT-only), 16.6 mg/g nicotine cap, tobacco/menthol/mint flavours only, online/distance-sale restrictions |
 | **Denmark** | Restricted | From 1 Jul 2025 (full effect Apr 2026): **9 mg/pouch cap, tobacco + menthol flavors only**, cigarette-equivalent taxation |
 | **Spain** | Restriction proposed | **0.99 mg/pouch cap** + tobacco-only flavors — would kill standard products; timeline unclear |
 | **Germany** | Grey | Classified unauthorised novel food; domestic sale restricted, personal import tolerated |
@@ -65,7 +66,7 @@ named layoff round 2025–26 (widely-indexed halfwheel layoff article is from
 **EU level:** TPD3 still pre-proposal as of spring 2026 (pouches entirely
 outside TPD2; realistic effect ~2028+). Tobacco-excise revision COM(2025) 580
 (16 Jul 2025) proposes **€143/kg or 50%-of-price minimum excise on pouches**;
-Council deadlocked (Cyprus compromise failed Jan 2026).
+Council deadlocked (Cyprus compromise failed Jan 2026; file since passed to the Irish Presidency for H2 2026, still no agreement).
 **Sweden's pushback:** Trade Minister Benjamin Dousa — formal warning letters
 to France and Spain (24 Sept 2025), "an attack on the Swedish way of living",
 criminalisation of travelling Swedes "clearly absurd"; EP question
