@@ -47,7 +47,8 @@ Vercel (push-to-`main` → prod).
 - **Commercial:** [docs/commercial-strategy.md](docs/commercial-strategy.md) ·
   [docs/pilot-proposal.md](docs/pilot-proposal.md) · [docs/outreach.md](docs/outreach.md)
 - **Pitch prep:** [docs/demo-script.md](docs/demo-script.md) · [docs/qa-prep.md](docs/qa-prep.md)
-  (the C-level Q&A answer sheet)
+  (the C-level Q&A answer sheet) · [docs/glossary.md](docs/glossary.md) (plain-language terms —
+  EBIT, ROIC, FCF, CAGR, MRC, SKU…)
 - **Parked:** [docs/ideas.md](docs/ideas.md) — the earlier HR/"Broen" track (reference only).
 
 ## Dev
