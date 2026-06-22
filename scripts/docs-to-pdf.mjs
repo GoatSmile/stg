@@ -3,8 +3,10 @@
 // independent of the print dialog. Markdown has no pages; the numbers are added
 // here by the print engine (your installed Chrome/Brave), not stored in the .md.
 //
-//   npm run docs:pdf            → regenerates docs/print/*.pdf
-//   CHROME_PATH=/path npm run docs:pdf   → use a specific Chromium-family browser
+//   npm run docs:pdf                         → all docs/*.md → docs/print/*.pdf
+//   npm run docs:pdf -- qa-prep.md           → just that one doc (the "--" is required)
+//   npm run docs:pdf -- qa-prep pilot-proposal   → a selected few (".md" optional)
+//   CHROME_PATH=/path npm run docs:pdf       → use a specific Chromium-family browser
 //
 // Dev-only: uses marked (md→html) + puppeteer-core driving your system browser
 // (no Chromium download). Output (docs/print/) is gitignored.
@@ -64,7 +66,19 @@ const footerBase = `<div style="font-size:8.5pt; width:100%; padding:0 18mm; col
 const header = `<div style="font-size:7.5pt; width:100%; padding:0 18mm; color:#777; text-align:right;">
   Varsel for STG — docs · printed <span class="date"></span></div>`;
 
-const files = readdirSync(DOCS).filter((f) => f.endsWith(".md")).sort();
+const all = readdirSync(DOCS).filter((f) => f.endsWith(".md")).sort();
+// Optional args (after `--`) select individual docs, with or without the .md suffix.
+const wanted = process.argv.slice(2).map((a) => a.replace(/\.md$/i, "").trim()).filter(Boolean);
+let files = all;
+if (wanted.length) {
+  files = all.filter((f) => wanted.includes(basename(f, ".md")));
+  const missing = wanted.filter((w) => !all.some((f) => basename(f, ".md") === w));
+  if (missing.length) {
+    console.error("Not found in docs/:", missing.join(", "));
+    console.error("Available:", all.map((f) => basename(f, ".md")).join(", "));
+  }
+  if (!files.length) process.exit(1);
+}
 mkdirSync(OUT, { recursive: true });
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: "new" });

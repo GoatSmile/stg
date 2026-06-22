@@ -55,3 +55,18 @@ Vercel (push-to-`main` → prod).
 `npm run dev` (:3000). The gate is **off** when `SITE_PASSWORD` is unset (local dev stays open).
 The Claude call is live when `ANTHROPIC_API_KEY` is set and `DEMO_MODE` ≠ `offline`; otherwise it
 serves the pre-reviewed golden, labelled "offline." `tsc --noEmit` + `next build` are the ship gates.
+
+## Printing the docs (numbered PDFs)
+
+Markdown has no pages, so the `.md` files print without page numbers. To get print-ready,
+page-numbered PDFs (e.g. to upload to a print kiosk — upload the `.pdf`, not the `.md`):
+
+```
+npm run docs:pdf                          # all docs/*.md → docs/print/*.pdf
+npm run docs:pdf -- qa-prep.md            # just one doc (the "--" is required; ".md" optional)
+npm run docs:pdf -- outreach pilot-proposal   # a selected few
+```
+
+A4, "Page X of Y" baked into the footer (dark enough for B/W). Renders via your installed
+Chrome/Brave/Edge/Chromium (`CHROME_PATH=…` to override) — no Chromium download. Output
+`docs/print/` is gitignored. Script: [scripts/docs-to-pdf.mjs](scripts/docs-to-pdf.mjs).
