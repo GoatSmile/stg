@@ -2,10 +2,12 @@ import Link from "next/link";
 import { CalendarClock, ArrowRight } from "lucide-react";
 import data from "@/data/hindsight.json";
 import { CitationChip } from "@/components/impact/CitationChip";
+import { HindsightTimeline } from "@/components/HindsightTimeline";
 
 type HindsightItem = {
   eventId: string;
   label: string;
+  shortLabel?: string;
   signalDate: string;
   signalWhat: string;
   effectDate: string;
@@ -43,6 +45,8 @@ export function HindsightCard() {
         effect. Varsel reads that same public record, so the exposure surfaces when a rule appears, not when
         it hits the P&amp;L.
       </p>
+
+      <HindsightTimeline items={items} />
 
       <div className="mt-1 flex flex-col divide-y divide-border">
         {items.map((it) => {
