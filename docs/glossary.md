@@ -1,6 +1,6 @@
 # Glossary — plain-language terms
 
-*Updated: 2026-06-22 09:59 CEST*
+*Updated: 2026-06-22 21:30 CEST*
 
 *Quick, plain-English definitions of the finance, market, regulatory, HR and tech terms used
 across the app and docs — written for a non-finance reader. Skim it, or Ctrl-F a term. STG figures
@@ -81,3 +81,15 @@ are illustrative anchors, not live.*
 - **Abstention** — when the model says *"not stated in the source"* instead of guessing.
 - **Golden response** — a pre-written, human-reviewed answer served when the AI is offline, so the demo never depends on wifi.
 - **SSO / RLS** — *single sign-on* (corporate login) / *row-level security* (who-can-read-which-rows in the database).
+
+## Selling the prototype — business-model & strategy wording
+
+*(from `commercial-strategy.md` / `ceo-play.md` — about the consulting venture itself, not STG's P&L.)*
+
+- **Runway** — how long your cash lasts (cash ÷ burn rate). *"Plan runway as if 2026 cash from this is DKK 0–150k (expected value)"* = budget assuming the deal pays roughly nothing; treat a signed pilot as upside, don't quit other income.
+- **Key-person risk / bus factor** — the venture depends entirely on one person (you); *bus factor = 1* = how many people you'd lose before it collapses. **Caps the ceiling** = that one-person dependency puts a hard lid on how big, valuable and fundable it can ever become — not fixable by building a better product.
+- **Logo** — a named customer you can show publicly (the "Trusted by…" wall). *"3–4 paying logos"* = the proof it's a repeatable business, not a one-off job. **Reference logo** = the first customer you're allowed to name (STG).
+- **White space** — an unserved gap in the market. *Verified / genuine* = confirmed by actually surveying competitors, not assumed ("we have no competition" usually means nobody looked).
+- **Multi-tenancy** — one shared app serving many customers at once, each walled off (vs **single-tenant** = a separate copy per customer, which is what we do). *"Don't build multi-tenancy before logo #2"* = don't build the SaaS platform before a 2nd customer proves demand — "the founder graveyard."
+- **Surprise-guidance tail** — the tail risk that an unforeseen event forces a sudden guidance cut and tanks the stock (STG's repeated pattern). What Varsel is pitched as "cheap insurance" against — specifically the *regulatory* slice of it.
+- **DPA build** — the paid real-data phase, run under a signed **DPA** (data-processing agreement, GDPR art. 28). The demo runs on public data; the DPA build plugs in STG's real SKU volumes for finance-grade bands. *"The DPA is the paywall."*
