@@ -126,6 +126,17 @@ She is the gatekeeper. Her #1 silent question is *"can I forward this up without
 > (your raw numbers never leave the processing environment); the IP is licensed to you, not sold; and
 > I'll disclose the personal intro proactively so no one can call it back-channel procurement.
 
+**Q: Where does this go beyond the first regulation? (the platform's future — also the CEO's "is this a one-off?")**
+> Three directions, and I'm precise about which is which. **Deeper** — the same engine reaches every
+> regulation that hits a P&L (tariffs, flavour/packaging, FDA), and with your real volumes the band stops
+> being a range and becomes a bookable, SKU-level number. **Wider** — the same live map serves any team
+> that thinks in geography: the concrete next build is **Tax** (every market's excise rate, live, into the
+> same DKK engine — pure public data), and the one that'd watch *your* world is **M&A** — imagine this
+> scanning brand-for-sale signals against your deal thesis. **Wired in** — from a hosted demo to a standing
+> watch that re-sizes your book the morning a rule is tabled, into your own FP&A. Tax is what I'd build
+> next; M&A is the one that's yours; the rest is range — any team with a map and a feed. *(Lead with the
+> engine + Radar; M&A is "imagine," never "built." Full ranked roadmap + stars: `docs/map-platform.md` §9.)*
+
 **The hindsight card is your strongest asset with her.** It shows, from public dates only, that the
 France ban was in the public record ~7 months before it took effect and the EU revision ~30 months out
 — so "early warning" is a property of *reading the public record systematically*, not a claim that

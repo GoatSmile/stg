@@ -243,20 +243,70 @@ Revises [build-plan.md](build-plan.md) — the phases still hold, re-scoped:
 This gets a forwardable, multi-department map — the thing the owner wants to see
 — while keeping every other surface on its existing track.
 
-## 9. Other departments / future live-agent cases (owner's additional task)
+## 9. Future development & usefulness — where the platform goes (the authoritative answer)
 
-Beyond the seven lenses, map-shaped use cases where agents fetch live public
-data for STG teams:
-- **M&A / Corporate Development** (Yulia's other hat): plot acquisition targets,
-  competitor M&A moves, brand-for-sale signals — agent-scanned from trade press
-  + filings. Ties to "M&A is in STG's DNA."
-- **Treasury:** live FX + interest-rate exposure by entity geography (ECB +
-  central-bank feeds).
-- **Tax:** excise-rate-by-market + the ETD/TTD changes (overlaps Regulatory +
-  Finance).
-- **Brand protection / IP:** counterfeit-listing scans on marketplaces, geotagged.
-- **Travel Retail (GTR):** airport/duty-free location performance signals.
-- **Investor Relations:** peer share-price/multiple map (display-only, MAR).
-- **Crisis/Comms:** geotagged news/sentiment monitoring per market.
-Each is the same engine + a new lens + a public feed an agent refreshes. The
-platform's ceiling is "any team that thinks in geography + a live external feed."
+*This is the answer to "where does this go, and how useful does it get?" — said with authority. The
+expansion is NOT one undifferentiated "more lenses" list. It runs on **three distinct axes**, and naming
+which axis a use-case sits on is the credibility — conflating them (an earlier draft said "each is the
+same engine") over-claims, because most team lenses are monitoring overlays, not the DKK-band engine.*
+
+### The three expansion axes
+
+1. **Deepen the engine** — more of the thing that has no incumbent. The core is regulation→DKK band.
+   Deepening = (a) more regulation *mechanisms* on the same band math — tariffs (already a marker), TPD3
+   flavour/plain-packaging, generational bans, FDA/PMTA, deposit-return & track-and-trace costs; and
+   (b) **STG's real data**, which collapses the band from a strategist's range to a CFO's SKU-level,
+   bookable number (the "imagine with your data" upside). *This axis is the product.* **Tax lives here** —
+   excise-rate-by-market is the one regulation type that's pure public data, feeding the same engine; it's
+   a deepening, not a side lens, which is why it ranks first below.
+2. **Broaden the platform** — the same *map + lens + live public feed* pattern for other STG teams. These
+   are mostly **monitoring / mapping overlays, not band computations**, and saying so is the honesty. This
+   is the "serves the whole C-suite" range that makes a strategy SVP forward it sideways. M&A, Brand/IP,
+   Treasury, GTR, IR and Crisis all live here.
+3. **Wire it in** — from a hosted demo to a standing system: live TRIS / EUR-Lex regulatory ingestion
+   (today the corpus is curated + manually refreshed — deliberately, per the out-of-scope list), a
+   **compute-and-return API** into STG's FP&A / BI / SAP, and a materiality-triaged watch that re-sizes the
+   real book the morning a rule is tabled. *This axis is the path from pilot → real-data build → retainer.*
+
+### Where today's seven lenses already sit (existing functionality, ranked)
+
+- **The defensible core (the product):** **Regulatory lens + Impact Room** — the band engine (★★★★★);
+  **Pouch Radar / Sales** — price-per-mg + flavour-cap→foreclosure, no incumbent (★★★★).
+- **Breadth + the live-agent proof (range, not standalone P&L value):** HR/careers, Finance/FX,
+  Procurement/weather, Supply/freight, ESG/water — **★★ each**. They demonstrate "any team's map, kept
+  fresh by agents," which is the *range* story; individually they're closer to commodity monitoring.
+
+### Future cases, ranked
+
+*Useful = strategic value × public-data defensibility × no-incumbent distinctiveness. Impressive =
+wow-in-the-room for this buyer (Yulia → CFO → CEO).*
+
+| Future case | Axis | Useful | Impressive | The honest read |
+|---|---|---|---|---|
+| **Tax** — excise-rate-by-market → the band (Tobacco Taxation Directive, COM(2025) 580) | Deepen | ★★★★ | ★★★★ | **The next build.** Excise rates are public; feeds the same DKK engine; nothing to over-claim. The *responsible* wow. |
+| **M&A / Corp Dev** — acquisition targets, competitor moves, brand-for-sale signals (agent-scanned, trade press + filings) | Broaden | ★★ | ★★★★★ | **The buyer-specific wow** — Yulia's other hat; ties to "M&A is in STG's DNA." Fuzziest to deliver → **frame as "imagine," roadmap, never "built."** |
+| **Brand protection / IP** — geotagged counterfeit-listing scans on marketplaces | Broaden | ★★★ | ★★★ | **The sleeper.** Concrete, demonstrable, a little unexpected — cheap to impress with. |
+| **Treasury** — FX + interest-rate exposure by entity geography | Deepen/Broaden | ★★ | ★★ | Feasible (the FX feed is already live) but commodity — every treasury has this. |
+| **Crisis / Comms** — geotagged news / sentiment per market | Broaden | ★★ | ★★ | Commodity media-monitoring; not P&L. |
+| **Travel Retail (GTR)** — airport / duty-free location signals | Broaden | ★★ | ★★ | STG has a GTR hub (Hong Kong), but duty-free performance isn't public — low public-data feasibility. |
+| **Investor Relations** — peer share-price / multiple map | Broaden | ★ | ★ | Weakest: a stock chart on a map, and MAR-touchy. Display-only. |
+
+### How to answer "where does it go?" out loud (the authoritative line)
+
+> "Three directions, and I'm precise about which is which. **Deeper** — the same engine reaches every
+> regulation that hits a P&L, and with your real volumes the band stops being a range and becomes a
+> bookable, SKU-level number. **Wider** — the same live map serves any team that thinks in geography: the
+> concrete next build is **Tax**, every market's excise rate live into the same engine; and the one that'd
+> watch *your* world is **M&A** — imagine this scanning brand-for-sale signals against your deal thesis.
+> **Wired in** — from a hosted demo to a standing watch that re-sizes your book the morning a rule is
+> tabled, straight into your FP&A. Tax is what I'd build next; M&A is the one that's yours; the rest is
+> range — any team with a map and a feed."
+
+**The discipline (don't break it):** lead with the **engine + Radar**; name **Tax** as the concrete next
+build; deploy **M&A** as the personalised "imagine if this watched your pipeline" hook for Yulia; keep
+Treasury / IR / GTR / Crisis as a single "and it extends to any team with a map and a feed" — breadth, not
+headline. **M&A and Tax both ladder straight into the "imagine with your data" upside** (qa-prep §5).
+
+**The ceiling:** any team that thinks in geography + a live external feed. But the *defensible* ceiling —
+the part with no incumbent — is the band engine reaching more regulation types and STG's real numbers
+(axis 1). Breadth wins the forward; depth wins the contract.
