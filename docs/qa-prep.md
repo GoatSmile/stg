@@ -254,7 +254,7 @@ lock us in?* Answer plainly, lead with the honest framing, and never oversell.
 > doesn't need. Concretely, today:
 > - **Secrets never reach the browser.** The Anthropic API key and the Supabase service key are
 >   server-side only (in `/api/*` routes); nothing sensitive is ever in `NEXT_PUBLIC_` or client code.
-> - **Access gate.** Prod is behind an env-driven password gate (`src/middleware.ts`): unauthenticated
+> - **Access gate.** Prod is behind an env-driven password gate (`src/proxy.ts`): unauthenticated
 >   requests are redirected to a styled `/gate` page; a valid cookie is a SHA-256 of the shared
 >   password (`src/lib/gate.ts`), httpOnly, never the raw password. It's a shared password the owner
 >   emails with the link — appropriate for a forwardable demo, and I'll say plainly it's not SSO.

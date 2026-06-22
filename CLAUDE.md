@@ -25,7 +25,8 @@ track (reference only).
 - shadcn style is `radix-nova` (same as jensen-fms — do NOT re-init with
   newer CLI defaults; `base-nova` won't compose with `asChild` patterns)
 - Deploy: Vercel, push-to-`main` → prod at `https://stg-azure.vercel.app`. A **password
-  gate is built** — env-driven: set `SITE_PASSWORD` and `src/middleware.ts` redirects
+  gate is built** — env-driven: set `SITE_PASSWORD` and `src/proxy.ts` (the Next 16 `proxy`
+  file convention — renamed from `middleware.ts` 2026-06-22) redirects
   unauthenticated visitors to a styled `/gate` page (shared password, forwardable; cookie
   validated by a SHA-256 of the password). `/opengraph-image` is allow-listed through the
   gate so forwarded-link previews still render while the app itself stays locked. It's **off
@@ -311,7 +312,7 @@ repeated to the client: owner decides, always.
 - **Dark-mode toggle + prod password gate shipped — (2026-06-14).** (1) `ThemeToggle` in
   the header flips the `.dark` class + persists to `localStorage`; an inline `<head>` script
   applies the saved theme before paint (no flash; `<html suppressHydrationWarning>`). Defaults
-  to light (the parchment hero). (2) Env-driven **password gate**: `src/middleware.ts` (Edge)
+  to light (the parchment hero). (2) Env-driven **password gate**: `src/proxy.ts` (Edge; was `src/middleware.ts`)
   redirects unauthenticated visitors to a styled `/gate` page; `/api/gate` checks the password
   vs `SITE_PASSWORD` and sets an httpOnly cookie (a SHA-256 of the password via shared
   `src/lib/gate.ts`); off when `SITE_PASSWORD` is unset. Verified end-to-end (server + browser:
@@ -756,6 +757,23 @@ repeated to the client: owner decides, always.
   plan)** — all phases built; SSO→`SITE_PASSWORD` drift + video-still-unrecorded noted. A repo-wide sweep
   for not-yet-done language ("recommendation:/near-term/vercel sso/will add/stub…") now comes back clean
   (remaining hits are inside already-bannered docs or are STG's own research facts in ceo-research-digest).
+- **Usage-tracking activation + `middleware`→`proxy` rename — (2026-06-22).** Two follow-ups off a
+  prior session's usage-tracking work + a Vercel deploy-log review. (1) **Usage table live + clean.**
+  Created `public.varsel_usage_events` in the "Valent - proposals" Supabase project (via MCP migration;
+  RLS on, no policies — service key bypasses), **verified end-to-end through the real `/api/track` route
+  incl. a tagged round-trip** (`?v=11` → DB `recipient="11"` → `/usage` renders "STG Yulia (11)"), then
+  **wiped to 0 rows** ready for real links. Owner's live `RECIPIENT_MAP` (in `.env.local`) =
+  `{"11":"STG Yulia","12":"STG personal secretary","13":"STG other","20":"non-STG"}`. **Still owner-TODO
+  in Vercel prod:** set `ADMIN_KEY` + `RECIPIENT_MAP`, toggle Vercel Web Analytics ON. (2) **Renamed
+  `src/middleware.ts` → `src/proxy.ts`** (`export function middleware` → `proxy`) per Next 16's
+  deprecation of the `middleware` file convention — the build now reports `ƒ Proxy (Middleware)`, the
+  warning is gone, `config.matcher` + all gate logic byte-identical. **The prod password gate is the
+  load-bearing thing in this file** — smoke-tested green end-to-end against a built server with
+  `SITE_PASSWORD` set: unauth deep-link → 307 `/gate?from=…` (deep-link preserved), `/opengraph-image`
+  always-allowed (200), wrong cookie/password rejected, correct password → 303 to the deep-link + cookie,
+  authenticated `/`+`/radar` → 200. The `node-domexception` deprecation in the deploy log is transitive
+  noise (ignored). Path refs updated in CLAUDE.md / qa-prep.md / gate.ts comment. `tsc` clean + `next build`
+  green (18 routes incl. `/api/track`, `/usage`).
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

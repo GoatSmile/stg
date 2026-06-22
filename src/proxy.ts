@@ -11,7 +11,7 @@ import { GATE_COOKIE, gateToken } from "@/lib/gate";
 // render once prod is gated (the app behind it still needs the password).
 const ALWAYS_ALLOW = ["/gate", "/api/gate", "/opengraph-image", "/_vercel"];
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const pw = process.env.SITE_PASSWORD;
   if (!pw) return NextResponse.next();
 
