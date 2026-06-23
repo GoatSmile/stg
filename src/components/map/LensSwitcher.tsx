@@ -9,10 +9,12 @@ const icons: Record<string, LucideIcon> = {
   coins: Coins, sprout: Sprout, ship: Ship, leaf: Leaf,
 };
 
-// The three lenses that carry the thesis (the regulation→DKK engine, the pouch growth story, hiring
-// as a leading indicator) lead; the live-feed lenses sit under an "extends to —" label so they read
-// as breadth/roadmap, not four co-equal hero feeds (buyer-panel feedback, 2026-06-18).
-const PRIMARY = new Set(["regulatory", "sales", "hr"]);
+// The two lenses that carry the thesis (the regulation→DKK engine and the pouch growth story) lead;
+// the rest sit under an "extends to —" label so they read as breadth/roadmap, not co-equal hero feeds
+// (buyer-panel feedback, 2026-06-18). HR was demoted out of the lead row 2026-06-23: the careers data
+// is public, but headlining STG's own hiring to senior STG readers — sourced through a household that
+// includes an STG HR employee — reads as an optics flag, not a wow; it stays available, just not led.
+const PRIMARY = new Set(["regulatory", "sales"]);
 
 export function LensSwitcher({
   lenses,

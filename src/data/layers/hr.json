@@ -4,7 +4,7 @@
   "label": "HR",
   "icon": "users",
   "feed": "careers",
-  "blurb": "The company's people footprint, live. Headcount by site, open roles + days-open from the careers feed, and (illustrative) retirement risk.",
+  "blurb": "The company's people footprint, built only from STG's public careers feed — nothing internal, nothing from any STG employee. Headcount by site, open roles + days-open, and (illustrative) retirement risk.",
   "asOf": "2026-06-15",
   "kpis": [
     {

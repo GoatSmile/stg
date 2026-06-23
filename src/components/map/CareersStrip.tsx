@@ -93,10 +93,11 @@ export function CareersStrip() {
             />
           </div>
           <p className="text-[11px] leading-snug text-muted-foreground">
-            Roles, locations + posting dates come from STG&apos;s public SuccessFactors careers feed
-            → days-open. Strategic sites are mapped individually; US retail / cigar-bar roles and
-            unmapped EU field roles are bucketed. Snapshots persist in Supabase (EU), so hiring
-            velocity is real once history accrues.{" "}
+            Built entirely from STG&apos;s public SuccessFactors careers feed — the same postings
+            anyone can see on the public site; nothing internal, nothing from any STG employee.
+            Strategic sites are mapped individually; US retail / cigar-bar roles and unmapped EU
+            field roles are bucketed. Snapshots persist in Supabase (EU), so hiring velocity is real
+            once history accrues.{" "}
             <a
               href="https://careers.st-group.com"
               target="_blank"
