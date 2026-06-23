@@ -8,7 +8,7 @@
   "kpis": [
     { "label": "Active threats tracked", "value": "5", "sub": "EU + 4 markets", "flag": "C" },
     { "label": "Revenue in restricted/banned pouch markets", "value": "DKK ~390m*", "sub": "EU pouch line, modeled", "flag": "fab" },
-    { "label": "Combustible core exposed to EU excise", "value": "50%", "sub": "of group net sales", "flag": "C" },
+    { "label": "EU cigar/pipe base (EUB division)", "value": "≈36%", "sub": "DKK 3.27bn of 9.0bn group", "flag": "C" },
     { "label": "Next ruling", "value": "H2 2026", "sub": "France Conseil d'État merits", "flag": "C" }
   ],
   "markers": [
