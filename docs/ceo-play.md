@@ -261,9 +261,9 @@ clincher. Visual targets are mocked in [mockups/](mockups/).
 1. **Green-light Varsel** as the build (vs. leaning harder into the Pouch Radar
    alone as a faster, lower-risk first wedge — judge #2's case).
 2. **Name:** "Varsel" vs. neutral vs. something else (it's a working title).
-3. **Lead market for the demo's worked example:** the EU ETD (hits the 50%
-   combustible core — most CEO-magnetic) vs. France (most acute, dual cigar+pouch
-   exposure).
+3. **Lead market for the demo's worked example:** the EU ETD (reaches the
+   cigar/pipe core — part of the ~85% combustible core; most CEO-magnetic) vs.
+   France (most acute, dual cigar+pouch exposure).
 4. **Anthropic API key** for the live Claude call.
 5. **Re-verify** the precise cigar/pipe depth of Tamarind & Euromonitor before
    any client conversation (our own agents conflicted; framing is safe either

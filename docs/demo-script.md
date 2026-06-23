@@ -3,9 +3,9 @@
 *Updated: 2026-06-22 09:59 CEST*
 
 *The email payload. ~3 min (hard ceiling 4). Owner to camera, intercut with
-screen share. Worked example: the **EU tobacco-tax revision** (hits the 50%
-combustible core — Yulia's strategy wheelhouse; France is the alternate, see
-end). The app is now **complete — 7 department lenses, 5 live public-data feeds**
+screen share. Worked example: the **EU tobacco-tax revision** (reaches the
+cigar/pipe core — part of STG's ~85% combustible core; Yulia's strategy
+wheelhouse; France is the alternate, see end). The app is now **complete — 7 department lenses, 5 live public-data feeds**
 — so the "genuinely live" beat is real, not a mockup. Spoken ≈ 470 words
 (~150 wpm). Strategy: [ceo-play.md](ceo-play.md) §5b.*
 
@@ -138,7 +138,7 @@ forwards clean.*
 ## Alternate worked example — France (swap for 0:50–2:00)
 
 If leading with France instead: it's more acute (ban in force April 2026, Conseil
-d'État merits ruling due this month) and dual — it removes a pouch market *and*
+d'État merits ruling expected H2 2026) and dual — it removes a pouch market *and*
 threatens the ~DKK 620m machine-rolled cigar market (France is STG's #1). Use it
 if the goal is urgency over strategic scale; use EU excise (above) if the goal is
 the bigger long-horizon number Yulia owns. **Don't do both in the video — one

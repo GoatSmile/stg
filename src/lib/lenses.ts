@@ -78,5 +78,5 @@ export const provenanceMeta: Record<
   public: { label: "Public", description: "Published / scrapable today", color: "var(--prov-public)" },
   agent: { label: "Agent-fetched", description: "AI fetches public data on a schedule", color: "var(--prov-agent)" },
   internal: { label: "Needs STG data", description: "Behind a data agreement", color: "var(--prov-internal)" },
-  fabricated: { label: "Illustrative*", description: "Plausible, fabricated for the demo", color: "var(--prov-fab)" },
+  fabricated: { label: "Illustrative*", description: "Plausible placeholder, constructed for the demo", color: "var(--prov-fab)" },
 };

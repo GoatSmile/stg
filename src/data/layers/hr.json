@@ -169,7 +169,7 @@
       "retirementRisk": 60,
       "provenance": "public",
       "sourceRef": "AR2025 p96",
-      "detail": "Handmade cigar workforce. No open roles in the latest crawl."
+      "detail": "Handmade cigar workforce. No open roles in the latest pull."
     },
     {
       "id": "hr-us-retail",
@@ -192,5 +192,5 @@
       "detail": "STG roles across Europe not tied to a mapped site — field sales (Netherlands, Sweden, UK) plus support / production roles such as Holstebro (DK). Counted in the live total; click to see them."
     }
   ],
-  "agentNote": "Open-positions + days-open come from STG's public SuccessFactors careers feed (careers.st-group.com). Strategic sites are mapped to markers; US retail / cigar-bar roles are counted in the total but bucketed (not the strategy). Evergreen 'talent pool' posts are excluded. Real one-time pull 2026-06-14; a scheduled refresh first-seen-stamps each role to derive days-open. Retirement-risk is illustrative (needs PeopleHub)."
+  "agentNote": "Open-positions + days-open come from STG's public SuccessFactors careers feed (careers.st-group.com). Strategic sites are mapped to markers; US retail / cigar-bar roles are counted in the total but bucketed (not the strategy). Evergreen 'talent pool' posts are excluded. Real one-time pull 2026-06-14; subsequent manual pulls first-seen-stamp each role to derive days-open. Retirement-risk is illustrative (needs PeopleHub)."
 }

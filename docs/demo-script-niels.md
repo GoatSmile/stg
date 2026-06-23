@@ -108,7 +108,7 @@ cigar/pipe core (his "backbone"); **France is the lead-time proof**, not a secon
 - **"Is this an investor / IR tool?"** → "No — strictly internal scenario-prep, and deliberately built so it never produces anything investor-facing. Public data only, zero STG figures."
 - **"We already monitor regulation."** → "You track *that* it's happening. This is what it's *worth* — to STG, in kroner, with the assumptions on the table. I haven't found anyone who sells exactly that."
 - **"Why are you showing me this and not my team?"** → "Because you'd know in one glance whether it's worth your team's time — and Betina's suggestion gave me the opening to ask you directly. If it is, strategy's the right home and I'll take it from there."
-- **"Isn't that France decree in court?"** → "The sale, import and possession ban took effect 1 April; the Conseil d'État only suspended the manufacture/export side, with a merits ruling due around June. The lead-time point stands either way."
+- **"Isn't that France decree in court?"** → "The sale, import and possession ban took effect 1 April; the Conseil d'État only suspended the manufacture/export side, with a merits ruling expected H2 2026. The lead-time point stands either way."
 
 ---
 

@@ -96,7 +96,7 @@ Compiled 2026-06-12. FX context: USD/DKK ran ~6.29–7.28 during 2025 (avg ~6.61
 |---|---|---|---|---|---|
 | Europe Branded (EUB) | DKK 3,270m | 36% | 0% | DKK 649m | 19.8% (21.0%) |
 | NA Branded & RoW (NABROW) | DKK 3,017m | 33% | -5% | DKK 938m | 31.1% (36.0%) |
-| NA Online & Retail (NAOR) | DKK 2,749m | 31% | -4% (+0.3% ex-ZYN) | DKK 347m | 12.6% (14.8%) |
+| NA Online & Retail (NAOR) | DKK 2,749m | 30% | -4% (+0.3% ex-ZYN) | DKK 347m | 12.6% (14.8%) |
 
 Product categories (% of group net sales FY25): Handmade Cigars 35% (organic 0%), Machine-Rolled Cigars & Smoking Tobacco 50% (organic -1%), Next Generation Products (own nicotine pouches) 5% (organic -17%; XQS alone +55%), Other (accessories, contract manufacturing, bar sales) 10% (organic -15%).
 
