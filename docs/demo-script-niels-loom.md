@@ -16,15 +16,18 @@ in two camera modes and stitch (see below). Target **~2:10–2:25**, hard ceilin
 The to-camera scenes should be **your face full-frame**, not a corner bubble — a cold CEO needs to see
 you. So record in two passes and arrange them in Loom's editor:
 
-| Clip | Loom mode | Shortcut (Mac) | Content |
+| Clip | Loom capture mode | How to set it | Content |
 |---|---|---|---|
-| 1 | **Camera only** (face full-frame) | `Cmd+Shift+1` | Scene 1 — who I am + the gap |
-| 2 | **Screen + camera bubble** | `Cmd+Shift+3` | Scene 2 — Impact Room |
-| 3 | **Screen + camera bubble** | `Cmd+Shift+3` | Scene 3 — lead-time chart |
-| 4 | **Camera only** (face full-frame) | `Cmd+Shift+1` | Scene 4 — honesty + close |
+| 1 | **Camera Only** (face full-frame) | Loom icon → **Camera Only** | Scene 1 — who I am + the gap |
+| 2 | **Screen + Cam** (bubble) | Loom icon → **Screen + Cam** | Scene 2 — Impact Room |
+| 3 | **Screen + Cam** (bubble) | Loom icon → **Screen + Cam** | Scene 3 — lead-time chart |
+| 4 | **Camera Only** (face full-frame) | Loom icon → **Camera Only** | Scene 4 — honesty + close |
 
-Then drag the four clips into order in Loom and trim the dead ends. (Loom has **no** shortcut to blow the
-bubble up to full-screen mid-recording — that's why scenes 1 & 4 are their own camera-only clips.)
+**Set the mode by clicking the Loom icon in Brave** and picking it in the recorder window *before* you
+start each clip — there is **no keyboard shortcut** for capture mode in the browser extension. You also
+can't switch *into* Camera Only mid-recording (Loom only lets you toggle Screen ↔ Screen+Cam while
+live), which is exactly why scenes 1 & 4 are their own Camera-Only clips. Then drag the four clips into
+order in Loom's editor and trim the dead ends.
 
 ---
 

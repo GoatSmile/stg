@@ -36,7 +36,7 @@ cigar/pipe core (his "backbone"); **France is the lead-time proof**, not a secon
 - [ ] **MAR/honesty rails said EARLY and in-frame.** Speak the guardrail in Scene 1 — *"public data only, nothing internal, scenario-prep not a forecast"* — BEFORE the first krone appears (a forwarded viewer who bails at 0:30 must still have heard it). On the money-shot, frame so the band's amber *"illustrative — public-data model, not STG's own figure"* tag is in shot. Every on-screen figure is a band that cites a source or visibly abstains. Nothing implies investor-facing / market-timing.
 
 **Technical:**
-- [ ] **Record in two camera modes and stitch.** Scenes 1 & 4 = **camera only, face full-frame** (`Cmd+Shift+1`); Scenes 2 & 3 = **screen + camera bubble** (`Cmd+Shift+3`). Loom can't blow the bubble up mid-recording, so record four clips and order them in Loom's editor.
+- [ ] **Record in two capture modes and stitch.** Set the mode by **clicking the Loom icon in your browser** and picking it in the recorder window (no keyboard shortcut for it in the extension): Scenes 1 & 4 = **Camera Only** (face full-frame), Scenes 2 & 3 = **Screen + Cam** (bubble). Loom won't switch *into* Camera Only mid-recording, so record four clips and order them in Loom's editor.
 - [ ] **Zoom to fit:** press `Cmd −` until, on `/impact`, the headline **DKK band** AND the **"Assumptions — you co-own the model"** sliders are both visible without scrolling (≈ 67–75% on 1080p) — so the band visibly jumps when you drag the slider. Dry-run it once.
 - [ ] **Gate OFF** while recording (don't set `SITE_PASSWORD` locally, or you'll hit your own wall).
 - [ ] **Opt your browser out of tracking first** — visit `localhost:3000/?notrack=1` once so your record session doesn't pollute the usage log.
