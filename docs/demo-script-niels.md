@@ -49,8 +49,9 @@ cigar/pipe core (his "backbone"); **France is the lead-time proof**, not a secon
 
 ### 0:00–0:22 — CAMERA ONLY (who I am + the gap)
 
-> "Hi Niels — I'm Nazar Taras. I build software for a living, at valent.dk; I'm not from STG, and I have
-> no STG data. What you're about to see is a working prototype I built in my own time — not a deck, an
+> "Hi Niels — I'm Nazar Taras. I build software for a living, here in Frederiksberg, at valent.dk; I'm
+> not from STG, and I have no STG data. What you're about to see is a working prototype I built in my own
+> time — not a deck, an
 > actual tool. It runs only on STG's published filings and public regulatory texts — nothing internal —
 > and it's scenario-prep, not a forecast. My wife, Tanya Pavlenko, works at STG, so let me be up front:
 > nothing here comes from her. She checked with Betina, who said you'd likely read a note like this — so
@@ -101,7 +102,7 @@ cigar/pipe core (his "backbone"); **France is the lead-time proof**, not a secon
 
 | Time | On screen — do this | Say (gist) | Cue |
 |---|---|---|---|
-| 0:00–0:22 | **You, CAMERA ONLY** (face full-frame) | I'm Nazar Taras, I build software (valent.dk), not from STG, no STG data; a working prototype I built — not a deck; public data only, scenario-prep not a forecast; Tanya works at STG, nothing comes from her; Betina said you'd read it; 90 sec | name + "I build software" FIRST, then warrant; guardrail said early |
+| 0:00–0:22 | **You, CAMERA ONLY** (face full-frame) | I'm Nazar Taras, I build software here in Frederiksberg (valent.dk), not from STG, no STG data; a working prototype I built — not a deck; public data only, scenario-prep not a forecast; Tanya works at STG, nothing comes from her; Betina said you'd read it; 90 sec | name + "I build software" FIRST, then warrant; guardrail said early |
 | 0:22–1:10 | Type **`/impact`** (EU-ETD chip + amber "proposed" badge), zoomed so band + sliders fit; cursor on the **band** under "EBITDA at risk"; point the amber **"not STG's own figure"** tag; run the **"Where the source is silent"** rail (right col); **drag "Exposed share of the EU base"** (left col, top slider — don't re-run) | industry sizes regs slow & by hand → this does it fast; COM(2025) 580, in Council, cigar/pipe floors from 2028 = the backbone; band (read it); "not STG's figure"; cites or abstains; slider = my estimate → real volumes tighten it to a narrower band your team owns | read the on-screen band; **no map, no feeds, no %**; watch the band jump |
 | 1:10–1:35 | **Home → lead-time CARD** ("Before it lands"); the **BAR CHART** SVG with the dashed "today" line | proposal not law = the point, see the range now; timing always in the public record; France decree last Sept → ban this April = 7 months; **didn't call France, tool didn't exist then**; reads the record → sized scenario, not a late surprise | cursor on "today" line; France/DK left, EU-ETD past it to 2028 |
 | 1:35–1:58 | **You, CAMERA ONLY** (face full-frame) | public data only, zero STG figures, never investor-facing, internal scenario-prep; pressure-test before committing; **you'll know who should own it — strategy's my guess**; **I'm Nazar Taras, valent.dk** | low-pressure; CTA routes DOWN; name bookends the close |

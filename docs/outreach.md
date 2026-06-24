@@ -33,8 +33,8 @@ it only if you're comfortable putting her name in the subject. B/C are the lower
 > My wife, Tanya Pavlenko, works at STG. She checked with Betina Haubjerg, who said you'd likely read
 > and reply, and that I should mention Tanya works there — so I'm writing directly, briefly.
 >
-> I build software for a living (valent.dk), and I kept running into a problem that sits squarely in
-> STG's world: when a tobacco regulation is on the horizon, sizing what it could mean gets done by hand
+> I build software for a living here in Frederiksberg (valent.dk), and I kept running into a problem that
+> sits squarely in STG's world: when a tobacco regulation is on the horizon, sizing what it could mean gets done by hand
 > and late — often after the strategic call already has to be made. So I built a working version that
 > does it fast, on public data only — every figure a banded range that cites its public source, or says
 > so plainly when a source doesn't state one.

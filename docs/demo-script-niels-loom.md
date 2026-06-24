@@ -45,7 +45,7 @@ bubble up to full-screen mid-recording — that's why scenes 1 & 4 are their own
 
 **SAY:**
 
-Hi Niels — I'm Nazar Taras. I build software for a living, at valent.dk; I'm not from STG, and I have no STG data. What you're about to see is a working prototype I built in my own time — not a deck, an actual tool.
+Hi Niels — I'm Nazar Taras. I build software for a living, here in Frederiksberg, at valent.dk; I'm not from STG, and I have no STG data. What you're about to see is a working prototype I built in my own time — not a deck, an actual tool.
 
 It runs only on STG's published filings and public regulatory texts — nothing internal — and it's scenario-prep, not a forecast.
 
