@@ -172,8 +172,6 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
         </Card>
       )}
 
-      <AiRead eventId={scenario.eventId} assumptions={values} />
-
       <div className="grid gap-6 md:grid-cols-2">
         <ScenarioControls
           assumptions={scenario.assumptions}
@@ -231,6 +229,8 @@ export function ImpactRoom({ scenario }: { scenario: Scenario }) {
           </div>
         </div>
       </div>
+
+      <AiRead eventId={scenario.eventId} assumptions={values} />
 
       <div className="flex items-start gap-2 rounded-md border border-border bg-secondary/40 px-3 py-2 text-[13px] text-muted-foreground">
         <Lock className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
