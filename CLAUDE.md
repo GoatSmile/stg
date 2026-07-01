@@ -24,7 +24,7 @@ track (reference only).
 - Next.js 16 (App Router) + TypeScript + Tailwind + shadcn/ui
 - shadcn style is `radix-nova` (same as jensen-fms — do NOT re-init with
   newer CLI defaults; `base-nova` won't compose with `asChild` patterns)
-- Deploy: Vercel, push-to-`main` → prod at `https://stg-azure.vercel.app`. A **password
+- Deploy: Vercel, push-to-`main` → prod at **`https://stg.valent.dk`** (Vercel custom domain, added 2026-07-01; `stg-azure.vercel.app` still resolves too). A **password
   gate is built** — env-driven: set `SITE_PASSWORD` and `src/proxy.ts` (the Next 16 `proxy`
   file convention — renamed from `middleware.ts` 2026-06-22) redirects
   unauthenticated visitors to a styled `/gate` page (shared password, forwardable; cookie
@@ -34,6 +34,14 @@ track (reference only).
   — `SITE_PASSWORD` is set in Vercel (owner-confirmed 2026-06-17); `stg-azure.vercel.app` requires the
   shared password.** (Vercel's own Password Protection is the zero-code alternative but needs Pro; this
   in-app gate is free + in our control.)
+- **Per-recipient access links — one link unlocks AND tags (`35171cd`, 2026-07-01).**
+  Instead of a gate link plus a separate `Password:` line in the email (a spam/phishing
+  signal — an owner cold email to the STG CEO landed in Gmail junk that way), send one
+  signed link per person: `/?k=<code>~<sig>`, where `sig = HMAC-SHA256(ACCESS_TOKEN_SECRET, code)`.
+  `src/proxy.ts` verifies it, sets the gate cookie, and 307s to `/?v=<code>` so `UsageTracker`
+  tags the opener; invalid/missing falls back to the password `/gate`. Helpers in
+  `src/lib/gate.ts`; generate links with `npm run access:links` (needs `ACCESS_TOKEN_SECRET`
+  + `RECIPIENT_MAP` in `.env.local`). Full how-to: `docs/engagement-tracking-playbook.md` §14.
 - **JSON-first, one DB table.** All data is versioned JSON in `/src/data/`: the STG
   segment model (from published disclosures), the curated regulatory corpus,
   golden AI responses, and cached Pouch Radar crawler output. **Supabase (EU) is
@@ -774,6 +782,28 @@ repeated to the client: owner decides, always.
   authenticated `/`+`/radar` → 200. The `node-domexception` deprecation in the deploy log is transitive
   noise (ignored). Path refs updated in CLAUDE.md / qa-prep.md / gate.ts comment. `tsc` clean + `next build`
   green (18 routes incl. `/api/track`, `/usage`).
+- **Per-recipient access links (`?k=`) + `stg.valent.dk` custom domain — `35171cd` (2026-07-01).**
+  Kills the "link + `Password:` line" pattern that tripped Gmail/Exchange spam+phishing filters
+  (an owner cold email to the STG CEO, Niels, landed in Gmail junk with the old
+  `stg-azure.vercel.app/?v=10` + `Password: stg-pulse`). Now one signed link per recipient both
+  unlocks and tags: `/?k=<code>~<sig>`, `sig = HMAC-SHA256(ACCESS_TOKEN_SECRET, code)` base64url[0:27].
+  (1) **`src/lib/gate.ts`** — new `makeAccessToken` / `verifyAccessToken` (Web Crypto, constant-time
+  compare; shared by the Edge proxy and the Node generator). (2) **`src/proxy.ts`** — a valid `?k=` sets
+  the gate cookie and 307s to `/?v=<code>`, handing the code to the existing `UsageTracker` (§7 of the
+  playbook); invalid/missing → password `/gate` unchanged. (3) **`scripts/make-access-links.ts`** +
+  **`npm run access:links`** — prints one link per `RECIPIENT_MAP` entry (self-contained `node:crypto`,
+  base64url byte-identical to gate.ts — verified). Backward-compatible: password gate + `?v=` links
+  unchanged; feature inactive unless `ACCESS_TOKEN_SECRET` is set. **Live in prod (owner-confirmed
+  2026-07-01):** `ACCESS_TOKEN_SECRET` set in Vercel + pushed; **`stg.valent.dk`** added as a Vercel
+  custom domain (DNS: CNAME `stg` → `…vercel-dns-017.com`; Let's Encrypt cert live) so links no longer
+  point at `*.vercel.app`. **Verified end-to-end against prod:** `stg.valent.dk/?k=10~…` → 307 `/?v=10`
+  + `Set-Cookie varsel_gate` (Secure); plain `/` → 307 `/gate`; tampered/wrong-secret token → `/gate`;
+  `tsc` + eslint clean. `RECIPIENT_MAP` is now `{"1":"Test by N","10":"STG CEO","11":"STG Yulia",
+  "12":"STG personal secretary","13":"STG other","20":"non-STG"}` (added `10` CEO + `1` test). Docs:
+  `.env.example` (ACCESS_TOKEN_SECRET / RECIPIENT_MAP / SITE_PASSWORD / ADMIN_KEY) +
+  `docs/engagement-tracking-playbook.md` §14. **Owner-TODO:** ensure the *updated* `RECIPIENT_MAP`
+  (with `10`/`1`) + `ADMIN_KEY` are set in Vercel prod (env change needs a redeploy); send a recipient
+  their link with **no** `Password:` line; test a link yourself with `&notrack=1` so it isn't logged as that person.
 - **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

@@ -515,3 +515,101 @@ restyle.)
 Free at this scale. Supabase free tier (the table is tiny) + Vercel Hobby/Pro
 (the route is a normal serverless function). Vercel Web Analytics has a free
 allowance. No third-party tracker, no DocSend subscription.
+
+---
+
+## 14. One link that unlocks AND tags (signed `?k=` tokens)
+
+If the demo sits behind a shared-password gate (STG/Varsel's `src/proxy.ts`), emailing
+a link **and** a password on the next line is a strong spam/phishing signal — an owner
+cold email to a CEO landed in Gmail junk exactly that way (`.../?v=10` + `Password: …`).
+This add-on collapses **access + recipient tag into one forwardable link** with no
+password line: `/?k=<code>~<sig>`. Requires the password gate from the host app (this is
+the one part that isn't in this generic recipe); everything else reuses §7's `?v=` tracker.
+
+**How it works**
+- `<sig>` = `HMAC-SHA256(ACCESS_TOKEN_SECRET, <code>)`, base64url, first 27 chars (~160 bits).
+  Stateless — no token store; any code the owner signs is valid.
+- The proxy verifies `?k=`: on success it **sets the gate cookie (unlock)** and **307s to
+  `/?v=<code>`**, handing the code to the existing `?v=` tracker (§7). Invalid/missing → the
+  normal password `/gate`.
+- One secret both signs (the generator) and verifies (the proxy), so they can't drift.
+
+**Token helpers** — `src/lib/gate.ts`. Web Crypto, so the Edge proxy and the Node
+generator share one implementation:
+
+```ts
+function b64url(bytes: Uint8Array): string {
+  let s = ""; for (const b of bytes) s += String.fromCharCode(b);
+  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+async function sign(secret: string, msg: string): Promise<string> {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(msg));
+  return b64url(new Uint8Array(mac)).slice(0, 27);
+}
+export async function makeAccessToken(secret: string, code: string) {
+  return `${code}~${await sign(secret, code)}`;
+}
+export async function verifyAccessToken(secret: string, token: string): Promise<string | null> {
+  const sep = token.lastIndexOf("~"); if (sep <= 0) return null;
+  const code = token.slice(0, sep), sig = token.slice(sep + 1);
+  const expected = await sign(secret, code);
+  if (sig.length !== expected.length) return null;               // constant-time compare
+  let diff = 0; for (let i = 0; i < sig.length; i++) diff |= sig.charCodeAt(i) ^ expected.charCodeAt(i);
+  return diff === 0 ? code : null;
+}
+```
+
+**Proxy handoff** — `src/proxy.ts`, before the gate-cookie check (`pw` = `SITE_PASSWORD`):
+
+```ts
+const k = req.nextUrl.searchParams.get("k");
+const accessSecret = process.env.ACCESS_TOKEN_SECRET;
+if (k && accessSecret) {
+  const code = await verifyAccessToken(accessSecret, k);
+  if (code) {
+    const dest = req.nextUrl.clone();
+    dest.searchParams.delete("k");
+    dest.searchParams.set("v", code);                 // hand off to the ?v= tracker (§7)
+    const res = NextResponse.redirect(dest);
+    res.cookies.set(GATE_COOKIE, await gateToken(pw), {
+      httpOnly: true, secure: process.env.NODE_ENV === "production",
+      sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 7,
+    });
+    return res;
+  }
+}
+```
+
+**Generate the links** — `scripts/make-access-links.ts` + `npm run access:links` prints one
+link per `RECIPIENT_MAP` entry. Self-contained `node:crypto` (its `digest("base64url")` is
+byte-identical to the Web Crypto `b64url` above — verified), so it needs no import from
+`src`. Run it with the secret + map in the env:
+
+```bash
+node --env-file=.env.local --experimental-strip-types scripts/make-access-links.ts
+# or point at whichever domain is live:
+BASE_URL='https://stg.valent.dk' npm run access:links
+```
+
+**Env:** `ACCESS_TOKEN_SECRET` (server-only, never `NEXT_PUBLIC_`). The **same value** must be
+in the host env (where the proxy verifies) and wherever you generate links (where they're
+signed), or prod links won't verify. It gates a public-data demo, so a short *random* secret
+is fine — but not a guessable one: a leaked link lets a weak secret be brute-forced offline.
+**Changing the secret invalidates every link already sent**, so pick it once.
+
+**Ops notes**
+- **Test a link yourself with `&notrack=1`** (§7.1) so your own click isn't logged under that
+  recipient.
+- **Host env change needs a redeploy** (§10.2). If `ACCESS_TOKEN_SECRET` isn't in prod, `?k=`
+  links silently fall back to the password page.
+- **Host the demo on your own domain, not `*.vercel.app`** — a free-host link from a young
+  sending domain reads as phishing no matter how clean the token is. (STG: `stg.valent.dk` via a
+  Vercel custom domain — add the domain in Vercel, then a CNAME `stg` → the `…vercel-dns-*.com`
+  value it gives you.)
+- **Forwarding:** because the proxy sets the cookie and redirects to `/?v=<code>`, a forwarded
+  *original* `?k=` link still unlocks and tags as the original recipient — extra opens show under
+  them (consistent with §10.5). The `code` is visible in the token, but it's opaque (a number) and
+  not a secret; the secret is only in the signature + the env.
