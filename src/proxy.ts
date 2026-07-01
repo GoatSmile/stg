@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { GATE_COOKIE, gateToken } from "@/lib/gate";
+import { GATE_COOKIE, gateToken, verifyAccessToken } from "@/lib/gate";
 
 // Prod password gate. Active only when SITE_PASSWORD is set (so local dev and
 // any environment without it stay open). Unauthenticated requests are redirected
@@ -18,6 +18,29 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (ALWAYS_ALLOW.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     return NextResponse.next();
+  }
+
+  // Tokenized access link (/?k=<code>~<sig>): unlock without the password page and
+  // hand the recipient code to the existing ?v= tracking, so one clean link both
+  // opens the demo and tags who opened it. Invalid/missing token → password gate below.
+  const k = req.nextUrl.searchParams.get("k");
+  const accessSecret = process.env.ACCESS_TOKEN_SECRET;
+  if (k && accessSecret) {
+    const code = await verifyAccessToken(accessSecret, k);
+    if (code) {
+      const dest = req.nextUrl.clone();
+      dest.searchParams.delete("k");
+      dest.searchParams.set("v", code); // reuse UsageTracker: it stores + strips ?v=
+      const res = NextResponse.redirect(dest);
+      res.cookies.set(GATE_COOKIE, await gateToken(pw), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7, // 7 days, same as the password flow
+      });
+      return res;
+    }
   }
 
   const cookie = req.cookies.get(GATE_COOKIE)?.value;
