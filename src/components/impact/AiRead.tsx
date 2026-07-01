@@ -97,14 +97,25 @@ export function AiRead({
                 : "offline · cached"}
           </span>
         )}
-        {stale && !loading && (
-          <button
-            onClick={run}
-            className="ml-auto inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-          >
-            <RefreshCw className="size-3" aria-hidden="true" /> re-run for current assumptions
-          </button>
-        )}
+        {data && stale && !loading &&
+          (data.mode === "live" ? (
+            <button
+              onClick={run}
+              className="ml-auto inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+            >
+              <RefreshCw className="size-3" aria-hidden="true" /> re-run for current assumptions
+            </button>
+          ) : (
+            // Offline serves a static golden — a re-run would just re-show it. So instead of a
+            // dead button, state the capability honestly: this re-runs for your assumptions once
+            // live AI is on. Promise of future, not a broken affordance.
+            <span
+              className="ml-auto inline-flex items-center gap-1 text-xs italic text-muted-foreground"
+              title="Offline mode serves a pre-vetted cached read at the default assumptions. With live AI on, the model re-generates this read for whatever you set here."
+            >
+              <RefreshCw className="size-3" aria-hidden="true" /> in live mode, this re-runs for your assumptions
+            </span>
+          ))}
       </div>
 
       {loading && <p className="text-sm text-muted-foreground">Generating the scenario read…</p>}
