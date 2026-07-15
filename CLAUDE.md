@@ -847,6 +847,26 @@ repeated to the client: owner decides, always.
   `RECIPIENT_MAP` to include 14/15 so `/usage` shows their *names* (tracking works regardless — codes log
   either way; redeploy needed for the env change); send Hanna her video link (reply drafted); a `?k=` link
   tags whoever holds it, so don't post it publicly.
+- **Meeting CONFIRMED (Thu 24 Sep 2026, 10:00–10:45, in person at STG Gentofte) + run-of-show + §7.5
+  sharpened — (2026-07).** Hanna sent a calendar invite ("Intro to AI tool to STG"): **three attendees,
+  all Legal & Public Affairs** — Peter Schøtt Knudsen (Group GC, gatekeeper), Hanna Løyche (champion),
+  **Emilie Thornedahl** (not in public leadership listings → working-level lawyer/PA specialist, the
+  day-to-day evaluator). Zero Finance/Strategy/IT. **New `docs/meeting-sep24-runofshow.md`**: countdown
+  checklist (usage-log check w/o 15 Sep; scenario-status re-verify; **feed freshen Sep 22–23** — the
+  deferred owner task now has its date; offline rehearsal; print 4× one-pagers), minute-by-minute plan
+  (proactive Tanya disclosure in minute 1 → AI-title defusal → hindsight lead-time proof → France-ban
+  deep demo with the abstention beat + handing Emilie the slider → DK-cap XQS card → 60-sec map flyover
+  → 18 min their questions → two-fork close on "who else should see one regulation worked end-to-end?"),
+  contingency table (no screen / crash / 30-min cut / Peter absent / price question / hostile number →
+  click the citation chip), same-day follow-up skeleton. **qa-prep.md §7.5 sharpened** for the all-legal
+  room: confirmed-meeting header + per-person read (incl. Emilie — don't talk past the working-level
+  evaluator), the "AI tool" invite-title defusal (deterministic wall up front), and three new GC-grade
+  Q&As — what goes to Anthropic (server-side, public-data-only, commercial API terms don't train, and
+  the number never comes from the AI), competitors/exclusivity (STG is client zero; exclusivity only
+  time-boxed + paid, never free/perpetual), and wrong-number liability (architecture → labelled
+  scenario-range → fee-capped liability + E&O). §2 banner updated. Demo runs from a localhost offline
+  build (never their wifi, never the tagged links). Docs-only. Full status: memory
+  `project-stg-outreach-status`.
 - **Superseded (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**

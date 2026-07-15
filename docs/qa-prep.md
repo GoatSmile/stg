@@ -83,9 +83,11 @@ language model hallucinates a kroner figure into the band.
 > **⚠️ Reality update (2026-07): the pitch was sent, and it routed differently than planned.** Tanya's
 > email reached CEO **Niels Frederiksen**, who forwarded it not to Strategy/Finance but to the people
 > "responsible for monitoring regulation and engaging with authorities" — **Corporate Affairs & the
-> General Counsel's office** (Hanna Løyche + Peter Schøtt Knudsen). **That is your September audience.**
-> Read **§7.5** — it is now the load-bearing persona section. Yulia/CFO/CEO below stay relevant as the
-> *forward-to* targets Hanna's team may loop in, but you are pitching Corporate Affairs first.
+> General Counsel's office** (Hanna Løyche + Peter Schøtt Knudsen). **The meeting is confirmed:
+> Thu 24 Sep 2026, 10:00–10:45, at STG Gentofte — Peter + Hanna + Emilie Thornedahl, all Legal &
+> Public Affairs.** Read **§7.5** — it is now the load-bearing persona section — and rehearse from
+> `docs/meeting-sep24-runofshow.md`. Yulia/CFO/CEO below stay relevant as the *forward-to* targets
+> Hanna's team may loop in, but you are pitching Corporate Affairs first.
 
 Map the personas to the real people, so you pitch to the right instinct:
 
@@ -391,9 +393,31 @@ Their lens is the nicotine-pouch portfolio (XQS) and the competitive set. The re
 
 ## 7.5 Corporate Affairs & the General Counsel — ⭐ the actual September audience
 
-This is the room you're in. **Hanna Løyche** (Head of Corporate Affairs, Europe — ex-BASF public
-affairs, law degree) and, behind or beside her, **Peter Schøtt Knudsen** (Group General Counsel, SVP
-Legal, Public & Regulatory Affairs). Two things about them change the whole pitch:
+**The meeting is confirmed: Thursday 24 September 2026, 10:00–10:45, in person at STG's offices
+(Gentofte). Invite title: "Intro to AI tool to STG." Three attendees, all from Legal & Public
+Affairs — no Finance, no Strategy, no IT.** Run-of-show: `docs/meeting-sep24-runofshow.md`.
+
+- **Peter Schøtt Knudsen** — Group General Counsel, SVP Legal, Public & Regulatory Affairs (joined
+  Dec 2025). The gatekeeper: he clears risk. Win him and the engagement is *safe*; lose him and
+  enthusiasm elsewhere won't matter.
+- **Hanna Løyche** — Head of Corporate Affairs, Europe (joined Jan 2026; ex-BASF public affairs; law
+  degree). The champion: she pulled you in, and this reflecting well on her new function is part of
+  what's being decided. Make her look right for having found you.
+- **Emilie Thornedahl** — not in any public leadership listing → almost certainly the **working-level
+  lawyer / public-affairs specialist**: the person who'd actually use or vet the tool day-to-day, and
+  who most likely writes the internal note afterwards. **Do not talk past her.** Direct real demo
+  moments to her, invite her to drive a slider, and treat her questions as seriously as Peter's.
+  Working-level evaluators kill more deals than executives do.
+
+**The invite title is a flag to defuse early.** They filed this as an "AI tool" — and to a General
+Counsel, "AI" means *hallucination, liability, an untraceable number in a regulatory document*. Don't
+wait for the question; open the demo with the wall: **the AI never produces the number** — a fixed,
+deterministic model computes the band; the AI only writes the sourced narrative around it, and a
+code-level citation rail rejects any figure that doesn't match its cited source. Then show the
+abstention live. The email PS already planted this ("AI does the language and judgment, deterministic
+code does the number — the wall between them is the credibility feature"); the meeting proves it.
+
+Two more things about this room that change the whole pitch:
 
 - **They are a brand-new function.** Niels built it over Dec 2025–Jan 2026 — Peter in, then Hanna. New
   leaders of a new function are the best buyer profile that exists: mandate-fresh, budget-forming, and
@@ -463,9 +487,36 @@ Legal, Public & Regulatory Affairs). Two things about them change the whole pitc
 > numbers. I'd rather show you exactly what it is than oversell it — that's the same honesty the tool
 > itself is built on.
 
-**What "winning the room" looks like here:** not a signature. It's Hanna's team deciding to (a)
-commission a small pilot from the function Niels just funded, or (b) pull Strategy/Finance into a second
-session. Close on: *"who else at STG should see one regulation worked end-to-end?"*
+**Q (Peter/Emilie): What data goes to the AI provider? Where does the AI run?**
+> The AI (Anthropic's Claude) is called server-side only, and the only thing it ever sees is the same
+> curated *public* material you see in the app — published filings and public regulatory texts. There is
+> no STG-internal data anywhere in the system for it to see. Under Anthropic's commercial API terms,
+> inputs and outputs aren't used to train their models. And structurally the AI can't contaminate the
+> result even if it misbehaved: the kroner band comes from fixed code, and every AI-written figure is
+> checked against its cited source or rejected.
+
+**Q (Peter, GC): Do you work with our competitors? Would you?**
+> No — STG is the first deployment; I have no engagement with any tobacco or nicotine company, and I'm
+> happy to represent that in writing. If category exclusivity matters to you contractually, it's
+> available as a defined, time-boxed commercial term — I'd rather price that honestly than hand-wave a
+> promise. What I won't do either way is carry one client's data or insight to another; the DPA and the
+> compute-and-return design make that structural, not personal.
+> *(Guardrail: never concede perpetual or free exclusivity in the room — "time-boxed and separately
+> priced" is the posture; the details are a §10/commercial-strategy conversation.)*
+
+**Q (Peter, GC): What if a number is wrong and we act on it? Who's liable?**
+> Three layers, honestly. First, the failure you'd most expect from an "AI tool" — a confidently
+> invented number — is blocked by architecture: deterministic model, value-matched citations, abstention
+> instead of guessing. Second, every output is explicitly a *scenario range on stated, editable
+> assumptions* — decision-support, not advice or a forecast; the caveats print on the artifact itself.
+> Third, contractually: liability capped at the fee, professional-indemnity insurance behind it. But the
+> honest core is the first layer — the tool is built so that being *verifiably sourced or silent* is the
+> only mode it has.
+
+**What "winning the room" looks like on 24 September:** not a signature. It's this team deciding to (a)
+commission a small pilot from the function Niels just funded — "run it on a regulation we actually care
+about" — or (b) pull Strategy/Finance into a second session. Close on: *"who else at STG should see one
+regulation worked end-to-end?"* — and leave with a named next step, however small.
 
 **Landmines to avoid with this audience specifically:**
 - Don't pitch it as a *Finance* or *Strategy* tool in their room — it makes them a courier, not an owner.
