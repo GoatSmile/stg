@@ -26,30 +26,33 @@ video link is **self-hosted on the prototype's own domain** (`stg.valent.dk/vide
 STG's network, unlike the Google Drive link that failed. Her links are **tagged** (`?k=14`) so app +
 video engagement is attributable in `/usage`.*
 
+*Final text below is the owner's Danish-toned cut (2026-07-15) — plain, dry, understated; two
+Anglo-flourish drafts were iterated down to this. Send verbatim.*
+
 > Dear Hanna,
 >
-> Thank you for coming back to me — and no concern at all about the timing; summer has its own calendar.
+> Thanks for getting back to me. And no worries about the timing — our glorious Danish summer imposes
+> its own logic.
 >
-> Mid-September works well. I'm flexible in the weeks of 15 and 22 September — any day, morning or
-> afternoon. Happy to come to you in Gentofte with the live prototype, or over Teams if that's easier;
-> 30–45 minutes is plenty, and do bring whoever you'd like.
+> Mid-September suits me well. I'm open most days, except Mondays, morning or afternoon. How does
+> 15–25 September look for you?
 >
-> On the video — it was hosted on Google Drive, which many corporate networks block, so that was on my
-> side of the fence. The same two minutes are here, on the same site as the prototype, which should open
-> without trouble:
+> I'm happy to come to Gentofte and show you the prototype live, or take it over Teams, if that's
+> simpler. 30–45 minutes would be enough. If you let me know who's joining, I'll tailor the walkthrough
+> accordingly.
 >
-> Video — **https://stg.valent.dk/video?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
+> On the video. Google Drive may be blocked on many corporate networks — something I could have
+> anticipated. The same three minutes are here and should open without trouble:
 >
-> And here's a link straight into the prototype itself, for whenever you'd like to explore it — no
-> password needed from you:
+> Video: **https://stg.valent.dk/video?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
 >
-> Prototype — **https://stg.valent.dk/?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
+> And here's a direct link to the prototype itself (no password needed):
 >
-> Everything in it is built from public data only.
+> Prototype: **https://stg.valent.dk/?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
 >
-> I look forward to meeting you and the team in September.
+> It's all built on public data only.
 >
-> Best regards,
+> Med venlig hilsen
 > Nazar Taras
 > valent.dk · nazar@valent.dk · +45 50 36 71 11
 
@@ -59,14 +62,18 @@ video engagement is attributable in `/usage`.*
   dwell time, **and** every app page she opens all land in `/usage` under "STG Hanna Løyche". (Two links
   to one person is a deliberate exception to the usual single-CTA rule — she's an evaluator who'll want to
   poke the app directly.) Peter's equivalents (`?k=15`, video + app) are in CLAUDE.md if you want to
-  send/route to him too.
-- **"Weeks of 15 and 22 September"** are Mondays (2026) — offering two whole weeks reads as flexible
-  without begging. Adjust to your real calendar.
-- **"bring whoever you'd like"** anticipates Peter (GC) or a colleague in the room — a plus, not a
-  threat. Prep with **qa-prep.md §7.5** (Corporate Affairs & General Counsel).
+  send/route to him too. Deliberately **"direct link", not "personal link"** — "personal" would advertise
+  per-recipient tracking to a GC-adjacent inbox.
+- **Dates:** proposes **15–25 September, Mondays excluded** (2026 Mondays are 14/21/28 Sept — the range
+  opens on Tuesday the 15th, so it's self-consistent). Concrete range + one stated constraint answers her
+  "let us know your availability" exactly. Adjust to the real calendar before sending.
+- **"If you let me know who's joining, I'll tailor the walkthrough accordingly"** — surfaces the
+  attendee list (is the GC in the room?) as a favour to her, not homework. Prep with **qa-prep.md §7.5**
+  (Corporate Affairs & General Counsel).
 - **Don't attach anything.** Everything by link into a Legal-adjacent inbox.
-- **The honest video line** ("that was on my side of the fence") takes the blame gracefully without
-  debugging their network — and quietly signals you host your own infrastructure.
+- **The honest video line** ("something I could have anticipated") takes the blame gracefully without
+  debugging their network — and quietly signals you host your own infrastructure. "Three minutes" is the
+  honest rounding (the video is 2:44).
 - Feed freshening: **do it in September**, right before the meeting (owner decision 2026-07-15 — not now;
   the dates would only re-stale over the summer). Also consider one no-ask regulatory touchpoint in
   mid/late August (see the strategy notes).
