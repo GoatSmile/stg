@@ -827,8 +827,9 @@ repeated to the client: owner decides, always.
   `/opengraph-image` still 200; browser-rendered player `readyState 4`, 1920×1080, 2:44. `tsc` + `next
   build` green. **Owner-TODO:** commit+push+redeploy so `stg.valent.dk/video` is live; mint fresh `?k=`
   links for Hanna + Peter (own attribution); reply to Hanna (draft ready) pointing the video at
-  `stg.valent.dk/video`; add a Corporate-Affairs/GC persona to `qa-prep.md`; freshen feed `asOf` dates
-  before Sept; a no-ask regulatory touchpoint ~mid-Aug. Full status: memory `project-stg-outreach-status`.
+  `stg.valent.dk/video`; add a Corporate-Affairs/GC persona to `qa-prep.md`; a no-ask regulatory
+  touchpoint ~mid-Aug. **Feed freshening: deferred to September (owner decision 2026-07-15), done right
+  before the meeting — NOT now.** Full status: memory `project-stg-outreach-status`.
 - **Per-recipient tracking extended to the video + Hanna/Peter links minted — (2026-07-15).** So the
   owner can track **both** app usage AND video usage for the two Corporate-Affairs contacts. (1) **proxy.ts
   reorder:** the `?k=` access-token block now runs BEFORE the `ALWAYS_ALLOW` check, so a `?k=` link that

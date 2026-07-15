@@ -36,10 +36,16 @@ video engagement is attributable in `/usage`.*
 >
 > On the video — it was hosted on Google Drive, which many corporate networks block, so that was on my
 > side of the fence. The same two minutes are here, on the same site as the prototype, which should open
-> without trouble: **https://stg.valent.dk/video?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
+> without trouble:
 >
-> Everything in it is built from public data only. If you'd like to click around the prototype itself
-> beforehand, the video page has a link straight into it — no password needed from you.
+> Video — **https://stg.valent.dk/video?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
+>
+> And here's a link straight into the prototype itself, for whenever you'd like to explore it — no
+> password needed from you:
+>
+> Prototype — **https://stg.valent.dk/?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
+>
+> Everything in it is built from public data only.
 >
 > I look forward to meeting you and the team in September.
 >
@@ -48,10 +54,12 @@ video engagement is attributable in `/usage`.*
 > valent.dk · nazar@valent.dk · +45 50 36 71 11
 
 **Notes:**
-- **Video link is Hanna's tagged link** (`?k=14`). It opens the walkthrough, sets her tag, and the
-  page's "open the live prototype" button carries the same tag + unlock into the app — so **both** her
-  video and app engagement land in `/usage` under "STG Hanna Løyche". Peter's equivalent (`?k=15`) is in
-  CLAUDE.md if you want to send/route to him too.
+- **Both links are Hanna's tagged links** (`?k=14`) — owner wants her to have a direct app link too, so
+  she has it to hand (not only via the video-page button). Same token on both, so the video view, the
+  dwell time, **and** every app page she opens all land in `/usage` under "STG Hanna Løyche". (Two links
+  to one person is a deliberate exception to the usual single-CTA rule — she's an evaluator who'll want to
+  poke the app directly.) Peter's equivalents (`?k=15`, video + app) are in CLAUDE.md if you want to
+  send/route to him too.
 - **"Weeks of 15 and 22 September"** are Mondays (2026) — offering two whole weeks reads as flexible
   without begging. Adjust to your real calendar.
 - **"bring whoever you'd like"** anticipates Peter (GC) or a colleague in the room — a plus, not a
@@ -59,8 +67,9 @@ video engagement is attributable in `/usage`.*
 - **Don't attach anything.** Everything by link into a Legal-adjacent inbox.
 - **The honest video line** ("that was on my side of the fence") takes the blame gracefully without
   debugging their network — and quietly signals you host your own infrastructure.
-- Before the meeting: freshen the feed `asOf` dates (they'll read ~3 months stale by September), and
-  consider one no-ask regulatory touchpoint in mid/late August (see the strategy notes).
+- Feed freshening: **do it in September**, right before the meeting (owner decision 2026-07-15 — not now;
+  the dates would only re-stale over the summer). Also consider one no-ask regulatory touchpoint in
+  mid/late August (see the strategy notes).
 
 ---
 
