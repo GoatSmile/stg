@@ -46,12 +46,22 @@ if (codes.length === 0) {
   process.exit(1);
 }
 
-const rows = codes.map((code) => ({
-  label: `${map[code]} (${code})`,
-  link: `${base}/?k=${makeAccessToken(secret, code)}`,
-}));
+const rows = codes.map((code) => {
+  const token = makeAccessToken(secret, code);
+  return {
+    label: `${map[code]} (${code})`,
+    // App link (lands on the home page) and video link (lands on the walkthrough,
+    // whose "open the live prototype" CTA carries the same tag+cookie into the app).
+    // Both tag the opener in /usage; send the video link as the single email CTA.
+    appLink: `${base}/?k=${token}`,
+    videoLink: `${base}/video?k=${token}`,
+  };
+});
 
-const w = Math.max(...rows.map((r) => r.label.length));
 console.log(`\nAccess links  ·  ${base}\n`);
-for (const r of rows) console.log(`${r.label.padEnd(w)}   ${r.link}`);
-console.log("");
+for (const r of rows) {
+  console.log(r.label);
+  console.log(`  video  ${r.videoLink}`);
+  console.log(`  app    ${r.appLink}`);
+  console.log("");
+}

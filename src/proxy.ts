@@ -19,13 +19,14 @@ export async function proxy(req: NextRequest) {
   if (!pw) return NextResponse.next();
 
   const { pathname } = req.nextUrl;
-  if (ALWAYS_ALLOW.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
-    return NextResponse.next();
-  }
 
-  // Tokenized access link (/?k=<code>~<sig>): unlock without the password page and
+  // Tokenized access link (/...?k=<code>~<sig>): unlock without the password page and
   // hand the recipient code to the existing ?v= tracking, so one clean link both
-  // opens the demo and tags who opened it. Invalid/missing token → password gate below.
+  // opens the demo and tags who opened it. This runs BEFORE the allow-list so a ?k=
+  // link that lands on an ungated page (e.g. /video) still sets the gate cookie AND
+  // tags the opener — the cookie is what lets that page's UsageTracker beacon reach
+  // the gated /api/track, so we can attribute video views (not just app views).
+  // Invalid/missing token → falls through to the allow-list / password gate below.
   const k = req.nextUrl.searchParams.get("k");
   const accessSecret = process.env.ACCESS_TOKEN_SECRET;
   if (k && accessSecret) {
@@ -44,6 +45,11 @@ export async function proxy(req: NextRequest) {
       });
       return res;
     }
+  }
+
+  // Ungated public surfaces (video walkthrough, share card, the gate page itself).
+  if (ALWAYS_ALLOW.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    return NextResponse.next();
   }
 
   const cookie = req.cookies.get(GATE_COOKIE)?.value;

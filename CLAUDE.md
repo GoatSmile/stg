@@ -829,6 +829,23 @@ repeated to the client: owner decides, always.
   links for Hanna + Peter (own attribution); reply to Hanna (draft ready) pointing the video at
   `stg.valent.dk/video`; add a Corporate-Affairs/GC persona to `qa-prep.md`; freshen feed `asOf` dates
   before Sept; a no-ask regulatory touchpoint ~mid-Aug. Full status: memory `project-stg-outreach-status`.
+- **Per-recipient tracking extended to the video + Hanna/Peter links minted — (2026-07-15).** So the
+  owner can track **both** app usage AND video usage for the two Corporate-Affairs contacts. (1) **proxy.ts
+  reorder:** the `?k=` access-token block now runs BEFORE the `ALWAYS_ALLOW` check, so a `?k=` link that
+  lands on the ungated `/video` still sets the gate cookie + redirects to `?v=<code>`. This is what makes
+  video views attributable — `/api/track` is itself gated, so without the cookie a `/video` beacon can't
+  post; the `?k=` cookie fixes that. Verified on a gated prod build: `/video?k=14~<sig>` → 307
+  `/video?v=14` + `Set-Cookie varsel_gate`; `/video?v=14` → 200; `/?k=…` app link still 307→`?v=` (regression
+  clean); invalid token on `/video` → 200 (falls through to allow-list, untagged); `/impact` no cookie →
+  307 `/gate`. (2) **`make-access-links.ts`** now prints TWO links per recipient — `video` (`/video?k=…`,
+  the single email CTA; its "open the live prototype" button carries the same tag+cookie into the app) and
+  `app` (`/?k=…`). (3) **`RECIPIENT_MAP`** (.env.local) gained `"14":"STG Hanna Løyche"`, `"15":"STG Peter
+  Knudsen"`. Their links (verify against prod — `ACCESS_TOKEN_SECRET` already matches Vercel): Hanna
+  `stg.valent.dk/video?k=14~05oZPiO2uu_FeXluzF_yMf57bWN`, Peter `…/video?k=15~qLr7_oMJRzjk_jmczxpwdBCEBbW`
+  (app variants swap `/video?k=` → `/?k=`). `tsc` + `next build` green. **Owner-TODO:** update Vercel prod
+  `RECIPIENT_MAP` to include 14/15 so `/usage` shows their *names* (tracking works regardless — codes log
+  either way; redeploy needed for the env change); send Hanna her video link (reply drafted); a `?k=` link
+  tags whoever holds it, so don't post it publicly.
 - **Superseded (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
