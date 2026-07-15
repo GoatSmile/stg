@@ -80,19 +80,29 @@ language model hallucinates a kroner figure into the band.
 
 ## 2. Who's actually in the room at STG
 
-Map the personas you asked about to the real people, so you pitch to the right instinct:
+> **⚠️ Reality update (2026-07): the pitch was sent, and it routed differently than planned.** Tanya's
+> email reached CEO **Niels Frederiksen**, who forwarded it not to Strategy/Finance but to the people
+> "responsible for monitoring regulation and engaging with authorities" — **Corporate Affairs & the
+> General Counsel's office** (Hanna Løyche + Peter Schøtt Knudsen). **That is your September audience.**
+> Read **§7.5** — it is now the load-bearing persona section. Yulia/CFO/CEO below stay relevant as the
+> *forward-to* targets Hanna's team may loop in, but you are pitching Corporate Affairs first.
+
+Map the personas to the real people, so you pitch to the right instinct:
 
 | Persona you asked about | Real person | What they actually care about |
 |---|---|---|
 | **Head of Strategy** (your first recipient) | **Yulia Lyusina**, SVP Strategy, Transformation & Sustainability | Is this credible enough to forward up? What's the catch? Does it make *her* look good to send it? |
 | **CEO** | **Niels Frederiksen** | The surprise that moves guidance; cheap insurance; "is this just a guy with a demo?" |
 | **CFO** (the real signer — not in your four but the key forward target) | **Marianne Rørslev Bock** | Are the numbers defensible? MAR/compliance risk? What does it cost, what's the ROI? |
+| **Head of Corporate Affairs** ⭐ *actual audience* | **Hanna Løyche** (joined Jan 2026; ex-BASF Head of Public Affairs Nordic; law degree) | Is it defensible to a ministry/board? Does it make the new function look sharp? How's it different from our monitoring subscriptions? → **§7.5** |
+| **Group General Counsel** ⭐ *actual audience* | **Peter Schøtt Knudsen** (joined Dec 2025; SVP Legal, Public & Regulatory Affairs) | MAR, discoverability, vendor/data risk, IP, contract posture → **§7.5** |
 | **CTO / Head of IT & Digital** | (STG digital/IT leadership) | Stack, security, data residency, backup/DR, AI accuracy, lock-in |
 | **Head of Sales** | (commercial leadership) | Pouch Radar — competitive intel and regulatory exposure on the nicotine-pouch portfolio |
 
-The realistic path: **Yulia → CFO (Marianne) → CEO (Niels).** The CTO and Head of Sales are people
-they may *loop in* to validate — so your job with those two is to survive technical and commercial due
-diligence, not to sell.
+The realistic path **as it actually unfolded**: **Niels (CEO) → Hanna + Peter (Corporate Affairs / GC).**
+The September meeting is with **Hanna's team**. Yulia (Strategy), the CFO and the CEO are now the
+people *they* may loop in — so your job in the room is to make Corporate Affairs want to champion it
+upward, and to survive a lawyer's due-diligence instincts. Pitch **§7.5** first.
 
 ---
 
@@ -376,6 +386,95 @@ Their lens is the nicotine-pouch portfolio (XQS) and the competitive set. The re
 > Through the Impact Room: the France ban and Denmark cap scenarios show the *foreclosed pouch revenue*
 > against STG's stated DKK 1bn+ pouch ambition. So Radar isn't just competitive trivia — it's the
 > evidence base for how much of the growth plan a regulation puts at risk.
+
+---
+
+## 7.5 Corporate Affairs & the General Counsel — ⭐ the actual September audience
+
+This is the room you're in. **Hanna Løyche** (Head of Corporate Affairs, Europe — ex-BASF public
+affairs, law degree) and, behind or beside her, **Peter Schøtt Knudsen** (Group General Counsel, SVP
+Legal, Public & Regulatory Affairs). Two things about them change the whole pitch:
+
+- **They are a brand-new function.** Niels built it over Dec 2025–Jan 2026 — Peter in, then Hanna. New
+  leaders of a new function are the best buyer profile that exists: mandate-fresh, budget-forming, and
+  hungry for something that makes the function look modern and indispensable to the board. **Frame Varsel
+  as a force-multiplier for the mandate they were just handed.**
+- **They are not P&L owners — they are the impact-translation layer.** Their daily job is to turn
+  regulation into advice the executive team and the authorities will act on. A DKK band is not Finance's
+  turf you're stealing; it is **the currency their own briefings are missing.** That is the single most
+  important reframe in this document.
+
+**The core reframe (open with a version of this):**
+> "You already monitor regulation better than I ever could. What I built isn't another monitor — it's
+> the step *after* monitoring: turning a specific regulation into a defensible, sourced kroner band on
+> STG's own footprint. So when your team briefs the CEO or responds to a consultation, you walk in with
+> a number that cites its source, not a summary that ends at 'this could be material.'"
+
+**Q (Hanna): How is this different from the regulatory monitoring we already subscribe to?**
+> Monitors tell you *what* is happening and *when* — FiscalNote, CUBE, the law-firm alerts. None of them
+> tell you *what it's worth to STG*. Varsel starts where they stop: it takes one regulation and works it
+> down to a DKK EBITDA band on STG's published footprint, with every figure sourced or abstained. It
+> doesn't replace your monitoring — it makes your monitoring *land* at executive level.
+
+**Q (Hanna): We do impact assessment already — how is this better than our own analysis?**
+> It's the same discipline you already apply, made faster, standing, and auditable. Every assumption is
+> an editable slider with its source shown; every number cites a public source or says "not stated." So
+> it's not a black box you'd have to defend blindly — it's a model your team owns and can adjust in the
+> room. And it's days, not the weeks a bespoke study takes.
+
+**Q (Hanna): Could I actually use this in advocacy / a consultation response?**
+> That's one of its best uses — with one caveat you'll appreciate. Internally and with authorities, a
+> sourced, banded impact estimate is exactly the ammunition that makes a submission credible. The caveat:
+> anything that reaches investors is off-limits by design (MAR) — the tool refuses to generate
+> investor-facing language. So: advocacy and internal decisions yes, market communication never. That
+> boundary is built in, not a promise.
+
+**Q (Peter, GC): Does using this create MAR / selective-disclosure exposure?**
+> No, and it's designed around exactly that. It runs only on STG's *published* filings and public
+> regulatory texts — nothing internal, nothing non-public. Every output is framed as internal
+> scenario-prep and the system won't produce earnings-language. Nothing here is material non-public
+> information created or moved. If it helps, treat any output as an internal working document like any
+> other impact memo.
+
+**Q (Peter, GC): Does this generate a discoverable trail of internal P&L estimates?**
+> It generates the same class of artifact your team already produces — an internal, caveated,
+> public-data impact estimate, explicitly labelled as a scenario range, not a forecast. It creates no
+> new category of record and stores no STG data. In the paid phase, retention and deletion are set by
+> the DPA — you decide what persists and for how long.
+
+**Q (Peter, GC): Where does STG data go? What's the data-protection posture?**
+> Today: zero STG data touches it — it's public-data only, so there's nothing to protect. The moment you
+> want real volumes behind it, that's a GDPR Article 28 data-processing agreement: STG controller, me
+> processor, EU hosting, **compute-and-return** (your raw figures are processed and the band returned;
+> raw data never persists outside the processing environment), sub-processor list, breach notification,
+> deletion on termination. Your office would paper that, not me.
+
+**Q (Peter, GC): Who are you, and what's the IP / vendor-risk position?**
+> An independent Danish business — Valent, CVR 46546628, Frederiksberg. The engine and method are mine
+> (licensed to STG, not sold), which keeps you from paying to build a tool I then resell as yours; and a
+> source-code escrow covers you if I'm ever unavailable. The relationship disclosure is on the table too:
+> my wife works at STG; I flagged that up front and nothing in the tool uses anything internal or
+> anything from her.
+
+**Q (Hanna): Is it done? Can we rely on it?**
+> It's a working prototype, honestly labelled as one — not a production system, and I won't pretend
+> otherwise. What's real is real (it runs live public feeds, the model is deterministic, the citations
+> are enforced in code). The paid step turns the prototype into a calibrated instance on your real
+> numbers. I'd rather show you exactly what it is than oversell it — that's the same honesty the tool
+> itself is built on.
+
+**What "winning the room" looks like here:** not a signature. It's Hanna's team deciding to (a)
+commission a small pilot from the function Niels just funded, or (b) pull Strategy/Finance into a second
+session. Close on: *"who else at STG should see one regulation worked end-to-end?"*
+
+**Landmines to avoid with this audience specifically:**
+- Don't pitch it as a *Finance* or *Strategy* tool in their room — it makes them a courier, not an owner.
+- Don't over-claim the "standing watch / auto-re-sizing" roadmap as if it's live — the regulatory corpus
+  is deliberately curated and human-vetted today (say so; a GC respects the restraint).
+- Don't lead with price. Lead with the mandate ("makes your new function's briefings land"). Price is a
+  §10 conversation once they want it.
+- Don't let "monitoring" become the yardstick — if they benchmark you against their alert subscriptions,
+  you've lost. The yardstick is *impact quantification*, which nobody sells them.
 
 ---
 

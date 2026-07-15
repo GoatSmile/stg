@@ -13,6 +13,57 @@ work.*
 
 ---
 
+## Reply to Hanna Løyche (2026-07-15) — the September-meeting reply *(current live action)*
+
+*Context: the CEO email (below) was sent 2026-07-02; Niels routed it to Corporate Affairs / Regulatory
+Affairs. Hanna Løyche (Head of Corporate Affairs, Europe) replied 2026-07-14 — couldn't open the video,
+concept "interesting," proposes a **mid-September** meeting, asked for availability. This is the reply.*
+
+**Send rules:** From Nazar alone — **drop Tanya** from the thread (her intro job is done; keep an
+employee out of the commercial conversation). Warm, brief, match her unhurried register — do NOT push
+for an earlier date. No DKK figure (Legal-adjacent inbox + MAR). One honest line on the video. The new
+video link is **self-hosted on the prototype's own domain** (`stg.valent.dk/video`) — proven to open on
+STG's network, unlike the Google Drive link that failed. Her links are **tagged** (`?k=14`) so app +
+video engagement is attributable in `/usage`.*
+
+> Dear Hanna,
+>
+> Thank you for coming back to me — and no concern at all about the timing; summer has its own calendar.
+>
+> Mid-September works well. I'm flexible in the weeks of 15 and 22 September — any day, morning or
+> afternoon. Happy to come to you in Gentofte with the live prototype, or over Teams if that's easier;
+> 30–45 minutes is plenty, and do bring whoever you'd like.
+>
+> On the video — it was hosted on Google Drive, which many corporate networks block, so that was on my
+> side of the fence. The same two minutes are here, on the same site as the prototype, which should open
+> without trouble: **https://stg.valent.dk/video?k=14~05oZPiO2uu_FeXluzF_yMf57bWN**
+>
+> Everything in it is built from public data only. If you'd like to click around the prototype itself
+> beforehand, the video page has a link straight into it — no password needed from you.
+>
+> I look forward to meeting you and the team in September.
+>
+> Best regards,
+> Nazar Taras
+> valent.dk · nazar@valent.dk · +45 50 36 71 11
+
+**Notes:**
+- **Video link is Hanna's tagged link** (`?k=14`). It opens the walkthrough, sets her tag, and the
+  page's "open the live prototype" button carries the same tag + unlock into the app — so **both** her
+  video and app engagement land in `/usage` under "STG Hanna Løyche". Peter's equivalent (`?k=15`) is in
+  CLAUDE.md if you want to send/route to him too.
+- **"Weeks of 15 and 22 September"** are Mondays (2026) — offering two whole weeks reads as flexible
+  without begging. Adjust to your real calendar.
+- **"bring whoever you'd like"** anticipates Peter (GC) or a colleague in the room — a plus, not a
+  threat. Prep with **qa-prep.md §7.5** (Corporate Affairs & General Counsel).
+- **Don't attach anything.** Everything by link into a Legal-adjacent inbox.
+- **The honest video line** ("that was on my side of the fence") takes the blame gracefully without
+  debugging their network — and quietly signals you host your own infrastructure.
+- Before the meeting: freshen the feed `asOf` dates (they'll read ~3 months stale by September), and
+  consider one no-ask regulatory touchpoint in mid/late August (see the strategy notes).
+
+---
+
 ## CEO path — direct email to Niels Frederiksen (primary, 2026-06-23, red-teamed)
 
 *Send AFTER the Niels video is recorded ([demo-script-niels.md](demo-script-niels.md)). Single CTA =
