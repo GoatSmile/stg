@@ -9,7 +9,10 @@ import { GATE_COOKIE, gateToken, verifyAccessToken } from "@/lib/gate";
 // /gate + its POST handler must be reachable to log in. /opengraph-image is a
 // public, no-data share card — it stays open so forwarded-link previews still
 // render once prod is gated (the app behind it still needs the password).
-const ALWAYS_ALLOW = ["/gate", "/api/gate", "/opengraph-image", "/_vercel"];
+// /video is the forwardable walkthrough — ungated on purpose (the app behind it
+// stays gated), so a link opens with zero friction on a locked-down corporate
+// network. The .mp4 itself is excluded via the matcher below.
+const ALWAYS_ALLOW = ["/gate", "/api/gate", "/opengraph-image", "/_vercel", "/video"];
 
 export async function proxy(req: NextRequest) {
   const pw = process.env.SITE_PASSWORD;
@@ -58,5 +61,5 @@ export async function proxy(req: NextRequest) {
 
 export const config = {
   // Run on everything except Next internals + static asset files.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml)$).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml|mp4|webm|mov)$).*)"],
 };

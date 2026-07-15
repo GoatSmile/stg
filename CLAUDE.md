@@ -804,7 +804,32 @@ repeated to the client: owner decides, always.
   `docs/engagement-tracking-playbook.md` §14. **Owner-TODO:** ensure the *updated* `RECIPIENT_MAP`
   (with `10`/`1`) + `ADMIN_KEY` are set in Vercel prod (env change needs a redeploy); send a recipient
   their link with **no** `Password:` line; test a link yourself with `&notrack=1` so it isn't logged as that person.
-- **Next (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
+- **Outreach went LIVE + self-hosted walkthrough video shipped — (2026-07-15).** The pitch was sent
+  and has progressed — this supersedes the "video deferred" note below. **What happened:** Tanya
+  Pavlenko (owner's wife, STG employee) emailed **CEO Niels Frederiksen** direct on 2026-07-02 (her own
+  mailbox + STG signature; Betina-check disclosed), embedding Nazar's note + a Google Drive video +
+  the `?k=10` app link. Niels replied warmly ~3h later and **routed it to Corporate Affairs / Regulatory
+  Affairs — Hanna Løyche (Head of Corporate Affairs, Europe; joined Jan 2026) + Peter Schøtt Knudsen
+  (Group General Counsel, SVP Legal/Public/Regulatory; joined Dec 2025)** — a function Niels stood up
+  Dec 2025–Jan 2026. Hanna replied 2026-07-14: **couldn't open the video**, concept "interesting,"
+  proposes a **mid-September meeting**. Usage log (`varsel_usage_events`, all STG traffic tagged `10`):
+  total STG exposure ≈ **60–70s of the home page only** — nobody reached `/impact`, `/radar`, or the
+  video. So the Sept meeting is effectively their first real look; audience is Corporate Affairs / GC
+  (defensibility, MAR, advocacy ammunition), **not** Strategy/Finance. **The video-fix (this session):**
+  diagnosed the failure — the Drive file (167 MB `.mp4`) is correctly link-shared, so it's STG-side:
+  corporate networks block Google Drive + the >100 MB "can't virus-scan" interstitial. Fix = **self-host
+  on `stg.valent.dk` (proven reachable from inside STG by the usage log).** Shipped: re-encoded 175 MB →
+  **22 MB** (H.264 CRF 24, 1080p, `+faststart` for progressive stream) → `public/varsel-for-stg.mp4`; a
+  branded, ungated **`/video`** page (`src/app/video/page.tsx`) with the player + disclaimers + the
+  root-layout `UsageTracker` beacon; `src/proxy.ts` allow-lists `/video` (ALWAYS_ALLOW) and the matcher
+  now excludes `mp4|webm|mov` so the file serves ungated. **Verified against a gated prod-build server:**
+  unauth `/` → 307 `/gate`; `/video` → 200; `/varsel-for-stg.mp4` → 200 + `Accept-Ranges` + 206 on Range;
+  `/opengraph-image` still 200; browser-rendered player `readyState 4`, 1920×1080, 2:44. `tsc` + `next
+  build` green. **Owner-TODO:** commit+push+redeploy so `stg.valent.dk/video` is live; mint fresh `?k=`
+  links for Hanna + Peter (own attribution); reply to Hanna (draft ready) pointing the video at
+  `stg.valent.dk/video`; add a Corporate-Affairs/GC persona to `qa-prep.md`; freshen feed `asOf` dates
+  before Sept; a no-ask regulatory touchpoint ~mid-Aug. Full status: memory `project-stg-outreach-status`.
+- **Superseded (video deferred per owner):** platform complete + polished (7 lenses, 5 live feeds), now
   self-explains for a cold forwarded reader with the anti-surprise cover, map camera presets + clickable
   role descriptions. **Prod is now gated** (`SITE_PASSWORD` live in Vercel, 2026-06-17). **To send:**
   record the video (script + shot list in `docs/demo-script.md`); fill `[wife]` + `[video link]` in
